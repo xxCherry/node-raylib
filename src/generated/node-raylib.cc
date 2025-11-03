@@ -1,11 +1,11 @@
 
 // GENERATED CODE: DO NOT MODIFY
-#include <string>
-#include <napi.h>
-#include <iostream>
-#include <cstring>
 #include "raylib.h"
 #include "raymath.h"
+#include <cstring>
+#include <iostream>
+#include <napi.h>
+#include <string>
 
 #include "../extras/reasings.h"
 #include "../extras/rlgl.h"
@@ -14,7 +14,7 @@
 #ifdef _MSC_VER
 #define _CRT_SECURE_NO_WARNINGS
 #pragma warning(push)
-#pragma warning(disable: 4996) // Disable deprecated function warnings
+#pragma warning(disable : 4996) // Disable deprecated function warnings
 #endif
 
 #define RAYGUI_IMPLEMENTATION
@@ -29,13 +29,13 @@ using namespace Napi;
 inline Napi::Value ToValue(Napi::Env env, bool value) {
   return Napi::Boolean::New(env, value);
 }
-inline Napi::Value ToValue(Napi::Env env, const char* value) {
+inline Napi::Value ToValue(Napi::Env env, const char *value) {
   return Napi::String::New(env, value);
 }
-inline Napi::Value ToValue(Napi::Env env, const std::string& value) {
+inline Napi::Value ToValue(Napi::Env env, const std::string &value) {
   return Napi::String::New(env, value);
 }
-inline Napi::Value ToValue(Napi::Env env, char* value) {
+inline Napi::Value ToValue(Napi::Env env, char *value) {
   return Napi::String::New(env, value);
 }
 inline Napi::Value ToValue(Napi::Env env, int value) {
@@ -53,364 +53,334 @@ inline Napi::Value ToValue(Napi::Env env, double value) {
 inline Napi::Value ToValue(Napi::Env env, float value) {
   return Napi::Number::New(env, value);
 }
-inline Napi::Value ToValue(Napi::Env env, void * value) {
-  return Napi::Number::New(env, (int64_t) value);
+inline Napi::Value ToValue(Napi::Env env, void *value) {
+  return Napi::Number::New(env, (int64_t)value);
 }
 inline Napi::Value ToValue(Napi::Env env, unsigned long long value) {
-  return Napi::BigInt::New(env, (uint64_t) value);
+  return Napi::BigInt::New(env, (uint64_t)value);
 }
 
-inline float floatFromValue(const Napi::CallbackInfo& info, int index) {
+inline float floatFromValue(const Napi::CallbackInfo &info, int index) {
   return info[index].As<Napi::Number>().FloatValue();
 }
-inline int intFromValue(const Napi::CallbackInfo& info, int index) {
+inline int intFromValue(const Napi::CallbackInfo &info, int index) {
   return info[index].As<Napi::Number>().Int32Value();
 }
-inline double doubleFromValue(const Napi::CallbackInfo& info, int index) {
+inline double doubleFromValue(const Napi::CallbackInfo &info, int index) {
   return info[index].As<Napi::Number>().DoubleValue();
 }
-uintptr_t pointerFromValue(const Napi::CallbackInfo& info, int index) {
-  return (uintptr_t) info[index].As<Napi::Number>().Int64Value();
+uintptr_t pointerFromValue(const Napi::CallbackInfo &info, int index) {
+  return (uintptr_t)info[index].As<Napi::Number>().Int64Value();
 }
-inline unsigned char unsignedcharFromValue(const Napi::CallbackInfo& info, int index) {
+inline unsigned char unsignedcharFromValue(const Napi::CallbackInfo &info, int index) {
   return info[index].As<Napi::Number>().Uint32Value();
 }
-inline unsigned int unsignedintFromValue(const Napi::CallbackInfo& info, int index) {
+inline unsigned int unsignedintFromValue(const Napi::CallbackInfo &info, int index) {
   return info[index].As<Napi::Number>().Uint32Value();
 }
-inline unsigned long long unsignedlonglongFromValue(const Napi::CallbackInfo& info, int index) {
-  return (unsigned long long) info[index].As<Napi::BigInt>().Uint64Value(0);
+inline unsigned long long unsignedlonglongFromValue(const Napi::CallbackInfo &info, int index) {
+  return (unsigned long long)info[index].As<Napi::BigInt>().Uint64Value(0);
 }
-inline bool boolFromValue(const Napi::CallbackInfo& info, int index) {
+inline bool boolFromValue(const Napi::CallbackInfo &info, int index) {
   return info[index].As<Napi::Boolean>();
 }
-inline const char * stringFromValue(const Napi::CallbackInfo& info, int index) {
+inline const char *stringFromValue(const Napi::CallbackInfo &info, int index) {
   std::string val = info[index].As<Napi::String>().Utf8Value();
   const std::string::size_type size = val.size();
-  char *buffer = new char[size + 1];   //we need extra char for NUL
+  char *buffer = new char[size + 1]; // we need extra char for NUL
   memcpy(buffer, val.c_str(), size + 1);
   return buffer;
 }
-inline char charFromValue(const Napi::CallbackInfo& info, int index) {
+inline char charFromValue(const Napi::CallbackInfo &info, int index) {
   return info[index].As<Napi::Number>().Uint32Value();
 }
 
 // exception for this constructor, which has different input depending on platform
-inline rlVertexBuffer rlVertexBufferFromValue(const Napi::CallbackInfo& info, int index) {
+inline rlVertexBuffer rlVertexBufferFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     intFromValue(info, index + 0),                              // elementCount
-     (float *) pointerFromValue(info, index + 1),               // vertices
-     (float *) pointerFromValue(info, index + 2),               // texcoords
-     (float *) pointerFromValue(info, index + 3),               // normals
-     (unsigned char*) pointerFromValue(info, index + 4),        // colors
-      #if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENGL_33)
-        (unsigned int*) pointerFromValue(info, index + 5),      // indices
-      #endif
-      #if defined(GRAPHICS_API_OPENGL_ES2)
-        (unsigned short *) pointerFromValue(info, index + 5),   // indices
-      #endif 
-     unsignedintFromValue(info, index + 6),                             // vaoId
-     {unsignedintFromValue(info, index + 7), unsignedintFromValue(info, index + 8), unsignedintFromValue(info, index + 9), unsignedintFromValue(info, index + 10), unsignedintFromValue(info, index + 11)} // vboId[5]
+    intFromValue(info, index + 0),                      // elementCount
+    (float *)pointerFromValue(info, index + 1),         // vertices
+    (float *)pointerFromValue(info, index + 2),         // texcoords
+    (float *)pointerFromValue(info, index + 3),         // normals
+    (unsigned char *)pointerFromValue(info, index + 4), // colors
+#if defined(GRAPHICS_API_OPENGL_11) || defined(GRAPHICS_API_OPENGL_33)
+    (unsigned int *)pointerFromValue(info, index + 5), // indices
+#endif
+#if defined(GRAPHICS_API_OPENGL_ES2)
+    (unsigned short *)pointerFromValue(info, index + 5), // indices
+#endif
+    unsignedintFromValue(info, index + 6),                                                                                                                                                                // vaoId
+    {unsignedintFromValue(info, index + 7), unsignedintFromValue(info, index + 8), unsignedintFromValue(info, index + 9), unsignedintFromValue(info, index + 10), unsignedintFromValue(info, index + 11)} // vboId[5]
   };
 }
 
 // Convert structs from Napi::Values in info[] arguments
 
-inline Vector2 Vector2FromValue(const Napi::CallbackInfo& info, int index) {
+inline Vector2 Vector2FromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     floatFromValue(info, index + 0),
-     floatFromValue(info, index + 1)
-  };
+    floatFromValue(info, index + 0),
+    floatFromValue(info, index + 1)};
 }
 
-inline Vector3 Vector3FromValue(const Napi::CallbackInfo& info, int index) {
+inline Vector3 Vector3FromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     floatFromValue(info, index + 0),
-     floatFromValue(info, index + 1),
-     floatFromValue(info, index + 2)
-  };
+    floatFromValue(info, index + 0),
+    floatFromValue(info, index + 1),
+    floatFromValue(info, index + 2)};
 }
 
-inline Vector4 Vector4FromValue(const Napi::CallbackInfo& info, int index) {
+inline Vector4 Vector4FromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     floatFromValue(info, index + 0),
-     floatFromValue(info, index + 1),
-     floatFromValue(info, index + 2),
-     floatFromValue(info, index + 3)
-  };
+    floatFromValue(info, index + 0),
+    floatFromValue(info, index + 1),
+    floatFromValue(info, index + 2),
+    floatFromValue(info, index + 3)};
 }
 
-inline Matrix MatrixFromValue(const Napi::CallbackInfo& info, int index) {
+inline Matrix MatrixFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     floatFromValue(info, index + 0),
-     floatFromValue(info, index + 1),
-     floatFromValue(info, index + 2),
-     floatFromValue(info, index + 3),
-     floatFromValue(info, index + 4),
-     floatFromValue(info, index + 5),
-     floatFromValue(info, index + 6),
-     floatFromValue(info, index + 7),
-     floatFromValue(info, index + 8),
-     floatFromValue(info, index + 9),
-     floatFromValue(info, index + 10),
-     floatFromValue(info, index + 11),
-     floatFromValue(info, index + 12),
-     floatFromValue(info, index + 13),
-     floatFromValue(info, index + 14),
-     floatFromValue(info, index + 15)
-  };
+    floatFromValue(info, index + 0),
+    floatFromValue(info, index + 1),
+    floatFromValue(info, index + 2),
+    floatFromValue(info, index + 3),
+    floatFromValue(info, index + 4),
+    floatFromValue(info, index + 5),
+    floatFromValue(info, index + 6),
+    floatFromValue(info, index + 7),
+    floatFromValue(info, index + 8),
+    floatFromValue(info, index + 9),
+    floatFromValue(info, index + 10),
+    floatFromValue(info, index + 11),
+    floatFromValue(info, index + 12),
+    floatFromValue(info, index + 13),
+    floatFromValue(info, index + 14),
+    floatFromValue(info, index + 15)};
 }
 
-inline Color ColorFromValue(const Napi::CallbackInfo& info, int index) {
+inline Color ColorFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     unsignedcharFromValue(info, index + 0),
-     unsignedcharFromValue(info, index + 1),
-     unsignedcharFromValue(info, index + 2),
-     unsignedcharFromValue(info, index + 3)
-  };
+    unsignedcharFromValue(info, index + 0),
+    unsignedcharFromValue(info, index + 1),
+    unsignedcharFromValue(info, index + 2),
+    unsignedcharFromValue(info, index + 3)};
 }
 
-inline Rectangle RectangleFromValue(const Napi::CallbackInfo& info, int index) {
+inline Rectangle RectangleFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     floatFromValue(info, index + 0),
-     floatFromValue(info, index + 1),
-     floatFromValue(info, index + 2),
-     floatFromValue(info, index + 3)
-  };
+    floatFromValue(info, index + 0),
+    floatFromValue(info, index + 1),
+    floatFromValue(info, index + 2),
+    floatFromValue(info, index + 3)};
 }
 
-inline Image ImageFromValue(const Napi::CallbackInfo& info, int index) {
+inline Image ImageFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     (void *) pointerFromValue(info, index + 0),
-     intFromValue(info, index + 1),
-     intFromValue(info, index + 2),
-     intFromValue(info, index + 3),
-     intFromValue(info, index + 4)
-  };
+    (void *)pointerFromValue(info, index + 0),
+    intFromValue(info, index + 1),
+    intFromValue(info, index + 2),
+    intFromValue(info, index + 3),
+    intFromValue(info, index + 4)};
 }
 
-inline Texture TextureFromValue(const Napi::CallbackInfo& info, int index) {
+inline Texture TextureFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     unsignedintFromValue(info, index + 0),
-     intFromValue(info, index + 1),
-     intFromValue(info, index + 2),
-     intFromValue(info, index + 3),
-     intFromValue(info, index + 4)
-  };
+    unsignedintFromValue(info, index + 0),
+    intFromValue(info, index + 1),
+    intFromValue(info, index + 2),
+    intFromValue(info, index + 3),
+    intFromValue(info, index + 4)};
 }
 
-inline RenderTexture RenderTextureFromValue(const Napi::CallbackInfo& info, int index) {
+inline RenderTexture RenderTextureFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     unsignedintFromValue(info, index + 0),
-     TextureFromValue(info, index + 1),
-     TextureFromValue(info, index + 6)
-  };
+    unsignedintFromValue(info, index + 0),
+    TextureFromValue(info, index + 1),
+    TextureFromValue(info, index + 6)};
 }
 
-inline NPatchInfo NPatchInfoFromValue(const Napi::CallbackInfo& info, int index) {
+inline NPatchInfo NPatchInfoFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     RectangleFromValue(info, index + 0),
-     intFromValue(info, index + 4),
-     intFromValue(info, index + 5),
-     intFromValue(info, index + 6),
-     intFromValue(info, index + 7),
-     intFromValue(info, index + 8)
-  };
+    RectangleFromValue(info, index + 0),
+    intFromValue(info, index + 4),
+    intFromValue(info, index + 5),
+    intFromValue(info, index + 6),
+    intFromValue(info, index + 7),
+    intFromValue(info, index + 8)};
 }
 
-inline GlyphInfo GlyphInfoFromValue(const Napi::CallbackInfo& info, int index) {
+inline GlyphInfo GlyphInfoFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     intFromValue(info, index + 0),
-     intFromValue(info, index + 1),
-     intFromValue(info, index + 2),
-     intFromValue(info, index + 3),
-     ImageFromValue(info, index + 4)
-  };
+    intFromValue(info, index + 0),
+    intFromValue(info, index + 1),
+    intFromValue(info, index + 2),
+    intFromValue(info, index + 3),
+    ImageFromValue(info, index + 4)};
 }
 
-inline Font FontFromValue(const Napi::CallbackInfo& info, int index) {
+inline Font FontFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     intFromValue(info, index + 0),
-     intFromValue(info, index + 1),
-     intFromValue(info, index + 2),
-     TextureFromValue(info, index + 3),
-     (Rectangle *) pointerFromValue(info, index + 8),
-     (GlyphInfo *) pointerFromValue(info, index + 9)
-  };
+    intFromValue(info, index + 0),
+    intFromValue(info, index + 1),
+    intFromValue(info, index + 2),
+    TextureFromValue(info, index + 3),
+    (Rectangle *)pointerFromValue(info, index + 8),
+    (GlyphInfo *)pointerFromValue(info, index + 9)};
 }
 
-inline Camera3D Camera3DFromValue(const Napi::CallbackInfo& info, int index) {
+inline Camera3D Camera3DFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     Vector3FromValue(info, index + 0),
-     Vector3FromValue(info, index + 3),
-     Vector3FromValue(info, index + 6),
-     floatFromValue(info, index + 9),
-     intFromValue(info, index + 10)
-  };
+    Vector3FromValue(info, index + 0),
+    Vector3FromValue(info, index + 3),
+    Vector3FromValue(info, index + 6),
+    floatFromValue(info, index + 9),
+    intFromValue(info, index + 10)};
 }
 
-inline Camera2D Camera2DFromValue(const Napi::CallbackInfo& info, int index) {
+inline Camera2D Camera2DFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     Vector2FromValue(info, index + 0),
-     Vector2FromValue(info, index + 2),
-     floatFromValue(info, index + 4),
-     floatFromValue(info, index + 5)
-  };
+    Vector2FromValue(info, index + 0),
+    Vector2FromValue(info, index + 2),
+    floatFromValue(info, index + 4),
+    floatFromValue(info, index + 5)};
 }
 
-inline Mesh MeshFromValue(const Napi::CallbackInfo& info, int index) {
+inline Mesh MeshFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     intFromValue(info, index + 0),
-     intFromValue(info, index + 1),
-     (float *) pointerFromValue(info, index + 2),
-     (float *) pointerFromValue(info, index + 3),
-     (float *) pointerFromValue(info, index + 4),
-     (float *) pointerFromValue(info, index + 5),
-     (float *) pointerFromValue(info, index + 6),
-     (unsigned char *) pointerFromValue(info, index + 7),
-     (unsigned short *) pointerFromValue(info, index + 8),
-     (float *) pointerFromValue(info, index + 9),
-     (float *) pointerFromValue(info, index + 10),
-     (unsigned char *) pointerFromValue(info, index + 11),
-     (float *) pointerFromValue(info, index + 12),
-     (Matrix *) pointerFromValue(info, index + 13),
-     intFromValue(info, index + 14),
-     unsignedintFromValue(info, index + 15),
-     (unsigned int *) pointerFromValue(info, index + 16)
-  };
+    intFromValue(info, index + 0),
+    intFromValue(info, index + 1),
+    (float *)pointerFromValue(info, index + 2),
+    (float *)pointerFromValue(info, index + 3),
+    (float *)pointerFromValue(info, index + 4),
+    (float *)pointerFromValue(info, index + 5),
+    (float *)pointerFromValue(info, index + 6),
+    (unsigned char *)pointerFromValue(info, index + 7),
+    (unsigned short *)pointerFromValue(info, index + 8),
+    (float *)pointerFromValue(info, index + 9),
+    (float *)pointerFromValue(info, index + 10),
+    (unsigned char *)pointerFromValue(info, index + 11),
+    (float *)pointerFromValue(info, index + 12),
+    (Matrix *)pointerFromValue(info, index + 13),
+    intFromValue(info, index + 14),
+    unsignedintFromValue(info, index + 15),
+    (unsigned int *)pointerFromValue(info, index + 16)};
 }
 
-inline Shader ShaderFromValue(const Napi::CallbackInfo& info, int index) {
+inline Shader ShaderFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     unsignedintFromValue(info, index + 0),
-     (int *) pointerFromValue(info, index + 1)
-  };
+    unsignedintFromValue(info, index + 0),
+    (int *)pointerFromValue(info, index + 1)};
 }
 
-inline MaterialMap MaterialMapFromValue(const Napi::CallbackInfo& info, int index) {
+inline MaterialMap MaterialMapFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     TextureFromValue(info, index + 0),
-     ColorFromValue(info, index + 5),
-     floatFromValue(info, index + 9)
-  };
+    TextureFromValue(info, index + 0),
+    ColorFromValue(info, index + 5),
+    floatFromValue(info, index + 9)};
 }
 
-inline Transform TransformFromValue(const Napi::CallbackInfo& info, int index) {
+inline Transform TransformFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     Vector3FromValue(info, index + 0),
-     Vector4FromValue(info, index + 3),
-     Vector3FromValue(info, index + 7)
-  };
+    Vector3FromValue(info, index + 0),
+    Vector4FromValue(info, index + 3),
+    Vector3FromValue(info, index + 7)};
 }
 
-inline Model ModelFromValue(const Napi::CallbackInfo& info, int index) {
+inline Model ModelFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     MatrixFromValue(info, index + 0),
-     intFromValue(info, index + 16),
-     intFromValue(info, index + 17),
-     (Mesh *) pointerFromValue(info, index + 18),
-     (Material *) pointerFromValue(info, index + 19),
-     (int *) pointerFromValue(info, index + 20),
-     intFromValue(info, index + 21),
-     (BoneInfo *) pointerFromValue(info, index + 22),
-     (Transform *) pointerFromValue(info, index + 23)
-  };
+    MatrixFromValue(info, index + 0),
+    intFromValue(info, index + 16),
+    intFromValue(info, index + 17),
+    (Mesh *)pointerFromValue(info, index + 18),
+    (Material *)pointerFromValue(info, index + 19),
+    (int *)pointerFromValue(info, index + 20),
+    intFromValue(info, index + 21),
+    (BoneInfo *)pointerFromValue(info, index + 22),
+    (Transform *)pointerFromValue(info, index + 23)};
 }
 
-inline Ray RayFromValue(const Napi::CallbackInfo& info, int index) {
+inline Ray RayFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     Vector3FromValue(info, index + 0),
-     Vector3FromValue(info, index + 3)
-  };
+    Vector3FromValue(info, index + 0),
+    Vector3FromValue(info, index + 3)};
 }
 
-inline RayCollision RayCollisionFromValue(const Napi::CallbackInfo& info, int index) {
+inline RayCollision RayCollisionFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     boolFromValue(info, index + 0),
-     floatFromValue(info, index + 1),
-     Vector3FromValue(info, index + 2),
-     Vector3FromValue(info, index + 5)
-  };
+    boolFromValue(info, index + 0),
+    floatFromValue(info, index + 1),
+    Vector3FromValue(info, index + 2),
+    Vector3FromValue(info, index + 5)};
 }
 
-inline BoundingBox BoundingBoxFromValue(const Napi::CallbackInfo& info, int index) {
+inline BoundingBox BoundingBoxFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     Vector3FromValue(info, index + 0),
-     Vector3FromValue(info, index + 3)
-  };
+    Vector3FromValue(info, index + 0),
+    Vector3FromValue(info, index + 3)};
 }
 
-inline Wave WaveFromValue(const Napi::CallbackInfo& info, int index) {
+inline Wave WaveFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     unsignedintFromValue(info, index + 0),
-     unsignedintFromValue(info, index + 1),
-     unsignedintFromValue(info, index + 2),
-     unsignedintFromValue(info, index + 3),
-     (void *) pointerFromValue(info, index + 4)
-  };
+    unsignedintFromValue(info, index + 0),
+    unsignedintFromValue(info, index + 1),
+    unsignedintFromValue(info, index + 2),
+    unsignedintFromValue(info, index + 3),
+    (void *)pointerFromValue(info, index + 4)};
 }
 
-inline AudioStream AudioStreamFromValue(const Napi::CallbackInfo& info, int index) {
+inline AudioStream AudioStreamFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     (rAudioBuffer *) pointerFromValue(info, index + 0),
-     (rAudioProcessor *) pointerFromValue(info, index + 1),
-     unsignedintFromValue(info, index + 2),
-     unsignedintFromValue(info, index + 3),
-     unsignedintFromValue(info, index + 4)
-  };
+    (rAudioBuffer *)pointerFromValue(info, index + 0),
+    (rAudioProcessor *)pointerFromValue(info, index + 1),
+    unsignedintFromValue(info, index + 2),
+    unsignedintFromValue(info, index + 3),
+    unsignedintFromValue(info, index + 4)};
 }
 
-inline Sound SoundFromValue(const Napi::CallbackInfo& info, int index) {
+inline Sound SoundFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     AudioStreamFromValue(info, index + 0),
-     unsignedintFromValue(info, index + 5)
-  };
+    AudioStreamFromValue(info, index + 0),
+    unsignedintFromValue(info, index + 5)};
 }
 
-inline Music MusicFromValue(const Napi::CallbackInfo& info, int index) {
+inline Music MusicFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     AudioStreamFromValue(info, index + 0),
-     unsignedintFromValue(info, index + 5),
-     boolFromValue(info, index + 6),
-     intFromValue(info, index + 7),
-     (void *) pointerFromValue(info, index + 8)
-  };
+    AudioStreamFromValue(info, index + 0),
+    unsignedintFromValue(info, index + 5),
+    boolFromValue(info, index + 6),
+    intFromValue(info, index + 7),
+    (void *)pointerFromValue(info, index + 8)};
 }
 
-inline FilePathList FilePathListFromValue(const Napi::CallbackInfo& info, int index) {
+inline FilePathList FilePathListFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     unsignedintFromValue(info, index + 0),
-     unsignedintFromValue(info, index + 1),
-     (char **) pointerFromValue(info, index + 2)
-  };
+    unsignedintFromValue(info, index + 0),
+    unsignedintFromValue(info, index + 1),
+    (char **)pointerFromValue(info, index + 2)};
 }
 
-inline AutomationEventList AutomationEventListFromValue(const Napi::CallbackInfo& info, int index) {
+inline AutomationEventList AutomationEventListFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     unsignedintFromValue(info, index + 0),
-     unsignedintFromValue(info, index + 1),
-     (AutomationEvent *) pointerFromValue(info, index + 2)
-  };
+    unsignedintFromValue(info, index + 0),
+    unsignedintFromValue(info, index + 1),
+    (AutomationEvent *)pointerFromValue(info, index + 2)};
 }
 
-inline rlDrawCall rlDrawCallFromValue(const Napi::CallbackInfo& info, int index) {
+inline rlDrawCall rlDrawCallFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     intFromValue(info, index + 0),
-     intFromValue(info, index + 1),
-     intFromValue(info, index + 2),
-     unsignedintFromValue(info, index + 3)
-  };
+    intFromValue(info, index + 0),
+    intFromValue(info, index + 1),
+    intFromValue(info, index + 2),
+    unsignedintFromValue(info, index + 3)};
 }
 
-inline rlRenderBatch rlRenderBatchFromValue(const Napi::CallbackInfo& info, int index) {
+inline rlRenderBatch rlRenderBatchFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     intFromValue(info, index + 0),
-     intFromValue(info, index + 1),
-     (rlVertexBuffer *) pointerFromValue(info, index + 2),
-     (rlDrawCall *) pointerFromValue(info, index + 3),
-     intFromValue(info, index + 4),
-     floatFromValue(info, index + 5)
-  };
+    intFromValue(info, index + 0),
+    intFromValue(info, index + 1),
+    (rlVertexBuffer *)pointerFromValue(info, index + 2),
+    (rlDrawCall *)pointerFromValue(info, index + 3),
+    intFromValue(info, index + 4),
+    floatFromValue(info, index + 5)};
 }
 // Convert structs to Napi::Objects for output to JS
 
@@ -724,7626 +694,6372 @@ inline Napi::Value ToValue(Napi::Env env, rlRenderBatch obj) {
   return out;
 }
 
-inline Texture2D Texture2DFromValue(const Napi::CallbackInfo& info, int index) {
-  return (Texture2D) TextureFromValue(info, index);
+inline Texture2D Texture2DFromValue(const Napi::CallbackInfo &info, int index) {
+  return (Texture2D)TextureFromValue(info, index);
 }
-inline RenderTexture2D RenderTexture2DFromValue(const Napi::CallbackInfo& info, int index) {
-  return (RenderTexture2D) RenderTextureFromValue(info, index);
+inline RenderTexture2D RenderTexture2DFromValue(const Napi::CallbackInfo &info, int index) {
+  return (RenderTexture2D)RenderTextureFromValue(info, index);
 }
-inline Camera CameraFromValue(const Napi::CallbackInfo& info, int index) {
+inline Camera CameraFromValue(const Napi::CallbackInfo &info, int index) {
   return Camera3DFromValue(info, index);
 }
 
-inline AutomationEvent AutomationEventFromValue(const Napi::CallbackInfo &info, int index)
-{
+inline AutomationEvent AutomationEventFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-      unsignedintFromValue(info, index + 0),
-      unsignedintFromValue(info, index + 1),
-      {intFromValue(info, index + 2), intFromValue(info, index + 3), intFromValue(info, index + 4), intFromValue(info, index + 5)},
+    unsignedintFromValue(info, index + 0),
+    unsignedintFromValue(info, index + 1),
+    {intFromValue(info, index + 2), intFromValue(info, index + 3), intFromValue(info, index + 4), intFromValue(info, index + 5)},
   };
 }
 
-inline ModelAnimation ModelAnimationFromValue(const Napi::CallbackInfo& info, int index) {
+inline ModelAnimation ModelAnimationFromValue(const Napi::CallbackInfo &info, int index) {
   return {
-     intFromValue(info, index + 0),
-     intFromValue(info, index + 1),
-     (BoneInfo *) pointerFromValue(info, index + 2),
-     (Transform **) pointerFromValue(info, index + 3),
-     charFromValue(info ,index+4)
-  };
+    intFromValue(info, index + 0),
+    intFromValue(info, index + 1),
+    (BoneInfo *)pointerFromValue(info, index + 2),
+    (Transform **)pointerFromValue(info, index + 3),
+    charFromValue(info, index + 4)};
 }
 
 // Raylib API function bindings
 
-Napi::Value BindWindowShouldClose(const Napi::CallbackInfo& info) {
+Napi::Value BindWindowShouldClose(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     WindowShouldClose(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindIsWindowReady(const Napi::CallbackInfo& info) {
+Napi::Value BindIsWindowReady(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsWindowReady(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindIsWindowFullscreen(const Napi::CallbackInfo& info) {
+Napi::Value BindIsWindowFullscreen(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsWindowFullscreen(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindIsWindowHidden(const Napi::CallbackInfo& info) {
+Napi::Value BindIsWindowHidden(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsWindowHidden(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindIsWindowMinimized(const Napi::CallbackInfo& info) {
+Napi::Value BindIsWindowMinimized(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsWindowMinimized(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindIsWindowMaximized(const Napi::CallbackInfo& info) {
+Napi::Value BindIsWindowMaximized(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsWindowMaximized(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindIsWindowFocused(const Napi::CallbackInfo& info) {
+Napi::Value BindIsWindowFocused(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsWindowFocused(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindIsWindowResized(const Napi::CallbackInfo& info) {
+Napi::Value BindIsWindowResized(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsWindowResized(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindIsWindowState(const Napi::CallbackInfo& info) {
+Napi::Value BindIsWindowState(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsWindowState(
-       unsignedintFromValue(info, 0)
-    )
-  );
+      unsignedintFromValue(info, 0)));
 }
 
-Napi::Value BindGetWindowHandle(const Napi::CallbackInfo& info) {
+Napi::Value BindGetWindowHandle(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetWindowHandle(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetScreenWidth(const Napi::CallbackInfo& info) {
+Napi::Value BindGetScreenWidth(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetScreenWidth(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetScreenHeight(const Napi::CallbackInfo& info) {
+Napi::Value BindGetScreenHeight(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetScreenHeight(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetRenderWidth(const Napi::CallbackInfo& info) {
+Napi::Value BindGetRenderWidth(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetRenderWidth(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetRenderHeight(const Napi::CallbackInfo& info) {
+Napi::Value BindGetRenderHeight(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetRenderHeight(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetMonitorCount(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMonitorCount(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMonitorCount(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetCurrentMonitor(const Napi::CallbackInfo& info) {
+Napi::Value BindGetCurrentMonitor(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetCurrentMonitor(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetMonitorPosition(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMonitorPosition(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMonitorPosition(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindGetMonitorWidth(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMonitorWidth(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMonitorWidth(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindGetMonitorHeight(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMonitorHeight(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMonitorHeight(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindGetMonitorPhysicalWidth(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMonitorPhysicalWidth(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMonitorPhysicalWidth(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindGetMonitorPhysicalHeight(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMonitorPhysicalHeight(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMonitorPhysicalHeight(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindGetMonitorRefreshRate(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMonitorRefreshRate(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMonitorRefreshRate(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindGetWindowPosition(const Napi::CallbackInfo& info) {
+Napi::Value BindGetWindowPosition(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetWindowPosition(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetWindowScaleDPI(const Napi::CallbackInfo& info) {
+Napi::Value BindGetWindowScaleDPI(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetWindowScaleDPI(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetMonitorName(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMonitorName(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMonitorName(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindGetClipboardText(const Napi::CallbackInfo& info) {
+Napi::Value BindGetClipboardText(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetClipboardText(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetClipboardImage(const Napi::CallbackInfo& info) {
+Napi::Value BindGetClipboardImage(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetClipboardImage(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindIsCursorHidden(const Napi::CallbackInfo& info) {
+Napi::Value BindIsCursorHidden(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsCursorHidden(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindIsCursorOnScreen(const Napi::CallbackInfo& info) {
+Napi::Value BindIsCursorOnScreen(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsCursorOnScreen(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindLoadShader(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadShader(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadShader(
-       (const char *) stringFromValue(info, 0),
-       (const char *) stringFromValue(info, 1)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (const char *)stringFromValue(info, 1)));
 }
 
-Napi::Value BindLoadShaderFromMemory(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadShaderFromMemory(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadShaderFromMemory(
-       (const char *) stringFromValue(info, 0),
-       (const char *) stringFromValue(info, 1)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (const char *)stringFromValue(info, 1)));
 }
 
-Napi::Value BindIsShaderValid(const Napi::CallbackInfo& info) {
+Napi::Value BindIsShaderValid(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsShaderValid(
-       ShaderFromValue(info, 0)
-    )
-  );
+      ShaderFromValue(info, 0)));
 }
 
-Napi::Value BindGetShaderLocation(const Napi::CallbackInfo& info) {
+Napi::Value BindGetShaderLocation(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetShaderLocation(
-       ShaderFromValue(info, 0),
-       (const char *) stringFromValue(info, 2)
-    )
-  );
+      ShaderFromValue(info, 0),
+      (const char *)stringFromValue(info, 2)));
 }
 
-Napi::Value BindGetShaderLocationAttrib(const Napi::CallbackInfo& info) {
+Napi::Value BindGetShaderLocationAttrib(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetShaderLocationAttrib(
-       ShaderFromValue(info, 0),
-       (const char *) stringFromValue(info, 2)
-    )
-  );
+      ShaderFromValue(info, 0),
+      (const char *)stringFromValue(info, 2)));
 }
 
-Napi::Value BindGetScreenToWorldRay(const Napi::CallbackInfo& info) {
+Napi::Value BindGetScreenToWorldRay(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetScreenToWorldRay(
-       Vector2FromValue(info, 0),
-       Camera3DFromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Camera3DFromValue(info, 2)));
 }
 
-Napi::Value BindGetScreenToWorldRayEx(const Napi::CallbackInfo& info) {
+Napi::Value BindGetScreenToWorldRayEx(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetScreenToWorldRayEx(
-       Vector2FromValue(info, 0),
-       Camera3DFromValue(info, 2),
-       intFromValue(info, 13),
-       intFromValue(info, 14)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Camera3DFromValue(info, 2),
+      intFromValue(info, 13),
+      intFromValue(info, 14)));
 }
 
-Napi::Value BindGetWorldToScreen(const Napi::CallbackInfo& info) {
+Napi::Value BindGetWorldToScreen(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetWorldToScreen(
-       Vector3FromValue(info, 0),
-       Camera3DFromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Camera3DFromValue(info, 3)));
 }
 
-Napi::Value BindGetWorldToScreenEx(const Napi::CallbackInfo& info) {
+Napi::Value BindGetWorldToScreenEx(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetWorldToScreenEx(
-       Vector3FromValue(info, 0),
-       Camera3DFromValue(info, 3),
-       intFromValue(info, 14),
-       intFromValue(info, 15)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Camera3DFromValue(info, 3),
+      intFromValue(info, 14),
+      intFromValue(info, 15)));
 }
 
-Napi::Value BindGetWorldToScreen2D(const Napi::CallbackInfo& info) {
+Napi::Value BindGetWorldToScreen2D(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetWorldToScreen2D(
-       Vector2FromValue(info, 0),
-       Camera2DFromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Camera2DFromValue(info, 2)));
 }
 
-Napi::Value BindGetScreenToWorld2D(const Napi::CallbackInfo& info) {
+Napi::Value BindGetScreenToWorld2D(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetScreenToWorld2D(
-       Vector2FromValue(info, 0),
-       Camera2DFromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Camera2DFromValue(info, 2)));
 }
 
-Napi::Value BindGetCameraMatrix(const Napi::CallbackInfo& info) {
+Napi::Value BindGetCameraMatrix(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetCameraMatrix(
-       Camera3DFromValue(info, 0)
-    )
-  );
+      Camera3DFromValue(info, 0)));
 }
 
-Napi::Value BindGetCameraMatrix2D(const Napi::CallbackInfo& info) {
+Napi::Value BindGetCameraMatrix2D(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetCameraMatrix2D(
-       Camera2DFromValue(info, 0)
-    )
-  );
+      Camera2DFromValue(info, 0)));
 }
 
-Napi::Value BindGetFrameTime(const Napi::CallbackInfo& info) {
+Napi::Value BindGetFrameTime(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetFrameTime(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetTime(const Napi::CallbackInfo& info) {
+Napi::Value BindGetTime(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetTime(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetFPS(const Napi::CallbackInfo& info) {
+Napi::Value BindGetFPS(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetFPS(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetRandomValue(const Napi::CallbackInfo& info) {
+Napi::Value BindGetRandomValue(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetRandomValue(
-       intFromValue(info, 0),
-       intFromValue(info, 1)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1)));
 }
 
-Napi::Value BindLoadRandomSequence(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadRandomSequence(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadRandomSequence(
-       unsignedintFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2)
-    )
-  );
+      unsignedintFromValue(info, 0),
+      intFromValue(info, 1),
+      intFromValue(info, 2)));
 }
 
-Napi::Value BindMemAlloc(const Napi::CallbackInfo& info) {
+Napi::Value BindMemAlloc(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MemAlloc(
-       unsignedintFromValue(info, 0)
-    )
-  );
+      unsignedintFromValue(info, 0)));
 }
 
-Napi::Value BindMemRealloc(const Napi::CallbackInfo& info) {
+Napi::Value BindMemRealloc(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MemRealloc(
-       (void *) pointerFromValue(info, 0),
-       unsignedintFromValue(info, 1)
-    )
-  );
+      (void *)pointerFromValue(info, 0),
+      unsignedintFromValue(info, 1)));
 }
 
-Napi::Value BindLoadFileData(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadFileData(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadFileData(
-       (const char *) stringFromValue(info, 0),
-       (int *) pointerFromValue(info, 1)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (int *)pointerFromValue(info, 1)));
 }
 
-Napi::Value BindSaveFileData(const Napi::CallbackInfo& info) {
+Napi::Value BindSaveFileData(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     SaveFileData(
-       (const char *) stringFromValue(info, 0),
-       (void *) pointerFromValue(info, 1),
-       intFromValue(info, 2)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (void *)pointerFromValue(info, 1),
+      intFromValue(info, 2)));
 }
 
-Napi::Value BindExportDataAsCode(const Napi::CallbackInfo& info) {
+Napi::Value BindExportDataAsCode(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ExportDataAsCode(
-       (const unsigned char *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       (const char *) stringFromValue(info, 2)
-    )
-  );
+      (const unsigned char *)pointerFromValue(info, 0),
+      intFromValue(info, 1),
+      (const char *)stringFromValue(info, 2)));
 }
 
-Napi::Value BindLoadFileText(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadFileText(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadFileText(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindSaveFileText(const Napi::CallbackInfo& info) {
+Napi::Value BindSaveFileText(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     SaveFileText(
-       (const char *) stringFromValue(info, 0),
-       (char *) pointerFromValue(info, 1)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (char *)pointerFromValue(info, 1)));
 }
 
-Napi::Value BindFileExists(const Napi::CallbackInfo& info) {
+Napi::Value BindFileExists(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     FileExists(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindDirectoryExists(const Napi::CallbackInfo& info) {
+Napi::Value BindDirectoryExists(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     DirectoryExists(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindIsFileExtension(const Napi::CallbackInfo& info) {
+Napi::Value BindIsFileExtension(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsFileExtension(
-       (const char *) stringFromValue(info, 0),
-       (const char *) stringFromValue(info, 1)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (const char *)stringFromValue(info, 1)));
 }
 
-Napi::Value BindGetFileLength(const Napi::CallbackInfo& info) {
+Napi::Value BindGetFileLength(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetFileLength(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindGetFileExtension(const Napi::CallbackInfo& info) {
+Napi::Value BindGetFileExtension(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetFileExtension(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindGetFileName(const Napi::CallbackInfo& info) {
+Napi::Value BindGetFileName(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetFileName(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindGetFileNameWithoutExt(const Napi::CallbackInfo& info) {
+Napi::Value BindGetFileNameWithoutExt(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetFileNameWithoutExt(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindGetDirectoryPath(const Napi::CallbackInfo& info) {
+Napi::Value BindGetDirectoryPath(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetDirectoryPath(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindGetPrevDirectoryPath(const Napi::CallbackInfo& info) {
+Napi::Value BindGetPrevDirectoryPath(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetPrevDirectoryPath(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindGetWorkingDirectory(const Napi::CallbackInfo& info) {
+Napi::Value BindGetWorkingDirectory(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetWorkingDirectory(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetApplicationDirectory(const Napi::CallbackInfo& info) {
+Napi::Value BindGetApplicationDirectory(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetApplicationDirectory(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindMakeDirectory(const Napi::CallbackInfo& info) {
+Napi::Value BindMakeDirectory(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MakeDirectory(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindChangeDirectory(const Napi::CallbackInfo& info) {
+Napi::Value BindChangeDirectory(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ChangeDirectory(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindIsPathFile(const Napi::CallbackInfo& info) {
+Napi::Value BindIsPathFile(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsPathFile(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindIsFileNameValid(const Napi::CallbackInfo& info) {
+Napi::Value BindIsFileNameValid(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsFileNameValid(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindLoadDirectoryFiles(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadDirectoryFiles(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadDirectoryFiles(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindLoadDirectoryFilesEx(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadDirectoryFilesEx(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadDirectoryFilesEx(
-       (const char *) stringFromValue(info, 0),
-       (const char *) stringFromValue(info, 1),
-       boolFromValue(info, 2)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (const char *)stringFromValue(info, 1),
+      boolFromValue(info, 2)));
 }
 
-Napi::Value BindIsFileDropped(const Napi::CallbackInfo& info) {
+Napi::Value BindIsFileDropped(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsFileDropped(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindLoadDroppedFiles(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadDroppedFiles(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadDroppedFiles(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetFileModTime(const Napi::CallbackInfo& info) {
+Napi::Value BindGetFileModTime(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetFileModTime(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindCompressData(const Napi::CallbackInfo& info) {
+Napi::Value BindCompressData(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     CompressData(
-       (const unsigned char *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       (int *) pointerFromValue(info, 2)
-    )
-  );
+      (const unsigned char *)pointerFromValue(info, 0),
+      intFromValue(info, 1),
+      (int *)pointerFromValue(info, 2)));
 }
 
-Napi::Value BindDecompressData(const Napi::CallbackInfo& info) {
+Napi::Value BindDecompressData(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     DecompressData(
-       (const unsigned char *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       (int *) pointerFromValue(info, 2)
-    )
-  );
+      (const unsigned char *)pointerFromValue(info, 0),
+      intFromValue(info, 1),
+      (int *)pointerFromValue(info, 2)));
 }
 
-Napi::Value BindEncodeDataBase64(const Napi::CallbackInfo& info) {
+Napi::Value BindEncodeDataBase64(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EncodeDataBase64(
-       (const unsigned char *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       (int *) pointerFromValue(info, 2)
-    )
-  );
+      (const unsigned char *)pointerFromValue(info, 0),
+      intFromValue(info, 1),
+      (int *)pointerFromValue(info, 2)));
 }
 
-Napi::Value BindDecodeDataBase64(const Napi::CallbackInfo& info) {
+Napi::Value BindDecodeDataBase64(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     DecodeDataBase64(
-       (const unsigned char *) pointerFromValue(info, 0),
-       (int *) pointerFromValue(info, 1)
-    )
-  );
+      (const unsigned char *)pointerFromValue(info, 0),
+      (int *)pointerFromValue(info, 1)));
 }
 
-Napi::Value BindComputeCRC32(const Napi::CallbackInfo& info) {
+Napi::Value BindComputeCRC32(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ComputeCRC32(
-       (unsigned char *) pointerFromValue(info, 0),
-       intFromValue(info, 1)
-    )
-  );
+      (unsigned char *)pointerFromValue(info, 0),
+      intFromValue(info, 1)));
 }
 
-Napi::Value BindComputeMD5(const Napi::CallbackInfo& info) {
+Napi::Value BindComputeMD5(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ComputeMD5(
-       (unsigned char *) pointerFromValue(info, 0),
-       intFromValue(info, 1)
-    )
-  );
+      (unsigned char *)pointerFromValue(info, 0),
+      intFromValue(info, 1)));
 }
 
-Napi::Value BindComputeSHA1(const Napi::CallbackInfo& info) {
+Napi::Value BindComputeSHA1(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ComputeSHA1(
-       (unsigned char *) pointerFromValue(info, 0),
-       intFromValue(info, 1)
-    )
-  );
+      (unsigned char *)pointerFromValue(info, 0),
+      intFromValue(info, 1)));
 }
 
-Napi::Value BindLoadAutomationEventList(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadAutomationEventList(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadAutomationEventList(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindExportAutomationEventList(const Napi::CallbackInfo& info) {
+Napi::Value BindExportAutomationEventList(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ExportAutomationEventList(
-       AutomationEventListFromValue(info, 0),
-       (const char *) stringFromValue(info, 3)
-    )
-  );
+      AutomationEventListFromValue(info, 0),
+      (const char *)stringFromValue(info, 3)));
 }
 
-Napi::Value BindIsKeyPressed(const Napi::CallbackInfo& info) {
+Napi::Value BindIsKeyPressed(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsKeyPressed(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindIsKeyPressedRepeat(const Napi::CallbackInfo& info) {
+Napi::Value BindIsKeyPressedRepeat(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsKeyPressedRepeat(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindIsKeyDown(const Napi::CallbackInfo& info) {
+Napi::Value BindIsKeyDown(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsKeyDown(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindIsKeyReleased(const Napi::CallbackInfo& info) {
+Napi::Value BindIsKeyReleased(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsKeyReleased(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindIsKeyUp(const Napi::CallbackInfo& info) {
+Napi::Value BindIsKeyUp(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsKeyUp(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindGetKeyPressed(const Napi::CallbackInfo& info) {
+Napi::Value BindGetKeyPressed(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetKeyPressed(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetCharPressed(const Napi::CallbackInfo& info) {
+Napi::Value BindGetCharPressed(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetCharPressed(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindIsGamepadAvailable(const Napi::CallbackInfo& info) {
+Napi::Value BindIsGamepadAvailable(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsGamepadAvailable(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindGetGamepadName(const Napi::CallbackInfo& info) {
+Napi::Value BindGetGamepadName(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetGamepadName(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindIsGamepadButtonPressed(const Napi::CallbackInfo& info) {
+Napi::Value BindIsGamepadButtonPressed(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsGamepadButtonPressed(
-       intFromValue(info, 0),
-       intFromValue(info, 1)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1)));
 }
 
-Napi::Value BindIsGamepadButtonDown(const Napi::CallbackInfo& info) {
+Napi::Value BindIsGamepadButtonDown(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsGamepadButtonDown(
-       intFromValue(info, 0),
-       intFromValue(info, 1)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1)));
 }
 
-Napi::Value BindIsGamepadButtonReleased(const Napi::CallbackInfo& info) {
+Napi::Value BindIsGamepadButtonReleased(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsGamepadButtonReleased(
-       intFromValue(info, 0),
-       intFromValue(info, 1)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1)));
 }
 
-Napi::Value BindIsGamepadButtonUp(const Napi::CallbackInfo& info) {
+Napi::Value BindIsGamepadButtonUp(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsGamepadButtonUp(
-       intFromValue(info, 0),
-       intFromValue(info, 1)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1)));
 }
 
-Napi::Value BindGetGamepadButtonPressed(const Napi::CallbackInfo& info) {
+Napi::Value BindGetGamepadButtonPressed(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetGamepadButtonPressed(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetGamepadAxisCount(const Napi::CallbackInfo& info) {
+Napi::Value BindGetGamepadAxisCount(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetGamepadAxisCount(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindGetGamepadAxisMovement(const Napi::CallbackInfo& info) {
+Napi::Value BindGetGamepadAxisMovement(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetGamepadAxisMovement(
-       intFromValue(info, 0),
-       intFromValue(info, 1)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1)));
 }
 
-Napi::Value BindSetGamepadMappings(const Napi::CallbackInfo& info) {
+Napi::Value BindSetGamepadMappings(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     SetGamepadMappings(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindIsMouseButtonPressed(const Napi::CallbackInfo& info) {
+Napi::Value BindIsMouseButtonPressed(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsMouseButtonPressed(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindIsMouseButtonDown(const Napi::CallbackInfo& info) {
+Napi::Value BindIsMouseButtonDown(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsMouseButtonDown(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindIsMouseButtonReleased(const Napi::CallbackInfo& info) {
+Napi::Value BindIsMouseButtonReleased(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsMouseButtonReleased(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindIsMouseButtonUp(const Napi::CallbackInfo& info) {
+Napi::Value BindIsMouseButtonUp(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsMouseButtonUp(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindGetMouseX(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMouseX(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMouseX(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetMouseY(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMouseY(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMouseY(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetMousePosition(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMousePosition(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMousePosition(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetMouseDelta(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMouseDelta(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMouseDelta(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetMouseWheelMove(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMouseWheelMove(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMouseWheelMove(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetMouseWheelMoveV(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMouseWheelMoveV(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMouseWheelMoveV(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetTouchX(const Napi::CallbackInfo& info) {
+Napi::Value BindGetTouchX(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetTouchX(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetTouchY(const Napi::CallbackInfo& info) {
+Napi::Value BindGetTouchY(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetTouchY(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetTouchPosition(const Napi::CallbackInfo& info) {
+Napi::Value BindGetTouchPosition(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetTouchPosition(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindGetTouchPointId(const Napi::CallbackInfo& info) {
+Napi::Value BindGetTouchPointId(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetTouchPointId(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindGetTouchPointCount(const Napi::CallbackInfo& info) {
+Napi::Value BindGetTouchPointCount(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetTouchPointCount(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindIsGestureDetected(const Napi::CallbackInfo& info) {
+Napi::Value BindIsGestureDetected(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsGestureDetected(
-       unsignedintFromValue(info, 0)
-    )
-  );
+      unsignedintFromValue(info, 0)));
 }
 
-Napi::Value BindGetGestureDetected(const Napi::CallbackInfo& info) {
+Napi::Value BindGetGestureDetected(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetGestureDetected(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetGestureHoldDuration(const Napi::CallbackInfo& info) {
+Napi::Value BindGetGestureHoldDuration(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetGestureHoldDuration(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetGestureDragVector(const Napi::CallbackInfo& info) {
+Napi::Value BindGetGestureDragVector(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetGestureDragVector(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetGestureDragAngle(const Napi::CallbackInfo& info) {
+Napi::Value BindGetGestureDragAngle(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetGestureDragAngle(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetGesturePinchVector(const Napi::CallbackInfo& info) {
+Napi::Value BindGetGesturePinchVector(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetGesturePinchVector(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetGesturePinchAngle(const Napi::CallbackInfo& info) {
+Napi::Value BindGetGesturePinchAngle(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetGesturePinchAngle(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetShapesTexture(const Napi::CallbackInfo& info) {
+Napi::Value BindGetShapesTexture(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetShapesTexture(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetShapesTextureRectangle(const Napi::CallbackInfo& info) {
+Napi::Value BindGetShapesTextureRectangle(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetShapesTextureRectangle(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetSplinePointLinear(const Napi::CallbackInfo& info) {
+Napi::Value BindGetSplinePointLinear(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetSplinePointLinear(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       floatFromValue(info, 4)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2),
+      floatFromValue(info, 4)));
 }
 
-Napi::Value BindGetSplinePointBasis(const Napi::CallbackInfo& info) {
+Napi::Value BindGetSplinePointBasis(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetSplinePointBasis(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       Vector2FromValue(info, 4),
-       Vector2FromValue(info, 6),
-       floatFromValue(info, 8)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2),
+      Vector2FromValue(info, 4),
+      Vector2FromValue(info, 6),
+      floatFromValue(info, 8)));
 }
 
-Napi::Value BindGetSplinePointCatmullRom(const Napi::CallbackInfo& info) {
+Napi::Value BindGetSplinePointCatmullRom(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetSplinePointCatmullRom(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       Vector2FromValue(info, 4),
-       Vector2FromValue(info, 6),
-       floatFromValue(info, 8)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2),
+      Vector2FromValue(info, 4),
+      Vector2FromValue(info, 6),
+      floatFromValue(info, 8)));
 }
 
-Napi::Value BindGetSplinePointBezierQuad(const Napi::CallbackInfo& info) {
+Napi::Value BindGetSplinePointBezierQuad(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetSplinePointBezierQuad(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       Vector2FromValue(info, 4),
-       floatFromValue(info, 6)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2),
+      Vector2FromValue(info, 4),
+      floatFromValue(info, 6)));
 }
 
-Napi::Value BindGetSplinePointBezierCubic(const Napi::CallbackInfo& info) {
+Napi::Value BindGetSplinePointBezierCubic(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetSplinePointBezierCubic(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       Vector2FromValue(info, 4),
-       Vector2FromValue(info, 6),
-       floatFromValue(info, 8)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2),
+      Vector2FromValue(info, 4),
+      Vector2FromValue(info, 6),
+      floatFromValue(info, 8)));
 }
 
-Napi::Value BindCheckCollisionRecs(const Napi::CallbackInfo& info) {
+Napi::Value BindCheckCollisionRecs(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     CheckCollisionRecs(
-       RectangleFromValue(info, 0),
-       RectangleFromValue(info, 4)
-    )
-  );
+      RectangleFromValue(info, 0),
+      RectangleFromValue(info, 4)));
 }
 
-Napi::Value BindCheckCollisionCircles(const Napi::CallbackInfo& info) {
+Napi::Value BindCheckCollisionCircles(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     CheckCollisionCircles(
-       Vector2FromValue(info, 0),
-       floatFromValue(info, 2),
-       Vector2FromValue(info, 3),
-       floatFromValue(info, 5)
-    )
-  );
+      Vector2FromValue(info, 0),
+      floatFromValue(info, 2),
+      Vector2FromValue(info, 3),
+      floatFromValue(info, 5)));
 }
 
-Napi::Value BindCheckCollisionCircleRec(const Napi::CallbackInfo& info) {
+Napi::Value BindCheckCollisionCircleRec(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     CheckCollisionCircleRec(
-       Vector2FromValue(info, 0),
-       floatFromValue(info, 2),
-       RectangleFromValue(info, 3)
-    )
-  );
+      Vector2FromValue(info, 0),
+      floatFromValue(info, 2),
+      RectangleFromValue(info, 3)));
 }
 
-Napi::Value BindCheckCollisionCircleLine(const Napi::CallbackInfo& info) {
+Napi::Value BindCheckCollisionCircleLine(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     CheckCollisionCircleLine(
-       Vector2FromValue(info, 0),
-       floatFromValue(info, 2),
-       Vector2FromValue(info, 3),
-       Vector2FromValue(info, 5)
-    )
-  );
+      Vector2FromValue(info, 0),
+      floatFromValue(info, 2),
+      Vector2FromValue(info, 3),
+      Vector2FromValue(info, 5)));
 }
 
-Napi::Value BindCheckCollisionPointRec(const Napi::CallbackInfo& info) {
+Napi::Value BindCheckCollisionPointRec(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     CheckCollisionPointRec(
-       Vector2FromValue(info, 0),
-       RectangleFromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      RectangleFromValue(info, 2)));
 }
 
-Napi::Value BindCheckCollisionPointCircle(const Napi::CallbackInfo& info) {
+Napi::Value BindCheckCollisionPointCircle(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     CheckCollisionPointCircle(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       floatFromValue(info, 4)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2),
+      floatFromValue(info, 4)));
 }
 
-Napi::Value BindCheckCollisionPointTriangle(const Napi::CallbackInfo& info) {
+Napi::Value BindCheckCollisionPointTriangle(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     CheckCollisionPointTriangle(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       Vector2FromValue(info, 4),
-       Vector2FromValue(info, 6)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2),
+      Vector2FromValue(info, 4),
+      Vector2FromValue(info, 6)));
 }
 
-Napi::Value BindCheckCollisionPointLine(const Napi::CallbackInfo& info) {
+Napi::Value BindCheckCollisionPointLine(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     CheckCollisionPointLine(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       Vector2FromValue(info, 4),
-       intFromValue(info, 6)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2),
+      Vector2FromValue(info, 4),
+      intFromValue(info, 6)));
 }
 
-Napi::Value BindCheckCollisionPointPoly(const Napi::CallbackInfo& info) {
+Napi::Value BindCheckCollisionPointPoly(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     CheckCollisionPointPoly(
-       Vector2FromValue(info, 0),
-       (const Vector2 *) pointerFromValue(info, 2),
-       intFromValue(info, 3)
-    )
-  );
+      Vector2FromValue(info, 0),
+      (const Vector2 *)pointerFromValue(info, 2),
+      intFromValue(info, 3)));
 }
 
-Napi::Value BindCheckCollisionLines(const Napi::CallbackInfo& info) {
+Napi::Value BindCheckCollisionLines(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     CheckCollisionLines(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       Vector2FromValue(info, 4),
-       Vector2FromValue(info, 6),
-       (Vector2 *) pointerFromValue(info, 8)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2),
+      Vector2FromValue(info, 4),
+      Vector2FromValue(info, 6),
+      (Vector2 *)pointerFromValue(info, 8)));
 }
 
-Napi::Value BindGetCollisionRec(const Napi::CallbackInfo& info) {
+Napi::Value BindGetCollisionRec(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetCollisionRec(
-       RectangleFromValue(info, 0),
-       RectangleFromValue(info, 4)
-    )
-  );
+      RectangleFromValue(info, 0),
+      RectangleFromValue(info, 4)));
 }
 
-Napi::Value BindLoadImage(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadImage(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadImage(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindLoadImageRaw(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadImageRaw(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadImageRaw(
-       (const char *) stringFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       intFromValue(info, 4)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      intFromValue(info, 1),
+      intFromValue(info, 2),
+      intFromValue(info, 3),
+      intFromValue(info, 4)));
 }
 
-Napi::Value BindLoadImageAnim(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadImageAnim(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadImageAnim(
-       (const char *) stringFromValue(info, 0),
-       (int *) pointerFromValue(info, 1)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (int *)pointerFromValue(info, 1)));
 }
 
-Napi::Value BindLoadImageAnimFromMemory(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadImageAnimFromMemory(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadImageAnimFromMemory(
-       (const char *) stringFromValue(info, 0),
-       (const unsigned char *) pointerFromValue(info, 1),
-       intFromValue(info, 2),
-       (int *) pointerFromValue(info, 3)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (const unsigned char *)pointerFromValue(info, 1),
+      intFromValue(info, 2),
+      (int *)pointerFromValue(info, 3)));
 }
 
-Napi::Value BindLoadImageFromMemory(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadImageFromMemory(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadImageFromMemory(
-       (const char *) stringFromValue(info, 0),
-       (const unsigned char *) pointerFromValue(info, 1),
-       intFromValue(info, 2)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (const unsigned char *)pointerFromValue(info, 1),
+      intFromValue(info, 2)));
 }
 
-Napi::Value BindLoadImageFromTexture(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadImageFromTexture(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadImageFromTexture(
-       TextureFromValue(info, 0)
-    )
-  );
+      TextureFromValue(info, 0)));
 }
 
-Napi::Value BindLoadImageFromScreen(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadImageFromScreen(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadImageFromScreen(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindIsImageValid(const Napi::CallbackInfo& info) {
+Napi::Value BindIsImageValid(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsImageValid(
-       ImageFromValue(info, 0)
-    )
-  );
+      ImageFromValue(info, 0)));
 }
 
-Napi::Value BindExportImage(const Napi::CallbackInfo& info) {
+Napi::Value BindExportImage(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ExportImage(
-       ImageFromValue(info, 0),
-       (const char *) stringFromValue(info, 5)
-    )
-  );
+      ImageFromValue(info, 0),
+      (const char *)stringFromValue(info, 5)));
 }
 
-Napi::Value BindExportImageToMemory(const Napi::CallbackInfo& info) {
+Napi::Value BindExportImageToMemory(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ExportImageToMemory(
-       ImageFromValue(info, 0),
-       (const char *) stringFromValue(info, 5),
-       (int *) pointerFromValue(info, 6)
-    )
-  );
+      ImageFromValue(info, 0),
+      (const char *)stringFromValue(info, 5),
+      (int *)pointerFromValue(info, 6)));
 }
 
-Napi::Value BindExportImageAsCode(const Napi::CallbackInfo& info) {
+Napi::Value BindExportImageAsCode(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ExportImageAsCode(
-       ImageFromValue(info, 0),
-       (const char *) stringFromValue(info, 5)
-    )
-  );
+      ImageFromValue(info, 0),
+      (const char *)stringFromValue(info, 5)));
 }
 
-Napi::Value BindGenImageColor(const Napi::CallbackInfo& info) {
+Napi::Value BindGenImageColor(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenImageColor(
-       intFromValue(info, 0),
-       intFromValue(info, 1),
-       ColorFromValue(info, 2)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1),
+      ColorFromValue(info, 2)));
 }
 
-Napi::Value BindGenImageGradientLinear(const Napi::CallbackInfo& info) {
+Napi::Value BindGenImageGradientLinear(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenImageGradientLinear(
-       intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       ColorFromValue(info, 3),
-       ColorFromValue(info, 7)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1),
+      intFromValue(info, 2),
+      ColorFromValue(info, 3),
+      ColorFromValue(info, 7)));
 }
 
-Napi::Value BindGenImageGradientRadial(const Napi::CallbackInfo& info) {
+Napi::Value BindGenImageGradientRadial(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenImageGradientRadial(
-       intFromValue(info, 0),
-       intFromValue(info, 1),
-       floatFromValue(info, 2),
-       ColorFromValue(info, 3),
-       ColorFromValue(info, 7)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1),
+      floatFromValue(info, 2),
+      ColorFromValue(info, 3),
+      ColorFromValue(info, 7)));
 }
 
-Napi::Value BindGenImageGradientSquare(const Napi::CallbackInfo& info) {
+Napi::Value BindGenImageGradientSquare(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenImageGradientSquare(
-       intFromValue(info, 0),
-       intFromValue(info, 1),
-       floatFromValue(info, 2),
-       ColorFromValue(info, 3),
-       ColorFromValue(info, 7)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1),
+      floatFromValue(info, 2),
+      ColorFromValue(info, 3),
+      ColorFromValue(info, 7)));
 }
 
-Napi::Value BindGenImageChecked(const Napi::CallbackInfo& info) {
+Napi::Value BindGenImageChecked(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenImageChecked(
-       intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       ColorFromValue(info, 4),
-       ColorFromValue(info, 8)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1),
+      intFromValue(info, 2),
+      intFromValue(info, 3),
+      ColorFromValue(info, 4),
+      ColorFromValue(info, 8)));
 }
 
-Napi::Value BindGenImageWhiteNoise(const Napi::CallbackInfo& info) {
+Napi::Value BindGenImageWhiteNoise(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenImageWhiteNoise(
-       intFromValue(info, 0),
-       intFromValue(info, 1),
-       floatFromValue(info, 2)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1),
+      floatFromValue(info, 2)));
 }
 
-Napi::Value BindGenImagePerlinNoise(const Napi::CallbackInfo& info) {
+Napi::Value BindGenImagePerlinNoise(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenImagePerlinNoise(
-       intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       floatFromValue(info, 4)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1),
+      intFromValue(info, 2),
+      intFromValue(info, 3),
+      floatFromValue(info, 4)));
 }
 
-Napi::Value BindGenImageCellular(const Napi::CallbackInfo& info) {
+Napi::Value BindGenImageCellular(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenImageCellular(
-       intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1),
+      intFromValue(info, 2)));
 }
 
-Napi::Value BindGenImageText(const Napi::CallbackInfo& info) {
+Napi::Value BindGenImageText(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenImageText(
-       intFromValue(info, 0),
-       intFromValue(info, 1),
-       (const char *) stringFromValue(info, 2)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1),
+      (const char *)stringFromValue(info, 2)));
 }
 
-Napi::Value BindImageCopy(const Napi::CallbackInfo& info) {
+Napi::Value BindImageCopy(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ImageCopy(
-       ImageFromValue(info, 0)
-    )
-  );
+      ImageFromValue(info, 0)));
 }
 
-Napi::Value BindImageFromImage(const Napi::CallbackInfo& info) {
+Napi::Value BindImageFromImage(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ImageFromImage(
-       ImageFromValue(info, 0),
-       RectangleFromValue(info, 5)
-    )
-  );
+      ImageFromValue(info, 0),
+      RectangleFromValue(info, 5)));
 }
 
-Napi::Value BindImageFromChannel(const Napi::CallbackInfo& info) {
+Napi::Value BindImageFromChannel(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ImageFromChannel(
-       ImageFromValue(info, 0),
-       intFromValue(info, 5)
-    )
-  );
+      ImageFromValue(info, 0),
+      intFromValue(info, 5)));
 }
 
-Napi::Value BindImageText(const Napi::CallbackInfo& info) {
+Napi::Value BindImageText(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ImageText(
-       (const char *) stringFromValue(info, 0),
-       intFromValue(info, 1),
-       ColorFromValue(info, 2)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      intFromValue(info, 1),
+      ColorFromValue(info, 2)));
 }
 
-Napi::Value BindImageTextEx(const Napi::CallbackInfo& info) {
+Napi::Value BindImageTextEx(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ImageTextEx(
-       FontFromValue(info, 0),
-       (const char *) stringFromValue(info, 10),
-       floatFromValue(info, 11),
-       floatFromValue(info, 12),
-       ColorFromValue(info, 13)
-    )
-  );
+      FontFromValue(info, 0),
+      (const char *)stringFromValue(info, 10),
+      floatFromValue(info, 11),
+      floatFromValue(info, 12),
+      ColorFromValue(info, 13)));
 }
 
-Napi::Value BindLoadImageColors(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadImageColors(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadImageColors(
-       ImageFromValue(info, 0)
-    )
-  );
+      ImageFromValue(info, 0)));
 }
 
-Napi::Value BindLoadImagePalette(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadImagePalette(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadImagePalette(
-       ImageFromValue(info, 0),
-       intFromValue(info, 5),
-       (int *) pointerFromValue(info, 6)
-    )
-  );
+      ImageFromValue(info, 0),
+      intFromValue(info, 5),
+      (int *)pointerFromValue(info, 6)));
 }
 
-Napi::Value BindGetImageAlphaBorder(const Napi::CallbackInfo& info) {
+Napi::Value BindGetImageAlphaBorder(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetImageAlphaBorder(
-       ImageFromValue(info, 0),
-       floatFromValue(info, 5)
-    )
-  );
+      ImageFromValue(info, 0),
+      floatFromValue(info, 5)));
 }
 
-Napi::Value BindGetImageColor(const Napi::CallbackInfo& info) {
+Napi::Value BindGetImageColor(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetImageColor(
-       ImageFromValue(info, 0),
-       intFromValue(info, 5),
-       intFromValue(info, 6)
-    )
-  );
+      ImageFromValue(info, 0),
+      intFromValue(info, 5),
+      intFromValue(info, 6)));
 }
 
-Napi::Value BindLoadTexture(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadTexture(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadTexture(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindLoadTextureFromImage(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadTextureFromImage(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadTextureFromImage(
-       ImageFromValue(info, 0)
-    )
-  );
+      ImageFromValue(info, 0)));
 }
 
-Napi::Value BindLoadTextureCubemap(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadTextureCubemap(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadTextureCubemap(
-       ImageFromValue(info, 0),
-       intFromValue(info, 5)
-    )
-  );
+      ImageFromValue(info, 0),
+      intFromValue(info, 5)));
 }
 
-Napi::Value BindLoadRenderTexture(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadRenderTexture(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadRenderTexture(
-       intFromValue(info, 0),
-       intFromValue(info, 1)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1)));
 }
 
-Napi::Value BindIsTextureValid(const Napi::CallbackInfo& info) {
+Napi::Value BindIsTextureValid(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsTextureValid(
-       TextureFromValue(info, 0)
-    )
-  );
+      TextureFromValue(info, 0)));
 }
 
-Napi::Value BindIsRenderTextureValid(const Napi::CallbackInfo& info) {
+Napi::Value BindIsRenderTextureValid(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsRenderTextureValid(
-       RenderTextureFromValue(info, 0)
-    )
-  );
+      RenderTextureFromValue(info, 0)));
 }
 
-Napi::Value BindColorIsEqual(const Napi::CallbackInfo& info) {
+Napi::Value BindColorIsEqual(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ColorIsEqual(
-       ColorFromValue(info, 0),
-       ColorFromValue(info, 4)
-    )
-  );
+      ColorFromValue(info, 0),
+      ColorFromValue(info, 4)));
 }
 
-Napi::Value BindFade(const Napi::CallbackInfo& info) {
+Napi::Value BindFade(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Fade(
-       ColorFromValue(info, 0),
-       floatFromValue(info, 4)
-    )
-  );
+      ColorFromValue(info, 0),
+      floatFromValue(info, 4)));
 }
 
-Napi::Value BindColorToInt(const Napi::CallbackInfo& info) {
+Napi::Value BindColorToInt(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ColorToInt(
-       ColorFromValue(info, 0)
-    )
-  );
+      ColorFromValue(info, 0)));
 }
 
-Napi::Value BindColorNormalize(const Napi::CallbackInfo& info) {
+Napi::Value BindColorNormalize(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ColorNormalize(
-       ColorFromValue(info, 0)
-    )
-  );
+      ColorFromValue(info, 0)));
 }
 
-Napi::Value BindColorFromNormalized(const Napi::CallbackInfo& info) {
+Napi::Value BindColorFromNormalized(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ColorFromNormalized(
-       Vector4FromValue(info, 0)
-    )
-  );
+      Vector4FromValue(info, 0)));
 }
 
-Napi::Value BindColorToHSV(const Napi::CallbackInfo& info) {
+Napi::Value BindColorToHSV(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ColorToHSV(
-       ColorFromValue(info, 0)
-    )
-  );
+      ColorFromValue(info, 0)));
 }
 
-Napi::Value BindColorFromHSV(const Napi::CallbackInfo& info) {
+Napi::Value BindColorFromHSV(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ColorFromHSV(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2)));
 }
 
-Napi::Value BindColorTint(const Napi::CallbackInfo& info) {
+Napi::Value BindColorTint(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ColorTint(
-       ColorFromValue(info, 0),
-       ColorFromValue(info, 4)
-    )
-  );
+      ColorFromValue(info, 0),
+      ColorFromValue(info, 4)));
 }
 
-Napi::Value BindColorBrightness(const Napi::CallbackInfo& info) {
+Napi::Value BindColorBrightness(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ColorBrightness(
-       ColorFromValue(info, 0),
-       floatFromValue(info, 4)
-    )
-  );
+      ColorFromValue(info, 0),
+      floatFromValue(info, 4)));
 }
 
-Napi::Value BindColorContrast(const Napi::CallbackInfo& info) {
+Napi::Value BindColorContrast(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ColorContrast(
-       ColorFromValue(info, 0),
-       floatFromValue(info, 4)
-    )
-  );
+      ColorFromValue(info, 0),
+      floatFromValue(info, 4)));
 }
 
-Napi::Value BindColorAlpha(const Napi::CallbackInfo& info) {
+Napi::Value BindColorAlpha(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ColorAlpha(
-       ColorFromValue(info, 0),
-       floatFromValue(info, 4)
-    )
-  );
+      ColorFromValue(info, 0),
+      floatFromValue(info, 4)));
 }
 
-Napi::Value BindColorAlphaBlend(const Napi::CallbackInfo& info) {
+Napi::Value BindColorAlphaBlend(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ColorAlphaBlend(
-       ColorFromValue(info, 0),
-       ColorFromValue(info, 4),
-       ColorFromValue(info, 8)
-    )
-  );
+      ColorFromValue(info, 0),
+      ColorFromValue(info, 4),
+      ColorFromValue(info, 8)));
 }
 
-Napi::Value BindColorLerp(const Napi::CallbackInfo& info) {
+Napi::Value BindColorLerp(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ColorLerp(
-       ColorFromValue(info, 0),
-       ColorFromValue(info, 4),
-       floatFromValue(info, 8)
-    )
-  );
+      ColorFromValue(info, 0),
+      ColorFromValue(info, 4),
+      floatFromValue(info, 8)));
 }
 
-Napi::Value BindGetColor(const Napi::CallbackInfo& info) {
+Napi::Value BindGetColor(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetColor(
-       unsignedintFromValue(info, 0)
-    )
-  );
+      unsignedintFromValue(info, 0)));
 }
 
-Napi::Value BindGetPixelColor(const Napi::CallbackInfo& info) {
+Napi::Value BindGetPixelColor(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetPixelColor(
-       (void *) pointerFromValue(info, 0),
-       intFromValue(info, 1)
-    )
-  );
+      (void *)pointerFromValue(info, 0),
+      intFromValue(info, 1)));
 }
 
-Napi::Value BindGetPixelDataSize(const Napi::CallbackInfo& info) {
+Napi::Value BindGetPixelDataSize(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetPixelDataSize(
-       intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1),
+      intFromValue(info, 2)));
 }
 
-Napi::Value BindGetFontDefault(const Napi::CallbackInfo& info) {
+Napi::Value BindGetFontDefault(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetFontDefault(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindLoadFont(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadFont(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadFont(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindLoadFontEx(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadFontEx(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadFontEx(
-       (const char *) stringFromValue(info, 0),
-       intFromValue(info, 1),
-       (int *) pointerFromValue(info, 2),
-       intFromValue(info, 3)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      intFromValue(info, 1),
+      (int *)pointerFromValue(info, 2),
+      intFromValue(info, 3)));
 }
 
-Napi::Value BindLoadFontFromImage(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadFontFromImage(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadFontFromImage(
-       ImageFromValue(info, 0),
-       ColorFromValue(info, 5),
-       intFromValue(info, 9)
-    )
-  );
+      ImageFromValue(info, 0),
+      ColorFromValue(info, 5),
+      intFromValue(info, 9)));
 }
 
-Napi::Value BindLoadFontFromMemory(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadFontFromMemory(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadFontFromMemory(
-       (const char *) stringFromValue(info, 0),
-       (const unsigned char *) pointerFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       (int *) pointerFromValue(info, 4),
-       intFromValue(info, 5)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (const unsigned char *)pointerFromValue(info, 1),
+      intFromValue(info, 2),
+      intFromValue(info, 3),
+      (int *)pointerFromValue(info, 4),
+      intFromValue(info, 5)));
 }
 
-Napi::Value BindIsFontValid(const Napi::CallbackInfo& info) {
+Napi::Value BindIsFontValid(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsFontValid(
-       FontFromValue(info, 0)
-    )
-  );
+      FontFromValue(info, 0)));
 }
 
-Napi::Value BindLoadFontData(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadFontData(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadFontData(
-       (const unsigned char *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       (int *) pointerFromValue(info, 3),
-       intFromValue(info, 4),
-       intFromValue(info, 5)
-    )
-  );
+      (const unsigned char *)pointerFromValue(info, 0),
+      intFromValue(info, 1),
+      intFromValue(info, 2),
+      (int *)pointerFromValue(info, 3),
+      intFromValue(info, 4),
+      intFromValue(info, 5)));
 }
 
-Napi::Value BindGenImageFontAtlas(const Napi::CallbackInfo& info) {
+Napi::Value BindGenImageFontAtlas(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenImageFontAtlas(
-       (const GlyphInfo *) pointerFromValue(info, 0),
-       (Rectangle **) pointerFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       intFromValue(info, 4),
-       intFromValue(info, 5)
-    )
-  );
+      (const GlyphInfo *)pointerFromValue(info, 0),
+      (Rectangle **)pointerFromValue(info, 1),
+      intFromValue(info, 2),
+      intFromValue(info, 3),
+      intFromValue(info, 4),
+      intFromValue(info, 5)));
 }
 
-Napi::Value BindExportFontAsCode(const Napi::CallbackInfo& info) {
+Napi::Value BindExportFontAsCode(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ExportFontAsCode(
-       FontFromValue(info, 0),
-       (const char *) stringFromValue(info, 10)
-    )
-  );
+      FontFromValue(info, 0),
+      (const char *)stringFromValue(info, 10)));
 }
 
-Napi::Value BindMeasureText(const Napi::CallbackInfo& info) {
+Napi::Value BindMeasureText(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MeasureText(
-       (const char *) stringFromValue(info, 0),
-       intFromValue(info, 1)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      intFromValue(info, 1)));
 }
 
-Napi::Value BindMeasureTextEx(const Napi::CallbackInfo& info) {
+Napi::Value BindMeasureTextEx(const Napi::CallbackInfo &info) {
   std::string val = info[10].As<Napi::String>().Utf8Value();
-  
+
   return ToValue(info.Env(),
     MeasureTextEx(
-       FontFromValue(info, 0),
-       val.c_str(),
-       floatFromValue(info, 11),
-       floatFromValue(info, 12)
-    )
-  );
+      FontFromValue(info, 0),
+      val.c_str(),
+      floatFromValue(info, 11),
+      floatFromValue(info, 12)));
 }
 
-Napi::Value BindGetGlyphIndex(const Napi::CallbackInfo& info) {
+Napi::Value BindGetGlyphIndex(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetGlyphIndex(
-       FontFromValue(info, 0),
-       intFromValue(info, 10)
-    )
-  );
+      FontFromValue(info, 0),
+      intFromValue(info, 10)));
 }
 
-Napi::Value BindGetGlyphInfo(const Napi::CallbackInfo& info) {
+Napi::Value BindGetGlyphInfo(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetGlyphInfo(
-       FontFromValue(info, 0),
-       intFromValue(info, 10)
-    )
-  );
+      FontFromValue(info, 0),
+      intFromValue(info, 10)));
 }
 
-Napi::Value BindGetGlyphAtlasRec(const Napi::CallbackInfo& info) {
+Napi::Value BindGetGlyphAtlasRec(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetGlyphAtlasRec(
-       FontFromValue(info, 0),
-       intFromValue(info, 10)
-    )
-  );
+      FontFromValue(info, 0),
+      intFromValue(info, 10)));
 }
 
-Napi::Value BindLoadUTF8(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadUTF8(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadUTF8(
-       (const int *) pointerFromValue(info, 0),
-       intFromValue(info, 1)
-    )
-  );
+      (const int *)pointerFromValue(info, 0),
+      intFromValue(info, 1)));
 }
 
-Napi::Value BindLoadCodepoints(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadCodepoints(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadCodepoints(
-       (const char *) stringFromValue(info, 0),
-       (int *) pointerFromValue(info, 1)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (int *)pointerFromValue(info, 1)));
 }
 
-Napi::Value BindGetCodepointCount(const Napi::CallbackInfo& info) {
+Napi::Value BindGetCodepointCount(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetCodepointCount(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindGetCodepoint(const Napi::CallbackInfo& info) {
+Napi::Value BindGetCodepoint(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetCodepoint(
-       (const char *) stringFromValue(info, 0),
-       (int *) pointerFromValue(info, 1)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (int *)pointerFromValue(info, 1)));
 }
 
-Napi::Value BindGetCodepointNext(const Napi::CallbackInfo& info) {
+Napi::Value BindGetCodepointNext(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetCodepointNext(
-       (const char *) stringFromValue(info, 0),
-       (int *) pointerFromValue(info, 1)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (int *)pointerFromValue(info, 1)));
 }
 
-Napi::Value BindGetCodepointPrevious(const Napi::CallbackInfo& info) {
+Napi::Value BindGetCodepointPrevious(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetCodepointPrevious(
-       (const char *) stringFromValue(info, 0),
-       (int *) pointerFromValue(info, 1)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (int *)pointerFromValue(info, 1)));
 }
 
-Napi::Value BindCodepointToUTF8(const Napi::CallbackInfo& info) {
+Napi::Value BindCodepointToUTF8(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     CodepointToUTF8(
-       intFromValue(info, 0),
-       (int *) pointerFromValue(info, 1)
-    )
-  );
+      intFromValue(info, 0),
+      (int *)pointerFromValue(info, 1)));
 }
 
-Napi::Value BindTextCopy(const Napi::CallbackInfo& info) {
+Napi::Value BindTextCopy(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     TextCopy(
-       (char *) pointerFromValue(info, 0),
-       (const char *) stringFromValue(info, 1)
-    )
-  );
+      (char *)pointerFromValue(info, 0),
+      (const char *)stringFromValue(info, 1)));
 }
 
-Napi::Value BindTextIsEqual(const Napi::CallbackInfo& info) {
+Napi::Value BindTextIsEqual(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     TextIsEqual(
-       (const char *) stringFromValue(info, 0),
-       (const char *) stringFromValue(info, 1)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (const char *)stringFromValue(info, 1)));
 }
 
-Napi::Value BindTextLength(const Napi::CallbackInfo& info) {
+Napi::Value BindTextLength(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     TextLength(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindTextSubtext(const Napi::CallbackInfo& info) {
+Napi::Value BindTextSubtext(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     TextSubtext(
-       (const char *) stringFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      intFromValue(info, 1),
+      intFromValue(info, 2)));
 }
 
-Napi::Value BindTextReplace(const Napi::CallbackInfo& info) {
+Napi::Value BindTextReplace(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     TextReplace(
-       (const char *) stringFromValue(info, 0),
-       (const char *) stringFromValue(info, 1),
-       (const char *) stringFromValue(info, 2)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (const char *)stringFromValue(info, 1),
+      (const char *)stringFromValue(info, 2)));
 }
 
-Napi::Value BindTextInsert(const Napi::CallbackInfo& info) {
+Napi::Value BindTextInsert(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     TextInsert(
-       (const char *) stringFromValue(info, 0),
-       (const char *) stringFromValue(info, 1),
-       intFromValue(info, 2)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (const char *)stringFromValue(info, 1),
+      intFromValue(info, 2)));
 }
 
-Napi::Value BindTextJoin(const Napi::CallbackInfo& info) {
+Napi::Value BindTextJoin(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     TextJoin(
-       (const char **) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       (const char *) stringFromValue(info, 2)
-    )
-  );
+      (const char **)pointerFromValue(info, 0),
+      intFromValue(info, 1),
+      (const char *)stringFromValue(info, 2)));
 }
 
-Napi::Value BindTextSplit(const Napi::CallbackInfo& info) {
+Napi::Value BindTextSplit(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     TextSplit(
-       (const char *) stringFromValue(info, 0),
-       charFromValue(info, 1),
-       (int *) pointerFromValue(info, 2)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      charFromValue(info, 1),
+      (int *)pointerFromValue(info, 2)));
 }
 
-Napi::Value BindTextFindIndex(const Napi::CallbackInfo& info) {
+Napi::Value BindTextFindIndex(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     TextFindIndex(
-       (const char *) stringFromValue(info, 0),
-       (const char *) stringFromValue(info, 1)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (const char *)stringFromValue(info, 1)));
 }
 
-Napi::Value BindTextToUpper(const Napi::CallbackInfo& info) {
+Napi::Value BindTextToUpper(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     TextToUpper(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindTextToLower(const Napi::CallbackInfo& info) {
+Napi::Value BindTextToLower(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     TextToLower(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindTextToPascal(const Napi::CallbackInfo& info) {
+Napi::Value BindTextToPascal(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     TextToPascal(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindTextToSnake(const Napi::CallbackInfo& info) {
+Napi::Value BindTextToSnake(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     TextToSnake(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindTextToCamel(const Napi::CallbackInfo& info) {
+Napi::Value BindTextToCamel(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     TextToCamel(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindTextToInteger(const Napi::CallbackInfo& info) {
+Napi::Value BindTextToInteger(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     TextToInteger(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindTextToFloat(const Napi::CallbackInfo& info) {
+Napi::Value BindTextToFloat(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     TextToFloat(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindLoadModel(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadModel(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadModel(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindLoadModelFromMesh(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadModelFromMesh(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadModelFromMesh(
-       MeshFromValue(info, 0)
-    )
-  );
+      MeshFromValue(info, 0)));
 }
 
-Napi::Value BindIsModelValid(const Napi::CallbackInfo& info) {
+Napi::Value BindIsModelValid(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsModelValid(
-       ModelFromValue(info, 0)
-    )
-  );
+      ModelFromValue(info, 0)));
 }
 
-Napi::Value BindGetModelBoundingBox(const Napi::CallbackInfo& info) {
+Napi::Value BindGetModelBoundingBox(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetModelBoundingBox(
-       ModelFromValue(info, 0)
-    )
-  );
+      ModelFromValue(info, 0)));
 }
 
-Napi::Value BindGetMeshBoundingBox(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMeshBoundingBox(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMeshBoundingBox(
-       MeshFromValue(info, 0)
-    )
-  );
+      MeshFromValue(info, 0)));
 }
 
-Napi::Value BindExportMesh(const Napi::CallbackInfo& info) {
+Napi::Value BindExportMesh(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ExportMesh(
-       MeshFromValue(info, 0),
-       (const char *) stringFromValue(info, 17)
-    )
-  );
+      MeshFromValue(info, 0),
+      (const char *)stringFromValue(info, 17)));
 }
 
-Napi::Value BindExportMeshAsCode(const Napi::CallbackInfo& info) {
+Napi::Value BindExportMeshAsCode(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ExportMeshAsCode(
-       MeshFromValue(info, 0),
-       (const char *) stringFromValue(info, 17)
-    )
-  );
+      MeshFromValue(info, 0),
+      (const char *)stringFromValue(info, 17)));
 }
 
-Napi::Value BindGenMeshPoly(const Napi::CallbackInfo& info) {
+Napi::Value BindGenMeshPoly(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenMeshPoly(
-       intFromValue(info, 0),
-       floatFromValue(info, 1)
-    )
-  );
+      intFromValue(info, 0),
+      floatFromValue(info, 1)));
 }
 
-Napi::Value BindGenMeshPlane(const Napi::CallbackInfo& info) {
+Napi::Value BindGenMeshPlane(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenMeshPlane(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      intFromValue(info, 2),
+      intFromValue(info, 3)));
 }
 
-Napi::Value BindGenMeshCube(const Napi::CallbackInfo& info) {
+Napi::Value BindGenMeshCube(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenMeshCube(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2)));
 }
 
-Napi::Value BindGenMeshSphere(const Napi::CallbackInfo& info) {
+Napi::Value BindGenMeshSphere(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenMeshSphere(
-       floatFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2)
-    )
-  );
+      floatFromValue(info, 0),
+      intFromValue(info, 1),
+      intFromValue(info, 2)));
 }
 
-Napi::Value BindGenMeshHemiSphere(const Napi::CallbackInfo& info) {
+Napi::Value BindGenMeshHemiSphere(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenMeshHemiSphere(
-       floatFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2)
-    )
-  );
+      floatFromValue(info, 0),
+      intFromValue(info, 1),
+      intFromValue(info, 2)));
 }
 
-Napi::Value BindGenMeshCylinder(const Napi::CallbackInfo& info) {
+Napi::Value BindGenMeshCylinder(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenMeshCylinder(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       intFromValue(info, 2)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      intFromValue(info, 2)));
 }
 
-Napi::Value BindGenMeshCone(const Napi::CallbackInfo& info) {
+Napi::Value BindGenMeshCone(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenMeshCone(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       intFromValue(info, 2)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      intFromValue(info, 2)));
 }
 
-Napi::Value BindGenMeshTorus(const Napi::CallbackInfo& info) {
+Napi::Value BindGenMeshTorus(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenMeshTorus(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      intFromValue(info, 2),
+      intFromValue(info, 3)));
 }
 
-Napi::Value BindGenMeshKnot(const Napi::CallbackInfo& info) {
+Napi::Value BindGenMeshKnot(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenMeshKnot(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      intFromValue(info, 2),
+      intFromValue(info, 3)));
 }
 
-Napi::Value BindGenMeshHeightmap(const Napi::CallbackInfo& info) {
+Napi::Value BindGenMeshHeightmap(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenMeshHeightmap(
-       ImageFromValue(info, 0),
-       Vector3FromValue(info, 5)
-    )
-  );
+      ImageFromValue(info, 0),
+      Vector3FromValue(info, 5)));
 }
 
-Napi::Value BindGenMeshCubicmap(const Napi::CallbackInfo& info) {
+Napi::Value BindGenMeshCubicmap(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GenMeshCubicmap(
-       ImageFromValue(info, 0),
-       Vector3FromValue(info, 5)
-    )
-  );
+      ImageFromValue(info, 0),
+      Vector3FromValue(info, 5)));
 }
 
-Napi::Value BindCheckCollisionSpheres(const Napi::CallbackInfo& info) {
+Napi::Value BindCheckCollisionSpheres(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     CheckCollisionSpheres(
-       Vector3FromValue(info, 0),
-       floatFromValue(info, 3),
-       Vector3FromValue(info, 4),
-       floatFromValue(info, 7)
-    )
-  );
+      Vector3FromValue(info, 0),
+      floatFromValue(info, 3),
+      Vector3FromValue(info, 4),
+      floatFromValue(info, 7)));
 }
 
-Napi::Value BindCheckCollisionBoxes(const Napi::CallbackInfo& info) {
+Napi::Value BindCheckCollisionBoxes(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     CheckCollisionBoxes(
-       BoundingBoxFromValue(info, 0),
-       BoundingBoxFromValue(info, 6)
-    )
-  );
+      BoundingBoxFromValue(info, 0),
+      BoundingBoxFromValue(info, 6)));
 }
 
-Napi::Value BindCheckCollisionBoxSphere(const Napi::CallbackInfo& info) {
+Napi::Value BindCheckCollisionBoxSphere(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     CheckCollisionBoxSphere(
-       BoundingBoxFromValue(info, 0),
-       Vector3FromValue(info, 6),
-       floatFromValue(info, 9)
-    )
-  );
+      BoundingBoxFromValue(info, 0),
+      Vector3FromValue(info, 6),
+      floatFromValue(info, 9)));
 }
 
-Napi::Value BindGetRayCollisionSphere(const Napi::CallbackInfo& info) {
+Napi::Value BindGetRayCollisionSphere(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetRayCollisionSphere(
-       RayFromValue(info, 0),
-       Vector3FromValue(info, 6),
-       floatFromValue(info, 9)
-    )
-  );
+      RayFromValue(info, 0),
+      Vector3FromValue(info, 6),
+      floatFromValue(info, 9)));
 }
 
-Napi::Value BindGetRayCollisionBox(const Napi::CallbackInfo& info) {
+Napi::Value BindGetRayCollisionBox(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetRayCollisionBox(
-       RayFromValue(info, 0),
-       BoundingBoxFromValue(info, 6)
-    )
-  );
+      RayFromValue(info, 0),
+      BoundingBoxFromValue(info, 6)));
 }
 
-Napi::Value BindGetRayCollisionMesh(const Napi::CallbackInfo& info) {
+Napi::Value BindGetRayCollisionMesh(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetRayCollisionMesh(
-       RayFromValue(info, 0),
-       MeshFromValue(info, 6),
-       MatrixFromValue(info, 23)
-    )
-  );
+      RayFromValue(info, 0),
+      MeshFromValue(info, 6),
+      MatrixFromValue(info, 23)));
 }
 
-Napi::Value BindGetRayCollisionTriangle(const Napi::CallbackInfo& info) {
+Napi::Value BindGetRayCollisionTriangle(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetRayCollisionTriangle(
-       RayFromValue(info, 0),
-       Vector3FromValue(info, 6),
-       Vector3FromValue(info, 9),
-       Vector3FromValue(info, 12)
-    )
-  );
+      RayFromValue(info, 0),
+      Vector3FromValue(info, 6),
+      Vector3FromValue(info, 9),
+      Vector3FromValue(info, 12)));
 }
 
-Napi::Value BindGetRayCollisionQuad(const Napi::CallbackInfo& info) {
+Napi::Value BindGetRayCollisionQuad(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetRayCollisionQuad(
-       RayFromValue(info, 0),
-       Vector3FromValue(info, 6),
-       Vector3FromValue(info, 9),
-       Vector3FromValue(info, 12),
-       Vector3FromValue(info, 15)
-    )
-  );
+      RayFromValue(info, 0),
+      Vector3FromValue(info, 6),
+      Vector3FromValue(info, 9),
+      Vector3FromValue(info, 12),
+      Vector3FromValue(info, 15)));
 }
 
-Napi::Value BindIsAudioDeviceReady(const Napi::CallbackInfo& info) {
+Napi::Value BindIsAudioDeviceReady(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsAudioDeviceReady(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGetMasterVolume(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMasterVolume(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMasterVolume(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindLoadWave(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadWave(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadWave(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindLoadWaveFromMemory(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadWaveFromMemory(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadWaveFromMemory(
-       (const char *) stringFromValue(info, 0),
-       (const unsigned char *) pointerFromValue(info, 1),
-       intFromValue(info, 2)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (const unsigned char *)pointerFromValue(info, 1),
+      intFromValue(info, 2)));
 }
 
-Napi::Value BindIsWaveValid(const Napi::CallbackInfo& info) {
+Napi::Value BindIsWaveValid(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsWaveValid(
-       WaveFromValue(info, 0)
-    )
-  );
+      WaveFromValue(info, 0)));
 }
 
-Napi::Value BindLoadSound(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadSound(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadSound(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindLoadSoundFromWave(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadSoundFromWave(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadSoundFromWave(
-       WaveFromValue(info, 0)
-    )
-  );
+      WaveFromValue(info, 0)));
 }
 
-Napi::Value BindLoadSoundAlias(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadSoundAlias(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadSoundAlias(
-       SoundFromValue(info, 0)
-    )
-  );
+      SoundFromValue(info, 0)));
 }
 
-Napi::Value BindIsSoundValid(const Napi::CallbackInfo& info) {
+Napi::Value BindIsSoundValid(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsSoundValid(
-       SoundFromValue(info, 0)
-    )
-  );
+      SoundFromValue(info, 0)));
 }
 
-Napi::Value BindExportWave(const Napi::CallbackInfo& info) {
+Napi::Value BindExportWave(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ExportWave(
-       WaveFromValue(info, 0),
-       (const char *) stringFromValue(info, 5)
-    )
-  );
+      WaveFromValue(info, 0),
+      (const char *)stringFromValue(info, 5)));
 }
 
-Napi::Value BindExportWaveAsCode(const Napi::CallbackInfo& info) {
+Napi::Value BindExportWaveAsCode(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     ExportWaveAsCode(
-       WaveFromValue(info, 0),
-       (const char *) stringFromValue(info, 5)
-    )
-  );
+      WaveFromValue(info, 0),
+      (const char *)stringFromValue(info, 5)));
 }
 
-Napi::Value BindIsSoundPlaying(const Napi::CallbackInfo& info) {
+Napi::Value BindIsSoundPlaying(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsSoundPlaying(
-       SoundFromValue(info, 0)
-    )
-  );
+      SoundFromValue(info, 0)));
 }
 
-Napi::Value BindWaveCopy(const Napi::CallbackInfo& info) {
+Napi::Value BindWaveCopy(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     WaveCopy(
-       WaveFromValue(info, 0)
-    )
-  );
+      WaveFromValue(info, 0)));
 }
 
-Napi::Value BindLoadWaveSamples(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadWaveSamples(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadWaveSamples(
-       WaveFromValue(info, 0)
-    )
-  );
+      WaveFromValue(info, 0)));
 }
 
-Napi::Value BindLoadMusicStream(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadMusicStream(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadMusicStream(
-       (const char *) stringFromValue(info, 0)
-    )
-  );
+      (const char *)stringFromValue(info, 0)));
 }
 
-Napi::Value BindLoadMusicStreamFromMemory(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadMusicStreamFromMemory(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadMusicStreamFromMemory(
-       (const char *) stringFromValue(info, 0),
-       (const unsigned char *) pointerFromValue(info, 1),
-       intFromValue(info, 2)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (const unsigned char *)pointerFromValue(info, 1),
+      intFromValue(info, 2)));
 }
 
-Napi::Value BindIsMusicValid(const Napi::CallbackInfo& info) {
+Napi::Value BindIsMusicValid(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsMusicValid(
-       MusicFromValue(info, 0)
-    )
-  );
+      MusicFromValue(info, 0)));
 }
 
-Napi::Value BindIsMusicStreamPlaying(const Napi::CallbackInfo& info) {
+Napi::Value BindIsMusicStreamPlaying(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsMusicStreamPlaying(
-       MusicFromValue(info, 0)
-    )
-  );
+      MusicFromValue(info, 0)));
 }
 
-Napi::Value BindGetMusicTimeLength(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMusicTimeLength(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMusicTimeLength(
-       MusicFromValue(info, 0)
-    )
-  );
+      MusicFromValue(info, 0)));
 }
 
-Napi::Value BindGetMusicTimePlayed(const Napi::CallbackInfo& info) {
+Napi::Value BindGetMusicTimePlayed(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GetMusicTimePlayed(
-       MusicFromValue(info, 0)
-    )
-  );
+      MusicFromValue(info, 0)));
 }
 
-Napi::Value BindLoadAudioStream(const Napi::CallbackInfo& info) {
+Napi::Value BindLoadAudioStream(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadAudioStream(
-       unsignedintFromValue(info, 0),
-       unsignedintFromValue(info, 1),
-       unsignedintFromValue(info, 2)
-    )
-  );
+      unsignedintFromValue(info, 0),
+      unsignedintFromValue(info, 1),
+      unsignedintFromValue(info, 2)));
 }
 
-Napi::Value BindIsAudioStreamValid(const Napi::CallbackInfo& info) {
+Napi::Value BindIsAudioStreamValid(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsAudioStreamValid(
-       AudioStreamFromValue(info, 0)
-    )
-  );
+      AudioStreamFromValue(info, 0)));
 }
 
-Napi::Value BindIsAudioStreamProcessed(const Napi::CallbackInfo& info) {
+Napi::Value BindIsAudioStreamProcessed(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsAudioStreamProcessed(
-       AudioStreamFromValue(info, 0)
-    )
-  );
+      AudioStreamFromValue(info, 0)));
 }
 
-Napi::Value BindIsAudioStreamPlaying(const Napi::CallbackInfo& info) {
+Napi::Value BindIsAudioStreamPlaying(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     IsAudioStreamPlaying(
-       AudioStreamFromValue(info, 0)
-    )
-  );
+      AudioStreamFromValue(info, 0)));
 }
 
-Napi::Value BindEaseLinearNone(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseLinearNone(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseLinearNone(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseLinearIn(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseLinearIn(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseLinearIn(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseLinearOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseLinearOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseLinearOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseLinearInOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseLinearInOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseLinearInOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseSineIn(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseSineIn(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseSineIn(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseSineOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseSineOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseSineOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseSineInOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseSineInOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseSineInOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseCircIn(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseCircIn(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseCircIn(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseCircOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseCircOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseCircOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseCircInOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseCircInOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseCircInOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseCubicIn(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseCubicIn(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseCubicIn(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseCubicOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseCubicOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseCubicOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseCubicInOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseCubicInOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseCubicInOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseQuadIn(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseQuadIn(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseQuadIn(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseQuadOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseQuadOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseQuadOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseQuadInOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseQuadInOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseQuadInOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseExpoIn(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseExpoIn(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseExpoIn(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseExpoOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseExpoOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseExpoOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseExpoInOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseExpoInOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseExpoInOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseBackIn(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseBackIn(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseBackIn(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseBackOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseBackOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseBackOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseBackInOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseBackInOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseBackInOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseBounceOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseBounceOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseBounceOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseBounceIn(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseBounceIn(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseBounceIn(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseBounceInOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseBounceInOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseBounceInOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseElasticIn(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseElasticIn(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseElasticIn(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseElasticOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseElasticOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseElasticOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindEaseElasticInOut(const Napi::CallbackInfo& info) {
+Napi::Value BindEaseElasticInOut(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     EaseElasticInOut(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindClamp(const Napi::CallbackInfo& info) {
+Napi::Value BindClamp(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Clamp(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2)));
 }
 
-Napi::Value BindLerp(const Napi::CallbackInfo& info) {
+Napi::Value BindLerp(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Lerp(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2)));
 }
 
-Napi::Value BindNormalize(const Napi::CallbackInfo& info) {
+Napi::Value BindNormalize(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Normalize(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2)));
 }
 
-Napi::Value BindRemap(const Napi::CallbackInfo& info) {
+Napi::Value BindRemap(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Remap(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3),
-       floatFromValue(info, 4)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3),
+      floatFromValue(info, 4)));
 }
 
-Napi::Value BindWrap(const Napi::CallbackInfo& info) {
+Napi::Value BindWrap(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Wrap(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2)));
 }
 
-Napi::Value BindFloatEquals(const Napi::CallbackInfo& info) {
+Napi::Value BindFloatEquals(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     FloatEquals(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1)));
 }
 
-Napi::Value BindVector2Zero(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Zero(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Zero(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindVector2One(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2One(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2One(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindVector2Add(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Add(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Add(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2)));
 }
 
-Napi::Value BindVector2AddValue(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2AddValue(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2AddValue(
-       Vector2FromValue(info, 0),
-       floatFromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      floatFromValue(info, 2)));
 }
 
-Napi::Value BindVector2Subtract(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Subtract(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Subtract(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2)));
 }
 
-Napi::Value BindVector2SubtractValue(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2SubtractValue(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2SubtractValue(
-       Vector2FromValue(info, 0),
-       floatFromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      floatFromValue(info, 2)));
 }
 
-Napi::Value BindVector2Length(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Length(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Length(
-       Vector2FromValue(info, 0)
-    )
-  );
+      Vector2FromValue(info, 0)));
 }
 
-Napi::Value BindVector2LengthSqr(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2LengthSqr(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2LengthSqr(
-       Vector2FromValue(info, 0)
-    )
-  );
+      Vector2FromValue(info, 0)));
 }
 
-Napi::Value BindVector2DotProduct(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2DotProduct(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2DotProduct(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2)));
 }
 
-Napi::Value BindVector2Distance(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Distance(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Distance(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2)));
 }
 
-Napi::Value BindVector2DistanceSqr(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2DistanceSqr(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2DistanceSqr(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2)));
 }
 
-Napi::Value BindVector2Angle(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Angle(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Angle(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2)));
 }
 
-Napi::Value BindVector2LineAngle(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2LineAngle(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2LineAngle(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2)));
 }
 
-Napi::Value BindVector2Scale(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Scale(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Scale(
-       Vector2FromValue(info, 0),
-       floatFromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      floatFromValue(info, 2)));
 }
 
-Napi::Value BindVector2Multiply(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Multiply(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Multiply(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2)));
 }
 
-Napi::Value BindVector2Negate(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Negate(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Negate(
-       Vector2FromValue(info, 0)
-    )
-  );
+      Vector2FromValue(info, 0)));
 }
 
-Napi::Value BindVector2Divide(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Divide(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Divide(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2)));
 }
 
-Napi::Value BindVector2Normalize(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Normalize(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Normalize(
-       Vector2FromValue(info, 0)
-    )
-  );
+      Vector2FromValue(info, 0)));
 }
 
-Napi::Value BindVector2Transform(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Transform(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Transform(
-       Vector2FromValue(info, 0),
-       MatrixFromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      MatrixFromValue(info, 2)));
 }
 
-Napi::Value BindVector2Lerp(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Lerp(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Lerp(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       floatFromValue(info, 4)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2),
+      floatFromValue(info, 4)));
 }
 
-Napi::Value BindVector2Reflect(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Reflect(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Reflect(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2)));
 }
 
-Napi::Value BindVector2Min(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Min(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Min(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2)));
 }
 
-Napi::Value BindVector2Max(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Max(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Max(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2)));
 }
 
-Napi::Value BindVector2Rotate(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Rotate(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Rotate(
-       Vector2FromValue(info, 0),
-       floatFromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      floatFromValue(info, 2)));
 }
 
-Napi::Value BindVector2MoveTowards(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2MoveTowards(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2MoveTowards(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       floatFromValue(info, 4)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2),
+      floatFromValue(info, 4)));
 }
 
-Napi::Value BindVector2Invert(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Invert(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Invert(
-       Vector2FromValue(info, 0)
-    )
-  );
+      Vector2FromValue(info, 0)));
 }
 
-Napi::Value BindVector2Clamp(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Clamp(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Clamp(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       Vector2FromValue(info, 4)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2),
+      Vector2FromValue(info, 4)));
 }
 
-Napi::Value BindVector2ClampValue(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2ClampValue(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2ClampValue(
-       Vector2FromValue(info, 0),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-    )
-  );
+      Vector2FromValue(info, 0),
+      floatFromValue(info, 2),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindVector2Equals(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Equals(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Equals(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2)));
 }
 
-Napi::Value BindVector2Refract(const Napi::CallbackInfo& info) {
+Napi::Value BindVector2Refract(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector2Refract(
-       Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       floatFromValue(info, 4)
-    )
-  );
+      Vector2FromValue(info, 0),
+      Vector2FromValue(info, 2),
+      floatFromValue(info, 4)));
 }
 
-Napi::Value BindVector3Zero(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Zero(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Zero(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindVector3One(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3One(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3One(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindVector3Add(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Add(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Add(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3)));
 }
 
-Napi::Value BindVector3AddValue(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3AddValue(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3AddValue(
-       Vector3FromValue(info, 0),
-       floatFromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindVector3Subtract(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Subtract(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Subtract(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3)));
 }
 
-Napi::Value BindVector3SubtractValue(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3SubtractValue(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3SubtractValue(
-       Vector3FromValue(info, 0),
-       floatFromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindVector3Scale(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Scale(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Scale(
-       Vector3FromValue(info, 0),
-       floatFromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindVector3Multiply(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Multiply(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Multiply(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3)));
 }
 
-Napi::Value BindVector3CrossProduct(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3CrossProduct(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3CrossProduct(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3)));
 }
 
-Napi::Value BindVector3Perpendicular(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Perpendicular(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Perpendicular(
-       Vector3FromValue(info, 0)
-    )
-  );
+      Vector3FromValue(info, 0)));
 }
 
-Napi::Value BindVector3Length(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Length(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Length(
-       Vector3FromValue(info, 0)
-    )
-  );
+      Vector3FromValue(info, 0)));
 }
 
-Napi::Value BindVector3LengthSqr(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3LengthSqr(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3LengthSqr(
-       Vector3FromValue(info, 0)
-    )
-  );
+      Vector3FromValue(info, 0)));
 }
 
-Napi::Value BindVector3DotProduct(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3DotProduct(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3DotProduct(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3)));
 }
 
-Napi::Value BindVector3Distance(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Distance(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Distance(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3)));
 }
 
-Napi::Value BindVector3DistanceSqr(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3DistanceSqr(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3DistanceSqr(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3)));
 }
 
-Napi::Value BindVector3Angle(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Angle(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Angle(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3)));
 }
 
-Napi::Value BindVector3Negate(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Negate(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Negate(
-       Vector3FromValue(info, 0)
-    )
-  );
+      Vector3FromValue(info, 0)));
 }
 
-Napi::Value BindVector3Divide(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Divide(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Divide(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3)));
 }
 
-Napi::Value BindVector3Normalize(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Normalize(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Normalize(
-       Vector3FromValue(info, 0)
-    )
-  );
+      Vector3FromValue(info, 0)));
 }
 
-Napi::Value BindVector3Project(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Project(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Project(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3)));
 }
 
-Napi::Value BindVector3Reject(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Reject(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Reject(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3)));
 }
 
-Napi::Value BindVector3Transform(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Transform(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Transform(
-       Vector3FromValue(info, 0),
-       MatrixFromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      MatrixFromValue(info, 3)));
 }
 
-Napi::Value BindVector3RotateByQuaternion(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3RotateByQuaternion(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3RotateByQuaternion(
-       Vector3FromValue(info, 0),
-       Vector4FromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector4FromValue(info, 3)));
 }
 
-Napi::Value BindVector3RotateByAxisAngle(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3RotateByAxisAngle(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3RotateByAxisAngle(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3),
-       floatFromValue(info, 6)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3),
+      floatFromValue(info, 6)));
 }
 
-Napi::Value BindVector3MoveTowards(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3MoveTowards(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3MoveTowards(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3),
-       floatFromValue(info, 6)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3),
+      floatFromValue(info, 6)));
 }
 
-Napi::Value BindVector3Lerp(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Lerp(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Lerp(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3),
-       floatFromValue(info, 6)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3),
+      floatFromValue(info, 6)));
 }
 
-Napi::Value BindVector3CubicHermite(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3CubicHermite(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3CubicHermite(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3),
-       Vector3FromValue(info, 6),
-       Vector3FromValue(info, 9),
-       floatFromValue(info, 12)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3),
+      Vector3FromValue(info, 6),
+      Vector3FromValue(info, 9),
+      floatFromValue(info, 12)));
 }
 
-Napi::Value BindVector3Reflect(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Reflect(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Reflect(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3)));
 }
 
-Napi::Value BindVector3Min(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Min(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Min(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3)));
 }
 
-Napi::Value BindVector3Max(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Max(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Max(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3)));
 }
 
-Napi::Value BindVector3Barycenter(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Barycenter(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Barycenter(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3),
-       Vector3FromValue(info, 6),
-       Vector3FromValue(info, 9)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3),
+      Vector3FromValue(info, 6),
+      Vector3FromValue(info, 9)));
 }
 
-Napi::Value BindVector3Unproject(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Unproject(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Unproject(
-       Vector3FromValue(info, 0),
-       MatrixFromValue(info, 3),
-       MatrixFromValue(info, 19)
-    )
-  );
+      Vector3FromValue(info, 0),
+      MatrixFromValue(info, 3),
+      MatrixFromValue(info, 19)));
 }
 
-Napi::Value BindVector3Invert(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Invert(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Invert(
-       Vector3FromValue(info, 0)
-    )
-  );
+      Vector3FromValue(info, 0)));
 }
 
-Napi::Value BindVector3Clamp(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Clamp(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Clamp(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3),
-       Vector3FromValue(info, 6)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3),
+      Vector3FromValue(info, 6)));
 }
 
-Napi::Value BindVector3ClampValue(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3ClampValue(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3ClampValue(
-       Vector3FromValue(info, 0),
-       floatFromValue(info, 3),
-       floatFromValue(info, 4)
-    )
-  );
+      Vector3FromValue(info, 0),
+      floatFromValue(info, 3),
+      floatFromValue(info, 4)));
 }
 
-Napi::Value BindVector3Equals(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Equals(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Equals(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3)));
 }
 
-Napi::Value BindVector3Refract(const Napi::CallbackInfo& info) {
+Napi::Value BindVector3Refract(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector3Refract(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3),
-       floatFromValue(info, 6)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3),
+      floatFromValue(info, 6)));
 }
 
-Napi::Value BindVector4Zero(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4Zero(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4Zero(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindVector4One(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4One(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4One(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindVector4Add(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4Add(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4Add(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 4)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 4)));
 }
 
-Napi::Value BindVector4AddValue(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4AddValue(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4AddValue(
-       Vector4FromValue(info, 0),
-       floatFromValue(info, 4)
-    )
-  );
+      Vector4FromValue(info, 0),
+      floatFromValue(info, 4)));
 }
 
-Napi::Value BindVector4Subtract(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4Subtract(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4Subtract(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 4)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 4)));
 }
 
-Napi::Value BindVector4SubtractValue(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4SubtractValue(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4SubtractValue(
-       Vector4FromValue(info, 0),
-       floatFromValue(info, 4)
-    )
-  );
+      Vector4FromValue(info, 0),
+      floatFromValue(info, 4)));
 }
 
-Napi::Value BindVector4Length(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4Length(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4Length(
-       Vector4FromValue(info, 0)
-    )
-  );
+      Vector4FromValue(info, 0)));
 }
 
-Napi::Value BindVector4LengthSqr(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4LengthSqr(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4LengthSqr(
-       Vector4FromValue(info, 0)
-    )
-  );
+      Vector4FromValue(info, 0)));
 }
 
-Napi::Value BindVector4DotProduct(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4DotProduct(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4DotProduct(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 4)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 4)));
 }
 
-Napi::Value BindVector4Distance(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4Distance(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4Distance(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 4)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 4)));
 }
 
-Napi::Value BindVector4DistanceSqr(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4DistanceSqr(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4DistanceSqr(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 4)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 4)));
 }
 
-Napi::Value BindVector4Scale(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4Scale(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4Scale(
-       Vector4FromValue(info, 0),
-       floatFromValue(info, 4)
-    )
-  );
+      Vector4FromValue(info, 0),
+      floatFromValue(info, 4)));
 }
 
-Napi::Value BindVector4Multiply(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4Multiply(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4Multiply(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 4)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 4)));
 }
 
-Napi::Value BindVector4Negate(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4Negate(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4Negate(
-       Vector4FromValue(info, 0)
-    )
-  );
+      Vector4FromValue(info, 0)));
 }
 
-Napi::Value BindVector4Divide(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4Divide(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4Divide(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 4)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 4)));
 }
 
-Napi::Value BindVector4Normalize(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4Normalize(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4Normalize(
-       Vector4FromValue(info, 0)
-    )
-  );
+      Vector4FromValue(info, 0)));
 }
 
-Napi::Value BindVector4Min(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4Min(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4Min(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 4)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 4)));
 }
 
-Napi::Value BindVector4Max(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4Max(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4Max(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 4)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 4)));
 }
 
-Napi::Value BindVector4Lerp(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4Lerp(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4Lerp(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 4),
-       floatFromValue(info, 8)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 4),
+      floatFromValue(info, 8)));
 }
 
-Napi::Value BindVector4MoveTowards(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4MoveTowards(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4MoveTowards(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 4),
-       floatFromValue(info, 8)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 4),
+      floatFromValue(info, 8)));
 }
 
-Napi::Value BindVector4Invert(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4Invert(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4Invert(
-       Vector4FromValue(info, 0)
-    )
-  );
+      Vector4FromValue(info, 0)));
 }
 
-Napi::Value BindVector4Equals(const Napi::CallbackInfo& info) {
+Napi::Value BindVector4Equals(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     Vector4Equals(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 4)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 4)));
 }
 
-Napi::Value BindMatrixDeterminant(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixDeterminant(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixDeterminant(
-       MatrixFromValue(info, 0)
-    )
-  );
+      MatrixFromValue(info, 0)));
 }
 
-Napi::Value BindMatrixTrace(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixTrace(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixTrace(
-       MatrixFromValue(info, 0)
-    )
-  );
+      MatrixFromValue(info, 0)));
 }
 
-Napi::Value BindMatrixTranspose(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixTranspose(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixTranspose(
-       MatrixFromValue(info, 0)
-    )
-  );
+      MatrixFromValue(info, 0)));
 }
 
-Napi::Value BindMatrixInvert(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixInvert(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixInvert(
-       MatrixFromValue(info, 0)
-    )
-  );
+      MatrixFromValue(info, 0)));
 }
 
-Napi::Value BindMatrixIdentity(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixIdentity(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixIdentity(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindMatrixAdd(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixAdd(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixAdd(
-       MatrixFromValue(info, 0),
-       MatrixFromValue(info, 16)
-    )
-  );
+      MatrixFromValue(info, 0),
+      MatrixFromValue(info, 16)));
 }
 
-Napi::Value BindMatrixSubtract(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixSubtract(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixSubtract(
-       MatrixFromValue(info, 0),
-       MatrixFromValue(info, 16)
-    )
-  );
+      MatrixFromValue(info, 0),
+      MatrixFromValue(info, 16)));
 }
 
-Napi::Value BindMatrixMultiply(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixMultiply(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixMultiply(
-       MatrixFromValue(info, 0),
-       MatrixFromValue(info, 16)
-    )
-  );
+      MatrixFromValue(info, 0),
+      MatrixFromValue(info, 16)));
 }
 
-Napi::Value BindMatrixTranslate(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixTranslate(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixTranslate(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2)));
 }
 
-Napi::Value BindMatrixRotate(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixRotate(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixRotate(
-       Vector3FromValue(info, 0),
-       floatFromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindMatrixRotateX(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixRotateX(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixRotateX(
-       floatFromValue(info, 0)
-    )
-  );
+      floatFromValue(info, 0)));
 }
 
-Napi::Value BindMatrixRotateY(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixRotateY(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixRotateY(
-       floatFromValue(info, 0)
-    )
-  );
+      floatFromValue(info, 0)));
 }
 
-Napi::Value BindMatrixRotateZ(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixRotateZ(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixRotateZ(
-       floatFromValue(info, 0)
-    )
-  );
+      floatFromValue(info, 0)));
 }
 
-Napi::Value BindMatrixRotateXYZ(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixRotateXYZ(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixRotateXYZ(
-       Vector3FromValue(info, 0)
-    )
-  );
+      Vector3FromValue(info, 0)));
 }
 
-Napi::Value BindMatrixRotateZYX(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixRotateZYX(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixRotateZYX(
-       Vector3FromValue(info, 0)
-    )
-  );
+      Vector3FromValue(info, 0)));
 }
 
-Napi::Value BindMatrixScale(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixScale(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixScale(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2)));
 }
 
-Napi::Value BindMatrixFrustum(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixFrustum(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixFrustum(
-       doubleFromValue(info, 0),
-       doubleFromValue(info, 1),
-       doubleFromValue(info, 2),
-       doubleFromValue(info, 3),
-       doubleFromValue(info, 4),
-       doubleFromValue(info, 5)
-    )
-  );
+      doubleFromValue(info, 0),
+      doubleFromValue(info, 1),
+      doubleFromValue(info, 2),
+      doubleFromValue(info, 3),
+      doubleFromValue(info, 4),
+      doubleFromValue(info, 5)));
 }
 
-Napi::Value BindMatrixPerspective(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixPerspective(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixPerspective(
-       doubleFromValue(info, 0),
-       doubleFromValue(info, 1),
-       doubleFromValue(info, 2),
-       doubleFromValue(info, 3)
-    )
-  );
+      doubleFromValue(info, 0),
+      doubleFromValue(info, 1),
+      doubleFromValue(info, 2),
+      doubleFromValue(info, 3)));
 }
 
-Napi::Value BindMatrixOrtho(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixOrtho(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixOrtho(
-       doubleFromValue(info, 0),
-       doubleFromValue(info, 1),
-       doubleFromValue(info, 2),
-       doubleFromValue(info, 3),
-       doubleFromValue(info, 4),
-       doubleFromValue(info, 5)
-    )
-  );
+      doubleFromValue(info, 0),
+      doubleFromValue(info, 1),
+      doubleFromValue(info, 2),
+      doubleFromValue(info, 3),
+      doubleFromValue(info, 4),
+      doubleFromValue(info, 5)));
 }
 
-Napi::Value BindMatrixLookAt(const Napi::CallbackInfo& info) {
+Napi::Value BindMatrixLookAt(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     MatrixLookAt(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3),
-       Vector3FromValue(info, 6)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3),
+      Vector3FromValue(info, 6)));
 }
 
-Napi::Value BindQuaternionAdd(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionAdd(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionAdd(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 1)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 1)));
 }
 
-Napi::Value BindQuaternionAddValue(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionAddValue(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionAddValue(
-       Vector4FromValue(info, 0),
-       floatFromValue(info, 1)
-    )
-  );
+      Vector4FromValue(info, 0),
+      floatFromValue(info, 1)));
 }
 
-Napi::Value BindQuaternionSubtract(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionSubtract(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionSubtract(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 1)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 1)));
 }
 
-Napi::Value BindQuaternionSubtractValue(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionSubtractValue(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionSubtractValue(
-       Vector4FromValue(info, 0),
-       floatFromValue(info, 1)
-    )
-  );
+      Vector4FromValue(info, 0),
+      floatFromValue(info, 1)));
 }
 
-Napi::Value BindQuaternionIdentity(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionIdentity(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionIdentity(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindQuaternionLength(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionLength(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionLength(
-       Vector4FromValue(info, 0)
-    )
-  );
+      Vector4FromValue(info, 0)));
 }
 
-Napi::Value BindQuaternionNormalize(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionNormalize(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionNormalize(
-       Vector4FromValue(info, 0)
-    )
-  );
+      Vector4FromValue(info, 0)));
 }
 
-Napi::Value BindQuaternionInvert(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionInvert(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionInvert(
-       Vector4FromValue(info, 0)
-    )
-  );
+      Vector4FromValue(info, 0)));
 }
 
-Napi::Value BindQuaternionMultiply(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionMultiply(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionMultiply(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 1)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 1)));
 }
 
-Napi::Value BindQuaternionScale(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionScale(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionScale(
-       Vector4FromValue(info, 0),
-       floatFromValue(info, 1)
-    )
-  );
+      Vector4FromValue(info, 0),
+      floatFromValue(info, 1)));
 }
 
-Napi::Value BindQuaternionDivide(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionDivide(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionDivide(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 1)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 1)));
 }
 
-Napi::Value BindQuaternionLerp(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionLerp(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionLerp(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 1),
-       floatFromValue(info, 2)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 1),
+      floatFromValue(info, 2)));
 }
 
-Napi::Value BindQuaternionNlerp(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionNlerp(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionNlerp(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 1),
-       floatFromValue(info, 2)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 1),
+      floatFromValue(info, 2)));
 }
 
-Napi::Value BindQuaternionSlerp(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionSlerp(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionSlerp(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 1),
-       floatFromValue(info, 2)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 1),
+      floatFromValue(info, 2)));
 }
 
-Napi::Value BindQuaternionCubicHermiteSpline(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionCubicHermiteSpline(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionCubicHermiteSpline(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 1),
-       Vector4FromValue(info, 2),
-       Vector4FromValue(info, 3),
-       floatFromValue(info, 4)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 1),
+      Vector4FromValue(info, 2),
+      Vector4FromValue(info, 3),
+      floatFromValue(info, 4)));
 }
 
-Napi::Value BindQuaternionFromVector3ToVector3(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionFromVector3ToVector3(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionFromVector3ToVector3(
-       Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      Vector3FromValue(info, 3)));
 }
 
-Napi::Value BindQuaternionFromMatrix(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionFromMatrix(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionFromMatrix(
-       MatrixFromValue(info, 0)
-    )
-  );
+      MatrixFromValue(info, 0)));
 }
 
-Napi::Value BindQuaternionToMatrix(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionToMatrix(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionToMatrix(
-       Vector4FromValue(info, 0)
-    )
-  );
+      Vector4FromValue(info, 0)));
 }
 
-Napi::Value BindQuaternionFromAxisAngle(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionFromAxisAngle(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionFromAxisAngle(
-       Vector3FromValue(info, 0),
-       floatFromValue(info, 3)
-    )
-  );
+      Vector3FromValue(info, 0),
+      floatFromValue(info, 3)));
 }
 
-Napi::Value BindQuaternionFromEuler(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionFromEuler(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionFromEuler(
-       floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2)
-    )
-  );
+      floatFromValue(info, 0),
+      floatFromValue(info, 1),
+      floatFromValue(info, 2)));
 }
 
-Napi::Value BindQuaternionToEuler(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionToEuler(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionToEuler(
-       Vector4FromValue(info, 0)
-    )
-  );
+      Vector4FromValue(info, 0)));
 }
 
-Napi::Value BindQuaternionTransform(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionTransform(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionTransform(
-       Vector4FromValue(info, 0),
-       MatrixFromValue(info, 1)
-    )
-  );
+      Vector4FromValue(info, 0),
+      MatrixFromValue(info, 1)));
 }
 
-Napi::Value BindQuaternionEquals(const Napi::CallbackInfo& info) {
+Napi::Value BindQuaternionEquals(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     QuaternionEquals(
-       Vector4FromValue(info, 0),
-       Vector4FromValue(info, 1)
-    )
-  );
+      Vector4FromValue(info, 0),
+      Vector4FromValue(info, 1)));
 }
 
-Napi::Value BindGuiIsLocked(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiIsLocked(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiIsLocked(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGuiGetState(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiGetState(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiGetState(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGuiGetFont(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiGetFont(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiGetFont(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGuiGetStyle(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiGetStyle(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiGetStyle(
-       intFromValue(info, 0),
-       intFromValue(info, 1)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1)));
 }
 
-Napi::Value BindGuiIconText(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiIconText(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiIconText(
-       intFromValue(info, 0),
-       (const char *) stringFromValue(info, 1)
-    )
-  );
+      intFromValue(info, 0),
+      (const char *)stringFromValue(info, 1)));
 }
 
-Napi::Value BindGuiGetIcons(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiGetIcons(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiGetIcons(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindGuiLoadIcons(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiLoadIcons(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiLoadIcons(
-       (const char *) stringFromValue(info, 0),
-       boolFromValue(info, 1)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      boolFromValue(info, 1)));
 }
 
-Napi::Value BindGuiWindowBox(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiWindowBox(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiWindowBox(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4)));
 }
 
-Napi::Value BindGuiGroupBox(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiGroupBox(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiGroupBox(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4)));
 }
 
-Napi::Value BindGuiLine(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiLine(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiLine(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4)));
 }
 
-Napi::Value BindGuiPanel(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiPanel(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiPanel(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4)));
 }
 
-Napi::Value BindGuiTabBar(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiTabBar(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiTabBar(
-       RectangleFromValue(info, 0),
-       (const char **) pointerFromValue(info, 4),
-       intFromValue(info, 5),
-       (int *) pointerFromValue(info, 6)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char **)pointerFromValue(info, 4),
+      intFromValue(info, 5),
+      (int *)pointerFromValue(info, 6)));
 }
 
-Napi::Value BindGuiScrollPanel(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiScrollPanel(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiScrollPanel(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       RectangleFromValue(info, 5),
-       (Vector2 *) pointerFromValue(info, 9),
-       (Rectangle *) pointerFromValue(info, 10)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      RectangleFromValue(info, 5),
+      (Vector2 *)pointerFromValue(info, 9),
+      (Rectangle *)pointerFromValue(info, 10)));
 }
 
-Napi::Value BindGuiLabel(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiLabel(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiLabel(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4)));
 }
 
-Napi::Value BindGuiButton(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiButton(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiButton(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4)));
 }
 
-Napi::Value BindGuiLabelButton(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiLabelButton(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiLabelButton(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4)));
 }
 
-Napi::Value BindGuiToggle(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiToggle(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiToggle(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (bool *) pointerFromValue(info, 5)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (bool *)pointerFromValue(info, 5)));
 }
 
-Napi::Value BindGuiToggleGroup(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiToggleGroup(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiToggleGroup(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (int *) pointerFromValue(info, 5)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (int *)pointerFromValue(info, 5)));
 }
 
-Napi::Value BindGuiToggleSlider(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiToggleSlider(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiToggleSlider(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (int *) pointerFromValue(info, 5)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (int *)pointerFromValue(info, 5)));
 }
 
-Napi::Value BindGuiCheckBox(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiCheckBox(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiCheckBox(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (bool *) pointerFromValue(info, 5)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (bool *)pointerFromValue(info, 5)));
 }
 
-Napi::Value BindGuiComboBox(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiComboBox(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiComboBox(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (int *) pointerFromValue(info, 5)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (int *)pointerFromValue(info, 5)));
 }
 
-Napi::Value BindGuiDropdownBox(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiDropdownBox(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiDropdownBox(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (int *) pointerFromValue(info, 5),
-       boolFromValue(info, 6)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (int *)pointerFromValue(info, 5),
+      boolFromValue(info, 6)));
 }
 
-Napi::Value BindGuiSpinner(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiSpinner(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiSpinner(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (int *) pointerFromValue(info, 5),
-       intFromValue(info, 6),
-       intFromValue(info, 7),
-       boolFromValue(info, 8)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (int *)pointerFromValue(info, 5),
+      intFromValue(info, 6),
+      intFromValue(info, 7),
+      boolFromValue(info, 8)));
 }
 
-Napi::Value BindGuiValueBox(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiValueBox(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiValueBox(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (int *) pointerFromValue(info, 5),
-       intFromValue(info, 6),
-       intFromValue(info, 7),
-       boolFromValue(info, 8)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (int *)pointerFromValue(info, 5),
+      intFromValue(info, 6),
+      intFromValue(info, 7),
+      boolFromValue(info, 8)));
 }
 
-Napi::Value BindGuiValueBoxFloat(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiValueBoxFloat(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiValueBoxFloat(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (char *) pointerFromValue(info, 5),
-       (float *) pointerFromValue(info, 6),
-       boolFromValue(info, 7)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (char *)pointerFromValue(info, 5),
+      (float *)pointerFromValue(info, 6),
+      boolFromValue(info, 7)));
 }
 
-Napi::Value BindGuiTextBox(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiTextBox(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiTextBox(
-       RectangleFromValue(info, 0),
-       (char *) pointerFromValue(info, 4),
-       intFromValue(info, 5),
-       boolFromValue(info, 6)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (char *)pointerFromValue(info, 4),
+      intFromValue(info, 5),
+      boolFromValue(info, 6)));
 }
 
-Napi::Value BindGuiSlider(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiSlider(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiSlider(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (const char *) stringFromValue(info, 5),
-       (float *) pointerFromValue(info, 6),
-       floatFromValue(info, 7),
-       floatFromValue(info, 8)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (const char *)stringFromValue(info, 5),
+      (float *)pointerFromValue(info, 6),
+      floatFromValue(info, 7),
+      floatFromValue(info, 8)));
 }
 
-Napi::Value BindGuiSliderBar(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiSliderBar(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiSliderBar(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (const char *) stringFromValue(info, 5),
-       (float *) pointerFromValue(info, 6),
-       floatFromValue(info, 7),
-       floatFromValue(info, 8)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (const char *)stringFromValue(info, 5),
+      (float *)pointerFromValue(info, 6),
+      floatFromValue(info, 7),
+      floatFromValue(info, 8)));
 }
 
-Napi::Value BindGuiProgressBar(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiProgressBar(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiProgressBar(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (const char *) stringFromValue(info, 5),
-       (float *) pointerFromValue(info, 6),
-       floatFromValue(info, 7),
-       floatFromValue(info, 8)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (const char *)stringFromValue(info, 5),
+      (float *)pointerFromValue(info, 6),
+      floatFromValue(info, 7),
+      floatFromValue(info, 8)));
 }
 
-Napi::Value BindGuiStatusBar(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiStatusBar(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiStatusBar(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4)));
 }
 
-Napi::Value BindGuiDummyRec(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiDummyRec(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiDummyRec(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4)));
 }
 
-Napi::Value BindGuiGrid(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiGrid(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiGrid(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       floatFromValue(info, 5),
-       intFromValue(info, 6),
-       (Vector2 *) pointerFromValue(info, 7)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      floatFromValue(info, 5),
+      intFromValue(info, 6),
+      (Vector2 *)pointerFromValue(info, 7)));
 }
 
-Napi::Value BindGuiListView(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiListView(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiListView(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (int *) pointerFromValue(info, 5),
-       (int *) pointerFromValue(info, 6)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (int *)pointerFromValue(info, 5),
+      (int *)pointerFromValue(info, 6)));
 }
 
-Napi::Value BindGuiListViewEx(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiListViewEx(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiListViewEx(
-       RectangleFromValue(info, 0),
-       (const char **) pointerFromValue(info, 4),
-       intFromValue(info, 5),
-       (int *) pointerFromValue(info, 6),
-       (int *) pointerFromValue(info, 7),
-       (int *) pointerFromValue(info, 8)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char **)pointerFromValue(info, 4),
+      intFromValue(info, 5),
+      (int *)pointerFromValue(info, 6),
+      (int *)pointerFromValue(info, 7),
+      (int *)pointerFromValue(info, 8)));
 }
 
-Napi::Value BindGuiMessageBox(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiMessageBox(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiMessageBox(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (const char *) stringFromValue(info, 5),
-       (const char *) stringFromValue(info, 6)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (const char *)stringFromValue(info, 5),
+      (const char *)stringFromValue(info, 6)));
 }
 
-Napi::Value BindGuiTextInputBox(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiTextInputBox(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiTextInputBox(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (const char *) stringFromValue(info, 5),
-       (const char *) stringFromValue(info, 6),
-       (char *) pointerFromValue(info, 7),
-       intFromValue(info, 8),
-       (bool *) pointerFromValue(info, 9)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (const char *)stringFromValue(info, 5),
+      (const char *)stringFromValue(info, 6),
+      (char *)pointerFromValue(info, 7),
+      intFromValue(info, 8),
+      (bool *)pointerFromValue(info, 9)));
 }
 
-Napi::Value BindGuiColorPicker(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiColorPicker(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiColorPicker(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (Color *) pointerFromValue(info, 5)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (Color *)pointerFromValue(info, 5)));
 }
 
-Napi::Value BindGuiColorPanel(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiColorPanel(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiColorPanel(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (Color *) pointerFromValue(info, 5)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (Color *)pointerFromValue(info, 5)));
 }
 
-Napi::Value BindGuiColorBarAlpha(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiColorBarAlpha(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiColorBarAlpha(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (float *) pointerFromValue(info, 5)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (float *)pointerFromValue(info, 5)));
 }
 
-Napi::Value BindGuiColorBarHue(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiColorBarHue(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiColorBarHue(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (float *) pointerFromValue(info, 5)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (float *)pointerFromValue(info, 5)));
 }
 
-Napi::Value BindGuiColorPickerHSV(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiColorPickerHSV(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiColorPickerHSV(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (Vector3 *) pointerFromValue(info, 5)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (Vector3 *)pointerFromValue(info, 5)));
 }
 
-Napi::Value BindGuiColorPanelHSV(const Napi::CallbackInfo& info) {
+Napi::Value BindGuiColorPanelHSV(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     GuiColorPanelHSV(
-       RectangleFromValue(info, 0),
-       (const char *) stringFromValue(info, 4),
-       (Vector3 *) pointerFromValue(info, 5)
-    )
-  );
+      RectangleFromValue(info, 0),
+      (const char *)stringFromValue(info, 4),
+      (Vector3 *)pointerFromValue(info, 5)));
 }
 
-Napi::Value BindrlGetCullDistanceNear(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetCullDistanceNear(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetCullDistanceNear(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindrlGetCullDistanceFar(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetCullDistanceFar(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetCullDistanceFar(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindrlEnableVertexArray(const Napi::CallbackInfo& info) {
+Napi::Value BindrlEnableVertexArray(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlEnableVertexArray(
-       unsignedintFromValue(info, 0)
-    )
-  );
+      unsignedintFromValue(info, 0)));
 }
 
-Napi::Value BindrlGetActiveFramebuffer(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetActiveFramebuffer(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetActiveFramebuffer(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindrlGetLineWidth(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetLineWidth(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetLineWidth(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindrlIsStereoRenderEnabled(const Napi::CallbackInfo& info) {
+Napi::Value BindrlIsStereoRenderEnabled(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlIsStereoRenderEnabled(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindrlGetVersion(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetVersion(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetVersion(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindrlGetFramebufferWidth(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetFramebufferWidth(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetFramebufferWidth(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindrlGetFramebufferHeight(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetFramebufferHeight(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetFramebufferHeight(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindrlGetTextureIdDefault(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetTextureIdDefault(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetTextureIdDefault(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindrlGetShaderIdDefault(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetShaderIdDefault(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetShaderIdDefault(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindrlGetShaderLocsDefault(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetShaderLocsDefault(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetShaderLocsDefault(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindrlLoadRenderBatch(const Napi::CallbackInfo& info) {
+Napi::Value BindrlLoadRenderBatch(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlLoadRenderBatch(
-       intFromValue(info, 0),
-       intFromValue(info, 1)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1)));
 }
 
-Napi::Value BindrlCheckRenderBatchLimit(const Napi::CallbackInfo& info) {
+Napi::Value BindrlCheckRenderBatchLimit(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlCheckRenderBatchLimit(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindrlLoadVertexArray(const Napi::CallbackInfo& info) {
+Napi::Value BindrlLoadVertexArray(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlLoadVertexArray(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindrlLoadVertexBuffer(const Napi::CallbackInfo& info) {
+Napi::Value BindrlLoadVertexBuffer(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlLoadVertexBuffer(
-       (const void *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       boolFromValue(info, 2)
-    )
-  );
+      (const void *)pointerFromValue(info, 0),
+      intFromValue(info, 1),
+      boolFromValue(info, 2)));
 }
 
-Napi::Value BindrlLoadVertexBufferElement(const Napi::CallbackInfo& info) {
+Napi::Value BindrlLoadVertexBufferElement(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlLoadVertexBufferElement(
-       (const void *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       boolFromValue(info, 2)
-    )
-  );
+      (const void *)pointerFromValue(info, 0),
+      intFromValue(info, 1),
+      boolFromValue(info, 2)));
 }
 
-Napi::Value BindrlLoadTexture(const Napi::CallbackInfo& info) {
+Napi::Value BindrlLoadTexture(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlLoadTexture(
-       (const void *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       intFromValue(info, 4)
-    )
-  );
+      (const void *)pointerFromValue(info, 0),
+      intFromValue(info, 1),
+      intFromValue(info, 2),
+      intFromValue(info, 3),
+      intFromValue(info, 4)));
 }
 
-Napi::Value BindrlLoadTextureDepth(const Napi::CallbackInfo& info) {
+Napi::Value BindrlLoadTextureDepth(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlLoadTextureDepth(
-       intFromValue(info, 0),
-       intFromValue(info, 1),
-       boolFromValue(info, 2)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1),
+      boolFromValue(info, 2)));
 }
 
-Napi::Value BindrlLoadTextureCubemap(const Napi::CallbackInfo& info) {
+Napi::Value BindrlLoadTextureCubemap(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlLoadTextureCubemap(
-       (const void *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3)
-    )
-  );
+      (const void *)pointerFromValue(info, 0),
+      intFromValue(info, 1),
+      intFromValue(info, 2),
+      intFromValue(info, 3)));
 }
 
-Napi::Value BindrlGetPixelFormatName(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetPixelFormatName(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetPixelFormatName(
-       unsignedintFromValue(info, 0)
-    )
-  );
+      unsignedintFromValue(info, 0)));
 }
 
-Napi::Value BindrlReadTexturePixels(const Napi::CallbackInfo& info) {
+Napi::Value BindrlReadTexturePixels(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlReadTexturePixels(
-       unsignedintFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3)
-    )
-  );
+      unsignedintFromValue(info, 0),
+      intFromValue(info, 1),
+      intFromValue(info, 2),
+      intFromValue(info, 3)));
 }
 
-Napi::Value BindrlReadScreenPixels(const Napi::CallbackInfo& info) {
+Napi::Value BindrlReadScreenPixels(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlReadScreenPixels(
-       intFromValue(info, 0),
-       intFromValue(info, 1)
-    )
-  );
+      intFromValue(info, 0),
+      intFromValue(info, 1)));
 }
 
-Napi::Value BindrlLoadFramebuffer(const Napi::CallbackInfo& info) {
+Napi::Value BindrlLoadFramebuffer(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlLoadFramebuffer(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindrlFramebufferComplete(const Napi::CallbackInfo& info) {
+Napi::Value BindrlFramebufferComplete(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlFramebufferComplete(
-       unsignedintFromValue(info, 0)
-    )
-  );
+      unsignedintFromValue(info, 0)));
 }
 
-Napi::Value BindrlLoadShaderCode(const Napi::CallbackInfo& info) {
+Napi::Value BindrlLoadShaderCode(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlLoadShaderCode(
-       (const char *) stringFromValue(info, 0),
-       (const char *) stringFromValue(info, 1)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      (const char *)stringFromValue(info, 1)));
 }
 
-Napi::Value BindrlCompileShader(const Napi::CallbackInfo& info) {
+Napi::Value BindrlCompileShader(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlCompileShader(
-       (const char *) stringFromValue(info, 0),
-       intFromValue(info, 1)
-    )
-  );
+      (const char *)stringFromValue(info, 0),
+      intFromValue(info, 1)));
 }
 
-Napi::Value BindrlLoadShaderProgram(const Napi::CallbackInfo& info) {
+Napi::Value BindrlLoadShaderProgram(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlLoadShaderProgram(
-       unsignedintFromValue(info, 0),
-       unsignedintFromValue(info, 1)
-    )
-  );
+      unsignedintFromValue(info, 0),
+      unsignedintFromValue(info, 1)));
 }
 
-Napi::Value BindrlGetLocationUniform(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetLocationUniform(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetLocationUniform(
-       unsignedintFromValue(info, 0),
-       (const char *) stringFromValue(info, 1)
-    )
-  );
+      unsignedintFromValue(info, 0),
+      (const char *)stringFromValue(info, 1)));
 }
 
-Napi::Value BindrlGetLocationAttrib(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetLocationAttrib(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetLocationAttrib(
-       unsignedintFromValue(info, 0),
-       (const char *) stringFromValue(info, 1)
-    )
-  );
+      unsignedintFromValue(info, 0),
+      (const char *)stringFromValue(info, 1)));
 }
 
-Napi::Value BindrlLoadComputeShaderProgram(const Napi::CallbackInfo& info) {
+Napi::Value BindrlLoadComputeShaderProgram(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlLoadComputeShaderProgram(
-       unsignedintFromValue(info, 0)
-    )
-  );
+      unsignedintFromValue(info, 0)));
 }
 
-Napi::Value BindrlLoadShaderBuffer(const Napi::CallbackInfo& info) {
+Napi::Value BindrlLoadShaderBuffer(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlLoadShaderBuffer(
-       unsignedintFromValue(info, 0),
-       (const void *) pointerFromValue(info, 1),
-       intFromValue(info, 2)
-    )
-  );
+      unsignedintFromValue(info, 0),
+      (const void *)pointerFromValue(info, 1),
+      intFromValue(info, 2)));
 }
 
-Napi::Value BindrlGetShaderBufferSize(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetShaderBufferSize(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetShaderBufferSize(
-       unsignedintFromValue(info, 0)
-    )
-  );
+      unsignedintFromValue(info, 0)));
 }
 
-Napi::Value BindrlGetMatrixModelview(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetMatrixModelview(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetMatrixModelview(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindrlGetMatrixProjection(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetMatrixProjection(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetMatrixProjection(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindrlGetMatrixTransform(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetMatrixTransform(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetMatrixTransform(
-      
-    )
-  );
+
+      ));
 }
 
-Napi::Value BindrlGetMatrixProjectionStereo(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetMatrixProjectionStereo(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetMatrixProjectionStereo(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-Napi::Value BindrlGetMatrixViewOffsetStereo(const Napi::CallbackInfo& info) {
+Napi::Value BindrlGetMatrixViewOffsetStereo(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     rlGetMatrixViewOffsetStereo(
-       intFromValue(info, 0)
-    )
-  );
+      intFromValue(info, 0)));
 }
 
-void BindInitWindow(const Napi::CallbackInfo& info) {
+void BindInitWindow(const Napi::CallbackInfo &info) {
   InitWindow(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       (const char *) stringFromValue(info, 2)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    (const char *)stringFromValue(info, 2));
 }
 
-void BindCloseWindow(const Napi::CallbackInfo& info) {
+void BindCloseWindow(const Napi::CallbackInfo &info) {
   CloseWindow(
-    
+
   );
 }
 
-void BindSetWindowState(const Napi::CallbackInfo& info) {
+void BindSetWindowState(const Napi::CallbackInfo &info) {
   SetWindowState(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindClearWindowState(const Napi::CallbackInfo& info) {
+void BindClearWindowState(const Napi::CallbackInfo &info) {
   ClearWindowState(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindToggleFullscreen(const Napi::CallbackInfo& info) {
+void BindToggleFullscreen(const Napi::CallbackInfo &info) {
   ToggleFullscreen(
-    
+
   );
 }
 
-void BindToggleBorderlessWindowed(const Napi::CallbackInfo& info) {
+void BindToggleBorderlessWindowed(const Napi::CallbackInfo &info) {
   ToggleBorderlessWindowed(
-    
+
   );
 }
 
-void BindMaximizeWindow(const Napi::CallbackInfo& info) {
+void BindMaximizeWindow(const Napi::CallbackInfo &info) {
   MaximizeWindow(
-    
+
   );
 }
 
-void BindMinimizeWindow(const Napi::CallbackInfo& info) {
+void BindMinimizeWindow(const Napi::CallbackInfo &info) {
   MinimizeWindow(
-    
+
   );
 }
 
-void BindRestoreWindow(const Napi::CallbackInfo& info) {
+void BindRestoreWindow(const Napi::CallbackInfo &info) {
   RestoreWindow(
-    
+
   );
 }
 
-void BindSetWindowIcon(const Napi::CallbackInfo& info) {
+void BindSetWindowIcon(const Napi::CallbackInfo &info) {
   SetWindowIcon(
-     ImageFromValue(info, 0)
-  );
+    ImageFromValue(info, 0));
 }
 
-void BindSetWindowIcons(const Napi::CallbackInfo& info) {
+void BindSetWindowIcons(const Napi::CallbackInfo &info) {
   SetWindowIcons(
-     (Image *) pointerFromValue(info, 0),
-       intFromValue(info, 1)
-  );
+    (Image *)pointerFromValue(info, 0),
+    intFromValue(info, 1));
 }
 
-void BindSetWindowTitle(const Napi::CallbackInfo& info) {
+void BindSetWindowTitle(const Napi::CallbackInfo &info) {
   SetWindowTitle(
-     (const char *) stringFromValue(info, 0)
-  );
+    (const char *)stringFromValue(info, 0));
 }
 
-void BindSetWindowPosition(const Napi::CallbackInfo& info) {
+void BindSetWindowPosition(const Napi::CallbackInfo &info) {
   SetWindowPosition(
-     intFromValue(info, 0),
-       intFromValue(info, 1)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1));
 }
 
-void BindSetWindowMonitor(const Napi::CallbackInfo& info) {
+void BindSetWindowMonitor(const Napi::CallbackInfo &info) {
   SetWindowMonitor(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindSetWindowMinSize(const Napi::CallbackInfo& info) {
+void BindSetWindowMinSize(const Napi::CallbackInfo &info) {
   SetWindowMinSize(
-     intFromValue(info, 0),
-       intFromValue(info, 1)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1));
 }
 
-void BindSetWindowMaxSize(const Napi::CallbackInfo& info) {
+void BindSetWindowMaxSize(const Napi::CallbackInfo &info) {
   SetWindowMaxSize(
-     intFromValue(info, 0),
-       intFromValue(info, 1)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1));
 }
 
-void BindSetWindowSize(const Napi::CallbackInfo& info) {
+void BindSetWindowSize(const Napi::CallbackInfo &info) {
   SetWindowSize(
-     intFromValue(info, 0),
-       intFromValue(info, 1)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1));
 }
 
-void BindSetWindowOpacity(const Napi::CallbackInfo& info) {
+void BindSetWindowOpacity(const Napi::CallbackInfo &info) {
   SetWindowOpacity(
-     floatFromValue(info, 0)
-  );
+    floatFromValue(info, 0));
 }
 
-void BindSetWindowFocused(const Napi::CallbackInfo& info) {
+void BindSetWindowFocused(const Napi::CallbackInfo &info) {
   SetWindowFocused(
-    
+
   );
 }
 
-void BindSetClipboardText(const Napi::CallbackInfo& info) {
+void BindSetClipboardText(const Napi::CallbackInfo &info) {
   SetClipboardText(
-     (const char *) stringFromValue(info, 0)
-  );
+    (const char *)stringFromValue(info, 0));
 }
 
-void BindEnableEventWaiting(const Napi::CallbackInfo& info) {
+void BindEnableEventWaiting(const Napi::CallbackInfo &info) {
   EnableEventWaiting(
-    
+
   );
 }
 
-void BindDisableEventWaiting(const Napi::CallbackInfo& info) {
+void BindDisableEventWaiting(const Napi::CallbackInfo &info) {
   DisableEventWaiting(
-    
+
   );
 }
 
-void BindShowCursor(const Napi::CallbackInfo& info) {
+void BindShowCursor(const Napi::CallbackInfo &info) {
   ShowCursor(
-    
+
   );
 }
 
-void BindHideCursor(const Napi::CallbackInfo& info) {
+void BindHideCursor(const Napi::CallbackInfo &info) {
   HideCursor(
-    
+
   );
 }
 
-void BindEnableCursor(const Napi::CallbackInfo& info) {
+void BindEnableCursor(const Napi::CallbackInfo &info) {
   EnableCursor(
-    
+
   );
 }
 
-void BindDisableCursor(const Napi::CallbackInfo& info) {
+void BindDisableCursor(const Napi::CallbackInfo &info) {
   DisableCursor(
-    
+
   );
 }
 
-void BindClearBackground(const Napi::CallbackInfo& info) {
+void BindClearBackground(const Napi::CallbackInfo &info) {
   ClearBackground(
-     ColorFromValue(info, 0)
-  );
+    ColorFromValue(info, 0));
 }
 
-void BindBeginDrawing(const Napi::CallbackInfo& info) {
+void BindBeginDrawing(const Napi::CallbackInfo &info) {
   BeginDrawing(
-    
+
   );
 }
 
-void BindEndDrawing(const Napi::CallbackInfo& info) {
+void BindEndDrawing(const Napi::CallbackInfo &info) {
   EndDrawing(
-    
+
   );
 }
 
-void BindBeginMode2D(const Napi::CallbackInfo& info) {
+void BindBeginMode2D(const Napi::CallbackInfo &info) {
   BeginMode2D(
-     Camera2DFromValue(info, 0)
-  );
+    Camera2DFromValue(info, 0));
 }
 
-void BindEndMode2D(const Napi::CallbackInfo& info) {
+void BindEndMode2D(const Napi::CallbackInfo &info) {
   EndMode2D(
-    
+
   );
 }
 
-void BindBeginMode3D(const Napi::CallbackInfo& info) {
+void BindBeginMode3D(const Napi::CallbackInfo &info) {
   BeginMode3D(
-     Camera3DFromValue(info, 0)
-  );
+    Camera3DFromValue(info, 0));
 }
 
-void BindEndMode3D(const Napi::CallbackInfo& info) {
+void BindEndMode3D(const Napi::CallbackInfo &info) {
   EndMode3D(
-    
+
   );
 }
 
-void BindBeginTextureMode(const Napi::CallbackInfo& info) {
+void BindBeginTextureMode(const Napi::CallbackInfo &info) {
   BeginTextureMode(
-     RenderTextureFromValue(info, 0)
-  );
+    RenderTextureFromValue(info, 0));
 }
 
-void BindEndTextureMode(const Napi::CallbackInfo& info) {
+void BindEndTextureMode(const Napi::CallbackInfo &info) {
   EndTextureMode(
-    
+
   );
 }
 
-void BindBeginShaderMode(const Napi::CallbackInfo& info) {
+void BindBeginShaderMode(const Napi::CallbackInfo &info) {
   BeginShaderMode(
-     ShaderFromValue(info, 0)
-  );
+    ShaderFromValue(info, 0));
 }
 
-void BindEndShaderMode(const Napi::CallbackInfo& info) {
+void BindEndShaderMode(const Napi::CallbackInfo &info) {
   EndShaderMode(
-    
+
   );
 }
 
-void BindBeginBlendMode(const Napi::CallbackInfo& info) {
+void BindBeginBlendMode(const Napi::CallbackInfo &info) {
   BeginBlendMode(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindEndBlendMode(const Napi::CallbackInfo& info) {
+void BindEndBlendMode(const Napi::CallbackInfo &info) {
   EndBlendMode(
-    
+
   );
 }
 
-void BindBeginScissorMode(const Napi::CallbackInfo& info) {
+void BindBeginScissorMode(const Napi::CallbackInfo &info) {
   BeginScissorMode(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3));
 }
 
-void BindEndScissorMode(const Napi::CallbackInfo& info) {
+void BindEndScissorMode(const Napi::CallbackInfo &info) {
   EndScissorMode(
-    
+
   );
 }
 
-void BindEndVrStereoMode(const Napi::CallbackInfo& info) {
+void BindEndVrStereoMode(const Napi::CallbackInfo &info) {
   EndVrStereoMode(
-    
+
   );
 }
 
-void BindSetShaderValueMatrix(const Napi::CallbackInfo& info) {
+void BindSetShaderValueMatrix(const Napi::CallbackInfo &info) {
   SetShaderValueMatrix(
-     ShaderFromValue(info, 0),
-       intFromValue(info, 2),
-       MatrixFromValue(info, 3)
-  );
+    ShaderFromValue(info, 0),
+    intFromValue(info, 2),
+    MatrixFromValue(info, 3));
 }
 
-void BindSetShaderValueTexture(const Napi::CallbackInfo& info) {
+void BindSetShaderValueTexture(const Napi::CallbackInfo &info) {
   SetShaderValueTexture(
-     ShaderFromValue(info, 0),
-       intFromValue(info, 2),
-       TextureFromValue(info, 3)
-  );
+    ShaderFromValue(info, 0),
+    intFromValue(info, 2),
+    TextureFromValue(info, 3));
 }
 
-void BindUnloadShader(const Napi::CallbackInfo& info) {
+void BindUnloadShader(const Napi::CallbackInfo &info) {
   UnloadShader(
-     ShaderFromValue(info, 0)
-  );
+    ShaderFromValue(info, 0));
 }
 
-void BindSetTargetFPS(const Napi::CallbackInfo& info) {
+void BindSetTargetFPS(const Napi::CallbackInfo &info) {
   SetTargetFPS(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindSwapScreenBuffer(const Napi::CallbackInfo& info) {
+void BindSwapScreenBuffer(const Napi::CallbackInfo &info) {
   SwapScreenBuffer(
-    
+
   );
 }
 
-void BindPollInputEvents(const Napi::CallbackInfo& info) {
+void BindPollInputEvents(const Napi::CallbackInfo &info) {
   PollInputEvents(
-    
+
   );
 }
 
-void BindWaitTime(const Napi::CallbackInfo& info) {
+void BindWaitTime(const Napi::CallbackInfo &info) {
   WaitTime(
-     doubleFromValue(info, 0)
-  );
+    doubleFromValue(info, 0));
 }
 
-void BindSetRandomSeed(const Napi::CallbackInfo& info) {
+void BindSetRandomSeed(const Napi::CallbackInfo &info) {
   SetRandomSeed(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindUnloadRandomSequence(const Napi::CallbackInfo& info) {
+void BindUnloadRandomSequence(const Napi::CallbackInfo &info) {
   UnloadRandomSequence(
-     (int *) pointerFromValue(info, 0)
-  );
+    (int *)pointerFromValue(info, 0));
 }
 
-void BindTakeScreenshot(const Napi::CallbackInfo& info) {
+void BindTakeScreenshot(const Napi::CallbackInfo &info) {
   TakeScreenshot(
-     (const char *) stringFromValue(info, 0)
-  );
+    (const char *)stringFromValue(info, 0));
 }
 
-void BindSetConfigFlags(const Napi::CallbackInfo& info) {
+void BindSetConfigFlags(const Napi::CallbackInfo &info) {
   SetConfigFlags(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindOpenURL(const Napi::CallbackInfo& info) {
+void BindOpenURL(const Napi::CallbackInfo &info) {
   OpenURL(
-     (const char *) stringFromValue(info, 0)
-  );
+    (const char *)stringFromValue(info, 0));
 }
 
-void BindSetTraceLogLevel(const Napi::CallbackInfo& info) {
+void BindSetTraceLogLevel(const Napi::CallbackInfo &info) {
   SetTraceLogLevel(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindMemFree(const Napi::CallbackInfo& info) {
+void BindMemFree(const Napi::CallbackInfo &info) {
   MemFree(
-     (void *) pointerFromValue(info, 0)
-  );
+    (void *)pointerFromValue(info, 0));
 }
 
-void BindUnloadFileData(const Napi::CallbackInfo& info) {
+void BindUnloadFileData(const Napi::CallbackInfo &info) {
   UnloadFileData(
-     (unsigned char *) pointerFromValue(info, 0)
-  );
+    (unsigned char *)pointerFromValue(info, 0));
 }
 
-void BindUnloadFileText(const Napi::CallbackInfo& info) {
+void BindUnloadFileText(const Napi::CallbackInfo &info) {
   UnloadFileText(
-     (char *) pointerFromValue(info, 0)
-  );
+    (char *)pointerFromValue(info, 0));
 }
 
-void BindUnloadDirectoryFiles(const Napi::CallbackInfo& info) {
+void BindUnloadDirectoryFiles(const Napi::CallbackInfo &info) {
   UnloadDirectoryFiles(
-     FilePathListFromValue(info, 0)
-  );
+    FilePathListFromValue(info, 0));
 }
 
-void BindUnloadDroppedFiles(const Napi::CallbackInfo& info) {
+void BindUnloadDroppedFiles(const Napi::CallbackInfo &info) {
   UnloadDroppedFiles(
-     FilePathListFromValue(info, 0)
-  );
+    FilePathListFromValue(info, 0));
 }
 
-void BindUnloadAutomationEventList(const Napi::CallbackInfo& info) {
+void BindUnloadAutomationEventList(const Napi::CallbackInfo &info) {
   UnloadAutomationEventList(
-     AutomationEventListFromValue(info, 0)
-  );
+    AutomationEventListFromValue(info, 0));
 }
 
-void BindSetAutomationEventList(const Napi::CallbackInfo& info) {
+void BindSetAutomationEventList(const Napi::CallbackInfo &info) {
   SetAutomationEventList(
-     (AutomationEventList *) pointerFromValue(info, 0)
-  );
+    (AutomationEventList *)pointerFromValue(info, 0));
 }
 
-void BindSetAutomationEventBaseFrame(const Napi::CallbackInfo& info) {
+void BindSetAutomationEventBaseFrame(const Napi::CallbackInfo &info) {
   SetAutomationEventBaseFrame(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindStartAutomationEventRecording(const Napi::CallbackInfo& info) {
+void BindStartAutomationEventRecording(const Napi::CallbackInfo &info) {
   StartAutomationEventRecording(
-    
+
   );
 }
 
-void BindStopAutomationEventRecording(const Napi::CallbackInfo& info) {
+void BindStopAutomationEventRecording(const Napi::CallbackInfo &info) {
   StopAutomationEventRecording(
-    
+
   );
 }
 
-void BindSetExitKey(const Napi::CallbackInfo& info) {
+void BindSetExitKey(const Napi::CallbackInfo &info) {
   SetExitKey(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindSetGamepadVibration(const Napi::CallbackInfo& info) {
+void BindSetGamepadVibration(const Napi::CallbackInfo &info) {
   SetGamepadVibration(
-     intFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-  );
+    intFromValue(info, 0),
+    floatFromValue(info, 1),
+    floatFromValue(info, 2),
+    floatFromValue(info, 3));
 }
 
-void BindSetMousePosition(const Napi::CallbackInfo& info) {
+void BindSetMousePosition(const Napi::CallbackInfo &info) {
   SetMousePosition(
-     intFromValue(info, 0),
-       intFromValue(info, 1)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1));
 }
 
-void BindSetMouseOffset(const Napi::CallbackInfo& info) {
+void BindSetMouseOffset(const Napi::CallbackInfo &info) {
   SetMouseOffset(
-     intFromValue(info, 0),
-       intFromValue(info, 1)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1));
 }
 
-void BindSetMouseScale(const Napi::CallbackInfo& info) {
+void BindSetMouseScale(const Napi::CallbackInfo &info) {
   SetMouseScale(
-     floatFromValue(info, 0),
-       floatFromValue(info, 1)
-  );
+    floatFromValue(info, 0),
+    floatFromValue(info, 1));
 }
 
-void BindSetMouseCursor(const Napi::CallbackInfo& info) {
+void BindSetMouseCursor(const Napi::CallbackInfo &info) {
   SetMouseCursor(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindSetGesturesEnabled(const Napi::CallbackInfo& info) {
+void BindSetGesturesEnabled(const Napi::CallbackInfo &info) {
   SetGesturesEnabled(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindUpdateCameraPro(const Napi::CallbackInfo& info) {
+void BindUpdateCameraPro(const Napi::CallbackInfo &info) {
   UpdateCameraPro(
-     (Camera *) pointerFromValue(info, 0),
-       Vector3FromValue(info, 1),
-       Vector3FromValue(info, 4),
-       floatFromValue(info, 7)
-  );
+    (Camera *)pointerFromValue(info, 0),
+    Vector3FromValue(info, 1),
+    Vector3FromValue(info, 4),
+    floatFromValue(info, 7));
 }
 
-void BindSetShapesTexture(const Napi::CallbackInfo& info) {
+void BindSetShapesTexture(const Napi::CallbackInfo &info) {
   SetShapesTexture(
-     TextureFromValue(info, 0),
-       RectangleFromValue(info, 5)
-  );
+    TextureFromValue(info, 0),
+    RectangleFromValue(info, 5));
 }
 
-void BindDrawPixel(const Napi::CallbackInfo& info) {
+void BindDrawPixel(const Napi::CallbackInfo &info) {
   DrawPixel(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       ColorFromValue(info, 2)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    ColorFromValue(info, 2));
 }
 
-void BindDrawPixelV(const Napi::CallbackInfo& info) {
+void BindDrawPixelV(const Napi::CallbackInfo &info) {
   DrawPixelV(
-     Vector2FromValue(info, 0),
-       ColorFromValue(info, 2)
-  );
+    Vector2FromValue(info, 0),
+    ColorFromValue(info, 2));
 }
 
-void BindDrawLine(const Napi::CallbackInfo& info) {
+void BindDrawLine(const Napi::CallbackInfo &info) {
   DrawLine(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       ColorFromValue(info, 4)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3),
+    ColorFromValue(info, 4));
 }
 
-void BindDrawLineV(const Napi::CallbackInfo& info) {
+void BindDrawLineV(const Napi::CallbackInfo &info) {
   DrawLineV(
-     Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       ColorFromValue(info, 4)
-  );
+    Vector2FromValue(info, 0),
+    Vector2FromValue(info, 2),
+    ColorFromValue(info, 4));
 }
 
-void BindDrawLineEx(const Napi::CallbackInfo& info) {
+void BindDrawLineEx(const Napi::CallbackInfo &info) {
   DrawLineEx(
-     Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       floatFromValue(info, 4),
-       ColorFromValue(info, 5)
-  );
+    Vector2FromValue(info, 0),
+    Vector2FromValue(info, 2),
+    floatFromValue(info, 4),
+    ColorFromValue(info, 5));
 }
 
-void BindDrawLineStrip(const Napi::CallbackInfo& info) {
+void BindDrawLineStrip(const Napi::CallbackInfo &info) {
   DrawLineStrip(
-     (const Vector2 *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       ColorFromValue(info, 2)
-  );
+    (const Vector2 *)pointerFromValue(info, 0),
+    intFromValue(info, 1),
+    ColorFromValue(info, 2));
 }
 
-void BindDrawLineBezier(const Napi::CallbackInfo& info) {
+void BindDrawLineBezier(const Napi::CallbackInfo &info) {
   DrawLineBezier(
-     Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       floatFromValue(info, 4),
-       ColorFromValue(info, 5)
-  );
+    Vector2FromValue(info, 0),
+    Vector2FromValue(info, 2),
+    floatFromValue(info, 4),
+    ColorFromValue(info, 5));
 }
 
-void BindDrawCircle(const Napi::CallbackInfo& info) {
+void BindDrawCircle(const Napi::CallbackInfo &info) {
   DrawCircle(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       floatFromValue(info, 2),
-       ColorFromValue(info, 3)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    floatFromValue(info, 2),
+    ColorFromValue(info, 3));
 }
 
-void BindDrawCircleSector(const Napi::CallbackInfo& info) {
+void BindDrawCircleSector(const Napi::CallbackInfo &info) {
   DrawCircleSector(
-     Vector2FromValue(info, 0),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3),
-       floatFromValue(info, 4),
-       intFromValue(info, 5),
-       ColorFromValue(info, 6)
-  );
+    Vector2FromValue(info, 0),
+    floatFromValue(info, 2),
+    floatFromValue(info, 3),
+    floatFromValue(info, 4),
+    intFromValue(info, 5),
+    ColorFromValue(info, 6));
 }
 
-void BindDrawCircleSectorLines(const Napi::CallbackInfo& info) {
+void BindDrawCircleSectorLines(const Napi::CallbackInfo &info) {
   DrawCircleSectorLines(
-     Vector2FromValue(info, 0),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3),
-       floatFromValue(info, 4),
-       intFromValue(info, 5),
-       ColorFromValue(info, 6)
-  );
+    Vector2FromValue(info, 0),
+    floatFromValue(info, 2),
+    floatFromValue(info, 3),
+    floatFromValue(info, 4),
+    intFromValue(info, 5),
+    ColorFromValue(info, 6));
 }
 
-void BindDrawCircleGradient(const Napi::CallbackInfo& info) {
+void BindDrawCircleGradient(const Napi::CallbackInfo &info) {
   DrawCircleGradient(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       floatFromValue(info, 2),
-       ColorFromValue(info, 3),
-       ColorFromValue(info, 7)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    floatFromValue(info, 2),
+    ColorFromValue(info, 3),
+    ColorFromValue(info, 7));
 }
 
-void BindDrawCircleV(const Napi::CallbackInfo& info) {
+void BindDrawCircleV(const Napi::CallbackInfo &info) {
   DrawCircleV(
-     Vector2FromValue(info, 0),
-       floatFromValue(info, 2),
-       ColorFromValue(info, 3)
-  );
+    Vector2FromValue(info, 0),
+    floatFromValue(info, 2),
+    ColorFromValue(info, 3));
 }
 
-void BindDrawCircleLines(const Napi::CallbackInfo& info) {
+void BindDrawCircleLines(const Napi::CallbackInfo &info) {
   DrawCircleLines(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       floatFromValue(info, 2),
-       ColorFromValue(info, 3)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    floatFromValue(info, 2),
+    ColorFromValue(info, 3));
 }
 
-void BindDrawCircleLinesV(const Napi::CallbackInfo& info) {
+void BindDrawCircleLinesV(const Napi::CallbackInfo &info) {
   DrawCircleLinesV(
-     Vector2FromValue(info, 0),
-       floatFromValue(info, 2),
-       ColorFromValue(info, 3)
-  );
+    Vector2FromValue(info, 0),
+    floatFromValue(info, 2),
+    ColorFromValue(info, 3));
 }
 
-void BindDrawEllipse(const Napi::CallbackInfo& info) {
+void BindDrawEllipse(const Napi::CallbackInfo &info) {
   DrawEllipse(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3),
-       ColorFromValue(info, 4)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    floatFromValue(info, 2),
+    floatFromValue(info, 3),
+    ColorFromValue(info, 4));
 }
 
-void BindDrawEllipseLines(const Napi::CallbackInfo& info) {
+void BindDrawEllipseLines(const Napi::CallbackInfo &info) {
   DrawEllipseLines(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3),
-       ColorFromValue(info, 4)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    floatFromValue(info, 2),
+    floatFromValue(info, 3),
+    ColorFromValue(info, 4));
 }
 
-void BindDrawRing(const Napi::CallbackInfo& info) {
+void BindDrawRing(const Napi::CallbackInfo &info) {
   DrawRing(
-     Vector2FromValue(info, 0),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3),
-       floatFromValue(info, 4),
-       floatFromValue(info, 5),
-       intFromValue(info, 6),
-       ColorFromValue(info, 7)
-  );
+    Vector2FromValue(info, 0),
+    floatFromValue(info, 2),
+    floatFromValue(info, 3),
+    floatFromValue(info, 4),
+    floatFromValue(info, 5),
+    intFromValue(info, 6),
+    ColorFromValue(info, 7));
 }
 
-void BindDrawRingLines(const Napi::CallbackInfo& info) {
+void BindDrawRingLines(const Napi::CallbackInfo &info) {
   DrawRingLines(
-     Vector2FromValue(info, 0),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3),
-       floatFromValue(info, 4),
-       floatFromValue(info, 5),
-       intFromValue(info, 6),
-       ColorFromValue(info, 7)
-  );
+    Vector2FromValue(info, 0),
+    floatFromValue(info, 2),
+    floatFromValue(info, 3),
+    floatFromValue(info, 4),
+    floatFromValue(info, 5),
+    intFromValue(info, 6),
+    ColorFromValue(info, 7));
 }
 
-void BindDrawRectangle(const Napi::CallbackInfo& info) {
+void BindDrawRectangle(const Napi::CallbackInfo &info) {
   DrawRectangle(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       ColorFromValue(info, 4)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3),
+    ColorFromValue(info, 4));
 }
 
-void BindDrawRectangleV(const Napi::CallbackInfo& info) {
+void BindDrawRectangleV(const Napi::CallbackInfo &info) {
   DrawRectangleV(
-     Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       ColorFromValue(info, 4)
-  );
+    Vector2FromValue(info, 0),
+    Vector2FromValue(info, 2),
+    ColorFromValue(info, 4));
 }
 
-void BindDrawRectangleRec(const Napi::CallbackInfo& info) {
+void BindDrawRectangleRec(const Napi::CallbackInfo &info) {
   DrawRectangleRec(
-     RectangleFromValue(info, 0),
-       ColorFromValue(info, 4)
-  );
+    RectangleFromValue(info, 0),
+    ColorFromValue(info, 4));
 }
 
-void BindDrawRectanglePro(const Napi::CallbackInfo& info) {
+void BindDrawRectanglePro(const Napi::CallbackInfo &info) {
   DrawRectanglePro(
-     RectangleFromValue(info, 0),
-       Vector2FromValue(info, 4),
-       floatFromValue(info, 6),
-       ColorFromValue(info, 7)
-  );
+    RectangleFromValue(info, 0),
+    Vector2FromValue(info, 4),
+    floatFromValue(info, 6),
+    ColorFromValue(info, 7));
 }
 
-void BindDrawRectangleGradientV(const Napi::CallbackInfo& info) {
+void BindDrawRectangleGradientV(const Napi::CallbackInfo &info) {
   DrawRectangleGradientV(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       ColorFromValue(info, 4),
-       ColorFromValue(info, 8)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3),
+    ColorFromValue(info, 4),
+    ColorFromValue(info, 8));
 }
 
-void BindDrawRectangleGradientH(const Napi::CallbackInfo& info) {
+void BindDrawRectangleGradientH(const Napi::CallbackInfo &info) {
   DrawRectangleGradientH(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       ColorFromValue(info, 4),
-       ColorFromValue(info, 8)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3),
+    ColorFromValue(info, 4),
+    ColorFromValue(info, 8));
 }
 
-void BindDrawRectangleGradientEx(const Napi::CallbackInfo& info) {
+void BindDrawRectangleGradientEx(const Napi::CallbackInfo &info) {
   DrawRectangleGradientEx(
-     RectangleFromValue(info, 0),
-       ColorFromValue(info, 4),
-       ColorFromValue(info, 8),
-       ColorFromValue(info, 12),
-       ColorFromValue(info, 16)
-  );
+    RectangleFromValue(info, 0),
+    ColorFromValue(info, 4),
+    ColorFromValue(info, 8),
+    ColorFromValue(info, 12),
+    ColorFromValue(info, 16));
 }
 
-void BindDrawRectangleLines(const Napi::CallbackInfo& info) {
+void BindDrawRectangleLines(const Napi::CallbackInfo &info) {
   DrawRectangleLines(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       ColorFromValue(info, 4)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3),
+    ColorFromValue(info, 4));
 }
 
-void BindDrawRectangleLinesEx(const Napi::CallbackInfo& info) {
+void BindDrawRectangleLinesEx(const Napi::CallbackInfo &info) {
   DrawRectangleLinesEx(
-     RectangleFromValue(info, 0),
-       floatFromValue(info, 4),
-       ColorFromValue(info, 5)
-  );
+    RectangleFromValue(info, 0),
+    floatFromValue(info, 4),
+    ColorFromValue(info, 5));
 }
 
-void BindDrawRectangleRounded(const Napi::CallbackInfo& info) {
+void BindDrawRectangleRounded(const Napi::CallbackInfo &info) {
   DrawRectangleRounded(
-     RectangleFromValue(info, 0),
-       floatFromValue(info, 4),
-       intFromValue(info, 5),
-       ColorFromValue(info, 6)
-  );
+    RectangleFromValue(info, 0),
+    floatFromValue(info, 4),
+    intFromValue(info, 5),
+    ColorFromValue(info, 6));
 }
 
-void BindDrawRectangleRoundedLines(const Napi::CallbackInfo& info) {
+void BindDrawRectangleRoundedLines(const Napi::CallbackInfo &info) {
   DrawRectangleRoundedLines(
-     RectangleFromValue(info, 0),
-       floatFromValue(info, 4),
-       intFromValue(info, 5),
-       ColorFromValue(info, 6)
-  );
+    RectangleFromValue(info, 0),
+    floatFromValue(info, 4),
+    intFromValue(info, 5),
+    ColorFromValue(info, 6));
 }
 
-void BindDrawRectangleRoundedLinesEx(const Napi::CallbackInfo& info) {
+void BindDrawRectangleRoundedLinesEx(const Napi::CallbackInfo &info) {
   DrawRectangleRoundedLinesEx(
-     RectangleFromValue(info, 0),
-       floatFromValue(info, 4),
-       intFromValue(info, 5),
-       floatFromValue(info, 6),
-       ColorFromValue(info, 7)
-  );
+    RectangleFromValue(info, 0),
+    floatFromValue(info, 4),
+    intFromValue(info, 5),
+    floatFromValue(info, 6),
+    ColorFromValue(info, 7));
 }
 
-void BindDrawTriangle(const Napi::CallbackInfo& info) {
+void BindDrawTriangle(const Napi::CallbackInfo &info) {
   DrawTriangle(
-     Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       Vector2FromValue(info, 4),
-       ColorFromValue(info, 6)
-  );
+    Vector2FromValue(info, 0),
+    Vector2FromValue(info, 2),
+    Vector2FromValue(info, 4),
+    ColorFromValue(info, 6));
 }
 
-void BindDrawTriangleLines(const Napi::CallbackInfo& info) {
+void BindDrawTriangleLines(const Napi::CallbackInfo &info) {
   DrawTriangleLines(
-     Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       Vector2FromValue(info, 4),
-       ColorFromValue(info, 6)
-  );
+    Vector2FromValue(info, 0),
+    Vector2FromValue(info, 2),
+    Vector2FromValue(info, 4),
+    ColorFromValue(info, 6));
 }
 
-void BindDrawTriangleFan(const Napi::CallbackInfo& info) {
+void BindDrawTriangleFan(const Napi::CallbackInfo &info) {
   DrawTriangleFan(
-     (const Vector2 *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       ColorFromValue(info, 2)
-  );
+    (const Vector2 *)pointerFromValue(info, 0),
+    intFromValue(info, 1),
+    ColorFromValue(info, 2));
 }
 
-void BindDrawTriangleStrip(const Napi::CallbackInfo& info) {
+void BindDrawTriangleStrip(const Napi::CallbackInfo &info) {
   DrawTriangleStrip(
-     (const Vector2 *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       ColorFromValue(info, 2)
-  );
+    (const Vector2 *)pointerFromValue(info, 0),
+    intFromValue(info, 1),
+    ColorFromValue(info, 2));
 }
 
-void BindDrawPoly(const Napi::CallbackInfo& info) {
+void BindDrawPoly(const Napi::CallbackInfo &info) {
   DrawPoly(
-     Vector2FromValue(info, 0),
-       intFromValue(info, 2),
-       floatFromValue(info, 3),
-       floatFromValue(info, 4),
-       ColorFromValue(info, 5)
-  );
+    Vector2FromValue(info, 0),
+    intFromValue(info, 2),
+    floatFromValue(info, 3),
+    floatFromValue(info, 4),
+    ColorFromValue(info, 5));
 }
 
-void BindDrawPolyLines(const Napi::CallbackInfo& info) {
+void BindDrawPolyLines(const Napi::CallbackInfo &info) {
   DrawPolyLines(
-     Vector2FromValue(info, 0),
-       intFromValue(info, 2),
-       floatFromValue(info, 3),
-       floatFromValue(info, 4),
-       ColorFromValue(info, 5)
-  );
+    Vector2FromValue(info, 0),
+    intFromValue(info, 2),
+    floatFromValue(info, 3),
+    floatFromValue(info, 4),
+    ColorFromValue(info, 5));
 }
 
-void BindDrawPolyLinesEx(const Napi::CallbackInfo& info) {
+void BindDrawPolyLinesEx(const Napi::CallbackInfo &info) {
   DrawPolyLinesEx(
-     Vector2FromValue(info, 0),
-       intFromValue(info, 2),
-       floatFromValue(info, 3),
-       floatFromValue(info, 4),
-       floatFromValue(info, 5),
-       ColorFromValue(info, 6)
-  );
+    Vector2FromValue(info, 0),
+    intFromValue(info, 2),
+    floatFromValue(info, 3),
+    floatFromValue(info, 4),
+    floatFromValue(info, 5),
+    ColorFromValue(info, 6));
 }
 
-void BindDrawSplineLinear(const Napi::CallbackInfo& info) {
+void BindDrawSplineLinear(const Napi::CallbackInfo &info) {
   DrawSplineLinear(
-     (const Vector2 *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       floatFromValue(info, 2),
-       ColorFromValue(info, 3)
-  );
+    (const Vector2 *)pointerFromValue(info, 0),
+    intFromValue(info, 1),
+    floatFromValue(info, 2),
+    ColorFromValue(info, 3));
 }
 
-void BindDrawSplineBasis(const Napi::CallbackInfo& info) {
+void BindDrawSplineBasis(const Napi::CallbackInfo &info) {
   DrawSplineBasis(
-     (const Vector2 *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       floatFromValue(info, 2),
-       ColorFromValue(info, 3)
-  );
+    (const Vector2 *)pointerFromValue(info, 0),
+    intFromValue(info, 1),
+    floatFromValue(info, 2),
+    ColorFromValue(info, 3));
 }
 
-void BindDrawSplineCatmullRom(const Napi::CallbackInfo& info) {
+void BindDrawSplineCatmullRom(const Napi::CallbackInfo &info) {
   DrawSplineCatmullRom(
-     (const Vector2 *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       floatFromValue(info, 2),
-       ColorFromValue(info, 3)
-  );
+    (const Vector2 *)pointerFromValue(info, 0),
+    intFromValue(info, 1),
+    floatFromValue(info, 2),
+    ColorFromValue(info, 3));
 }
 
-void BindDrawSplineBezierQuadratic(const Napi::CallbackInfo& info) {
+void BindDrawSplineBezierQuadratic(const Napi::CallbackInfo &info) {
   DrawSplineBezierQuadratic(
-     (const Vector2 *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       floatFromValue(info, 2),
-       ColorFromValue(info, 3)
-  );
+    (const Vector2 *)pointerFromValue(info, 0),
+    intFromValue(info, 1),
+    floatFromValue(info, 2),
+    ColorFromValue(info, 3));
 }
 
-void BindDrawSplineBezierCubic(const Napi::CallbackInfo& info) {
+void BindDrawSplineBezierCubic(const Napi::CallbackInfo &info) {
   DrawSplineBezierCubic(
-     (const Vector2 *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       floatFromValue(info, 2),
-       ColorFromValue(info, 3)
-  );
+    (const Vector2 *)pointerFromValue(info, 0),
+    intFromValue(info, 1),
+    floatFromValue(info, 2),
+    ColorFromValue(info, 3));
 }
 
-void BindDrawSplineSegmentLinear(const Napi::CallbackInfo& info) {
+void BindDrawSplineSegmentLinear(const Napi::CallbackInfo &info) {
   DrawSplineSegmentLinear(
-     Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       floatFromValue(info, 4),
-       ColorFromValue(info, 5)
-  );
+    Vector2FromValue(info, 0),
+    Vector2FromValue(info, 2),
+    floatFromValue(info, 4),
+    ColorFromValue(info, 5));
 }
 
-void BindDrawSplineSegmentBasis(const Napi::CallbackInfo& info) {
+void BindDrawSplineSegmentBasis(const Napi::CallbackInfo &info) {
   DrawSplineSegmentBasis(
-     Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       Vector2FromValue(info, 4),
-       Vector2FromValue(info, 6),
-       floatFromValue(info, 8),
-       ColorFromValue(info, 9)
-  );
+    Vector2FromValue(info, 0),
+    Vector2FromValue(info, 2),
+    Vector2FromValue(info, 4),
+    Vector2FromValue(info, 6),
+    floatFromValue(info, 8),
+    ColorFromValue(info, 9));
 }
 
-void BindDrawSplineSegmentCatmullRom(const Napi::CallbackInfo& info) {
+void BindDrawSplineSegmentCatmullRom(const Napi::CallbackInfo &info) {
   DrawSplineSegmentCatmullRom(
-     Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       Vector2FromValue(info, 4),
-       Vector2FromValue(info, 6),
-       floatFromValue(info, 8),
-       ColorFromValue(info, 9)
-  );
+    Vector2FromValue(info, 0),
+    Vector2FromValue(info, 2),
+    Vector2FromValue(info, 4),
+    Vector2FromValue(info, 6),
+    floatFromValue(info, 8),
+    ColorFromValue(info, 9));
 }
 
-void BindDrawSplineSegmentBezierQuadratic(const Napi::CallbackInfo& info) {
+void BindDrawSplineSegmentBezierQuadratic(const Napi::CallbackInfo &info) {
   DrawSplineSegmentBezierQuadratic(
-     Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       Vector2FromValue(info, 4),
-       floatFromValue(info, 6),
-       ColorFromValue(info, 7)
-  );
+    Vector2FromValue(info, 0),
+    Vector2FromValue(info, 2),
+    Vector2FromValue(info, 4),
+    floatFromValue(info, 6),
+    ColorFromValue(info, 7));
 }
 
-void BindDrawSplineSegmentBezierCubic(const Napi::CallbackInfo& info) {
+void BindDrawSplineSegmentBezierCubic(const Napi::CallbackInfo &info) {
   DrawSplineSegmentBezierCubic(
-     Vector2FromValue(info, 0),
-       Vector2FromValue(info, 2),
-       Vector2FromValue(info, 4),
-       Vector2FromValue(info, 6),
-       floatFromValue(info, 8),
-       ColorFromValue(info, 9)
-  );
+    Vector2FromValue(info, 0),
+    Vector2FromValue(info, 2),
+    Vector2FromValue(info, 4),
+    Vector2FromValue(info, 6),
+    floatFromValue(info, 8),
+    ColorFromValue(info, 9));
 }
 
-void BindUnloadImage(const Napi::CallbackInfo& info) {
+void BindUnloadImage(const Napi::CallbackInfo &info) {
   UnloadImage(
-     ImageFromValue(info, 0)
-  );
+    ImageFromValue(info, 0));
 }
 
-void BindImageBlurGaussian(const Napi::CallbackInfo& info) {
+Napi::Value BindImageLock(const Napi::CallbackInfo &info) {
+  const auto image = new Image(ImageFromValue(info, 0));
+
+  return ToValue(info.Env(), image);
+}
+
+void BindImageUnlock(const Napi::CallbackInfo &info) {
+  delete (Image *)pointerFromValue(info, 0);
+}
+
+void BindImageBlurGaussian(const Napi::CallbackInfo &info) {
   ImageBlurGaussian(
-     (Image *) pointerFromValue(info, 0),
-       intFromValue(info, 1)
-  );
+    (Image *)pointerFromValue(info, 0),
+    intFromValue(info, 1));
 }
 
-void BindImageKernelConvolution(const Napi::CallbackInfo& info) {
+void BindImageKernelConvolution(const Napi::CallbackInfo &info) {
   ImageKernelConvolution(
-     (Image *) pointerFromValue(info, 0),
-       (const float *) pointerFromValue(info, 1),
-       intFromValue(info, 2)
-  );
+    (Image *)pointerFromValue(info, 0),
+    (const float *)pointerFromValue(info, 1),
+    intFromValue(info, 2));
 }
 
-void BindImageRotate(const Napi::CallbackInfo& info) {
+void BindImageRotate(const Napi::CallbackInfo &info) {
   ImageRotate(
-     (Image *) pointerFromValue(info, 0),
-       intFromValue(info, 1)
-  );
+    (Image *)pointerFromValue(info, 0),
+    intFromValue(info, 1));
 }
 
-void BindUnloadImageColors(const Napi::CallbackInfo& info) {
+void BindUnloadImageColors(const Napi::CallbackInfo &info) {
   UnloadImageColors(
-     (Color *) pointerFromValue(info, 0)
-  );
+    (Color *)pointerFromValue(info, 0));
 }
 
-void BindUnloadImagePalette(const Napi::CallbackInfo& info) {
+void BindUnloadImagePalette(const Napi::CallbackInfo &info) {
   UnloadImagePalette(
-     (Color *) pointerFromValue(info, 0)
-  );
+    (Color *)pointerFromValue(info, 0));
 }
 
-void BindImageDrawLineEx(const Napi::CallbackInfo& info) {
+void BindImageDrawLineEx(const Napi::CallbackInfo &info) {
   ImageDrawLineEx(
-     (Image *) pointerFromValue(info, 0),
-       Vector2FromValue(info, 1),
-       Vector2FromValue(info, 3),
-       intFromValue(info, 5),
-       ColorFromValue(info, 6)
-  );
+    (Image *)pointerFromValue(info, 0),
+    Vector2FromValue(info, 1),
+    Vector2FromValue(info, 3),
+    intFromValue(info, 5),
+    ColorFromValue(info, 6));
 }
 
-void BindImageDrawCircleLines(const Napi::CallbackInfo& info) {
+void BindImageDrawCircleLines(const Napi::CallbackInfo &info) {
   ImageDrawCircleLines(
-     (Image *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       ColorFromValue(info, 4)
-  );
+    (Image *)pointerFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3),
+    ColorFromValue(info, 4));
 }
 
-void BindImageDrawCircleLinesV(const Napi::CallbackInfo& info) {
+void BindImageDrawCircleLinesV(const Napi::CallbackInfo &info) {
   ImageDrawCircleLinesV(
-     (Image *) pointerFromValue(info, 0),
-       Vector2FromValue(info, 1),
-       intFromValue(info, 3),
-       ColorFromValue(info, 4)
-  );
+    (Image *)pointerFromValue(info, 0),
+    Vector2FromValue(info, 1),
+    intFromValue(info, 3),
+    ColorFromValue(info, 4));
 }
 
-void BindImageDrawTriangle(const Napi::CallbackInfo& info) {
+void BindImageDrawTriangle(const Napi::CallbackInfo &info) {
   ImageDrawTriangle(
-     (Image *) pointerFromValue(info, 0),
-       Vector2FromValue(info, 1),
-       Vector2FromValue(info, 3),
-       Vector2FromValue(info, 5),
-       ColorFromValue(info, 7)
-  );
+    (Image *)pointerFromValue(info, 0),
+    Vector2FromValue(info, 1),
+    Vector2FromValue(info, 3),
+    Vector2FromValue(info, 5),
+    ColorFromValue(info, 7));
 }
 
-void BindImageDrawTriangleEx(const Napi::CallbackInfo& info) {
+void BindImageDrawTriangleEx(const Napi::CallbackInfo &info) {
   ImageDrawTriangleEx(
-     (Image *) pointerFromValue(info, 0),
-       Vector2FromValue(info, 1),
-       Vector2FromValue(info, 3),
-       Vector2FromValue(info, 5),
-       ColorFromValue(info, 7),
-       ColorFromValue(info, 11),
-       ColorFromValue(info, 15)
-  );
+    (Image *)pointerFromValue(info, 0),
+    Vector2FromValue(info, 1),
+    Vector2FromValue(info, 3),
+    Vector2FromValue(info, 5),
+    ColorFromValue(info, 7),
+    ColorFromValue(info, 11),
+    ColorFromValue(info, 15));
 }
 
-void BindImageDrawTriangleLines(const Napi::CallbackInfo& info) {
+void BindImageDrawTriangleLines(const Napi::CallbackInfo &info) {
   ImageDrawTriangleLines(
-     (Image *) pointerFromValue(info, 0),
-       Vector2FromValue(info, 1),
-       Vector2FromValue(info, 3),
-       Vector2FromValue(info, 5),
-       ColorFromValue(info, 7)
-  );
+    (Image *)pointerFromValue(info, 0),
+    Vector2FromValue(info, 1),
+    Vector2FromValue(info, 3),
+    Vector2FromValue(info, 5),
+    ColorFromValue(info, 7));
 }
 
-void BindImageDrawTriangleFan(const Napi::CallbackInfo& info) {
+void BindImageDrawTriangleFan(const Napi::CallbackInfo &info) {
   ImageDrawTriangleFan(
-     (Image *) pointerFromValue(info, 0),
-       (Vector2 *) pointerFromValue(info, 1),
-       intFromValue(info, 2),
-       ColorFromValue(info, 3)
-  );
+    (Image *)pointerFromValue(info, 0),
+    (Vector2 *)pointerFromValue(info, 1),
+    intFromValue(info, 2),
+    ColorFromValue(info, 3));
 }
 
-void BindImageDrawTriangleStrip(const Napi::CallbackInfo& info) {
+void BindImageDrawTriangleStrip(const Napi::CallbackInfo &info) {
   ImageDrawTriangleStrip(
-     (Image *) pointerFromValue(info, 0),
-       (Vector2 *) pointerFromValue(info, 1),
-       intFromValue(info, 2),
-       ColorFromValue(info, 3)
-  );
+    (Image *)pointerFromValue(info, 0),
+    (Vector2 *)pointerFromValue(info, 1),
+    intFromValue(info, 2),
+    ColorFromValue(info, 3));
 }
 
-void BindUnloadTexture(const Napi::CallbackInfo& info) {
+void BindUnloadTexture(const Napi::CallbackInfo &info) {
   UnloadTexture(
-     TextureFromValue(info, 0)
-  );
+    TextureFromValue(info, 0));
 }
 
-void BindUnloadRenderTexture(const Napi::CallbackInfo& info) {
+void BindUnloadRenderTexture(const Napi::CallbackInfo &info) {
   UnloadRenderTexture(
-     RenderTextureFromValue(info, 0)
-  );
+    RenderTextureFromValue(info, 0));
 }
 
-void BindUpdateTexture(const Napi::CallbackInfo& info) {
+void BindUpdateTexture(const Napi::CallbackInfo &info) {
   UpdateTexture(
-     TextureFromValue(info, 0),
-       (const void *) pointerFromValue(info, 5)
-  );
+    TextureFromValue(info, 0),
+    (const void *)pointerFromValue(info, 5));
 }
 
-void BindUpdateTextureRec(const Napi::CallbackInfo& info) {
+void BindUpdateTextureRec(const Napi::CallbackInfo &info) {
   UpdateTextureRec(
-     TextureFromValue(info, 0),
-       RectangleFromValue(info, 5),
-       (const void *) pointerFromValue(info, 9)
-  );
+    TextureFromValue(info, 0),
+    RectangleFromValue(info, 5),
+    (const void *)pointerFromValue(info, 9));
 }
 
-void BindSetTextureFilter(const Napi::CallbackInfo& info) {
+void BindSetTextureFilter(const Napi::CallbackInfo &info) {
   SetTextureFilter(
-     TextureFromValue(info, 0),
-       intFromValue(info, 5)
-  );
+    TextureFromValue(info, 0),
+    intFromValue(info, 5));
 }
 
-void BindSetTextureWrap(const Napi::CallbackInfo& info) {
+void BindSetTextureWrap(const Napi::CallbackInfo &info) {
   SetTextureWrap(
-     TextureFromValue(info, 0),
-       intFromValue(info, 5)
-  );
+    TextureFromValue(info, 0),
+    intFromValue(info, 5));
 }
 
-void BindDrawTexture(const Napi::CallbackInfo& info) {
+void BindDrawTexture(const Napi::CallbackInfo &info) {
   DrawTexture(
-     TextureFromValue(info, 0),
-       intFromValue(info, 5),
-       intFromValue(info, 6),
-       ColorFromValue(info, 7)
-  );
+    TextureFromValue(info, 0),
+    intFromValue(info, 5),
+    intFromValue(info, 6),
+    ColorFromValue(info, 7));
 }
 
-void BindDrawTextureV(const Napi::CallbackInfo& info) {
+void BindDrawTextureV(const Napi::CallbackInfo &info) {
   DrawTextureV(
-     TextureFromValue(info, 0),
-       Vector2FromValue(info, 5),
-       ColorFromValue(info, 7)
-  );
+    TextureFromValue(info, 0),
+    Vector2FromValue(info, 5),
+    ColorFromValue(info, 7));
 }
 
-void BindDrawTextureEx(const Napi::CallbackInfo& info) {
+void BindDrawTextureEx(const Napi::CallbackInfo &info) {
   DrawTextureEx(
-     TextureFromValue(info, 0),
-       Vector2FromValue(info, 5),
-       floatFromValue(info, 7),
-       floatFromValue(info, 8),
-       ColorFromValue(info, 9)
-  );
+    TextureFromValue(info, 0),
+    Vector2FromValue(info, 5),
+    floatFromValue(info, 7),
+    floatFromValue(info, 8),
+    ColorFromValue(info, 9));
 }
 
-void BindDrawTextureRec(const Napi::CallbackInfo& info) {
+void BindDrawTextureRec(const Napi::CallbackInfo &info) {
   DrawTextureRec(
-     TextureFromValue(info, 0),
-       RectangleFromValue(info, 5),
-       Vector2FromValue(info, 9),
-       ColorFromValue(info, 11)
-  );
+    TextureFromValue(info, 0),
+    RectangleFromValue(info, 5),
+    Vector2FromValue(info, 9),
+    ColorFromValue(info, 11));
 }
 
-void BindDrawTexturePro(const Napi::CallbackInfo& info) {
+void BindDrawTexturePro(const Napi::CallbackInfo &info) {
   DrawTexturePro(
-     TextureFromValue(info, 0),
-       RectangleFromValue(info, 5),
-       RectangleFromValue(info, 9),
-       Vector2FromValue(info, 13),
-       floatFromValue(info, 15),
-       ColorFromValue(info, 16)
-  );
+    TextureFromValue(info, 0),
+    RectangleFromValue(info, 5),
+    RectangleFromValue(info, 9),
+    Vector2FromValue(info, 13),
+    floatFromValue(info, 15),
+    ColorFromValue(info, 16));
 }
 
-void BindDrawTextureNPatch(const Napi::CallbackInfo& info) {
+void BindDrawTextureNPatch(const Napi::CallbackInfo &info) {
   DrawTextureNPatch(
-     TextureFromValue(info, 0),
-       NPatchInfoFromValue(info, 5),
-       RectangleFromValue(info, 14),
-       Vector2FromValue(info, 18),
-       floatFromValue(info, 20),
-       ColorFromValue(info, 21)
-  );
+    TextureFromValue(info, 0),
+    NPatchInfoFromValue(info, 5),
+    RectangleFromValue(info, 14),
+    Vector2FromValue(info, 18),
+    floatFromValue(info, 20),
+    ColorFromValue(info, 21));
 }
 
-void BindSetPixelColor(const Napi::CallbackInfo& info) {
+void BindSetPixelColor(const Napi::CallbackInfo &info) {
   SetPixelColor(
-     (void *) pointerFromValue(info, 0),
-       ColorFromValue(info, 1),
-       intFromValue(info, 5)
-  );
+    (void *)pointerFromValue(info, 0),
+    ColorFromValue(info, 1),
+    intFromValue(info, 5));
 }
 
-void BindUnloadFontData(const Napi::CallbackInfo& info) {
+void BindUnloadFontData(const Napi::CallbackInfo &info) {
   UnloadFontData(
-     (GlyphInfo *) pointerFromValue(info, 0),
-       intFromValue(info, 1)
-  );
+    (GlyphInfo *)pointerFromValue(info, 0),
+    intFromValue(info, 1));
 }
 
-void BindUnloadFont(const Napi::CallbackInfo& info) {
+void BindUnloadFont(const Napi::CallbackInfo &info) {
   UnloadFont(
-     FontFromValue(info, 0)
-  );
+    FontFromValue(info, 0));
 }
 
-void BindDrawFPS(const Napi::CallbackInfo& info) {
+void BindDrawFPS(const Napi::CallbackInfo &info) {
   DrawFPS(
-     intFromValue(info, 0),
-       intFromValue(info, 1)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1));
 }
 
-void BindDrawText(const Napi::CallbackInfo& info) {
+void BindDrawText(const Napi::CallbackInfo &info) {
   DrawText(
-     (const char *) stringFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       ColorFromValue(info, 4)
-  );
+    (const char *)stringFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3),
+    ColorFromValue(info, 4));
 }
 
-void BindDrawTextEx(const Napi::CallbackInfo& info) {
+void BindDrawTextEx(const Napi::CallbackInfo &info) {
   std::string val = info[10].As<Napi::String>().Utf8Value();
   DrawTextEx(
-     FontFromValue(info, 0),
-       val.c_str(),
-       Vector2FromValue(info, 11),
-       floatFromValue(info, 13),
-       floatFromValue(info, 14),
-       ColorFromValue(info, 15)
-  );
+    FontFromValue(info, 0),
+    val.c_str(),
+    Vector2FromValue(info, 11),
+    floatFromValue(info, 13),
+    floatFromValue(info, 14),
+    ColorFromValue(info, 15));
 }
 
-void BindDrawTextPro(const Napi::CallbackInfo& info) {
+void BindDrawTextPro(const Napi::CallbackInfo &info) {
   DrawTextPro(
-     FontFromValue(info, 0),
-       (const char *) stringFromValue(info, 10),
-       Vector2FromValue(info, 11),
-       Vector2FromValue(info, 13),
-       floatFromValue(info, 15),
-       floatFromValue(info, 16),
-       floatFromValue(info, 17),
-       ColorFromValue(info, 18)
-  );
+    FontFromValue(info, 0),
+    (const char *)stringFromValue(info, 10),
+    Vector2FromValue(info, 11),
+    Vector2FromValue(info, 13),
+    floatFromValue(info, 15),
+    floatFromValue(info, 16),
+    floatFromValue(info, 17),
+    ColorFromValue(info, 18));
 }
 
-void BindDrawTextCodepoint(const Napi::CallbackInfo& info) {
+void BindDrawTextCodepoint(const Napi::CallbackInfo &info) {
   DrawTextCodepoint(
-     FontFromValue(info, 0),
-       intFromValue(info, 10),
-       Vector2FromValue(info, 11),
-       floatFromValue(info, 13),
-       ColorFromValue(info, 14)
-  );
+    FontFromValue(info, 0),
+    intFromValue(info, 10),
+    Vector2FromValue(info, 11),
+    floatFromValue(info, 13),
+    ColorFromValue(info, 14));
 }
 
-void BindDrawTextCodepoints(const Napi::CallbackInfo& info) {
+void BindDrawTextCodepoints(const Napi::CallbackInfo &info) {
   DrawTextCodepoints(
-     FontFromValue(info, 0),
-       (const int *) pointerFromValue(info, 10),
-       intFromValue(info, 11),
-       Vector2FromValue(info, 12),
-       floatFromValue(info, 14),
-       floatFromValue(info, 15),
-       ColorFromValue(info, 16)
-  );
+    FontFromValue(info, 0),
+    (const int *)pointerFromValue(info, 10),
+    intFromValue(info, 11),
+    Vector2FromValue(info, 12),
+    floatFromValue(info, 14),
+    floatFromValue(info, 15),
+    ColorFromValue(info, 16));
 }
 
-void BindSetTextLineSpacing(const Napi::CallbackInfo& info) {
+void BindSetTextLineSpacing(const Napi::CallbackInfo &info) {
   SetTextLineSpacing(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindUnloadUTF8(const Napi::CallbackInfo& info) {
+void BindUnloadUTF8(const Napi::CallbackInfo &info) {
   UnloadUTF8(
-     (char *) pointerFromValue(info, 0)
-  );
+    (char *)pointerFromValue(info, 0));
 }
 
-void BindUnloadCodepoints(const Napi::CallbackInfo& info) {
+void BindUnloadCodepoints(const Napi::CallbackInfo &info) {
   UnloadCodepoints(
-     (int *) pointerFromValue(info, 0)
-  );
+    (int *)pointerFromValue(info, 0));
 }
 
-void BindTextAppend(const Napi::CallbackInfo& info) {
+void BindTextAppend(const Napi::CallbackInfo &info) {
   TextAppend(
-     (char *) pointerFromValue(info, 0),
-       (const char *) stringFromValue(info, 1),
-       (int *) pointerFromValue(info, 2)
-  );
+    (char *)pointerFromValue(info, 0),
+    (const char *)stringFromValue(info, 1),
+    (int *)pointerFromValue(info, 2));
 }
 
-void BindDrawLine3D(const Napi::CallbackInfo& info) {
+void BindDrawLine3D(const Napi::CallbackInfo &info) {
   DrawLine3D(
-     Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3),
-       ColorFromValue(info, 6)
-  );
+    Vector3FromValue(info, 0),
+    Vector3FromValue(info, 3),
+    ColorFromValue(info, 6));
 }
 
-void BindDrawPoint3D(const Napi::CallbackInfo& info) {
+void BindDrawPoint3D(const Napi::CallbackInfo &info) {
   DrawPoint3D(
-     Vector3FromValue(info, 0),
-       ColorFromValue(info, 3)
-  );
+    Vector3FromValue(info, 0),
+    ColorFromValue(info, 3));
 }
 
-void BindDrawCircle3D(const Napi::CallbackInfo& info) {
+void BindDrawCircle3D(const Napi::CallbackInfo &info) {
   DrawCircle3D(
-     Vector3FromValue(info, 0),
-       floatFromValue(info, 3),
-       Vector3FromValue(info, 4),
-       floatFromValue(info, 7),
-       ColorFromValue(info, 8)
-  );
+    Vector3FromValue(info, 0),
+    floatFromValue(info, 3),
+    Vector3FromValue(info, 4),
+    floatFromValue(info, 7),
+    ColorFromValue(info, 8));
 }
 
-void BindDrawTriangle3D(const Napi::CallbackInfo& info) {
+void BindDrawTriangle3D(const Napi::CallbackInfo &info) {
   DrawTriangle3D(
-     Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3),
-       Vector3FromValue(info, 6),
-       ColorFromValue(info, 9)
-  );
+    Vector3FromValue(info, 0),
+    Vector3FromValue(info, 3),
+    Vector3FromValue(info, 6),
+    ColorFromValue(info, 9));
 }
 
-void BindDrawTriangleStrip3D(const Napi::CallbackInfo& info) {
+void BindDrawTriangleStrip3D(const Napi::CallbackInfo &info) {
   DrawTriangleStrip3D(
-     (const Vector3 *) pointerFromValue(info, 0),
-       intFromValue(info, 1),
-       ColorFromValue(info, 2)
-  );
+    (const Vector3 *)pointerFromValue(info, 0),
+    intFromValue(info, 1),
+    ColorFromValue(info, 2));
 }
 
-void BindDrawCube(const Napi::CallbackInfo& info) {
+void BindDrawCube(const Napi::CallbackInfo &info) {
   DrawCube(
-     Vector3FromValue(info, 0),
-       floatFromValue(info, 3),
-       floatFromValue(info, 4),
-       floatFromValue(info, 5),
-       ColorFromValue(info, 6)
-  );
+    Vector3FromValue(info, 0),
+    floatFromValue(info, 3),
+    floatFromValue(info, 4),
+    floatFromValue(info, 5),
+    ColorFromValue(info, 6));
 }
 
-void BindDrawCubeV(const Napi::CallbackInfo& info) {
+void BindDrawCubeV(const Napi::CallbackInfo &info) {
   DrawCubeV(
-     Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3),
-       ColorFromValue(info, 6)
-  );
+    Vector3FromValue(info, 0),
+    Vector3FromValue(info, 3),
+    ColorFromValue(info, 6));
 }
 
-void BindDrawCubeWires(const Napi::CallbackInfo& info) {
+void BindDrawCubeWires(const Napi::CallbackInfo &info) {
   DrawCubeWires(
-     Vector3FromValue(info, 0),
-       floatFromValue(info, 3),
-       floatFromValue(info, 4),
-       floatFromValue(info, 5),
-       ColorFromValue(info, 6)
-  );
+    Vector3FromValue(info, 0),
+    floatFromValue(info, 3),
+    floatFromValue(info, 4),
+    floatFromValue(info, 5),
+    ColorFromValue(info, 6));
 }
 
-void BindDrawCubeWiresV(const Napi::CallbackInfo& info) {
+void BindDrawCubeWiresV(const Napi::CallbackInfo &info) {
   DrawCubeWiresV(
-     Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3),
-       ColorFromValue(info, 6)
-  );
+    Vector3FromValue(info, 0),
+    Vector3FromValue(info, 3),
+    ColorFromValue(info, 6));
 }
 
-void BindDrawSphere(const Napi::CallbackInfo& info) {
+void BindDrawSphere(const Napi::CallbackInfo &info) {
   DrawSphere(
-     Vector3FromValue(info, 0),
-       floatFromValue(info, 3),
-       ColorFromValue(info, 4)
-  );
+    Vector3FromValue(info, 0),
+    floatFromValue(info, 3),
+    ColorFromValue(info, 4));
 }
 
-void BindDrawSphereEx(const Napi::CallbackInfo& info) {
+void BindDrawSphereEx(const Napi::CallbackInfo &info) {
   DrawSphereEx(
-     Vector3FromValue(info, 0),
-       floatFromValue(info, 3),
-       intFromValue(info, 4),
-       intFromValue(info, 5),
-       ColorFromValue(info, 6)
-  );
+    Vector3FromValue(info, 0),
+    floatFromValue(info, 3),
+    intFromValue(info, 4),
+    intFromValue(info, 5),
+    ColorFromValue(info, 6));
 }
 
-void BindDrawSphereWires(const Napi::CallbackInfo& info) {
+void BindDrawSphereWires(const Napi::CallbackInfo &info) {
   DrawSphereWires(
-     Vector3FromValue(info, 0),
-       floatFromValue(info, 3),
-       intFromValue(info, 4),
-       intFromValue(info, 5),
-       ColorFromValue(info, 6)
-  );
+    Vector3FromValue(info, 0),
+    floatFromValue(info, 3),
+    intFromValue(info, 4),
+    intFromValue(info, 5),
+    ColorFromValue(info, 6));
 }
 
-void BindDrawCylinder(const Napi::CallbackInfo& info) {
+void BindDrawCylinder(const Napi::CallbackInfo &info) {
   DrawCylinder(
-     Vector3FromValue(info, 0),
-       floatFromValue(info, 3),
-       floatFromValue(info, 4),
-       floatFromValue(info, 5),
-       intFromValue(info, 6),
-       ColorFromValue(info, 7)
-  );
+    Vector3FromValue(info, 0),
+    floatFromValue(info, 3),
+    floatFromValue(info, 4),
+    floatFromValue(info, 5),
+    intFromValue(info, 6),
+    ColorFromValue(info, 7));
 }
 
-void BindDrawCylinderEx(const Napi::CallbackInfo& info) {
+void BindDrawCylinderEx(const Napi::CallbackInfo &info) {
   DrawCylinderEx(
-     Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3),
-       floatFromValue(info, 6),
-       floatFromValue(info, 7),
-       intFromValue(info, 8),
-       ColorFromValue(info, 9)
-  );
+    Vector3FromValue(info, 0),
+    Vector3FromValue(info, 3),
+    floatFromValue(info, 6),
+    floatFromValue(info, 7),
+    intFromValue(info, 8),
+    ColorFromValue(info, 9));
 }
 
-void BindDrawCylinderWires(const Napi::CallbackInfo& info) {
+void BindDrawCylinderWires(const Napi::CallbackInfo &info) {
   DrawCylinderWires(
-     Vector3FromValue(info, 0),
-       floatFromValue(info, 3),
-       floatFromValue(info, 4),
-       floatFromValue(info, 5),
-       intFromValue(info, 6),
-       ColorFromValue(info, 7)
-  );
+    Vector3FromValue(info, 0),
+    floatFromValue(info, 3),
+    floatFromValue(info, 4),
+    floatFromValue(info, 5),
+    intFromValue(info, 6),
+    ColorFromValue(info, 7));
 }
 
-void BindDrawCylinderWiresEx(const Napi::CallbackInfo& info) {
+void BindDrawCylinderWiresEx(const Napi::CallbackInfo &info) {
   DrawCylinderWiresEx(
-     Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3),
-       floatFromValue(info, 6),
-       floatFromValue(info, 7),
-       intFromValue(info, 8),
-       ColorFromValue(info, 9)
-  );
+    Vector3FromValue(info, 0),
+    Vector3FromValue(info, 3),
+    floatFromValue(info, 6),
+    floatFromValue(info, 7),
+    intFromValue(info, 8),
+    ColorFromValue(info, 9));
 }
 
-void BindDrawCapsule(const Napi::CallbackInfo& info) {
+void BindDrawCapsule(const Napi::CallbackInfo &info) {
   DrawCapsule(
-     Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3),
-       floatFromValue(info, 6),
-       intFromValue(info, 7),
-       intFromValue(info, 8),
-       ColorFromValue(info, 9)
-  );
+    Vector3FromValue(info, 0),
+    Vector3FromValue(info, 3),
+    floatFromValue(info, 6),
+    intFromValue(info, 7),
+    intFromValue(info, 8),
+    ColorFromValue(info, 9));
 }
 
-void BindDrawCapsuleWires(const Napi::CallbackInfo& info) {
+void BindDrawCapsuleWires(const Napi::CallbackInfo &info) {
   DrawCapsuleWires(
-     Vector3FromValue(info, 0),
-       Vector3FromValue(info, 3),
-       floatFromValue(info, 6),
-       intFromValue(info, 7),
-       intFromValue(info, 8),
-       ColorFromValue(info, 9)
-  );
+    Vector3FromValue(info, 0),
+    Vector3FromValue(info, 3),
+    floatFromValue(info, 6),
+    intFromValue(info, 7),
+    intFromValue(info, 8),
+    ColorFromValue(info, 9));
 }
 
-void BindDrawPlane(const Napi::CallbackInfo& info) {
+void BindDrawPlane(const Napi::CallbackInfo &info) {
   DrawPlane(
-     Vector3FromValue(info, 0),
-       Vector2FromValue(info, 3),
-       ColorFromValue(info, 5)
-  );
+    Vector3FromValue(info, 0),
+    Vector2FromValue(info, 3),
+    ColorFromValue(info, 5));
 }
 
-void BindDrawRay(const Napi::CallbackInfo& info) {
+void BindDrawRay(const Napi::CallbackInfo &info) {
   DrawRay(
-     RayFromValue(info, 0),
-       ColorFromValue(info, 6)
-  );
+    RayFromValue(info, 0),
+    ColorFromValue(info, 6));
 }
 
-void BindDrawGrid(const Napi::CallbackInfo& info) {
+void BindDrawGrid(const Napi::CallbackInfo &info) {
   DrawGrid(
-     intFromValue(info, 0),
-       floatFromValue(info, 1)
-  );
+    intFromValue(info, 0),
+    floatFromValue(info, 1));
 }
 
-void BindUnloadModel(const Napi::CallbackInfo& info) {
+void BindUnloadModel(const Napi::CallbackInfo &info) {
   UnloadModel(
-     ModelFromValue(info, 0)
-  );
+    ModelFromValue(info, 0));
 }
 
-void BindDrawModel(const Napi::CallbackInfo& info) {
+void BindDrawModel(const Napi::CallbackInfo &info) {
   DrawModel(
-     ModelFromValue(info, 0),
-       Vector3FromValue(info, 24),
-       floatFromValue(info, 27),
-       ColorFromValue(info, 28)
-  );
+    ModelFromValue(info, 0),
+    Vector3FromValue(info, 24),
+    floatFromValue(info, 27),
+    ColorFromValue(info, 28));
 }
 
-void BindDrawModelEx(const Napi::CallbackInfo& info) {
+void BindDrawModelEx(const Napi::CallbackInfo &info) {
   DrawModelEx(
-     ModelFromValue(info, 0),
-       Vector3FromValue(info, 24),
-       Vector3FromValue(info, 27),
-       floatFromValue(info, 30),
-       Vector3FromValue(info, 31),
-       ColorFromValue(info, 34)
-  );
+    ModelFromValue(info, 0),
+    Vector3FromValue(info, 24),
+    Vector3FromValue(info, 27),
+    floatFromValue(info, 30),
+    Vector3FromValue(info, 31),
+    ColorFromValue(info, 34));
 }
 
-void BindDrawModelWires(const Napi::CallbackInfo& info) {
+void BindDrawModelWires(const Napi::CallbackInfo &info) {
   DrawModelWires(
-     ModelFromValue(info, 0),
-       Vector3FromValue(info, 24),
-       floatFromValue(info, 27),
-       ColorFromValue(info, 28)
-  );
+    ModelFromValue(info, 0),
+    Vector3FromValue(info, 24),
+    floatFromValue(info, 27),
+    ColorFromValue(info, 28));
 }
 
-void BindDrawModelWiresEx(const Napi::CallbackInfo& info) {
+void BindDrawModelWiresEx(const Napi::CallbackInfo &info) {
   DrawModelWiresEx(
-     ModelFromValue(info, 0),
-       Vector3FromValue(info, 24),
-       Vector3FromValue(info, 27),
-       floatFromValue(info, 30),
-       Vector3FromValue(info, 31),
-       ColorFromValue(info, 34)
-  );
+    ModelFromValue(info, 0),
+    Vector3FromValue(info, 24),
+    Vector3FromValue(info, 27),
+    floatFromValue(info, 30),
+    Vector3FromValue(info, 31),
+    ColorFromValue(info, 34));
 }
 
-void BindDrawModelPoints(const Napi::CallbackInfo& info) {
+void BindDrawModelPoints(const Napi::CallbackInfo &info) {
   DrawModelPoints(
-     ModelFromValue(info, 0),
-       Vector3FromValue(info, 24),
-       floatFromValue(info, 27),
-       ColorFromValue(info, 28)
-  );
+    ModelFromValue(info, 0),
+    Vector3FromValue(info, 24),
+    floatFromValue(info, 27),
+    ColorFromValue(info, 28));
 }
 
-void BindDrawModelPointsEx(const Napi::CallbackInfo& info) {
+void BindDrawModelPointsEx(const Napi::CallbackInfo &info) {
   DrawModelPointsEx(
-     ModelFromValue(info, 0),
-       Vector3FromValue(info, 24),
-       Vector3FromValue(info, 27),
-       floatFromValue(info, 30),
-       Vector3FromValue(info, 31),
-       ColorFromValue(info, 34)
-  );
+    ModelFromValue(info, 0),
+    Vector3FromValue(info, 24),
+    Vector3FromValue(info, 27),
+    floatFromValue(info, 30),
+    Vector3FromValue(info, 31),
+    ColorFromValue(info, 34));
 }
 
-void BindDrawBoundingBox(const Napi::CallbackInfo& info) {
+void BindDrawBoundingBox(const Napi::CallbackInfo &info) {
   DrawBoundingBox(
-     BoundingBoxFromValue(info, 0),
-       ColorFromValue(info, 6)
-  );
+    BoundingBoxFromValue(info, 0),
+    ColorFromValue(info, 6));
 }
 
-void BindDrawBillboard(const Napi::CallbackInfo& info) {
+void BindDrawBillboard(const Napi::CallbackInfo &info) {
   DrawBillboard(
-     Camera3DFromValue(info, 0),
-       TextureFromValue(info, 11),
-       Vector3FromValue(info, 16),
-       floatFromValue(info, 19),
-       ColorFromValue(info, 20)
-  );
+    Camera3DFromValue(info, 0),
+    TextureFromValue(info, 11),
+    Vector3FromValue(info, 16),
+    floatFromValue(info, 19),
+    ColorFromValue(info, 20));
 }
 
-void BindDrawBillboardRec(const Napi::CallbackInfo& info) {
+void BindDrawBillboardRec(const Napi::CallbackInfo &info) {
   DrawBillboardRec(
-     Camera3DFromValue(info, 0),
-       TextureFromValue(info, 11),
-       RectangleFromValue(info, 16),
-       Vector3FromValue(info, 20),
-       Vector2FromValue(info, 23),
-       ColorFromValue(info, 25)
-  );
+    Camera3DFromValue(info, 0),
+    TextureFromValue(info, 11),
+    RectangleFromValue(info, 16),
+    Vector3FromValue(info, 20),
+    Vector2FromValue(info, 23),
+    ColorFromValue(info, 25));
 }
 
-void BindDrawBillboardPro(const Napi::CallbackInfo& info) {
+void BindDrawBillboardPro(const Napi::CallbackInfo &info) {
   DrawBillboardPro(
-     Camera3DFromValue(info, 0),
-       TextureFromValue(info, 11),
-       RectangleFromValue(info, 16),
-       Vector3FromValue(info, 20),
-       Vector3FromValue(info, 23),
-       Vector2FromValue(info, 26),
-       Vector2FromValue(info, 28),
-       floatFromValue(info, 30),
-       ColorFromValue(info, 31)
-  );
+    Camera3DFromValue(info, 0),
+    TextureFromValue(info, 11),
+    RectangleFromValue(info, 16),
+    Vector3FromValue(info, 20),
+    Vector3FromValue(info, 23),
+    Vector2FromValue(info, 26),
+    Vector2FromValue(info, 28),
+    floatFromValue(info, 30),
+    ColorFromValue(info, 31));
 }
 
-void BindUpdateMeshBuffer(const Napi::CallbackInfo& info) {
+void BindUpdateMeshBuffer(const Napi::CallbackInfo &info) {
   UpdateMeshBuffer(
-     MeshFromValue(info, 0),
-       intFromValue(info, 17),
-       (const void *) pointerFromValue(info, 18),
-       intFromValue(info, 19),
-       intFromValue(info, 20)
-  );
+    MeshFromValue(info, 0),
+    intFromValue(info, 17),
+    (const void *)pointerFromValue(info, 18),
+    intFromValue(info, 19),
+    intFromValue(info, 20));
 }
 
-void BindUnloadMesh(const Napi::CallbackInfo& info) {
+void BindUnloadMesh(const Napi::CallbackInfo &info) {
   UnloadMesh(
-     MeshFromValue(info, 0)
-  );
+    MeshFromValue(info, 0));
 }
 
-void BindInitAudioDevice(const Napi::CallbackInfo& info) {
+void BindInitAudioDevice(const Napi::CallbackInfo &info) {
   InitAudioDevice(
-    
+
   );
 }
 
-void BindCloseAudioDevice(const Napi::CallbackInfo& info) {
+void BindCloseAudioDevice(const Napi::CallbackInfo &info) {
   CloseAudioDevice(
-    
+
   );
 }
 
-void BindSetMasterVolume(const Napi::CallbackInfo& info) {
+void BindSetMasterVolume(const Napi::CallbackInfo &info) {
   SetMasterVolume(
-     floatFromValue(info, 0)
-  );
+    floatFromValue(info, 0));
 }
 
-void BindUpdateSound(const Napi::CallbackInfo& info) {
+void BindUpdateSound(const Napi::CallbackInfo &info) {
   UpdateSound(
-     SoundFromValue(info, 0),
-       (const void *) pointerFromValue(info, 6),
-       intFromValue(info, 7)
-  );
+    SoundFromValue(info, 0),
+    (const void *)pointerFromValue(info, 6),
+    intFromValue(info, 7));
 }
 
-void BindUnloadWave(const Napi::CallbackInfo& info) {
+void BindUnloadWave(const Napi::CallbackInfo &info) {
   UnloadWave(
-     WaveFromValue(info, 0)
-  );
+    WaveFromValue(info, 0));
 }
 
-void BindUnloadSound(const Napi::CallbackInfo& info) {
+void BindUnloadSound(const Napi::CallbackInfo &info) {
   UnloadSound(
-     SoundFromValue(info, 0)
-  );
+    SoundFromValue(info, 0));
 }
 
-void BindUnloadSoundAlias(const Napi::CallbackInfo& info) {
+void BindUnloadSoundAlias(const Napi::CallbackInfo &info) {
   UnloadSoundAlias(
-     SoundFromValue(info, 0)
-  );
+    SoundFromValue(info, 0));
 }
 
-void BindPlaySound(const Napi::CallbackInfo& info) {
+void BindPlaySound(const Napi::CallbackInfo &info) {
   PlaySound(
-     SoundFromValue(info, 0)
-  );
+    SoundFromValue(info, 0));
 }
 
-void BindStopSound(const Napi::CallbackInfo& info) {
+void BindStopSound(const Napi::CallbackInfo &info) {
   StopSound(
-     SoundFromValue(info, 0)
-  );
+    SoundFromValue(info, 0));
 }
 
-void BindPauseSound(const Napi::CallbackInfo& info) {
+void BindPauseSound(const Napi::CallbackInfo &info) {
   PauseSound(
-     SoundFromValue(info, 0)
-  );
+    SoundFromValue(info, 0));
 }
 
-void BindResumeSound(const Napi::CallbackInfo& info) {
+void BindResumeSound(const Napi::CallbackInfo &info) {
   ResumeSound(
-     SoundFromValue(info, 0)
-  );
+    SoundFromValue(info, 0));
 }
 
-void BindSetSoundVolume(const Napi::CallbackInfo& info) {
+void BindSetSoundVolume(const Napi::CallbackInfo &info) {
   SetSoundVolume(
-     SoundFromValue(info, 0),
-       floatFromValue(info, 6)
-  );
+    SoundFromValue(info, 0),
+    floatFromValue(info, 6));
 }
 
-void BindSetSoundPitch(const Napi::CallbackInfo& info) {
+void BindSetSoundPitch(const Napi::CallbackInfo &info) {
   SetSoundPitch(
-     SoundFromValue(info, 0),
-       floatFromValue(info, 6)
-  );
+    SoundFromValue(info, 0),
+    floatFromValue(info, 6));
 }
 
-void BindSetSoundPan(const Napi::CallbackInfo& info) {
+void BindSetSoundPan(const Napi::CallbackInfo &info) {
   SetSoundPan(
-     SoundFromValue(info, 0),
-       floatFromValue(info, 6)
-  );
+    SoundFromValue(info, 0),
+    floatFromValue(info, 6));
 }
 
-void BindUnloadWaveSamples(const Napi::CallbackInfo& info) {
+void BindUnloadWaveSamples(const Napi::CallbackInfo &info) {
   UnloadWaveSamples(
-     (float *) pointerFromValue(info, 0)
-  );
+    (float *)pointerFromValue(info, 0));
 }
 
-void BindUnloadMusicStream(const Napi::CallbackInfo& info) {
+void BindUnloadMusicStream(const Napi::CallbackInfo &info) {
   UnloadMusicStream(
-     MusicFromValue(info, 0)
-  );
+    MusicFromValue(info, 0));
 }
 
-void BindPlayMusicStream(const Napi::CallbackInfo& info) {
+void BindPlayMusicStream(const Napi::CallbackInfo &info) {
   PlayMusicStream(
-     MusicFromValue(info, 0)
-  );
+    MusicFromValue(info, 0));
 }
 
-void BindUpdateMusicStream(const Napi::CallbackInfo& info) {
+void BindUpdateMusicStream(const Napi::CallbackInfo &info) {
   UpdateMusicStream(
-     MusicFromValue(info, 0)
-  );
+    MusicFromValue(info, 0));
 }
 
-void BindStopMusicStream(const Napi::CallbackInfo& info) {
+void BindStopMusicStream(const Napi::CallbackInfo &info) {
   StopMusicStream(
-     MusicFromValue(info, 0)
-  );
+    MusicFromValue(info, 0));
 }
 
-void BindPauseMusicStream(const Napi::CallbackInfo& info) {
+void BindPauseMusicStream(const Napi::CallbackInfo &info) {
   PauseMusicStream(
-     MusicFromValue(info, 0)
-  );
+    MusicFromValue(info, 0));
 }
 
-void BindResumeMusicStream(const Napi::CallbackInfo& info) {
+void BindResumeMusicStream(const Napi::CallbackInfo &info) {
   ResumeMusicStream(
-     MusicFromValue(info, 0)
-  );
+    MusicFromValue(info, 0));
 }
 
-void BindSeekMusicStream(const Napi::CallbackInfo& info) {
+void BindSeekMusicStream(const Napi::CallbackInfo &info) {
   SeekMusicStream(
-     MusicFromValue(info, 0),
-       floatFromValue(info, 9)
-  );
+    MusicFromValue(info, 0),
+    floatFromValue(info, 9));
 }
 
-void BindSetMusicVolume(const Napi::CallbackInfo& info) {
+void BindSetMusicVolume(const Napi::CallbackInfo &info) {
   SetMusicVolume(
-     MusicFromValue(info, 0),
-       floatFromValue(info, 9)
-  );
+    MusicFromValue(info, 0),
+    floatFromValue(info, 9));
 }
 
-void BindSetMusicPitch(const Napi::CallbackInfo& info) {
+void BindSetMusicPitch(const Napi::CallbackInfo &info) {
   SetMusicPitch(
-     MusicFromValue(info, 0),
-       floatFromValue(info, 9)
-  );
+    MusicFromValue(info, 0),
+    floatFromValue(info, 9));
 }
 
-void BindSetMusicPan(const Napi::CallbackInfo& info) {
+void BindSetMusicPan(const Napi::CallbackInfo &info) {
   SetMusicPan(
-     MusicFromValue(info, 0),
-       floatFromValue(info, 9)
-  );
+    MusicFromValue(info, 0),
+    floatFromValue(info, 9));
 }
 
-void BindUnloadAudioStream(const Napi::CallbackInfo& info) {
+void BindUnloadAudioStream(const Napi::CallbackInfo &info) {
   UnloadAudioStream(
-     AudioStreamFromValue(info, 0)
-  );
+    AudioStreamFromValue(info, 0));
 }
 
-void BindUpdateAudioStream(const Napi::CallbackInfo& info) {
+void BindUpdateAudioStream(const Napi::CallbackInfo &info) {
   UpdateAudioStream(
-     AudioStreamFromValue(info, 0),
-       (const void *) pointerFromValue(info, 5),
-       intFromValue(info, 6)
-  );
+    AudioStreamFromValue(info, 0),
+    (const void *)pointerFromValue(info, 5),
+    intFromValue(info, 6));
 }
 
-void BindPlayAudioStream(const Napi::CallbackInfo& info) {
+void BindPlayAudioStream(const Napi::CallbackInfo &info) {
   PlayAudioStream(
-     AudioStreamFromValue(info, 0)
-  );
+    AudioStreamFromValue(info, 0));
 }
 
-void BindPauseAudioStream(const Napi::CallbackInfo& info) {
+void BindPauseAudioStream(const Napi::CallbackInfo &info) {
   PauseAudioStream(
-     AudioStreamFromValue(info, 0)
-  );
+    AudioStreamFromValue(info, 0));
 }
 
-void BindResumeAudioStream(const Napi::CallbackInfo& info) {
+void BindResumeAudioStream(const Napi::CallbackInfo &info) {
   ResumeAudioStream(
-     AudioStreamFromValue(info, 0)
-  );
+    AudioStreamFromValue(info, 0));
 }
 
-void BindStopAudioStream(const Napi::CallbackInfo& info) {
+void BindStopAudioStream(const Napi::CallbackInfo &info) {
   StopAudioStream(
-     AudioStreamFromValue(info, 0)
-  );
+    AudioStreamFromValue(info, 0));
 }
 
-void BindSetAudioStreamVolume(const Napi::CallbackInfo& info) {
+void BindSetAudioStreamVolume(const Napi::CallbackInfo &info) {
   SetAudioStreamVolume(
-     AudioStreamFromValue(info, 0),
-       floatFromValue(info, 5)
-  );
+    AudioStreamFromValue(info, 0),
+    floatFromValue(info, 5));
 }
 
-void BindSetAudioStreamPitch(const Napi::CallbackInfo& info) {
+void BindSetAudioStreamPitch(const Napi::CallbackInfo &info) {
   SetAudioStreamPitch(
-     AudioStreamFromValue(info, 0),
-       floatFromValue(info, 5)
-  );
+    AudioStreamFromValue(info, 0),
+    floatFromValue(info, 5));
 }
 
-void BindSetAudioStreamPan(const Napi::CallbackInfo& info) {
+void BindSetAudioStreamPan(const Napi::CallbackInfo &info) {
   SetAudioStreamPan(
-     AudioStreamFromValue(info, 0),
-       floatFromValue(info, 5)
-  );
+    AudioStreamFromValue(info, 0),
+    floatFromValue(info, 5));
 }
 
-void BindSetAudioStreamBufferSizeDefault(const Napi::CallbackInfo& info) {
+void BindSetAudioStreamBufferSizeDefault(const Napi::CallbackInfo &info) {
   SetAudioStreamBufferSizeDefault(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindVector3OrthoNormalize(const Napi::CallbackInfo& info) {
+void BindVector3OrthoNormalize(const Napi::CallbackInfo &info) {
   Vector3OrthoNormalize(
-     (Vector3 *) pointerFromValue(info, 0),
-       (Vector3 *) pointerFromValue(info, 1)
-  );
+    (Vector3 *)pointerFromValue(info, 0),
+    (Vector3 *)pointerFromValue(info, 1));
 }
 
-void BindQuaternionToAxisAngle(const Napi::CallbackInfo& info) {
+void BindQuaternionToAxisAngle(const Napi::CallbackInfo &info) {
   QuaternionToAxisAngle(
-     Vector4FromValue(info, 0),
-       (Vector3 *) pointerFromValue(info, 1),
-       (float *) pointerFromValue(info, 2)
-  );
+    Vector4FromValue(info, 0),
+    (Vector3 *)pointerFromValue(info, 1),
+    (float *)pointerFromValue(info, 2));
 }
 
-void BindMatrixDecompose(const Napi::CallbackInfo& info) {
+void BindMatrixDecompose(const Napi::CallbackInfo &info) {
   MatrixDecompose(
-     MatrixFromValue(info, 0),
-       (Vector3 *) pointerFromValue(info, 16),
-       (Quaternion *) pointerFromValue(info, 17),
-       (Vector3 *) pointerFromValue(info, 18)
-  );
+    MatrixFromValue(info, 0),
+    (Vector3 *)pointerFromValue(info, 16),
+    (Quaternion *)pointerFromValue(info, 17),
+    (Vector3 *)pointerFromValue(info, 18));
 }
 
-void BindGuiEnable(const Napi::CallbackInfo& info) {
+void BindGuiEnable(const Napi::CallbackInfo &info) {
   GuiEnable(
-    
+
   );
 }
 
-void BindGuiDisable(const Napi::CallbackInfo& info) {
+void BindGuiDisable(const Napi::CallbackInfo &info) {
   GuiDisable(
-    
+
   );
 }
 
-void BindGuiLock(const Napi::CallbackInfo& info) {
+void BindGuiLock(const Napi::CallbackInfo &info) {
   GuiLock(
-    
+
   );
 }
 
-void BindGuiUnlock(const Napi::CallbackInfo& info) {
+void BindGuiUnlock(const Napi::CallbackInfo &info) {
   GuiUnlock(
-    
+
   );
 }
 
-void BindGuiSetAlpha(const Napi::CallbackInfo& info) {
+void BindGuiSetAlpha(const Napi::CallbackInfo &info) {
   GuiSetAlpha(
-     floatFromValue(info, 0)
-  );
+    floatFromValue(info, 0));
 }
 
-void BindGuiSetState(const Napi::CallbackInfo& info) {
+void BindGuiSetState(const Napi::CallbackInfo &info) {
   GuiSetState(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindGuiSetFont(const Napi::CallbackInfo& info) {
+void BindGuiSetFont(const Napi::CallbackInfo &info) {
   GuiSetFont(
-     FontFromValue(info, 0)
-  );
+    FontFromValue(info, 0));
 }
 
-void BindGuiSetStyle(const Napi::CallbackInfo& info) {
+void BindGuiSetStyle(const Napi::CallbackInfo &info) {
   GuiSetStyle(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2));
 }
 
-void BindGuiLoadStyle(const Napi::CallbackInfo& info) {
+void BindGuiLoadStyle(const Napi::CallbackInfo &info) {
   GuiLoadStyle(
-     (const char *) stringFromValue(info, 0)
-  );
+    (const char *)stringFromValue(info, 0));
 }
 
-void BindGuiLoadStyleDefault(const Napi::CallbackInfo& info) {
+void BindGuiLoadStyleDefault(const Napi::CallbackInfo &info) {
   GuiLoadStyleDefault(
-    
+
   );
 }
 
-void BindGuiEnableTooltip(const Napi::CallbackInfo& info) {
+void BindGuiEnableTooltip(const Napi::CallbackInfo &info) {
   GuiEnableTooltip(
-    
+
   );
 }
 
-void BindGuiDisableTooltip(const Napi::CallbackInfo& info) {
+void BindGuiDisableTooltip(const Napi::CallbackInfo &info) {
   GuiDisableTooltip(
-    
+
   );
 }
 
-void BindGuiSetTooltip(const Napi::CallbackInfo& info) {
+void BindGuiSetTooltip(const Napi::CallbackInfo &info) {
   GuiSetTooltip(
-     (const char *) stringFromValue(info, 0)
-  );
+    (const char *)stringFromValue(info, 0));
 }
 
-void BindGuiSetIconScale(const Napi::CallbackInfo& info) {
+void BindGuiSetIconScale(const Napi::CallbackInfo &info) {
   GuiSetIconScale(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindGuiDrawIcon(const Napi::CallbackInfo& info) {
+void BindGuiDrawIcon(const Napi::CallbackInfo &info) {
   GuiDrawIcon(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       ColorFromValue(info, 4)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3),
+    ColorFromValue(info, 4));
 }
 
-void BindrlMatrixMode(const Napi::CallbackInfo& info) {
+void BindrlMatrixMode(const Napi::CallbackInfo &info) {
   rlMatrixMode(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindrlPushMatrix(const Napi::CallbackInfo& info) {
+void BindrlPushMatrix(const Napi::CallbackInfo &info) {
   rlPushMatrix(
-    
+
   );
 }
 
-void BindrlPopMatrix(const Napi::CallbackInfo& info) {
+void BindrlPopMatrix(const Napi::CallbackInfo &info) {
   rlPopMatrix(
-    
+
   );
 }
 
-void BindrlLoadIdentity(const Napi::CallbackInfo& info) {
+void BindrlLoadIdentity(const Napi::CallbackInfo &info) {
   rlLoadIdentity(
-    
+
   );
 }
 
-void BindrlTranslatef(const Napi::CallbackInfo& info) {
+void BindrlTranslatef(const Napi::CallbackInfo &info) {
   rlTranslatef(
-     floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2)
-  );
+    floatFromValue(info, 0),
+    floatFromValue(info, 1),
+    floatFromValue(info, 2));
 }
 
-void BindrlRotatef(const Napi::CallbackInfo& info) {
+void BindrlRotatef(const Napi::CallbackInfo &info) {
   rlRotatef(
-     floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-  );
+    floatFromValue(info, 0),
+    floatFromValue(info, 1),
+    floatFromValue(info, 2),
+    floatFromValue(info, 3));
 }
 
-void BindrlScalef(const Napi::CallbackInfo& info) {
+void BindrlScalef(const Napi::CallbackInfo &info) {
   rlScalef(
-     floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2)
-  );
+    floatFromValue(info, 0),
+    floatFromValue(info, 1),
+    floatFromValue(info, 2));
 }
 
-void BindrlMultMatrixf(const Napi::CallbackInfo& info) {
+void BindrlMultMatrixf(const Napi::CallbackInfo &info) {
   rlMultMatrixf(
-     (const float *) pointerFromValue(info, 0)
-  );
+    (const float *)pointerFromValue(info, 0));
 }
 
-void BindrlFrustum(const Napi::CallbackInfo& info) {
+void BindrlFrustum(const Napi::CallbackInfo &info) {
   rlFrustum(
-     doubleFromValue(info, 0),
-       doubleFromValue(info, 1),
-       doubleFromValue(info, 2),
-       doubleFromValue(info, 3),
-       doubleFromValue(info, 4),
-       doubleFromValue(info, 5)
-  );
+    doubleFromValue(info, 0),
+    doubleFromValue(info, 1),
+    doubleFromValue(info, 2),
+    doubleFromValue(info, 3),
+    doubleFromValue(info, 4),
+    doubleFromValue(info, 5));
 }
 
-void BindrlOrtho(const Napi::CallbackInfo& info) {
+void BindrlOrtho(const Napi::CallbackInfo &info) {
   rlOrtho(
-     doubleFromValue(info, 0),
-       doubleFromValue(info, 1),
-       doubleFromValue(info, 2),
-       doubleFromValue(info, 3),
-       doubleFromValue(info, 4),
-       doubleFromValue(info, 5)
-  );
+    doubleFromValue(info, 0),
+    doubleFromValue(info, 1),
+    doubleFromValue(info, 2),
+    doubleFromValue(info, 3),
+    doubleFromValue(info, 4),
+    doubleFromValue(info, 5));
 }
 
-void BindrlViewport(const Napi::CallbackInfo& info) {
+void BindrlViewport(const Napi::CallbackInfo &info) {
   rlViewport(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3));
 }
 
-void BindrlSetClipPlanes(const Napi::CallbackInfo& info) {
+void BindrlSetClipPlanes(const Napi::CallbackInfo &info) {
   rlSetClipPlanes(
-     doubleFromValue(info, 0),
-       doubleFromValue(info, 1)
-  );
+    doubleFromValue(info, 0),
+    doubleFromValue(info, 1));
 }
 
-void BindrlBegin(const Napi::CallbackInfo& info) {
+void BindrlBegin(const Napi::CallbackInfo &info) {
   rlBegin(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindrlEnd(const Napi::CallbackInfo& info) {
+void BindrlEnd(const Napi::CallbackInfo &info) {
   rlEnd(
-    
+
   );
 }
 
-void BindrlVertex2i(const Napi::CallbackInfo& info) {
+void BindrlVertex2i(const Napi::CallbackInfo &info) {
   rlVertex2i(
-     intFromValue(info, 0),
-       intFromValue(info, 1)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1));
 }
 
-void BindrlVertex2f(const Napi::CallbackInfo& info) {
+void BindrlVertex2f(const Napi::CallbackInfo &info) {
   rlVertex2f(
-     floatFromValue(info, 0),
-       floatFromValue(info, 1)
-  );
+    floatFromValue(info, 0),
+    floatFromValue(info, 1));
 }
 
-void BindrlVertex3f(const Napi::CallbackInfo& info) {
+void BindrlVertex3f(const Napi::CallbackInfo &info) {
   rlVertex3f(
-     floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2)
-  );
+    floatFromValue(info, 0),
+    floatFromValue(info, 1),
+    floatFromValue(info, 2));
 }
 
-void BindrlTexCoord2f(const Napi::CallbackInfo& info) {
+void BindrlTexCoord2f(const Napi::CallbackInfo &info) {
   rlTexCoord2f(
-     floatFromValue(info, 0),
-       floatFromValue(info, 1)
-  );
+    floatFromValue(info, 0),
+    floatFromValue(info, 1));
 }
 
-void BindrlNormal3f(const Napi::CallbackInfo& info) {
+void BindrlNormal3f(const Napi::CallbackInfo &info) {
   rlNormal3f(
-     floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2)
-  );
+    floatFromValue(info, 0),
+    floatFromValue(info, 1),
+    floatFromValue(info, 2));
 }
 
-void BindrlColor4ub(const Napi::CallbackInfo& info) {
+void BindrlColor4ub(const Napi::CallbackInfo &info) {
   rlColor4ub(
-     unsignedcharFromValue(info, 0),
-       unsignedcharFromValue(info, 1),
-       unsignedcharFromValue(info, 2),
-       unsignedcharFromValue(info, 3)
-  );
+    unsignedcharFromValue(info, 0),
+    unsignedcharFromValue(info, 1),
+    unsignedcharFromValue(info, 2),
+    unsignedcharFromValue(info, 3));
 }
 
-void BindrlColor3f(const Napi::CallbackInfo& info) {
+void BindrlColor3f(const Napi::CallbackInfo &info) {
   rlColor3f(
-     floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2)
-  );
+    floatFromValue(info, 0),
+    floatFromValue(info, 1),
+    floatFromValue(info, 2));
 }
 
-void BindrlColor4f(const Napi::CallbackInfo& info) {
+void BindrlColor4f(const Napi::CallbackInfo &info) {
   rlColor4f(
-     floatFromValue(info, 0),
-       floatFromValue(info, 1),
-       floatFromValue(info, 2),
-       floatFromValue(info, 3)
-  );
+    floatFromValue(info, 0),
+    floatFromValue(info, 1),
+    floatFromValue(info, 2),
+    floatFromValue(info, 3));
 }
 
-void BindrlDisableVertexArray(const Napi::CallbackInfo& info) {
+void BindrlDisableVertexArray(const Napi::CallbackInfo &info) {
   rlDisableVertexArray(
-    
+
   );
 }
 
-void BindrlEnableVertexBuffer(const Napi::CallbackInfo& info) {
+void BindrlEnableVertexBuffer(const Napi::CallbackInfo &info) {
   rlEnableVertexBuffer(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindrlDisableVertexBuffer(const Napi::CallbackInfo& info) {
+void BindrlDisableVertexBuffer(const Napi::CallbackInfo &info) {
   rlDisableVertexBuffer(
-    
+
   );
 }
 
-void BindrlEnableVertexBufferElement(const Napi::CallbackInfo& info) {
+void BindrlEnableVertexBufferElement(const Napi::CallbackInfo &info) {
   rlEnableVertexBufferElement(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindrlDisableVertexBufferElement(const Napi::CallbackInfo& info) {
+void BindrlDisableVertexBufferElement(const Napi::CallbackInfo &info) {
   rlDisableVertexBufferElement(
-    
+
   );
 }
 
-void BindrlEnableVertexAttribute(const Napi::CallbackInfo& info) {
+void BindrlEnableVertexAttribute(const Napi::CallbackInfo &info) {
   rlEnableVertexAttribute(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindrlDisableVertexAttribute(const Napi::CallbackInfo& info) {
+void BindrlDisableVertexAttribute(const Napi::CallbackInfo &info) {
   rlDisableVertexAttribute(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindrlActiveTextureSlot(const Napi::CallbackInfo& info) {
+void BindrlActiveTextureSlot(const Napi::CallbackInfo &info) {
   rlActiveTextureSlot(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindrlEnableTexture(const Napi::CallbackInfo& info) {
+void BindrlEnableTexture(const Napi::CallbackInfo &info) {
   rlEnableTexture(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindrlDisableTexture(const Napi::CallbackInfo& info) {
+void BindrlDisableTexture(const Napi::CallbackInfo &info) {
   rlDisableTexture(
-    
+
   );
 }
 
-void BindrlEnableTextureCubemap(const Napi::CallbackInfo& info) {
+void BindrlEnableTextureCubemap(const Napi::CallbackInfo &info) {
   rlEnableTextureCubemap(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindrlDisableTextureCubemap(const Napi::CallbackInfo& info) {
+void BindrlDisableTextureCubemap(const Napi::CallbackInfo &info) {
   rlDisableTextureCubemap(
-    
+
   );
 }
 
-void BindrlTextureParameters(const Napi::CallbackInfo& info) {
+void BindrlTextureParameters(const Napi::CallbackInfo &info) {
   rlTextureParameters(
-     unsignedintFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2)
-  );
+    unsignedintFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2));
 }
 
-void BindrlCubemapParameters(const Napi::CallbackInfo& info) {
+void BindrlCubemapParameters(const Napi::CallbackInfo &info) {
   rlCubemapParameters(
-     unsignedintFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2)
-  );
+    unsignedintFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2));
 }
 
-void BindrlEnableShader(const Napi::CallbackInfo& info) {
+void BindrlEnableShader(const Napi::CallbackInfo &info) {
   rlEnableShader(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindrlDisableShader(const Napi::CallbackInfo& info) {
+void BindrlDisableShader(const Napi::CallbackInfo &info) {
   rlDisableShader(
-    
+
   );
 }
 
-void BindrlEnableFramebuffer(const Napi::CallbackInfo& info) {
+void BindrlEnableFramebuffer(const Napi::CallbackInfo &info) {
   rlEnableFramebuffer(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindrlDisableFramebuffer(const Napi::CallbackInfo& info) {
+void BindrlDisableFramebuffer(const Napi::CallbackInfo &info) {
   rlDisableFramebuffer(
-    
+
   );
 }
 
-void BindrlActiveDrawBuffers(const Napi::CallbackInfo& info) {
+void BindrlActiveDrawBuffers(const Napi::CallbackInfo &info) {
   rlActiveDrawBuffers(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindrlBlitFramebuffer(const Napi::CallbackInfo& info) {
+void BindrlBlitFramebuffer(const Napi::CallbackInfo &info) {
   rlBlitFramebuffer(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       intFromValue(info, 4),
-       intFromValue(info, 5),
-       intFromValue(info, 6),
-       intFromValue(info, 7),
-       intFromValue(info, 8)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3),
+    intFromValue(info, 4),
+    intFromValue(info, 5),
+    intFromValue(info, 6),
+    intFromValue(info, 7),
+    intFromValue(info, 8));
 }
 
-void BindrlBindFramebuffer(const Napi::CallbackInfo& info) {
+void BindrlBindFramebuffer(const Napi::CallbackInfo &info) {
   rlBindFramebuffer(
-     unsignedintFromValue(info, 0),
-       unsignedintFromValue(info, 1)
-  );
+    unsignedintFromValue(info, 0),
+    unsignedintFromValue(info, 1));
 }
 
-void BindrlEnableColorBlend(const Napi::CallbackInfo& info) {
+void BindrlEnableColorBlend(const Napi::CallbackInfo &info) {
   rlEnableColorBlend(
-    
+
   );
 }
 
-void BindrlDisableColorBlend(const Napi::CallbackInfo& info) {
+void BindrlDisableColorBlend(const Napi::CallbackInfo &info) {
   rlDisableColorBlend(
-    
+
   );
 }
 
-void BindrlEnableDepthTest(const Napi::CallbackInfo& info) {
+void BindrlEnableDepthTest(const Napi::CallbackInfo &info) {
   rlEnableDepthTest(
-    
+
   );
 }
 
-void BindrlDisableDepthTest(const Napi::CallbackInfo& info) {
+void BindrlDisableDepthTest(const Napi::CallbackInfo &info) {
   rlDisableDepthTest(
-    
+
   );
 }
 
-void BindrlEnableDepthMask(const Napi::CallbackInfo& info) {
+void BindrlEnableDepthMask(const Napi::CallbackInfo &info) {
   rlEnableDepthMask(
-    
+
   );
 }
 
-void BindrlDisableDepthMask(const Napi::CallbackInfo& info) {
+void BindrlDisableDepthMask(const Napi::CallbackInfo &info) {
   rlDisableDepthMask(
-    
+
   );
 }
 
-void BindrlEnableBackfaceCulling(const Napi::CallbackInfo& info) {
+void BindrlEnableBackfaceCulling(const Napi::CallbackInfo &info) {
   rlEnableBackfaceCulling(
-    
+
   );
 }
 
-void BindrlDisableBackfaceCulling(const Napi::CallbackInfo& info) {
+void BindrlDisableBackfaceCulling(const Napi::CallbackInfo &info) {
   rlDisableBackfaceCulling(
-    
+
   );
 }
 
-void BindrlColorMask(const Napi::CallbackInfo& info) {
+void BindrlColorMask(const Napi::CallbackInfo &info) {
   rlColorMask(
-     boolFromValue(info, 0),
-       boolFromValue(info, 1),
-       boolFromValue(info, 2),
-       boolFromValue(info, 3)
-  );
+    boolFromValue(info, 0),
+    boolFromValue(info, 1),
+    boolFromValue(info, 2),
+    boolFromValue(info, 3));
 }
 
-void BindrlSetCullFace(const Napi::CallbackInfo& info) {
+void BindrlSetCullFace(const Napi::CallbackInfo &info) {
   rlSetCullFace(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindrlEnableScissorTest(const Napi::CallbackInfo& info) {
+void BindrlEnableScissorTest(const Napi::CallbackInfo &info) {
   rlEnableScissorTest(
-    
+
   );
 }
 
-void BindrlDisableScissorTest(const Napi::CallbackInfo& info) {
+void BindrlDisableScissorTest(const Napi::CallbackInfo &info) {
   rlDisableScissorTest(
-    
+
   );
 }
 
-void BindrlScissor(const Napi::CallbackInfo& info) {
+void BindrlScissor(const Napi::CallbackInfo &info) {
   rlScissor(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3));
 }
 
-void BindrlEnableWireMode(const Napi::CallbackInfo& info) {
+void BindrlEnableWireMode(const Napi::CallbackInfo &info) {
   rlEnableWireMode(
-    
+
   );
 }
 
-void BindrlEnablePointMode(const Napi::CallbackInfo& info) {
+void BindrlEnablePointMode(const Napi::CallbackInfo &info) {
   rlEnablePointMode(
-    
+
   );
 }
 
-void BindrlDisableWireMode(const Napi::CallbackInfo& info) {
+void BindrlDisableWireMode(const Napi::CallbackInfo &info) {
   rlDisableWireMode(
-    
+
   );
 }
 
-void BindrlSetLineWidth(const Napi::CallbackInfo& info) {
+void BindrlSetLineWidth(const Napi::CallbackInfo &info) {
   rlSetLineWidth(
-     floatFromValue(info, 0)
-  );
+    floatFromValue(info, 0));
 }
 
-void BindrlEnableSmoothLines(const Napi::CallbackInfo& info) {
+void BindrlEnableSmoothLines(const Napi::CallbackInfo &info) {
   rlEnableSmoothLines(
-    
+
   );
 }
 
-void BindrlDisableSmoothLines(const Napi::CallbackInfo& info) {
+void BindrlDisableSmoothLines(const Napi::CallbackInfo &info) {
   rlDisableSmoothLines(
-    
+
   );
 }
 
-void BindrlEnableStereoRender(const Napi::CallbackInfo& info) {
+void BindrlEnableStereoRender(const Napi::CallbackInfo &info) {
   rlEnableStereoRender(
-    
+
   );
 }
 
-void BindrlDisableStereoRender(const Napi::CallbackInfo& info) {
+void BindrlDisableStereoRender(const Napi::CallbackInfo &info) {
   rlDisableStereoRender(
-    
+
   );
 }
 
-void BindrlClearColor(const Napi::CallbackInfo& info) {
+void BindrlClearColor(const Napi::CallbackInfo &info) {
   rlClearColor(
-     unsignedcharFromValue(info, 0),
-       unsignedcharFromValue(info, 1),
-       unsignedcharFromValue(info, 2),
-       unsignedcharFromValue(info, 3)
-  );
+    unsignedcharFromValue(info, 0),
+    unsignedcharFromValue(info, 1),
+    unsignedcharFromValue(info, 2),
+    unsignedcharFromValue(info, 3));
 }
 
-void BindrlClearScreenBuffers(const Napi::CallbackInfo& info) {
+void BindrlClearScreenBuffers(const Napi::CallbackInfo &info) {
   rlClearScreenBuffers(
-    
+
   );
 }
 
-void BindrlCheckErrors(const Napi::CallbackInfo& info) {
+void BindrlCheckErrors(const Napi::CallbackInfo &info) {
   rlCheckErrors(
-    
+
   );
 }
 
-void BindrlSetBlendMode(const Napi::CallbackInfo& info) {
+void BindrlSetBlendMode(const Napi::CallbackInfo &info) {
   rlSetBlendMode(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindrlSetBlendFactors(const Napi::CallbackInfo& info) {
+void BindrlSetBlendFactors(const Napi::CallbackInfo &info) {
   rlSetBlendFactors(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2));
 }
 
-void BindrlSetBlendFactorsSeparate(const Napi::CallbackInfo& info) {
+void BindrlSetBlendFactorsSeparate(const Napi::CallbackInfo &info) {
   rlSetBlendFactorsSeparate(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       intFromValue(info, 4),
-       intFromValue(info, 5)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3),
+    intFromValue(info, 4),
+    intFromValue(info, 5));
 }
 
-void BindrlglInit(const Napi::CallbackInfo& info) {
+void BindrlglInit(const Napi::CallbackInfo &info) {
   rlglInit(
-     intFromValue(info, 0),
-       intFromValue(info, 1)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1));
 }
 
-void BindrlglClose(const Napi::CallbackInfo& info) {
+void BindrlglClose(const Napi::CallbackInfo &info) {
   rlglClose(
-    
+
   );
 }
 
-void BindrlLoadExtensions(const Napi::CallbackInfo& info) {
+void BindrlLoadExtensions(const Napi::CallbackInfo &info) {
   rlLoadExtensions(
-     (void *) pointerFromValue(info, 0)
-  );
+    (void *)pointerFromValue(info, 0));
 }
 
-void BindrlSetFramebufferWidth(const Napi::CallbackInfo& info) {
+void BindrlSetFramebufferWidth(const Napi::CallbackInfo &info) {
   rlSetFramebufferWidth(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindrlSetFramebufferHeight(const Napi::CallbackInfo& info) {
+void BindrlSetFramebufferHeight(const Napi::CallbackInfo &info) {
   rlSetFramebufferHeight(
-     intFromValue(info, 0)
-  );
+    intFromValue(info, 0));
 }
 
-void BindrlUnloadRenderBatch(const Napi::CallbackInfo& info) {
+void BindrlUnloadRenderBatch(const Napi::CallbackInfo &info) {
   rlUnloadRenderBatch(
-     rlRenderBatchFromValue(info, 0)
-  );
+    rlRenderBatchFromValue(info, 0));
 }
 
-void BindrlDrawRenderBatch(const Napi::CallbackInfo& info) {
+void BindrlDrawRenderBatch(const Napi::CallbackInfo &info) {
   rlDrawRenderBatch(
-     (rlRenderBatch *) pointerFromValue(info, 0)
-  );
+    (rlRenderBatch *)pointerFromValue(info, 0));
 }
 
-void BindrlSetRenderBatchActive(const Napi::CallbackInfo& info) {
+void BindrlSetRenderBatchActive(const Napi::CallbackInfo &info) {
   rlSetRenderBatchActive(
-     (rlRenderBatch *) pointerFromValue(info, 0)
-  );
+    (rlRenderBatch *)pointerFromValue(info, 0));
 }
 
-void BindrlDrawRenderBatchActive(const Napi::CallbackInfo& info) {
+void BindrlDrawRenderBatchActive(const Napi::CallbackInfo &info) {
   rlDrawRenderBatchActive(
-    
+
   );
 }
 
-void BindrlSetTexture(const Napi::CallbackInfo& info) {
+void BindrlSetTexture(const Napi::CallbackInfo &info) {
   rlSetTexture(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindrlUpdateVertexBuffer(const Napi::CallbackInfo& info) {
+void BindrlUpdateVertexBuffer(const Napi::CallbackInfo &info) {
   rlUpdateVertexBuffer(
-     unsignedintFromValue(info, 0),
-       (const void *) pointerFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3)
-  );
+    unsignedintFromValue(info, 0),
+    (const void *)pointerFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3));
 }
 
-void BindrlUpdateVertexBufferElements(const Napi::CallbackInfo& info) {
+void BindrlUpdateVertexBufferElements(const Napi::CallbackInfo &info) {
   rlUpdateVertexBufferElements(
-     unsignedintFromValue(info, 0),
-       (const void *) pointerFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3)
-  );
+    unsignedintFromValue(info, 0),
+    (const void *)pointerFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3));
 }
 
-void BindrlUnloadVertexArray(const Napi::CallbackInfo& info) {
+void BindrlUnloadVertexArray(const Napi::CallbackInfo &info) {
   rlUnloadVertexArray(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindrlUnloadVertexBuffer(const Napi::CallbackInfo& info) {
+void BindrlUnloadVertexBuffer(const Napi::CallbackInfo &info) {
   rlUnloadVertexBuffer(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindrlSetVertexAttribute(const Napi::CallbackInfo& info) {
+void BindrlSetVertexAttribute(const Napi::CallbackInfo &info) {
   rlSetVertexAttribute(
-     unsignedintFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       boolFromValue(info, 3),
-       intFromValue(info, 4),
-       intFromValue(info, 5)
-  );
+    unsignedintFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2),
+    boolFromValue(info, 3),
+    intFromValue(info, 4),
+    intFromValue(info, 5));
 }
 
-void BindrlSetVertexAttributeDivisor(const Napi::CallbackInfo& info) {
+void BindrlSetVertexAttributeDivisor(const Napi::CallbackInfo &info) {
   rlSetVertexAttributeDivisor(
-     unsignedintFromValue(info, 0),
-       intFromValue(info, 1)
-  );
+    unsignedintFromValue(info, 0),
+    intFromValue(info, 1));
 }
 
-void BindrlSetVertexAttributeDefault(const Napi::CallbackInfo& info) {
+void BindrlSetVertexAttributeDefault(const Napi::CallbackInfo &info) {
   rlSetVertexAttributeDefault(
-     intFromValue(info, 0),
-       (const void *) pointerFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3)
-  );
+    intFromValue(info, 0),
+    (const void *)pointerFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3));
 }
 
-void BindrlDrawVertexArray(const Napi::CallbackInfo& info) {
+void BindrlDrawVertexArray(const Napi::CallbackInfo &info) {
   rlDrawVertexArray(
-     intFromValue(info, 0),
-       intFromValue(info, 1)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1));
 }
 
-void BindrlDrawVertexArrayElements(const Napi::CallbackInfo& info) {
+void BindrlDrawVertexArrayElements(const Napi::CallbackInfo &info) {
   rlDrawVertexArrayElements(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       (const void *) pointerFromValue(info, 2)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    (const void *)pointerFromValue(info, 2));
 }
 
-void BindrlDrawVertexArrayInstanced(const Napi::CallbackInfo& info) {
+void BindrlDrawVertexArrayInstanced(const Napi::CallbackInfo &info) {
   rlDrawVertexArrayInstanced(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2));
 }
 
-void BindrlDrawVertexArrayElementsInstanced(const Napi::CallbackInfo& info) {
+void BindrlDrawVertexArrayElementsInstanced(const Napi::CallbackInfo &info) {
   rlDrawVertexArrayElementsInstanced(
-     intFromValue(info, 0),
-       intFromValue(info, 1),
-       (const void *) pointerFromValue(info, 2),
-       intFromValue(info, 3)
-  );
+    intFromValue(info, 0),
+    intFromValue(info, 1),
+    (const void *)pointerFromValue(info, 2),
+    intFromValue(info, 3));
 }
 
-void BindrlUpdateTexture(const Napi::CallbackInfo& info) {
+void BindrlUpdateTexture(const Napi::CallbackInfo &info) {
   rlUpdateTexture(
-     unsignedintFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       intFromValue(info, 4),
-       intFromValue(info, 5),
-       (const void *) pointerFromValue(info, 6)
-  );
+    unsignedintFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3),
+    intFromValue(info, 4),
+    intFromValue(info, 5),
+    (const void *)pointerFromValue(info, 6));
 }
 
-void BindrlGetGlTextureFormats(const Napi::CallbackInfo& info) {
+void BindrlGetGlTextureFormats(const Napi::CallbackInfo &info) {
   rlGetGlTextureFormats(
-     intFromValue(info, 0),
-       (unsigned int *) pointerFromValue(info, 1),
-       (unsigned int *) pointerFromValue(info, 2),
-       (unsigned int *) pointerFromValue(info, 3)
-  );
+    intFromValue(info, 0),
+    (unsigned int *)pointerFromValue(info, 1),
+    (unsigned int *)pointerFromValue(info, 2),
+    (unsigned int *)pointerFromValue(info, 3));
 }
 
-void BindrlUnloadTexture(const Napi::CallbackInfo& info) {
+void BindrlUnloadTexture(const Napi::CallbackInfo &info) {
   rlUnloadTexture(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindrlGenTextureMipmaps(const Napi::CallbackInfo& info) {
+void BindrlGenTextureMipmaps(const Napi::CallbackInfo &info) {
   rlGenTextureMipmaps(
-     unsignedintFromValue(info, 0),
-       intFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       (int *) pointerFromValue(info, 4)
-  );
+    unsignedintFromValue(info, 0),
+    intFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3),
+    (int *)pointerFromValue(info, 4));
 }
 
-void BindrlFramebufferAttach(const Napi::CallbackInfo& info) {
+void BindrlFramebufferAttach(const Napi::CallbackInfo &info) {
   rlFramebufferAttach(
-     unsignedintFromValue(info, 0),
-       unsignedintFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3),
-       intFromValue(info, 4)
-  );
+    unsignedintFromValue(info, 0),
+    unsignedintFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3),
+    intFromValue(info, 4));
 }
 
-void BindrlUnloadFramebuffer(const Napi::CallbackInfo& info) {
+void BindrlUnloadFramebuffer(const Napi::CallbackInfo &info) {
   rlUnloadFramebuffer(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindrlUnloadShaderProgram(const Napi::CallbackInfo& info) {
+void BindrlUnloadShaderProgram(const Napi::CallbackInfo &info) {
   rlUnloadShaderProgram(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindrlSetUniform(const Napi::CallbackInfo& info) {
+void BindrlSetUniform(const Napi::CallbackInfo &info) {
   rlSetUniform(
-     intFromValue(info, 0),
-       (const void *) pointerFromValue(info, 1),
-       intFromValue(info, 2),
-       intFromValue(info, 3)
-  );
+    intFromValue(info, 0),
+    (const void *)pointerFromValue(info, 1),
+    intFromValue(info, 2),
+    intFromValue(info, 3));
 }
 
-void BindrlSetUniformMatrix(const Napi::CallbackInfo& info) {
+void BindrlSetUniformMatrix(const Napi::CallbackInfo &info) {
   rlSetUniformMatrix(
-     intFromValue(info, 0),
-       MatrixFromValue(info, 1)
-  );
+    intFromValue(info, 0),
+    MatrixFromValue(info, 1));
 }
 
-void BindrlSetUniformMatrices(const Napi::CallbackInfo& info) {
+void BindrlSetUniformMatrices(const Napi::CallbackInfo &info) {
   rlSetUniformMatrices(
-     intFromValue(info, 0),
-       (const Matrix *) pointerFromValue(info, 1),
-       intFromValue(info, 2)
-  );
+    intFromValue(info, 0),
+    (const Matrix *)pointerFromValue(info, 1),
+    intFromValue(info, 2));
 }
 
-void BindrlSetUniformSampler(const Napi::CallbackInfo& info) {
+void BindrlSetUniformSampler(const Napi::CallbackInfo &info) {
   rlSetUniformSampler(
-     intFromValue(info, 0),
-       unsignedintFromValue(info, 1)
-  );
+    intFromValue(info, 0),
+    unsignedintFromValue(info, 1));
 }
 
-void BindrlSetShader(const Napi::CallbackInfo& info) {
+void BindrlSetShader(const Napi::CallbackInfo &info) {
   rlSetShader(
-     unsignedintFromValue(info, 0),
-       (int *) pointerFromValue(info, 1)
-  );
+    unsignedintFromValue(info, 0),
+    (int *)pointerFromValue(info, 1));
 }
 
-void BindrlComputeShaderDispatch(const Napi::CallbackInfo& info) {
+void BindrlComputeShaderDispatch(const Napi::CallbackInfo &info) {
   rlComputeShaderDispatch(
-     unsignedintFromValue(info, 0),
-       unsignedintFromValue(info, 1),
-       unsignedintFromValue(info, 2)
-  );
+    unsignedintFromValue(info, 0),
+    unsignedintFromValue(info, 1),
+    unsignedintFromValue(info, 2));
 }
 
-void BindrlUnloadShaderBuffer(const Napi::CallbackInfo& info) {
+void BindrlUnloadShaderBuffer(const Napi::CallbackInfo &info) {
   rlUnloadShaderBuffer(
-     unsignedintFromValue(info, 0)
-  );
+    unsignedintFromValue(info, 0));
 }
 
-void BindrlUpdateShaderBuffer(const Napi::CallbackInfo& info) {
+void BindrlUpdateShaderBuffer(const Napi::CallbackInfo &info) {
   rlUpdateShaderBuffer(
-     unsignedintFromValue(info, 0),
-       (const void *) pointerFromValue(info, 1),
-       unsignedintFromValue(info, 2),
-       unsignedintFromValue(info, 3)
-  );
+    unsignedintFromValue(info, 0),
+    (const void *)pointerFromValue(info, 1),
+    unsignedintFromValue(info, 2),
+    unsignedintFromValue(info, 3));
 }
 
-void BindrlBindShaderBuffer(const Napi::CallbackInfo& info) {
+void BindrlBindShaderBuffer(const Napi::CallbackInfo &info) {
   rlBindShaderBuffer(
-     unsignedintFromValue(info, 0),
-       unsignedintFromValue(info, 1)
-  );
+    unsignedintFromValue(info, 0),
+    unsignedintFromValue(info, 1));
 }
 
-void BindrlReadShaderBuffer(const Napi::CallbackInfo& info) {
+void BindrlReadShaderBuffer(const Napi::CallbackInfo &info) {
   rlReadShaderBuffer(
-     unsignedintFromValue(info, 0),
-       (void *) pointerFromValue(info, 1),
-       unsignedintFromValue(info, 2),
-       unsignedintFromValue(info, 3)
-  );
+    unsignedintFromValue(info, 0),
+    (void *)pointerFromValue(info, 1),
+    unsignedintFromValue(info, 2),
+    unsignedintFromValue(info, 3));
 }
 
-void BindrlCopyShaderBuffer(const Napi::CallbackInfo& info) {
+void BindrlCopyShaderBuffer(const Napi::CallbackInfo &info) {
   rlCopyShaderBuffer(
-     unsignedintFromValue(info, 0),
-       unsignedintFromValue(info, 1),
-       unsignedintFromValue(info, 2),
-       unsignedintFromValue(info, 3),
-       unsignedintFromValue(info, 4)
-  );
+    unsignedintFromValue(info, 0),
+    unsignedintFromValue(info, 1),
+    unsignedintFromValue(info, 2),
+    unsignedintFromValue(info, 3),
+    unsignedintFromValue(info, 4));
 }
 
-void BindrlBindImageTexture(const Napi::CallbackInfo& info) {
+void BindrlBindImageTexture(const Napi::CallbackInfo &info) {
   rlBindImageTexture(
-     unsignedintFromValue(info, 0),
-       unsignedintFromValue(info, 1),
-       intFromValue(info, 2),
-       boolFromValue(info, 3)
-  );
+    unsignedintFromValue(info, 0),
+    unsignedintFromValue(info, 1),
+    intFromValue(info, 2),
+    boolFromValue(info, 3));
 }
 
-void BindrlSetMatrixProjection(const Napi::CallbackInfo& info) {
+void BindrlSetMatrixProjection(const Napi::CallbackInfo &info) {
   rlSetMatrixProjection(
-     MatrixFromValue(info, 0)
-  );
+    MatrixFromValue(info, 0));
 }
 
-void BindrlSetMatrixModelview(const Napi::CallbackInfo& info) {
+void BindrlSetMatrixModelview(const Napi::CallbackInfo &info) {
   rlSetMatrixModelview(
-     MatrixFromValue(info, 0)
-  );
+    MatrixFromValue(info, 0));
 }
 
-void BindrlSetMatrixProjectionStereo(const Napi::CallbackInfo& info) {
+void BindrlSetMatrixProjectionStereo(const Napi::CallbackInfo &info) {
   rlSetMatrixProjectionStereo(
-     MatrixFromValue(info, 0),
-       MatrixFromValue(info, 16)
-  );
+    MatrixFromValue(info, 0),
+    MatrixFromValue(info, 16));
 }
 
-void BindrlSetMatrixViewOffsetStereo(const Napi::CallbackInfo& info) {
+void BindrlSetMatrixViewOffsetStereo(const Napi::CallbackInfo &info) {
   rlSetMatrixViewOffsetStereo(
-     MatrixFromValue(info, 0),
-       MatrixFromValue(info, 16)
-  );
+    MatrixFromValue(info, 0),
+    MatrixFromValue(info, 16));
 }
 
-void BindrlLoadDrawCube(const Napi::CallbackInfo& info) {
+void BindrlLoadDrawCube(const Napi::CallbackInfo &info) {
   rlLoadDrawCube(
-    
+
   );
 }
 
-void BindrlLoadDrawQuad(const Napi::CallbackInfo& info) {
+void BindrlLoadDrawQuad(const Napi::CallbackInfo &info) {
   rlLoadDrawQuad(
-    
+
   );
 }
 // By-Reference function bindings
 
-Napi::Value BindUpdateCamera(const Napi::CallbackInfo& info) {
+Napi::Value BindUpdateCamera(const Napi::CallbackInfo &info) {
   Camera3D obj = Camera3DFromValue(info, 0);
   UpdateCamera(
-    &obj, intFromValue(info, 11)
-  );
+    &obj,
+    intFromValue(info, 11));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageFormat(const Napi::CallbackInfo& info) {
+Napi::Value BindImageFormat(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageFormat(
-    &obj, intFromValue(info, 5)
-  );
+    &obj,
+    intFromValue(info, 5));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageToPOT(const Napi::CallbackInfo& info) {
+Napi::Value BindImageToPOT(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageToPOT(
-    &obj, ColorFromValue(info, 5)
-  );
+    &obj,
+    ColorFromValue(info, 5));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageCrop(const Napi::CallbackInfo& info) {
+Napi::Value BindImageCrop(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageCrop(
-    &obj, RectangleFromValue(info, 5)
-  );
+    &obj,
+    RectangleFromValue(info, 5));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageAlphaCrop(const Napi::CallbackInfo& info) {
+Napi::Value BindImageAlphaCrop(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageAlphaCrop(
-    &obj, floatFromValue(info, 5)
-  );
+    &obj,
+    floatFromValue(info, 5));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageAlphaClear(const Napi::CallbackInfo& info) {
+Napi::Value BindImageAlphaClear(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageAlphaClear(
-    &obj, ColorFromValue(info, 5),
-       floatFromValue(info, 9)
-  );
+    &obj,
+    ColorFromValue(info, 5),
+    floatFromValue(info, 9));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageAlphaMask(const Napi::CallbackInfo& info) {
+Napi::Value BindImageAlphaMask(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageAlphaMask(
-    &obj, ImageFromValue(info, 5)
-  );
+    &obj,
+    ImageFromValue(info, 5));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageAlphaPremultiply(const Napi::CallbackInfo& info) {
+Napi::Value BindImageAlphaPremultiply(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageAlphaPremultiply(
     &obj
@@ -8352,37 +7068,37 @@ Napi::Value BindImageAlphaPremultiply(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageResize(const Napi::CallbackInfo& info) {
+Napi::Value BindImageResize(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageResize(
-    &obj, intFromValue(info, 5),
-       intFromValue(info, 6)
-  );
+    &obj,
+    intFromValue(info, 5),
+    intFromValue(info, 6));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageResizeNN(const Napi::CallbackInfo& info) {
+Napi::Value BindImageResizeNN(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageResizeNN(
-    &obj, intFromValue(info, 5),
-       intFromValue(info, 6)
-  );
+    &obj,
+    intFromValue(info, 5),
+    intFromValue(info, 6));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageResizeCanvas(const Napi::CallbackInfo& info) {
+Napi::Value BindImageResizeCanvas(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageResizeCanvas(
-    &obj, intFromValue(info, 5),
-       intFromValue(info, 6),
-       intFromValue(info, 7),
-       intFromValue(info, 8),
-       ColorFromValue(info, 9)
-  );
+    &obj,
+    intFromValue(info, 5),
+    intFromValue(info, 6),
+    intFromValue(info, 7),
+    intFromValue(info, 8),
+    ColorFromValue(info, 9));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageMipmaps(const Napi::CallbackInfo& info) {
+Napi::Value BindImageMipmaps(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageMipmaps(
     &obj
@@ -8391,18 +7107,18 @@ Napi::Value BindImageMipmaps(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageDither(const Napi::CallbackInfo& info) {
+Napi::Value BindImageDither(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageDither(
-    &obj, intFromValue(info, 5),
-       intFromValue(info, 6),
-       intFromValue(info, 7),
-       intFromValue(info, 8)
-  );
+    &obj,
+    intFromValue(info, 5),
+    intFromValue(info, 6),
+    intFromValue(info, 7),
+    intFromValue(info, 8));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageFlipVertical(const Napi::CallbackInfo& info) {
+Napi::Value BindImageFlipVertical(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageFlipVertical(
     &obj
@@ -8411,7 +7127,7 @@ Napi::Value BindImageFlipVertical(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageFlipHorizontal(const Napi::CallbackInfo& info) {
+Napi::Value BindImageFlipHorizontal(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageFlipHorizontal(
     &obj
@@ -8420,7 +7136,7 @@ Napi::Value BindImageFlipHorizontal(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageRotateCW(const Napi::CallbackInfo& info) {
+Napi::Value BindImageRotateCW(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageRotateCW(
     &obj
@@ -8429,7 +7145,7 @@ Napi::Value BindImageRotateCW(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageRotateCCW(const Napi::CallbackInfo& info) {
+Napi::Value BindImageRotateCCW(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageRotateCCW(
     &obj
@@ -8438,15 +7154,15 @@ Napi::Value BindImageRotateCCW(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageColorTint(const Napi::CallbackInfo& info) {
+Napi::Value BindImageColorTint(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageColorTint(
-    &obj, ColorFromValue(info, 5)
-  );
+    &obj,
+    ColorFromValue(info, 5));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageColorInvert(const Napi::CallbackInfo& info) {
+Napi::Value BindImageColorInvert(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageColorInvert(
     &obj
@@ -8455,7 +7171,7 @@ Napi::Value BindImageColorInvert(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageColorGrayscale(const Napi::CallbackInfo& info) {
+Napi::Value BindImageColorGrayscale(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageColorGrayscale(
     &obj
@@ -8464,179 +7180,179 @@ Napi::Value BindImageColorGrayscale(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageColorContrast(const Napi::CallbackInfo& info) {
+Napi::Value BindImageColorContrast(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageColorContrast(
-    &obj, floatFromValue(info, 5)
-  );
+    &obj,
+    floatFromValue(info, 5));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageColorBrightness(const Napi::CallbackInfo& info) {
+Napi::Value BindImageColorBrightness(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageColorBrightness(
-    &obj, intFromValue(info, 5)
-  );
+    &obj,
+    intFromValue(info, 5));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageColorReplace(const Napi::CallbackInfo& info) {
+Napi::Value BindImageColorReplace(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageColorReplace(
-    &obj, ColorFromValue(info, 5),
-       ColorFromValue(info, 9)
-  );
+    &obj,
+    ColorFromValue(info, 5),
+    ColorFromValue(info, 9));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageClearBackground(const Napi::CallbackInfo& info) {
+Napi::Value BindImageClearBackground(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageClearBackground(
-    &obj, ColorFromValue(info, 5)
-  );
+    &obj,
+    ColorFromValue(info, 5));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageDrawPixel(const Napi::CallbackInfo& info) {
+Napi::Value BindImageDrawPixel(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawPixel(
-    &obj, intFromValue(info, 5),
-       intFromValue(info, 6),
-       ColorFromValue(info, 7)
-  );
+    &obj,
+    intFromValue(info, 5),
+    intFromValue(info, 6),
+    ColorFromValue(info, 7));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageDrawPixelV(const Napi::CallbackInfo& info) {
+Napi::Value BindImageDrawPixelV(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawPixelV(
-    &obj, Vector2FromValue(info, 5),
-       ColorFromValue(info, 7)
-  );
+    &obj,
+    Vector2FromValue(info, 5),
+    ColorFromValue(info, 7));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageDrawLine(const Napi::CallbackInfo& info) {
+Napi::Value BindImageDrawLine(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawLine(
-    &obj, intFromValue(info, 5),
-       intFromValue(info, 6),
-       intFromValue(info, 7),
-       intFromValue(info, 8),
-       ColorFromValue(info, 9)
-  );
+    &obj,
+    intFromValue(info, 5),
+    intFromValue(info, 6),
+    intFromValue(info, 7),
+    intFromValue(info, 8),
+    ColorFromValue(info, 9));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageDrawLineV(const Napi::CallbackInfo& info) {
+Napi::Value BindImageDrawLineV(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawLineV(
-    &obj, Vector2FromValue(info, 5),
-       Vector2FromValue(info, 7),
-       ColorFromValue(info, 9)
-  );
+    &obj,
+    Vector2FromValue(info, 5),
+    Vector2FromValue(info, 7),
+    ColorFromValue(info, 9));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageDrawCircle(const Napi::CallbackInfo& info) {
+Napi::Value BindImageDrawCircle(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawCircle(
-    &obj, intFromValue(info, 5),
-       intFromValue(info, 6),
-       intFromValue(info, 7),
-       ColorFromValue(info, 8)
-  );
+    &obj,
+    intFromValue(info, 5),
+    intFromValue(info, 6),
+    intFromValue(info, 7),
+    ColorFromValue(info, 8));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageDrawCircleV(const Napi::CallbackInfo& info) {
+Napi::Value BindImageDrawCircleV(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawCircleV(
-    &obj, Vector2FromValue(info, 5),
-       intFromValue(info, 7),
-       ColorFromValue(info, 8)
-  );
+    &obj,
+    Vector2FromValue(info, 5),
+    intFromValue(info, 7),
+    ColorFromValue(info, 8));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageDrawRectangle(const Napi::CallbackInfo& info) {
+Napi::Value BindImageDrawRectangle(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawRectangle(
-    &obj, intFromValue(info, 5),
-       intFromValue(info, 6),
-       intFromValue(info, 7),
-       intFromValue(info, 8),
-       ColorFromValue(info, 9)
-  );
+    &obj,
+    intFromValue(info, 5),
+    intFromValue(info, 6),
+    intFromValue(info, 7),
+    intFromValue(info, 8),
+    ColorFromValue(info, 9));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageDrawRectangleV(const Napi::CallbackInfo& info) {
+Napi::Value BindImageDrawRectangleV(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawRectangleV(
-    &obj, Vector2FromValue(info, 5),
-       Vector2FromValue(info, 7),
-       ColorFromValue(info, 9)
-  );
+    &obj,
+    Vector2FromValue(info, 5),
+    Vector2FromValue(info, 7),
+    ColorFromValue(info, 9));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageDrawRectangleRec(const Napi::CallbackInfo& info) {
+Napi::Value BindImageDrawRectangleRec(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawRectangleRec(
-    &obj, RectangleFromValue(info, 5),
-       ColorFromValue(info, 9)
-  );
+    &obj,
+    RectangleFromValue(info, 5),
+    ColorFromValue(info, 9));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageDrawRectangleLines(const Napi::CallbackInfo& info) {
+Napi::Value BindImageDrawRectangleLines(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawRectangleLines(
-    &obj, RectangleFromValue(info, 5),
-       intFromValue(info, 9),
-       ColorFromValue(info, 10)
-  );
+    &obj,
+    RectangleFromValue(info, 5),
+    intFromValue(info, 9),
+    ColorFromValue(info, 10));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageDraw(const Napi::CallbackInfo& info) {
+Napi::Value BindImageDraw(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageDraw(
-    &obj, ImageFromValue(info, 5),
-       RectangleFromValue(info, 10),
-       RectangleFromValue(info, 14),
-       ColorFromValue(info, 18)
-  );
+    &obj,
+    ImageFromValue(info, 5),
+    RectangleFromValue(info, 10),
+    RectangleFromValue(info, 14),
+    ColorFromValue(info, 18));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageDrawText(const Napi::CallbackInfo& info) {
+Napi::Value BindImageDrawText(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawText(
-    &obj, (const char *) stringFromValue(info, 5),
-       intFromValue(info, 6),
-       intFromValue(info, 7),
-       intFromValue(info, 8),
-       ColorFromValue(info, 9)
-  );
+    &obj,
+    (const char *)stringFromValue(info, 5),
+    intFromValue(info, 6),
+    intFromValue(info, 7),
+    intFromValue(info, 8),
+    ColorFromValue(info, 9));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindImageDrawTextEx(const Napi::CallbackInfo& info) {
+Napi::Value BindImageDrawTextEx(const Napi::CallbackInfo &info) {
   Image obj = ImageFromValue(info, 0);
   ImageDrawTextEx(
-    &obj, FontFromValue(info, 5),
-       (const char *) stringFromValue(info, 15),
-       Vector2FromValue(info, 16),
-       floatFromValue(info, 18),
-       floatFromValue(info, 19),
-       ColorFromValue(info, 20)
-  );
+    &obj,
+    FontFromValue(info, 5),
+    (const char *)stringFromValue(info, 15),
+    Vector2FromValue(info, 16),
+    floatFromValue(info, 18),
+    floatFromValue(info, 19),
+    ColorFromValue(info, 20));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindGenTextureMipmaps(const Napi::CallbackInfo& info) {
+Napi::Value BindGenTextureMipmaps(const Napi::CallbackInfo &info) {
   Texture obj = TextureFromValue(info, 0);
   GenTextureMipmaps(
     &obj
@@ -8645,15 +7361,15 @@ Napi::Value BindGenTextureMipmaps(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindUploadMesh(const Napi::CallbackInfo& info) {
+Napi::Value BindUploadMesh(const Napi::CallbackInfo &info) {
   Mesh obj = MeshFromValue(info, 0);
   UploadMesh(
-    &obj, boolFromValue(info, 17)
-  );
+    &obj,
+    boolFromValue(info, 17));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindGenMeshTangents(const Napi::CallbackInfo& info) {
+Napi::Value BindGenMeshTangents(const Napi::CallbackInfo &info) {
   Mesh obj = MeshFromValue(info, 0);
   GenMeshTangents(
     &obj
@@ -8662,88 +7378,83 @@ Napi::Value BindGenMeshTangents(const Napi::CallbackInfo& info) {
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindSetModelMeshMaterial(const Napi::CallbackInfo& info) {
+Napi::Value BindSetModelMeshMaterial(const Napi::CallbackInfo &info) {
   Model obj = ModelFromValue(info, 0);
   SetModelMeshMaterial(
-    &obj, intFromValue(info, 24),
-       intFromValue(info, 25)
-  );
+    &obj,
+    intFromValue(info, 24),
+    intFromValue(info, 25));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindWaveCrop(const Napi::CallbackInfo& info) {
+Napi::Value BindWaveCrop(const Napi::CallbackInfo &info) {
   Wave obj = WaveFromValue(info, 0);
   WaveCrop(
-    &obj, intFromValue(info, 5),
-       intFromValue(info, 6)
-  );
+    &obj,
+    intFromValue(info, 5),
+    intFromValue(info, 6));
   return ToValue(info.Env(), obj);
 }
 
-Napi::Value BindWaveFormat(const Napi::CallbackInfo& info) {
+Napi::Value BindWaveFormat(const Napi::CallbackInfo &info) {
   Wave obj = WaveFromValue(info, 0);
   WaveFormat(
-    &obj, intFromValue(info, 5),
-       intFromValue(info, 6),
-       intFromValue(info, 7)
-  );
+    &obj,
+    intFromValue(info, 5),
+    intFromValue(info, 6),
+    intFromValue(info, 7));
   return ToValue(info.Env(), obj);
 }
 
 // Shader Functions
-void BindSetShaderFloat(const Napi::CallbackInfo& info) {
+void BindSetShaderFloat(const Napi::CallbackInfo &info) {
   float value = floatFromValue(info, 3);
   SetShaderValueV(
-     ShaderFromValue(info, 0),
-       intFromValue(info, 2),
-       &value,
-       SHADER_UNIFORM_FLOAT,
-       1
-  );
+    ShaderFromValue(info, 0),
+    intFromValue(info, 2),
+    &value,
+    SHADER_UNIFORM_FLOAT,
+    1);
 }
 
-void BindSetShaderInt(const Napi::CallbackInfo& info) {
+void BindSetShaderInt(const Napi::CallbackInfo &info) {
   int value = intFromValue(info, 3);
   SetShaderValueV(
-     ShaderFromValue(info, 0),
-       intFromValue(info, 2),
-       &value,
-       SHADER_UNIFORM_INT,
-       1
-  );
+    ShaderFromValue(info, 0),
+    intFromValue(info, 2),
+    &value,
+    SHADER_UNIFORM_INT,
+    1);
 }
 
-void BindSetShaderVec2(const Napi::CallbackInfo& info) {
+void BindSetShaderVec2(const Napi::CallbackInfo &info) {
   Vector2 value = Vector2FromValue(info, 3);
   SetShaderValueV(
-     ShaderFromValue(info, 0),
-       intFromValue(info, 2),
-       &value,
-       SHADER_UNIFORM_VEC2,
-       1
-  );
+    ShaderFromValue(info, 0),
+    intFromValue(info, 2),
+    &value,
+    SHADER_UNIFORM_VEC2,
+    1);
 }
 
-void BindSetShaderVec3(const Napi::CallbackInfo& info) {
+void BindSetShaderVec3(const Napi::CallbackInfo &info) {
   Vector3 value = Vector3FromValue(info, 3);
   SetShaderValueV(
-     ShaderFromValue(info, 0),
-       intFromValue(info, 2),
-       &value,
-       SHADER_UNIFORM_VEC3,
-       1
-  );
+    ShaderFromValue(info, 0),
+    intFromValue(info, 2),
+    &value,
+    SHADER_UNIFORM_VEC3,
+    1);
 }
 
-void BindSetShaderVec4(const Napi::CallbackInfo& info) {
+void BindSetShaderVec4(const Napi::CallbackInfo &info) {
   Vector4 value = Vector4FromValue(info, 3);
   SetShaderValueV(
-     ShaderFromValue(info, 0),
-       intFromValue(info, 2),
-       &value,
-       SHADER_UNIFORM_VEC4,
-       1
-  );
+    ShaderFromValue(info, 0),
+    intFromValue(info, 2),
+    &value,
+    SHADER_UNIFORM_VEC4,
+    1);
 }
 
 // Exported JS Module object
@@ -9032,6 +7743,8 @@ Napi::Object Init(Napi::Env env, Napi::Object exports) {
   exports.Set("BindGenImagePerlinNoise", Napi::Function::New(env, BindGenImagePerlinNoise));
   exports.Set("BindGenImageCellular", Napi::Function::New(env, BindGenImageCellular));
   exports.Set("BindGenImageText", Napi::Function::New(env, BindGenImageText));
+  exports.Set("BindImageLock", Napi::Function::New(env, BindImageLock));
+  exports.Set("BindImageUnlock", Napi::Function::New(env, BindImageUnlock));
   exports.Set("BindImageCopy", Napi::Function::New(env, BindImageCopy));
   exports.Set("BindImageFromImage", Napi::Function::New(env, BindImageFromImage));
   exports.Set("BindImageFromChannel", Napi::Function::New(env, BindImageFromChannel));
