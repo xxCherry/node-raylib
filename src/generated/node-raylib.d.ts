@@ -1344,7 +1344,7 @@ declare module "raylib" {
   export function GenImageText(width: number, height: number, text: string): Image
 
   export function ImageLock(image: Image): number
-  export function ImageUnlock(image: number): void
+  export function ImageUnlock(image: number): Image
 
   /** Create an image duplicate (useful for transformations) */
   export function ImageCopy(image: Image): Image

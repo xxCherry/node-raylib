@@ -4772,7 +4772,7 @@ function ImageLock(image) {
 raylib.ImageLock = ImageLock
 
 function ImageUnlock(image) {
-  r.BindImageUnlock(
+  return r.BindImageUnlock(
     image
   )
 }

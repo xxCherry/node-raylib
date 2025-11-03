@@ -5382,8 +5382,13 @@ Napi::Value BindImageLock(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(), image);
 }
 
-void BindImageUnlock(const Napi::CallbackInfo &info) {
-  delete (Image *)pointerFromValue(info, 0);
+Napi::Value BindImageUnlock(const Napi::CallbackInfo &info) {
+  const auto image = (Image *)pointerFromValue(info, 0);
+  const auto unlocked = ToValue(info.Env(), *image);
+
+  delete image;
+
+  return unlocked;
 }
 
 void BindImageBlurGaussian(const Napi::CallbackInfo &info) {
