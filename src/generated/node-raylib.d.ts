@@ -496,2794 +496,2797 @@ declare module "raylib" {
   export type Quaternion = Vector4
   /** Initialize window and OpenGL context */
   export function InitWindow(width: number, height: number, title: string): void
-  
+
   /** Close window and unload OpenGL context */
   export function CloseWindow(): void
-  
+
   /** Check if application should close (KEY_ESCAPE pressed or windows close icon clicked) */
   export function WindowShouldClose(): boolean
-  
+
   /** Check if window has been initialized successfully */
   export function IsWindowReady(): boolean
-  
+
   /** Check if window is currently fullscreen */
   export function IsWindowFullscreen(): boolean
-  
+
   /** Check if window is currently hidden */
   export function IsWindowHidden(): boolean
-  
+
   /** Check if window is currently minimized */
   export function IsWindowMinimized(): boolean
-  
+
   /** Check if window is currently maximized */
   export function IsWindowMaximized(): boolean
-  
+
   /** Check if window is currently focused */
   export function IsWindowFocused(): boolean
-  
+
   /** Check if window has been resized last frame */
   export function IsWindowResized(): boolean
-  
+
   /** Check if one specific window flag is enabled */
   export function IsWindowState(flag: number): boolean
-  
+
   /** Set window configuration state using flags */
   export function SetWindowState(flags: number): void
-  
+
   /** Clear window configuration state flags */
   export function ClearWindowState(flags: number): void
-  
+
   /** Toggle window state: fullscreen/windowed, resizes monitor to match window resolution */
   export function ToggleFullscreen(): void
-  
+
   /** Toggle window state: borderless windowed, resizes window to match monitor resolution */
   export function ToggleBorderlessWindowed(): void
-  
+
   /** Set window state: maximized, if resizable */
   export function MaximizeWindow(): void
-  
+
   /** Set window state: minimized, if resizable */
   export function MinimizeWindow(): void
-  
+
   /** Set window state: not minimized/maximized */
   export function RestoreWindow(): void
-  
+
   /** Set icon for window (single image, RGBA 32bit) */
   export function SetWindowIcon(image: Image): void
-  
+
   /** Set icon for window (multiple images, RGBA 32bit) */
   export function SetWindowIcons(images: number, count: number): void
-  
+
   /** Set title for window */
   export function SetWindowTitle(title: string): void
-  
+
   /** Set window position on screen */
   export function SetWindowPosition(x: number, y: number): void
-  
+
   /** Set monitor for the current window */
   export function SetWindowMonitor(monitor: number): void
-  
+
   /** Set window minimum dimensions (for FLAG_WINDOW_RESIZABLE) */
   export function SetWindowMinSize(width: number, height: number): void
-  
+
   /** Set window maximum dimensions (for FLAG_WINDOW_RESIZABLE) */
   export function SetWindowMaxSize(width: number, height: number): void
-  
+
   /** Set window dimensions */
   export function SetWindowSize(width: number, height: number): void
-  
+
   /** Set window opacity [0.0f..1.0f] */
   export function SetWindowOpacity(opacity: number): void
-  
+
   /** Set window focused */
   export function SetWindowFocused(): void
-  
+
   /** Get native window handle */
   export function GetWindowHandle(): number
-  
+
   /** Get current screen width */
   export function GetScreenWidth(): number
-  
+
   /** Get current screen height */
   export function GetScreenHeight(): number
-  
+
   /** Get current render width (it considers HiDPI) */
   export function GetRenderWidth(): number
-  
+
   /** Get current render height (it considers HiDPI) */
   export function GetRenderHeight(): number
-  
+
   /** Get number of connected monitors */
   export function GetMonitorCount(): number
-  
+
   /** Get current monitor where window is placed */
   export function GetCurrentMonitor(): number
-  
+
   /** Get specified monitor position */
   export function GetMonitorPosition(monitor: number): Vector2
-  
+
   /** Get specified monitor width (current video mode used by monitor) */
   export function GetMonitorWidth(monitor: number): number
-  
+
   /** Get specified monitor height (current video mode used by monitor) */
   export function GetMonitorHeight(monitor: number): number
-  
+
   /** Get specified monitor physical width in millimetres */
   export function GetMonitorPhysicalWidth(monitor: number): number
-  
+
   /** Get specified monitor physical height in millimetres */
   export function GetMonitorPhysicalHeight(monitor: number): number
-  
+
   /** Get specified monitor refresh rate */
   export function GetMonitorRefreshRate(monitor: number): number
-  
+
   /** Get window position XY on monitor */
   export function GetWindowPosition(): Vector2
-  
+
   /** Get window scale DPI factor */
   export function GetWindowScaleDPI(): Vector2
-  
+
   /** Get the human-readable, UTF-8 encoded name of the specified monitor */
   export function GetMonitorName(monitor: number): string
-  
+
   /** Set clipboard text content */
   export function SetClipboardText(text: string): void
-  
+
   /** Get clipboard text content */
   export function GetClipboardText(): string
-  
+
   /** Get clipboard image content */
   export function GetClipboardImage(): Image
-  
+
   /** Enable waiting for events on EndDrawing(), no automatic event polling */
   export function EnableEventWaiting(): void
-  
+
   /** Disable waiting for events on EndDrawing(), automatic events polling */
   export function DisableEventWaiting(): void
-  
+
   /** Shows cursor */
   export function ShowCursor(): void
-  
+
   /** Hides cursor */
   export function HideCursor(): void
-  
+
   /** Check if cursor is not visible */
   export function IsCursorHidden(): boolean
-  
+
   /** Enables cursor (unlock cursor) */
   export function EnableCursor(): void
-  
+
   /** Disables cursor (lock cursor) */
   export function DisableCursor(): void
-  
+
   /** Check if cursor is on the screen */
   export function IsCursorOnScreen(): boolean
-  
+
   /** Set background color (framebuffer clear color) */
   export function ClearBackground(color: Color): void
-  
+
   /** Setup canvas (framebuffer) to start drawing */
   export function BeginDrawing(): void
-  
+
   /** End canvas drawing and swap buffers (double buffering) */
   export function EndDrawing(): void
-  
+
   /** Begin 2D mode with custom camera (2D) */
   export function BeginMode2D(camera: Camera2D): void
-  
+
   /** Ends 2D mode with custom camera */
   export function EndMode2D(): void
-  
+
   /** Begin 3D mode with custom camera (3D) */
   export function BeginMode3D(camera: Camera3D): void
-  
+
   /** Ends 3D mode and returns to default 2D orthographic mode */
   export function EndMode3D(): void
-  
+
   /** Begin drawing to render texture */
   export function BeginTextureMode(target: RenderTexture): void
-  
+
   /** Ends drawing to render texture */
   export function EndTextureMode(): void
-  
+
   /** Begin custom shader drawing */
   export function BeginShaderMode(shader: Shader): void
-  
+
   /** End custom shader drawing (use default shader) */
   export function EndShaderMode(): void
-  
+
   /** Begin blending mode (alpha, additive, multiplied, subtract, custom) */
   export function BeginBlendMode(mode: number): void
-  
+
   /** End blending mode (reset to default: alpha blending) */
   export function EndBlendMode(): void
-  
+
   /** Begin scissor mode (define screen area for following drawing) */
   export function BeginScissorMode(x: number, y: number, width: number, height: number): void
-  
+
   /** End scissor mode */
   export function EndScissorMode(): void
-  
+
   /** End stereo rendering (requires VR simulator) */
   export function EndVrStereoMode(): void
-  
+
   /** Load shader from files and bind default locations */
   export function LoadShader(vsFileName: string, fsFileName: string): Shader
-  
+
   /** Load shader from code strings and bind default locations */
   export function LoadShaderFromMemory(vsCode: string, fsCode: string): Shader
-  
+
   /** Check if a shader is valid (loaded on GPU) */
   export function IsShaderValid(shader: Shader): boolean
-  
+
   /** Get shader uniform location */
   export function GetShaderLocation(shader: Shader, uniformName: string): number
-  
+
   /** Get shader attribute location */
   export function GetShaderLocationAttrib(shader: Shader, attribName: string): number
-  
+
   /** Set shader uniform value (matrix 4x4) */
   export function SetShaderValueMatrix(shader: Shader, locIndex: number, mat: Matrix): void
-  
+
   /** Set shader uniform value for texture (sampler2d) */
   export function SetShaderValueTexture(shader: Shader, locIndex: number, texture: Texture): void
-  
+
   /** Unload shader from GPU memory (VRAM) */
   export function UnloadShader(shader: Shader): void
-  
+
   /** Get a ray trace from screen position (i.e mouse) */
   export function GetScreenToWorldRay(position: Vector2, camera: Camera3D): Ray
-  
+
   /** Get a ray trace from screen position (i.e mouse) in a viewport */
   export function GetScreenToWorldRayEx(position: Vector2, camera: Camera3D, width: number, height: number): Ray
-  
+
   /** Get the screen space position for a 3d world space position */
   export function GetWorldToScreen(position: Vector3, camera: Camera3D): Vector2
-  
+
   /** Get size position for a 3d world space position */
   export function GetWorldToScreenEx(position: Vector3, camera: Camera3D, width: number, height: number): Vector2
-  
+
   /** Get the screen space position for a 2d camera world space position */
   export function GetWorldToScreen2D(position: Vector2, camera: Camera2D): Vector2
-  
+
   /** Get the world space position for a 2d camera screen space position */
   export function GetScreenToWorld2D(position: Vector2, camera: Camera2D): Vector2
-  
+
   /** Get camera transform matrix (view matrix) */
   export function GetCameraMatrix(camera: Camera3D): Matrix
-  
+
   /** Get camera 2d transform matrix */
   export function GetCameraMatrix2D(camera: Camera2D): Matrix
-  
+
   /** Set target FPS (maximum) */
   export function SetTargetFPS(fps: number): void
-  
+
   /** Get time in seconds for last frame drawn (delta time) */
   export function GetFrameTime(): number
-  
+
   /** Get elapsed time in seconds since InitWindow() */
   export function GetTime(): number
-  
+
   /** Get current FPS */
   export function GetFPS(): number
-  
+
   /** Swap back buffer with front buffer (screen drawing) */
   export function SwapScreenBuffer(): void
-  
+
   /** Register all input events */
   export function PollInputEvents(): void
-  
+
   /** Wait for some time (halt program execution) */
   export function WaitTime(seconds: number): void
-  
+
   /** Set the seed for the random number generator */
   export function SetRandomSeed(seed: number): void
-  
+
   /** Get a random value between min and max (both included) */
   export function GetRandomValue(min: number, max: number): number
-  
+
   /** Load random values sequence, no values repeated */
   export function LoadRandomSequence(count: number, min: number, max: number): number
-  
+
   /** Unload random values sequence */
   export function UnloadRandomSequence(sequence: number): void
-  
+
   /** Takes a screenshot of current screen (filename extension defines format) */
   export function TakeScreenshot(fileName: string): void
-  
+
   /** Setup init configuration flags (view FLAGS) */
   export function SetConfigFlags(flags: number): void
-  
+
   /** Open URL with default system browser (if available) */
   export function OpenURL(url: string): void
-  
+
   /** Set the current threshold (minimum) log level */
   export function SetTraceLogLevel(logLevel: number): void
-  
+
   /** Internal memory allocator */
   export function MemAlloc(size: number): number
-  
+
   /** Internal memory reallocator */
   export function MemRealloc(ptr: number, size: number): number
-  
+
   /** Internal memory free */
   export function MemFree(ptr: number): void
-  
+
   /** Load file data as byte array (read) */
   export function LoadFileData(fileName: string, dataSize: number): Buffer
-  
+
   /** Unload file data allocated by LoadFileData() */
   export function UnloadFileData(data: Buffer): void
-  
+
   /** Save data to file from byte array (write), returns true on success */
   export function SaveFileData(fileName: string, data: number, dataSize: number): boolean
-  
+
   /** Export data to code (.h), returns true on success */
   export function ExportDataAsCode(data: Buffer, dataSize: number, fileName: string): boolean
-  
+
   /** Load text data from file (read), returns a '\0' terminated string */
   export function LoadFileText(fileName: string): string
-  
+
   /** Unload file text data allocated by LoadFileText() */
   export function UnloadFileText(text: string): void
-  
+
   /** Save text data to file (write), string must be '\0' terminated, returns true on success */
   export function SaveFileText(fileName: string, text: string): boolean
-  
+
   /** Check if file exists */
   export function FileExists(fileName: string): boolean
-  
+
   /** Check if a directory path exists */
   export function DirectoryExists(dirPath: string): boolean
-  
+
   /** Check file extension (including point: .png, .wav) */
   export function IsFileExtension(fileName: string, ext: string): boolean
-  
+
   /** Get file length in bytes (NOTE: GetFileSize() conflicts with windows.h) */
   export function GetFileLength(fileName: string): number
-  
+
   /** Get pointer to extension for a filename string (includes dot: '.png') */
   export function GetFileExtension(fileName: string): string
-  
+
   /** Get pointer to filename for a path string */
   export function GetFileName(filePath: string): string
-  
+
   /** Get filename string without extension (uses static string) */
   export function GetFileNameWithoutExt(filePath: string): string
-  
+
   /** Get full path for a given fileName with path (uses static string) */
   export function GetDirectoryPath(filePath: string): string
-  
+
   /** Get previous directory path for a given path (uses static string) */
   export function GetPrevDirectoryPath(dirPath: string): string
-  
+
   /** Get current working directory (uses static string) */
   export function GetWorkingDirectory(): string
-  
+
   /** Get the directory of the running application (uses static string) */
   export function GetApplicationDirectory(): string
-  
+
   /** Create directories (including full path requested), returns 0 on success */
   export function MakeDirectory(dirPath: string): number
-  
+
   /** Change working directory, return true on success */
   export function ChangeDirectory(dir: string): boolean
-  
+
   /** Check if a given path is a file or a directory */
   export function IsPathFile(path: string): boolean
-  
+
   /** Check if fileName is valid for the platform/OS */
   export function IsFileNameValid(fileName: string): boolean
-  
+
   /** Load directory filepaths */
   export function LoadDirectoryFiles(dirPath: string): FilePathList
-  
+
   /** Load directory filepaths with extension filtering and recursive directory scan. Use 'DIR' in the filter string to include directories in the result */
   export function LoadDirectoryFilesEx(basePath: string, filter: string, scanSubdirs: boolean): FilePathList
-  
+
   /** Unload filepaths */
   export function UnloadDirectoryFiles(files: FilePathList): void
-  
+
   /** Check if a file has been dropped into window */
   export function IsFileDropped(): boolean
-  
+
   /** Load dropped filepaths */
   export function LoadDroppedFiles(): FilePathList
-  
+
   /** Unload dropped filepaths */
   export function UnloadDroppedFiles(files: FilePathList): void
-  
+
   /** Get file modification time (last write time) */
   export function GetFileModTime(fileName: string): number
-  
+
   /** Compress data (DEFLATE algorithm), memory must be MemFree() */
   export function CompressData(data: Buffer, dataSize: number, compDataSize: number): Buffer
-  
+
   /** Decompress data (DEFLATE algorithm), memory must be MemFree() */
   export function DecompressData(compData: Buffer, compDataSize: number, dataSize: number): Buffer
-  
+
   /** Encode data to Base64 string, memory must be MemFree() */
   export function EncodeDataBase64(data: Buffer, dataSize: number, outputSize: number): string
-  
+
   /** Decode Base64 string data, memory must be MemFree() */
   export function DecodeDataBase64(data: Buffer, outputSize: number): Buffer
-  
+
   /** Compute CRC32 hash code */
   export function ComputeCRC32(data: Buffer, dataSize: number): number
-  
+
   /** Compute MD5 hash code, returns static int[4] (16 bytes) */
   export function ComputeMD5(data: Buffer, dataSize: number): number
-  
+
   /** Compute SHA1 hash code, returns static int[5] (20 bytes) */
   export function ComputeSHA1(data: Buffer, dataSize: number): number
-  
+
   /** Load automation events list from file, NULL for empty list, capacity = MAX_AUTOMATION_EVENTS */
   export function LoadAutomationEventList(fileName: string): AutomationEventList
-  
+
   /** Unload automation events list from file */
   export function UnloadAutomationEventList(list: AutomationEventList): void
-  
+
   /** Export automation events list as text file */
   export function ExportAutomationEventList(list: AutomationEventList, fileName: string): boolean
-  
+
   /** Set automation event list to record to */
   export function SetAutomationEventList(list: number): void
-  
+
   /** Set automation event internal base frame to start recording */
   export function SetAutomationEventBaseFrame(frame: number): void
-  
+
   /** Start recording automation events (AutomationEventList must be set) */
   export function StartAutomationEventRecording(): void
-  
+
   /** Stop recording automation events */
   export function StopAutomationEventRecording(): void
-  
+
   /** Check if a key has been pressed once */
   export function IsKeyPressed(key: number): boolean
-  
+
   /** Check if a key has been pressed again */
   export function IsKeyPressedRepeat(key: number): boolean
-  
+
   /** Check if a key is being pressed */
   export function IsKeyDown(key: number): boolean
-  
+
   /** Check if a key has been released once */
   export function IsKeyReleased(key: number): boolean
-  
+
   /** Check if a key is NOT being pressed */
   export function IsKeyUp(key: number): boolean
-  
+
   /** Get key pressed (keycode), call it multiple times for keys queued, returns 0 when the queue is empty */
   export function GetKeyPressed(): number
-  
+
   /** Get char pressed (unicode), call it multiple times for chars queued, returns 0 when the queue is empty */
   export function GetCharPressed(): number
-  
+
   /** Set a custom key to exit program (default is ESC) */
   export function SetExitKey(key: number): void
-  
+
   /** Check if a gamepad is available */
   export function IsGamepadAvailable(gamepad: number): boolean
-  
+
   /** Get gamepad internal name id */
   export function GetGamepadName(gamepad: number): string
-  
+
   /** Check if a gamepad button has been pressed once */
   export function IsGamepadButtonPressed(gamepad: number, button: number): boolean
-  
+
   /** Check if a gamepad button is being pressed */
   export function IsGamepadButtonDown(gamepad: number, button: number): boolean
-  
+
   /** Check if a gamepad button has been released once */
   export function IsGamepadButtonReleased(gamepad: number, button: number): boolean
-  
+
   /** Check if a gamepad button is NOT being pressed */
   export function IsGamepadButtonUp(gamepad: number, button: number): boolean
-  
+
   /** Get the last gamepad button pressed */
   export function GetGamepadButtonPressed(): number
-  
+
   /** Get gamepad axis count for a gamepad */
   export function GetGamepadAxisCount(gamepad: number): number
-  
+
   /** Get axis movement value for a gamepad axis */
   export function GetGamepadAxisMovement(gamepad: number, axis: number): number
-  
+
   /** Set internal gamepad mappings (SDL_GameControllerDB) */
   export function SetGamepadMappings(mappings: string): number
-  
+
   /** Set gamepad vibration for both motors (duration in seconds) */
   export function SetGamepadVibration(gamepad: number, leftMotor: number, rightMotor: number, duration: number): void
-  
+
   /** Check if a mouse button has been pressed once */
   export function IsMouseButtonPressed(button: number): boolean
-  
+
   /** Check if a mouse button is being pressed */
   export function IsMouseButtonDown(button: number): boolean
-  
+
   /** Check if a mouse button has been released once */
   export function IsMouseButtonReleased(button: number): boolean
-  
+
   /** Check if a mouse button is NOT being pressed */
   export function IsMouseButtonUp(button: number): boolean
-  
+
   /** Get mouse position X */
   export function GetMouseX(): number
-  
+
   /** Get mouse position Y */
   export function GetMouseY(): number
-  
+
   /** Get mouse position XY */
   export function GetMousePosition(): Vector2
-  
+
   /** Get mouse delta between frames */
   export function GetMouseDelta(): Vector2
-  
+
   /** Set mouse position XY */
   export function SetMousePosition(x: number, y: number): void
-  
+
   /** Set mouse offset */
   export function SetMouseOffset(offsetX: number, offsetY: number): void
-  
+
   /** Set mouse scaling */
   export function SetMouseScale(scaleX: number, scaleY: number): void
-  
+
   /** Get mouse wheel movement for X or Y, whichever is larger */
   export function GetMouseWheelMove(): number
-  
+
   /** Get mouse wheel movement for both X and Y */
   export function GetMouseWheelMoveV(): Vector2
-  
+
   /** Set mouse cursor */
   export function SetMouseCursor(cursor: number): void
-  
+
   /** Get touch position X for touch point 0 (relative to screen size) */
   export function GetTouchX(): number
-  
+
   /** Get touch position Y for touch point 0 (relative to screen size) */
   export function GetTouchY(): number
-  
+
   /** Get touch position XY for a touch point index (relative to screen size) */
   export function GetTouchPosition(index: number): Vector2
-  
+
   /** Get touch point identifier for given index */
   export function GetTouchPointId(index: number): number
-  
+
   /** Get number of touch points */
   export function GetTouchPointCount(): number
-  
+
   /** Enable a set of gestures using flags */
   export function SetGesturesEnabled(flags: number): void
-  
+
   /** Check if a gesture have been detected */
   export function IsGestureDetected(gesture: number): boolean
-  
+
   /** Get latest detected gesture */
   export function GetGestureDetected(): number
-  
+
   /** Get gesture hold time in seconds */
   export function GetGestureHoldDuration(): number
-  
+
   /** Get gesture drag vector */
   export function GetGestureDragVector(): Vector2
-  
+
   /** Get gesture drag angle */
   export function GetGestureDragAngle(): number
-  
+
   /** Get gesture pinch delta */
   export function GetGesturePinchVector(): Vector2
-  
+
   /** Get gesture pinch angle */
   export function GetGesturePinchAngle(): number
-  
+
   /** Update camera position for selected mode */
   export function UpdateCamera(camera: Camera3D, mode: number): void
-  
+
   /** Update camera movement/rotation */
   export function UpdateCameraPro(camera: number, movement: Vector3, rotation: Vector3, zoom: number): void
-  
+
   /** Set texture and rectangle to be used on shapes drawing */
   export function SetShapesTexture(texture: Texture, source: Rectangle): void
-  
+
   /** Get texture that is used for shapes drawing */
   export function GetShapesTexture(): Texture2D
-  
+
   /** Get texture source rectangle that is used for shapes drawing */
   export function GetShapesTextureRectangle(): Rectangle
-  
+
   /** Draw a pixel using geometry [Can be slow, use with care] */
   export function DrawPixel(posX: number, posY: number, color: Color): void
-  
+
   /** Draw a pixel using geometry (Vector version) [Can be slow, use with care] */
   export function DrawPixelV(position: Vector2, color: Color): void
-  
+
   /** Draw a line */
   export function DrawLine(startPosX: number, startPosY: number, endPosX: number, endPosY: number, color: Color): void
-  
+
   /** Draw a line (using gl lines) */
   export function DrawLineV(startPos: Vector2, endPos: Vector2, color: Color): void
-  
+
   /** Draw a line (using triangles/quads) */
   export function DrawLineEx(startPos: Vector2, endPos: Vector2, thick: number, color: Color): void
-  
+
   /** Draw lines sequence (using gl lines) */
   export function DrawLineStrip(points: number, pointCount: number, color: Color): void
-  
+
   /** Draw line segment cubic-bezier in-out interpolation */
   export function DrawLineBezier(startPos: Vector2, endPos: Vector2, thick: number, color: Color): void
-  
+
   /** Draw a color-filled circle */
   export function DrawCircle(centerX: number, centerY: number, radius: number, color: Color): void
-  
+
   /** Draw a piece of a circle */
   export function DrawCircleSector(center: Vector2, radius: number, startAngle: number, endAngle: number, segments: number, color: Color): void
-  
+
   /** Draw circle sector outline */
   export function DrawCircleSectorLines(center: Vector2, radius: number, startAngle: number, endAngle: number, segments: number, color: Color): void
-  
+
   /** Draw a gradient-filled circle */
   export function DrawCircleGradient(centerX: number, centerY: number, radius: number, inner: Color, outer: Color): void
-  
+
   /** Draw a color-filled circle (Vector version) */
   export function DrawCircleV(center: Vector2, radius: number, color: Color): void
-  
+
   /** Draw circle outline */
   export function DrawCircleLines(centerX: number, centerY: number, radius: number, color: Color): void
-  
+
   /** Draw circle outline (Vector version) */
   export function DrawCircleLinesV(center: Vector2, radius: number, color: Color): void
-  
+
   /** Draw ellipse */
   export function DrawEllipse(centerX: number, centerY: number, radiusH: number, radiusV: number, color: Color): void
-  
+
   /** Draw ellipse outline */
   export function DrawEllipseLines(centerX: number, centerY: number, radiusH: number, radiusV: number, color: Color): void
-  
+
   /** Draw ring */
   export function DrawRing(center: Vector2, innerRadius: number, outerRadius: number, startAngle: number, endAngle: number, segments: number, color: Color): void
-  
+
   /** Draw ring outline */
   export function DrawRingLines(center: Vector2, innerRadius: number, outerRadius: number, startAngle: number, endAngle: number, segments: number, color: Color): void
-  
+
   /** Draw a color-filled rectangle */
   export function DrawRectangle(posX: number, posY: number, width: number, height: number, color: Color): void
-  
+
   /** Draw a color-filled rectangle (Vector version) */
   export function DrawRectangleV(position: Vector2, size: Vector2, color: Color): void
-  
+
   /** Draw a color-filled rectangle */
   export function DrawRectangleRec(rec: Rectangle, color: Color): void
-  
+
   /** Draw a color-filled rectangle with pro parameters */
   export function DrawRectanglePro(rec: Rectangle, origin: Vector2, rotation: number, color: Color): void
-  
+
   /** Draw a vertical-gradient-filled rectangle */
   export function DrawRectangleGradientV(posX: number, posY: number, width: number, height: number, top: Color, bottom: Color): void
-  
+
   /** Draw a horizontal-gradient-filled rectangle */
   export function DrawRectangleGradientH(posX: number, posY: number, width: number, height: number, left: Color, right: Color): void
-  
+
   /** Draw a gradient-filled rectangle with custom vertex colors */
   export function DrawRectangleGradientEx(rec: Rectangle, topLeft: Color, bottomLeft: Color, topRight: Color, bottomRight: Color): void
-  
+
   /** Draw rectangle outline */
   export function DrawRectangleLines(posX: number, posY: number, width: number, height: number, color: Color): void
-  
+
   /** Draw rectangle outline with extended parameters */
   export function DrawRectangleLinesEx(rec: Rectangle, lineThick: number, color: Color): void
-  
+
   /** Draw rectangle with rounded edges */
   export function DrawRectangleRounded(rec: Rectangle, roundness: number, segments: number, color: Color): void
-  
+
   /** Draw rectangle lines with rounded edges */
   export function DrawRectangleRoundedLines(rec: Rectangle, roundness: number, segments: number, color: Color): void
-  
+
   /** Draw rectangle with rounded edges outline */
   export function DrawRectangleRoundedLinesEx(rec: Rectangle, roundness: number, segments: number, lineThick: number, color: Color): void
-  
+
   /** Draw a color-filled triangle (vertex in counter-clockwise order!) */
   export function DrawTriangle(v1: Vector2, v2: Vector2, v3: Vector2, color: Color): void
-  
+
   /** Draw triangle outline (vertex in counter-clockwise order!) */
   export function DrawTriangleLines(v1: Vector2, v2: Vector2, v3: Vector2, color: Color): void
-  
+
   /** Draw a triangle fan defined by points (first vertex is the center) */
   export function DrawTriangleFan(points: number, pointCount: number, color: Color): void
-  
+
   /** Draw a triangle strip defined by points */
   export function DrawTriangleStrip(points: number, pointCount: number, color: Color): void
-  
+
   /** Draw a regular polygon (Vector version) */
   export function DrawPoly(center: Vector2, sides: number, radius: number, rotation: number, color: Color): void
-  
+
   /** Draw a polygon outline of n sides */
   export function DrawPolyLines(center: Vector2, sides: number, radius: number, rotation: number, color: Color): void
-  
+
   /** Draw a polygon outline of n sides with extended parameters */
   export function DrawPolyLinesEx(center: Vector2, sides: number, radius: number, rotation: number, lineThick: number, color: Color): void
-  
+
   /** Draw spline: Linear, minimum 2 points */
   export function DrawSplineLinear(points: number, pointCount: number, thick: number, color: Color): void
-  
+
   /** Draw spline: B-Spline, minimum 4 points */
   export function DrawSplineBasis(points: number, pointCount: number, thick: number, color: Color): void
-  
+
   /** Draw spline: Catmull-Rom, minimum 4 points */
   export function DrawSplineCatmullRom(points: number, pointCount: number, thick: number, color: Color): void
-  
+
   /** Draw spline: Quadratic Bezier, minimum 3 points (1 control point): [p1, c2, p3, c4...] */
   export function DrawSplineBezierQuadratic(points: number, pointCount: number, thick: number, color: Color): void
-  
+
   /** Draw spline: Cubic Bezier, minimum 4 points (2 control points): [p1, c2, c3, p4, c5, c6...] */
   export function DrawSplineBezierCubic(points: number, pointCount: number, thick: number, color: Color): void
-  
+
   /** Draw spline segment: Linear, 2 points */
   export function DrawSplineSegmentLinear(p1: Vector2, p2: Vector2, thick: number, color: Color): void
-  
+
   /** Draw spline segment: B-Spline, 4 points */
   export function DrawSplineSegmentBasis(p1: Vector2, p2: Vector2, p3: Vector2, p4: Vector2, thick: number, color: Color): void
-  
+
   /** Draw spline segment: Catmull-Rom, 4 points */
   export function DrawSplineSegmentCatmullRom(p1: Vector2, p2: Vector2, p3: Vector2, p4: Vector2, thick: number, color: Color): void
-  
+
   /** Draw spline segment: Quadratic Bezier, 2 points, 1 control point */
   export function DrawSplineSegmentBezierQuadratic(p1: Vector2, c2: Vector2, p3: Vector2, thick: number, color: Color): void
-  
+
   /** Draw spline segment: Cubic Bezier, 2 points, 2 control points */
   export function DrawSplineSegmentBezierCubic(p1: Vector2, c2: Vector2, c3: Vector2, p4: Vector2, thick: number, color: Color): void
-  
+
   /** Get (evaluate) spline point: Linear */
   export function GetSplinePointLinear(startPos: Vector2, endPos: Vector2, t: number): Vector2
-  
+
   /** Get (evaluate) spline point: B-Spline */
   export function GetSplinePointBasis(p1: Vector2, p2: Vector2, p3: Vector2, p4: Vector2, t: number): Vector2
-  
+
   /** Get (evaluate) spline point: Catmull-Rom */
   export function GetSplinePointCatmullRom(p1: Vector2, p2: Vector2, p3: Vector2, p4: Vector2, t: number): Vector2
-  
+
   /** Get (evaluate) spline point: Quadratic Bezier */
   export function GetSplinePointBezierQuad(p1: Vector2, c2: Vector2, p3: Vector2, t: number): Vector2
-  
+
   /** Get (evaluate) spline point: Cubic Bezier */
   export function GetSplinePointBezierCubic(p1: Vector2, c2: Vector2, c3: Vector2, p4: Vector2, t: number): Vector2
-  
+
   /** Check collision between two rectangles */
   export function CheckCollisionRecs(rec1: Rectangle, rec2: Rectangle): boolean
-  
+
   /** Check collision between two circles */
   export function CheckCollisionCircles(center1: Vector2, radius1: number, center2: Vector2, radius2: number): boolean
-  
+
   /** Check collision between circle and rectangle */
   export function CheckCollisionCircleRec(center: Vector2, radius: number, rec: Rectangle): boolean
-  
+
   /** Check if circle collides with a line created betweeen two points [p1] and [p2] */
   export function CheckCollisionCircleLine(center: Vector2, radius: number, p1: Vector2, p2: Vector2): boolean
-  
+
   /** Check if point is inside rectangle */
   export function CheckCollisionPointRec(point: Vector2, rec: Rectangle): boolean
-  
+
   /** Check if point is inside circle */
   export function CheckCollisionPointCircle(point: Vector2, center: Vector2, radius: number): boolean
-  
+
   /** Check if point is inside a triangle */
   export function CheckCollisionPointTriangle(point: Vector2, p1: Vector2, p2: Vector2, p3: Vector2): boolean
-  
+
   /** Check if point belongs to line created between two points [p1] and [p2] with defined margin in pixels [threshold] */
   export function CheckCollisionPointLine(point: Vector2, p1: Vector2, p2: Vector2, threshold: number): boolean
-  
+
   /** Check if point is within a polygon described by array of vertices */
   export function CheckCollisionPointPoly(point: Vector2, points: number, pointCount: number): boolean
-  
+
   /** Check the collision between two lines defined by two points each, returns collision point by reference */
   export function CheckCollisionLines(startPos1: Vector2, endPos1: Vector2, startPos2: Vector2, endPos2: Vector2, collisionPoint: number): boolean
-  
+
   /** Get collision rectangle for two rectangles collision */
   export function GetCollisionRec(rec1: Rectangle, rec2: Rectangle): Rectangle
-  
+
   /** Load image from file into CPU memory (RAM) */
   export function LoadImage(fileName: string): Image
-  
+
   /** Load image from RAW file data */
   export function LoadImageRaw(fileName: string, width: number, height: number, format: number, headerSize: number): Image
-  
+
   /** Load image sequence from file (frames appended to image.data) */
   export function LoadImageAnim(fileName: string, frames: number): Image
-  
+
   /** Load image sequence from memory buffer */
   export function LoadImageAnimFromMemory(fileType: string, fileData: Buffer, dataSize: number, frames: number): Image
-  
+
   /** Load image from memory buffer, fileType refers to extension: i.e. '.png' */
   export function LoadImageFromMemory(fileType: string, fileData: Buffer, dataSize: number): Image
-  
+
   /** Load image from GPU texture data */
   export function LoadImageFromTexture(texture: Texture): Image
-  
+
   /** Load image from screen buffer and (screenshot) */
   export function LoadImageFromScreen(): Image
-  
+
   /** Check if an image is valid (data and parameters) */
   export function IsImageValid(image: Image): boolean
-  
+
   /** Unload image from CPU memory (RAM) */
   export function UnloadImage(image: Image): void
-  
+
   /** Export image data to file, returns true on success */
   export function ExportImage(image: Image, fileName: string): boolean
-  
+
   /** Export image to memory buffer */
   export function ExportImageToMemory(image: Image, fileType: string, fileSize: number): Buffer
-  
+
   /** Export image as code file defining an array of bytes, returns true on success */
   export function ExportImageAsCode(image: Image, fileName: string): boolean
-  
+
   /** Generate image: plain color */
   export function GenImageColor(width: number, height: number, color: Color): Image
-  
+
   /** Generate image: linear gradient, direction in degrees [0..360], 0=Vertical gradient */
   export function GenImageGradientLinear(width: number, height: number, direction: number, start: Color, end: Color): Image
-  
+
   /** Generate image: radial gradient */
   export function GenImageGradientRadial(width: number, height: number, density: number, inner: Color, outer: Color): Image
-  
+
   /** Generate image: square gradient */
   export function GenImageGradientSquare(width: number, height: number, density: number, inner: Color, outer: Color): Image
-  
+
   /** Generate image: checked */
   export function GenImageChecked(width: number, height: number, checksX: number, checksY: number, col1: Color, col2: Color): Image
-  
+
   /** Generate image: white noise */
   export function GenImageWhiteNoise(width: number, height: number, factor: number): Image
-  
+
   /** Generate image: perlin noise */
   export function GenImagePerlinNoise(width: number, height: number, offsetX: number, offsetY: number, scale: number): Image
-  
+
   /** Generate image: cellular algorithm, bigger tileSize means bigger cells */
   export function GenImageCellular(width: number, height: number, tileSize: number): Image
-  
+
   /** Generate image: grayscale image from text data */
   export function GenImageText(width: number, height: number, text: string): Image
-  
+
+  export function ImageLock(image: Image): number
+  export function ImageUnlock(image: number): Image
+
   /** Create an image duplicate (useful for transformations) */
   export function ImageCopy(image: Image): Image
-  
+
   /** Create an image from another image piece */
   export function ImageFromImage(image: Image, rec: Rectangle): Image
-  
+
   /** Create an image from a selected channel of another image (GRAYSCALE) */
   export function ImageFromChannel(image: Image, selectedChannel: number): Image
-  
+
   /** Create an image from text (default font) */
   export function ImageText(text: string, fontSize: number, color: Color): Image
-  
+
   /** Create an image from text (custom sprite font) */
   export function ImageTextEx(font: Font, text: string, fontSize: number, spacing: number, tint: Color): Image
-  
+
   /** Convert image data to desired format */
   export function ImageFormat(image: Image, newFormat: number): void
-  
+
   /** Convert image to POT (power-of-two) */
   export function ImageToPOT(image: Image, fill: Color): void
-  
+
   /** Crop an image to a defined rectangle */
   export function ImageCrop(image: Image, crop: Rectangle): void
-  
+
   /** Crop image depending on alpha value */
   export function ImageAlphaCrop(image: Image, threshold: number): void
-  
+
   /** Clear alpha channel to desired color */
   export function ImageAlphaClear(image: Image, color: Color, threshold: number): void
-  
+
   /** Apply alpha mask to image */
   export function ImageAlphaMask(image: Image, alphaMask: Image): void
-  
+
   /** Premultiply alpha channel */
   export function ImageAlphaPremultiply(image: Image): void
-  
+
   /** Apply Gaussian blur using a box blur approximation */
   export function ImageBlurGaussian(image: number, blurSize: number): void
-  
+
   /** Apply custom square convolution kernel to image */
   export function ImageKernelConvolution(image: number, kernel: number, kernelSize: number): void
-  
+
   /** Resize image (Bicubic scaling algorithm) */
   export function ImageResize(image: Image, newWidth: number, newHeight: number): void
-  
+
   /** Resize image (Nearest-Neighbor scaling algorithm) */
   export function ImageResizeNN(image: Image, newWidth: number, newHeight: number): void
-  
+
   /** Resize canvas and fill with color */
   export function ImageResizeCanvas(image: Image, newWidth: number, newHeight: number, offsetX: number, offsetY: number, fill: Color): void
-  
+
   /** Compute all mipmap levels for a provided image */
   export function ImageMipmaps(image: Image): void
-  
+
   /** Dither image data to 16bpp or lower (Floyd-Steinberg dithering) */
   export function ImageDither(image: Image, rBpp: number, gBpp: number, bBpp: number, aBpp: number): void
-  
+
   /** Flip image vertically */
   export function ImageFlipVertical(image: Image): void
-  
+
   /** Flip image horizontally */
   export function ImageFlipHorizontal(image: Image): void
-  
+
   /** Rotate image by input angle in degrees (-359 to 359) */
   export function ImageRotate(image: number, degrees: number): void
-  
+
   /** Rotate image clockwise 90deg */
   export function ImageRotateCW(image: Image): void
-  
+
   /** Rotate image counter-clockwise 90deg */
   export function ImageRotateCCW(image: Image): void
-  
+
   /** Modify image color: tint */
   export function ImageColorTint(image: Image, color: Color): void
-  
+
   /** Modify image color: invert */
   export function ImageColorInvert(image: Image): void
-  
+
   /** Modify image color: grayscale */
   export function ImageColorGrayscale(image: Image): void
-  
+
   /** Modify image color: contrast (-100 to 100) */
   export function ImageColorContrast(image: Image, contrast: number): void
-  
+
   /** Modify image color: brightness (-255 to 255) */
   export function ImageColorBrightness(image: Image, brightness: number): void
-  
+
   /** Modify image color: replace color */
   export function ImageColorReplace(image: Image, color: Color, replace: Color): void
-  
+
   /** Load color data from image as a Color array (RGBA - 32bit) */
   export function LoadImageColors(image: Image): number
-  
+
   /** Load colors palette from image as a Color array (RGBA - 32bit) */
   export function LoadImagePalette(image: Image, maxPaletteSize: number, colorCount: number): number
-  
+
   /** Unload color data loaded with LoadImageColors() */
   export function UnloadImageColors(colors: number): void
-  
+
   /** Unload colors palette loaded with LoadImagePalette() */
   export function UnloadImagePalette(colors: number): void
-  
+
   /** Get image alpha border rectangle */
   export function GetImageAlphaBorder(image: Image, threshold: number): Rectangle
-  
+
   /** Get image pixel color at (x, y) position */
   export function GetImageColor(image: Image, x: number, y: number): Color
-  
+
   /** Clear image background with given color */
   export function ImageClearBackground(dst: Image, color: Color): void
-  
+
   /** Draw pixel within an image */
   export function ImageDrawPixel(dst: Image, posX: number, posY: number, color: Color): void
-  
+
   /** Draw pixel within an image (Vector version) */
   export function ImageDrawPixelV(dst: Image, position: Vector2, color: Color): void
-  
+
   /** Draw line within an image */
   export function ImageDrawLine(dst: Image, startPosX: number, startPosY: number, endPosX: number, endPosY: number, color: Color): void
-  
+
   /** Draw line within an image (Vector version) */
   export function ImageDrawLineV(dst: Image, start: Vector2, end: Vector2, color: Color): void
-  
+
   /** Draw a line defining thickness within an image */
   export function ImageDrawLineEx(dst: number, start: Vector2, end: Vector2, thick: number, color: Color): void
-  
+
   /** Draw a filled circle within an image */
   export function ImageDrawCircle(dst: Image, centerX: number, centerY: number, radius: number, color: Color): void
-  
+
   /** Draw a filled circle within an image (Vector version) */
   export function ImageDrawCircleV(dst: Image, center: Vector2, radius: number, color: Color): void
-  
+
   /** Draw circle outline within an image */
   export function ImageDrawCircleLines(dst: number, centerX: number, centerY: number, radius: number, color: Color): void
-  
+
   /** Draw circle outline within an image (Vector version) */
   export function ImageDrawCircleLinesV(dst: number, center: Vector2, radius: number, color: Color): void
-  
+
   /** Draw rectangle within an image */
   export function ImageDrawRectangle(dst: Image, posX: number, posY: number, width: number, height: number, color: Color): void
-  
+
   /** Draw rectangle within an image (Vector version) */
   export function ImageDrawRectangleV(dst: Image, position: Vector2, size: Vector2, color: Color): void
-  
+
   /** Draw rectangle within an image */
   export function ImageDrawRectangleRec(dst: Image, rec: Rectangle, color: Color): void
-  
+
   /** Draw rectangle lines within an image */
   export function ImageDrawRectangleLines(dst: Image, rec: Rectangle, thick: number, color: Color): void
-  
+
   /** Draw triangle within an image */
   export function ImageDrawTriangle(dst: number, v1: Vector2, v2: Vector2, v3: Vector2, color: Color): void
-  
+
   /** Draw triangle with interpolated colors within an image */
   export function ImageDrawTriangleEx(dst: number, v1: Vector2, v2: Vector2, v3: Vector2, c1: Color, c2: Color, c3: Color): void
-  
+
   /** Draw triangle outline within an image */
   export function ImageDrawTriangleLines(dst: number, v1: Vector2, v2: Vector2, v3: Vector2, color: Color): void
-  
+
   /** Draw a triangle fan defined by points within an image (first vertex is the center) */
   export function ImageDrawTriangleFan(dst: number, points: number, pointCount: number, color: Color): void
-  
+
   /** Draw a triangle strip defined by points within an image */
   export function ImageDrawTriangleStrip(dst: number, points: number, pointCount: number, color: Color): void
-  
+
   /** Draw a source image within a destination image (tint applied to source) */
   export function ImageDraw(dst: Image, src: Image, srcRec: Rectangle, dstRec: Rectangle, tint: Color): void
-  
+
   /** Draw text (using default font) within an image (destination) */
   export function ImageDrawText(dst: Image, text: string, posX: number, posY: number, fontSize: number, color: Color): void
-  
+
   /** Draw text (custom sprite font) within an image (destination) */
   export function ImageDrawTextEx(dst: Image, font: Font, text: string, position: Vector2, fontSize: number, spacing: number, tint: Color): void
-  
+
   /** Load texture from file into GPU memory (VRAM) */
   export function LoadTexture(fileName: string): Texture2D
-  
+
   /** Load texture from image data */
   export function LoadTextureFromImage(image: Image): Texture2D
-  
+
   /** Load cubemap from image, multiple image cubemap layouts supported */
   export function LoadTextureCubemap(image: Image, layout: number): TextureCubemap
-  
+
   /** Load texture for rendering (framebuffer) */
   export function LoadRenderTexture(width: number, height: number): RenderTexture2D
-  
+
   /** Check if a texture is valid (loaded in GPU) */
   export function IsTextureValid(texture: Texture): boolean
-  
+
   /** Unload texture from GPU memory (VRAM) */
   export function UnloadTexture(texture: Texture): void
-  
+
   /** Check if a render texture is valid (loaded in GPU) */
   export function IsRenderTextureValid(target: RenderTexture): boolean
-  
+
   /** Unload render texture from GPU memory (VRAM) */
   export function UnloadRenderTexture(target: RenderTexture): void
-  
+
   /** Update GPU texture with new data */
   export function UpdateTexture(texture: Texture, pixels: number): void
-  
+
   /** Update GPU texture rectangle with new data */
   export function UpdateTextureRec(texture: Texture, rec: Rectangle, pixels: number): void
-  
+
   /** Generate GPU mipmaps for a texture */
   export function GenTextureMipmaps(texture: Texture): void
-  
+
   /** Set texture scaling filter mode */
   export function SetTextureFilter(texture: Texture, filter: number): void
-  
+
   /** Set texture wrapping mode */
   export function SetTextureWrap(texture: Texture, wrap: number): void
-  
+
   /** Draw a Texture2D */
   export function DrawTexture(texture: Texture, posX: number, posY: number, tint: Color): void
-  
+
   /** Draw a Texture2D with position defined as Vector2 */
   export function DrawTextureV(texture: Texture, position: Vector2, tint: Color): void
-  
+
   /** Draw a Texture2D with extended parameters */
   export function DrawTextureEx(texture: Texture, position: Vector2, rotation: number, scale: number, tint: Color): void
-  
+
   /** Draw a part of a texture defined by a rectangle */
   export function DrawTextureRec(texture: Texture, source: Rectangle, position: Vector2, tint: Color): void
-  
+
   /** Draw a part of a texture defined by a rectangle with 'pro' parameters */
   export function DrawTexturePro(texture: Texture, source: Rectangle, dest: Rectangle, origin: Vector2, rotation: number, tint: Color): void
-  
+
   /** Draws a texture (or part of it) that stretches or shrinks nicely */
   export function DrawTextureNPatch(texture: Texture, nPatchInfo: NPatchInfo, dest: Rectangle, origin: Vector2, rotation: number, tint: Color): void
-  
+
   /** Check if two colors are equal */
   export function ColorIsEqual(col1: Color, col2: Color): boolean
-  
+
   /** Get color with alpha applied, alpha goes from 0.0f to 1.0f */
   export function Fade(color: Color, alpha: number): Color
-  
+
   /** Get hexadecimal value for a Color (0xRRGGBBAA) */
   export function ColorToInt(color: Color): number
-  
+
   /** Get Color normalized as float [0..1] */
   export function ColorNormalize(color: Color): Vector4
-  
+
   /** Get Color from normalized values [0..1] */
   export function ColorFromNormalized(normalized: Vector4): Color
-  
+
   /** Get HSV values for a Color, hue [0..360], saturation/value [0..1] */
   export function ColorToHSV(color: Color): Vector3
-  
+
   /** Get a Color from HSV values, hue [0..360], saturation/value [0..1] */
   export function ColorFromHSV(hue: number, saturation: number, value: number): Color
-  
+
   /** Get color multiplied with another color */
   export function ColorTint(color: Color, tint: Color): Color
-  
+
   /** Get color with brightness correction, brightness factor goes from -1.0f to 1.0f */
   export function ColorBrightness(color: Color, factor: number): Color
-  
+
   /** Get color with contrast correction, contrast values between -1.0f and 1.0f */
   export function ColorContrast(color: Color, contrast: number): Color
-  
+
   /** Get color with alpha applied, alpha goes from 0.0f to 1.0f */
   export function ColorAlpha(color: Color, alpha: number): Color
-  
+
   /** Get src alpha-blended into dst color with tint */
   export function ColorAlphaBlend(dst: Color, src: Color, tint: Color): Color
-  
+
   /** Get color lerp interpolation between two colors, factor [0.0f..1.0f] */
   export function ColorLerp(color1: Color, color2: Color, factor: number): Color
-  
+
   /** Get Color structure from hexadecimal value */
   export function GetColor(hexValue: number): Color
-  
+
   /** Get Color from a source pixel pointer of certain format */
   export function GetPixelColor(srcPtr: number, format: number): Color
-  
+
   /** Set color formatted into destination pixel pointer */
   export function SetPixelColor(dstPtr: number, color: Color, format: number): void
-  
+
   /** Get pixel data size in bytes for certain format */
   export function GetPixelDataSize(width: number, height: number, format: number): number
-  
+
   /** Get the default Font */
   export function GetFontDefault(): Font
-  
+
   /** Load font from file into GPU memory (VRAM) */
   export function LoadFont(fileName: string): Font
-  
+
   /** Load font from file with extended parameters, use NULL for codepoints and 0 for codepointCount to load the default character set, font size is provided in pixels height */
   export function LoadFontEx(fileName: string, fontSize: number, codepoints: number, codepointCount: number): Font
-  
+
   /** Load font from Image (XNA style) */
   export function LoadFontFromImage(image: Image, key: Color, firstChar: number): Font
-  
+
   /** Load font from memory buffer, fileType refers to extension: i.e. '.ttf' */
   export function LoadFontFromMemory(fileType: string, fileData: Buffer, dataSize: number, fontSize: number, codepoints: number, codepointCount: number): Font
-  
+
   /** Check if a font is valid (font data loaded, WARNING: GPU texture not checked) */
   export function IsFontValid(font: Font): boolean
-  
+
   /** Load font data for further use */
   export function LoadFontData(fileData: Buffer, dataSize: number, fontSize: number, codepoints: number, codepointCount: number, type: number): number
-  
+
   /** Generate image font atlas using chars info */
   export function GenImageFontAtlas(glyphs: number, glyphRecs: number, glyphCount: number, fontSize: number, padding: number, packMethod: number): Image
-  
+
   /** Unload font chars info data (RAM) */
   export function UnloadFontData(glyphs: number, glyphCount: number): void
-  
+
   /** Unload font from GPU memory (VRAM) */
   export function UnloadFont(font: Font): void
-  
+
   /** Export font as code file, returns true on success */
   export function ExportFontAsCode(font: Font, fileName: string): boolean
-  
+
   /** Draw current FPS */
   export function DrawFPS(posX: number, posY: number): void
-  
+
   /** Draw text (using default font) */
   export function DrawText(text: string, posX: number, posY: number, fontSize: number, color: Color): void
-  
+
   /** Draw text using font and additional parameters */
   export function DrawTextEx(font: Font, text: string, position: Vector2, fontSize: number, spacing: number, tint: Color): void
-  
+
   /** Draw text using Font and pro parameters (rotation) */
   export function DrawTextPro(font: Font, text: string, position: Vector2, origin: Vector2, rotation: number, fontSize: number, spacing: number, tint: Color): void
-  
+
   /** Draw one character (codepoint) */
   export function DrawTextCodepoint(font: Font, codepoint: number, position: Vector2, fontSize: number, tint: Color): void
-  
+
   /** Draw multiple character (codepoint) */
   export function DrawTextCodepoints(font: Font, codepoints: number, codepointCount: number, position: Vector2, fontSize: number, spacing: number, tint: Color): void
-  
+
   /** Set vertical line spacing when drawing with line-breaks */
   export function SetTextLineSpacing(spacing: number): void
-  
+
   /** Measure string width for default font */
   export function MeasureText(text: string, fontSize: number): number
-  
+
   /** Measure string size for Font */
   export function MeasureTextEx(font: Font, text: string, fontSize: number, spacing: number): Vector2
-  
+
   /** Get glyph index position in font for a codepoint (unicode character), fallback to '?' if not found */
   export function GetGlyphIndex(font: Font, codepoint: number): number
-  
+
   /** Get glyph font info data for a codepoint (unicode character), fallback to '?' if not found */
   export function GetGlyphInfo(font: Font, codepoint: number): GlyphInfo
-  
+
   /** Get glyph rectangle in font atlas for a codepoint (unicode character), fallback to '?' if not found */
   export function GetGlyphAtlasRec(font: Font, codepoint: number): Rectangle
-  
+
   /** Load UTF-8 text encoded from codepoints array */
   export function LoadUTF8(codepoints: number, length: number): string
-  
+
   /** Unload UTF-8 text encoded from codepoints array */
   export function UnloadUTF8(text: string): void
-  
+
   /** Load all codepoints from a UTF-8 text string, codepoints count returned by parameter */
   export function LoadCodepoints(text: string, count: number): number
-  
+
   /** Unload codepoints data from memory */
   export function UnloadCodepoints(codepoints: number): void
-  
+
   /** Get total number of codepoints in a UTF-8 encoded string */
   export function GetCodepointCount(text: string): number
-  
+
   /** Get next codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure */
   export function GetCodepoint(text: string, codepointSize: number): number
-  
+
   /** Get next codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure */
   export function GetCodepointNext(text: string, codepointSize: number): number
-  
+
   /** Get previous codepoint in a UTF-8 encoded string, 0x3f('?') is returned on failure */
   export function GetCodepointPrevious(text: string, codepointSize: number): number
-  
+
   /** Encode one codepoint into UTF-8 byte array (array length returned as parameter) */
   export function CodepointToUTF8(codepoint: number, utf8Size: number): string
-  
+
   /** Copy one string to another, returns bytes copied */
   export function TextCopy(dst: string, src: string): number
-  
+
   /** Check if two text string are equal */
   export function TextIsEqual(text1: string, text2: string): boolean
-  
+
   /** Get text length, checks for '\0' ending */
   export function TextLength(text: string): number
-  
+
   /** Get a piece of a text string */
   export function TextSubtext(text: string, position: number, length: number): string
-  
+
   /** Replace text string (WARNING: memory must be freed!) */
   export function TextReplace(text: string, replace: string, by: string): string
-  
+
   /** Insert text in a position (WARNING: memory must be freed!) */
   export function TextInsert(text: string, insert: string, position: number): string
-  
+
   /** Join text strings with delimiter */
   export function TextJoin(textList: number, count: number, delimiter: string): string
-  
+
   /** Split text into multiple strings */
   export function TextSplit(text: string, delimiter: string, count: number): number
-  
+
   /** Append text at specific position and move cursor! */
   export function TextAppend(text: string, append: string, position: number): void
-  
+
   /** Find first text occurrence within a string */
   export function TextFindIndex(text: string, find: string): number
-  
+
   /** Get upper case version of provided string */
   export function TextToUpper(text: string): string
-  
+
   /** Get lower case version of provided string */
   export function TextToLower(text: string): string
-  
+
   /** Get Pascal case notation version of provided string */
   export function TextToPascal(text: string): string
-  
+
   /** Get Snake case notation version of provided string */
   export function TextToSnake(text: string): string
-  
+
   /** Get Camel case notation version of provided string */
   export function TextToCamel(text: string): string
-  
+
   /** Get integer value from text (negative values not supported) */
   export function TextToInteger(text: string): number
-  
+
   /** Get float value from text (negative values not supported) */
   export function TextToFloat(text: string): number
-  
+
   /** Draw a line in 3D world space */
   export function DrawLine3D(startPos: Vector3, endPos: Vector3, color: Color): void
-  
+
   /** Draw a point in 3D space, actually a small line */
   export function DrawPoint3D(position: Vector3, color: Color): void
-  
+
   /** Draw a circle in 3D world space */
   export function DrawCircle3D(center: Vector3, radius: number, rotationAxis: Vector3, rotationAngle: number, color: Color): void
-  
+
   /** Draw a color-filled triangle (vertex in counter-clockwise order!) */
   export function DrawTriangle3D(v1: Vector3, v2: Vector3, v3: Vector3, color: Color): void
-  
+
   /** Draw a triangle strip defined by points */
   export function DrawTriangleStrip3D(points: number, pointCount: number, color: Color): void
-  
+
   /** Draw cube */
   export function DrawCube(position: Vector3, width: number, height: number, length: number, color: Color): void
-  
+
   /** Draw cube (Vector version) */
   export function DrawCubeV(position: Vector3, size: Vector3, color: Color): void
-  
+
   /** Draw cube wires */
   export function DrawCubeWires(position: Vector3, width: number, height: number, length: number, color: Color): void
-  
+
   /** Draw cube wires (Vector version) */
   export function DrawCubeWiresV(position: Vector3, size: Vector3, color: Color): void
-  
+
   /** Draw sphere */
   export function DrawSphere(centerPos: Vector3, radius: number, color: Color): void
-  
+
   /** Draw sphere with extended parameters */
   export function DrawSphereEx(centerPos: Vector3, radius: number, rings: number, slices: number, color: Color): void
-  
+
   /** Draw sphere wires */
   export function DrawSphereWires(centerPos: Vector3, radius: number, rings: number, slices: number, color: Color): void
-  
+
   /** Draw a cylinder/cone */
   export function DrawCylinder(position: Vector3, radiusTop: number, radiusBottom: number, height: number, slices: number, color: Color): void
-  
+
   /** Draw a cylinder with base at startPos and top at endPos */
   export function DrawCylinderEx(startPos: Vector3, endPos: Vector3, startRadius: number, endRadius: number, sides: number, color: Color): void
-  
+
   /** Draw a cylinder/cone wires */
   export function DrawCylinderWires(position: Vector3, radiusTop: number, radiusBottom: number, height: number, slices: number, color: Color): void
-  
+
   /** Draw a cylinder wires with base at startPos and top at endPos */
   export function DrawCylinderWiresEx(startPos: Vector3, endPos: Vector3, startRadius: number, endRadius: number, sides: number, color: Color): void
-  
+
   /** Draw a capsule with the center of its sphere caps at startPos and endPos */
   export function DrawCapsule(startPos: Vector3, endPos: Vector3, radius: number, slices: number, rings: number, color: Color): void
-  
+
   /** Draw capsule wireframe with the center of its sphere caps at startPos and endPos */
   export function DrawCapsuleWires(startPos: Vector3, endPos: Vector3, radius: number, slices: number, rings: number, color: Color): void
-  
+
   /** Draw a plane XZ */
   export function DrawPlane(centerPos: Vector3, size: Vector2, color: Color): void
-  
+
   /** Draw a ray line */
   export function DrawRay(ray: Ray, color: Color): void
-  
+
   /** Draw a grid (centered at (0, 0, 0)) */
   export function DrawGrid(slices: number, spacing: number): void
-  
+
   /** Load model from files (meshes and materials) */
   export function LoadModel(fileName: string): Model
-  
+
   /** Load model from generated mesh (default material) */
   export function LoadModelFromMesh(mesh: Mesh): Model
-  
+
   /** Check if a model is valid (loaded in GPU, VAO/VBOs) */
   export function IsModelValid(model: Model): boolean
-  
+
   /** Unload model (including meshes) from memory (RAM and/or VRAM) */
   export function UnloadModel(model: Model): void
-  
+
   /** Compute model bounding box limits (considers all meshes) */
   export function GetModelBoundingBox(model: Model): BoundingBox
-  
+
   /** Draw a model (with texture if set) */
   export function DrawModel(model: Model, position: Vector3, scale: number, tint: Color): void
-  
+
   /** Draw a model with extended parameters */
   export function DrawModelEx(model: Model, position: Vector3, rotationAxis: Vector3, rotationAngle: number, scale: Vector3, tint: Color): void
-  
+
   /** Draw a model wires (with texture if set) */
   export function DrawModelWires(model: Model, position: Vector3, scale: number, tint: Color): void
-  
+
   /** Draw a model wires (with texture if set) with extended parameters */
   export function DrawModelWiresEx(model: Model, position: Vector3, rotationAxis: Vector3, rotationAngle: number, scale: Vector3, tint: Color): void
-  
+
   /** Draw a model as points */
   export function DrawModelPoints(model: Model, position: Vector3, scale: number, tint: Color): void
-  
+
   /** Draw a model as points with extended parameters */
   export function DrawModelPointsEx(model: Model, position: Vector3, rotationAxis: Vector3, rotationAngle: number, scale: Vector3, tint: Color): void
-  
+
   /** Draw bounding box (wires) */
   export function DrawBoundingBox(box: BoundingBox, color: Color): void
-  
+
   /** Draw a billboard texture */
   export function DrawBillboard(camera: Camera3D, texture: Texture, position: Vector3, scale: number, tint: Color): void
-  
+
   /** Draw a billboard texture defined by source */
   export function DrawBillboardRec(camera: Camera3D, texture: Texture, source: Rectangle, position: Vector3, size: Vector2, tint: Color): void
-  
+
   /** Draw a billboard texture defined by source and rotation */
   export function DrawBillboardPro(camera: Camera3D, texture: Texture, source: Rectangle, position: Vector3, up: Vector3, size: Vector2, origin: Vector2, rotation: number, tint: Color): void
-  
+
   /** Upload mesh vertex data in GPU and provide VAO/VBO ids */
   export function UploadMesh(mesh: Mesh, dynamic: boolean): void
-  
+
   /** Update mesh vertex data in GPU for a specific buffer index */
   export function UpdateMeshBuffer(mesh: Mesh, index: number, data: number, dataSize: number, offset: number): void
-  
+
   /** Unload mesh data from CPU and GPU */
   export function UnloadMesh(mesh: Mesh): void
-  
+
   /** Compute mesh bounding box limits */
   export function GetMeshBoundingBox(mesh: Mesh): BoundingBox
-  
+
   /** Compute mesh tangents */
   export function GenMeshTangents(mesh: Mesh): void
-  
+
   /** Export mesh data to file, returns true on success */
   export function ExportMesh(mesh: Mesh, fileName: string): boolean
-  
+
   /** Export mesh as code file (.h) defining multiple arrays of vertex attributes */
   export function ExportMeshAsCode(mesh: Mesh, fileName: string): boolean
-  
+
   /** Generate polygonal mesh */
   export function GenMeshPoly(sides: number, radius: number): Mesh
-  
+
   /** Generate plane mesh (with subdivisions) */
   export function GenMeshPlane(width: number, length: number, resX: number, resZ: number): Mesh
-  
+
   /** Generate cuboid mesh */
   export function GenMeshCube(width: number, height: number, length: number): Mesh
-  
+
   /** Generate sphere mesh (standard sphere) */
   export function GenMeshSphere(radius: number, rings: number, slices: number): Mesh
-  
+
   /** Generate half-sphere mesh (no bottom cap) */
   export function GenMeshHemiSphere(radius: number, rings: number, slices: number): Mesh
-  
+
   /** Generate cylinder mesh */
   export function GenMeshCylinder(radius: number, height: number, slices: number): Mesh
-  
+
   /** Generate cone/pyramid mesh */
   export function GenMeshCone(radius: number, height: number, slices: number): Mesh
-  
+
   /** Generate torus mesh */
   export function GenMeshTorus(radius: number, size: number, radSeg: number, sides: number): Mesh
-  
+
   /** Generate trefoil knot mesh */
   export function GenMeshKnot(radius: number, size: number, radSeg: number, sides: number): Mesh
-  
+
   /** Generate heightmap mesh from image data */
   export function GenMeshHeightmap(heightmap: Image, size: Vector3): Mesh
-  
+
   /** Generate cubes-based map mesh from image data */
   export function GenMeshCubicmap(cubicmap: Image, cubeSize: Vector3): Mesh
-  
+
   /** Set material for a mesh */
   export function SetModelMeshMaterial(model: Model, meshId: number, materialId: number): void
-  
+
   /** Check collision between two spheres */
   export function CheckCollisionSpheres(center1: Vector3, radius1: number, center2: Vector3, radius2: number): boolean
-  
+
   /** Check collision between two bounding boxes */
   export function CheckCollisionBoxes(box1: BoundingBox, box2: BoundingBox): boolean
-  
+
   /** Check collision between box and sphere */
   export function CheckCollisionBoxSphere(box: BoundingBox, center: Vector3, radius: number): boolean
-  
+
   /** Get collision info between ray and sphere */
   export function GetRayCollisionSphere(ray: Ray, center: Vector3, radius: number): RayCollision
-  
+
   /** Get collision info between ray and box */
   export function GetRayCollisionBox(ray: Ray, box: BoundingBox): RayCollision
-  
+
   /** Get collision info between ray and mesh */
   export function GetRayCollisionMesh(ray: Ray, mesh: Mesh, transform: Matrix): RayCollision
-  
+
   /** Get collision info between ray and triangle */
   export function GetRayCollisionTriangle(ray: Ray, p1: Vector3, p2: Vector3, p3: Vector3): RayCollision
-  
+
   /** Get collision info between ray and quad */
   export function GetRayCollisionQuad(ray: Ray, p1: Vector3, p2: Vector3, p3: Vector3, p4: Vector3): RayCollision
-  
+
   /** Initialize audio device and context */
   export function InitAudioDevice(): void
-  
+
   /** Close the audio device and context */
   export function CloseAudioDevice(): void
-  
+
   /** Check if audio device has been initialized successfully */
   export function IsAudioDeviceReady(): boolean
-  
+
   /** Set master volume (listener) */
   export function SetMasterVolume(volume: number): void
-  
+
   /** Get master volume (listener) */
   export function GetMasterVolume(): number
-  
+
   /** Load wave data from file */
   export function LoadWave(fileName: string): Wave
-  
+
   /** Load wave from memory buffer, fileType refers to extension: i.e. '.wav' */
   export function LoadWaveFromMemory(fileType: string, fileData: Buffer, dataSize: number): Wave
-  
+
   /** Checks if wave data is valid (data loaded and parameters) */
   export function IsWaveValid(wave: Wave): boolean
-  
+
   /** Load sound from file */
   export function LoadSound(fileName: string): Sound
-  
+
   /** Load sound from wave data */
   export function LoadSoundFromWave(wave: Wave): Sound
-  
+
   /** Create a new sound that shares the same sample data as the source sound, does not own the sound data */
   export function LoadSoundAlias(source: Sound): Sound
-  
+
   /** Checks if a sound is valid (data loaded and buffers initialized) */
   export function IsSoundValid(sound: Sound): boolean
-  
+
   /** Update sound buffer with new data */
   export function UpdateSound(sound: Sound, data: number, sampleCount: number): void
-  
+
   /** Unload wave data */
   export function UnloadWave(wave: Wave): void
-  
+
   /** Unload sound */
   export function UnloadSound(sound: Sound): void
-  
+
   /** Unload a sound alias (does not deallocate sample data) */
   export function UnloadSoundAlias(alias: Sound): void
-  
+
   /** Export wave data to file, returns true on success */
   export function ExportWave(wave: Wave, fileName: string): boolean
-  
+
   /** Export wave sample data to code (.h), returns true on success */
   export function ExportWaveAsCode(wave: Wave, fileName: string): boolean
-  
+
   /** Play a sound */
   export function PlaySound(sound: Sound): void
-  
+
   /** Stop playing a sound */
   export function StopSound(sound: Sound): void
-  
+
   /** Pause a sound */
   export function PauseSound(sound: Sound): void
-  
+
   /** Resume a paused sound */
   export function ResumeSound(sound: Sound): void
-  
+
   /** Check if a sound is currently playing */
   export function IsSoundPlaying(sound: Sound): boolean
-  
+
   /** Set volume for a sound (1.0 is max level) */
   export function SetSoundVolume(sound: Sound, volume: number): void
-  
+
   /** Set pitch for a sound (1.0 is base level) */
   export function SetSoundPitch(sound: Sound, pitch: number): void
-  
+
   /** Set pan for a sound (0.5 is center) */
   export function SetSoundPan(sound: Sound, pan: number): void
-  
+
   /** Copy a wave to a new wave */
   export function WaveCopy(wave: Wave): Wave
-  
+
   /** Crop a wave to defined frames range */
   export function WaveCrop(wave: Wave, initFrame: number, finalFrame: number): void
-  
+
   /** Convert wave data to desired format */
   export function WaveFormat(wave: Wave, sampleRate: number, sampleSize: number, channels: number): void
-  
+
   /** Load samples data from wave as a 32bit float data array */
   export function LoadWaveSamples(wave: Wave): number
-  
+
   /** Unload samples data loaded with LoadWaveSamples() */
   export function UnloadWaveSamples(samples: number): void
-  
+
   /** Load music stream from file */
   export function LoadMusicStream(fileName: string): Music
-  
+
   /** Load music stream from data */
   export function LoadMusicStreamFromMemory(fileType: string, data: Buffer, dataSize: number): Music
-  
+
   /** Checks if a music stream is valid (context and buffers initialized) */
   export function IsMusicValid(music: Music): boolean
-  
+
   /** Unload music stream */
   export function UnloadMusicStream(music: Music): void
-  
+
   /** Start music playing */
   export function PlayMusicStream(music: Music): void
-  
+
   /** Check if music is playing */
   export function IsMusicStreamPlaying(music: Music): boolean
-  
+
   /** Updates buffers for music streaming */
   export function UpdateMusicStream(music: Music): void
-  
+
   /** Stop music playing */
   export function StopMusicStream(music: Music): void
-  
+
   /** Pause music playing */
   export function PauseMusicStream(music: Music): void
-  
+
   /** Resume playing paused music */
   export function ResumeMusicStream(music: Music): void
-  
+
   /** Seek music to a position (in seconds) */
   export function SeekMusicStream(music: Music, position: number): void
-  
+
   /** Set volume for music (1.0 is max level) */
   export function SetMusicVolume(music: Music, volume: number): void
-  
+
   /** Set pitch for a music (1.0 is base level) */
   export function SetMusicPitch(music: Music, pitch: number): void
-  
+
   /** Set pan for a music (0.5 is center) */
   export function SetMusicPan(music: Music, pan: number): void
-  
+
   /** Get music time length (in seconds) */
   export function GetMusicTimeLength(music: Music): number
-  
+
   /** Get current music time played (in seconds) */
   export function GetMusicTimePlayed(music: Music): number
-  
+
   /** Load audio stream (to stream raw audio pcm data) */
   export function LoadAudioStream(sampleRate: number, sampleSize: number, channels: number): AudioStream
-  
+
   /** Checks if an audio stream is valid (buffers initialized) */
   export function IsAudioStreamValid(stream: AudioStream): boolean
-  
+
   /** Unload audio stream and free memory */
   export function UnloadAudioStream(stream: AudioStream): void
-  
+
   /** Update audio stream buffers with data */
   export function UpdateAudioStream(stream: AudioStream, data: number, frameCount: number): void
-  
+
   /** Check if any audio stream buffers requires refill */
   export function IsAudioStreamProcessed(stream: AudioStream): boolean
-  
+
   /** Play audio stream */
   export function PlayAudioStream(stream: AudioStream): void
-  
+
   /** Pause audio stream */
   export function PauseAudioStream(stream: AudioStream): void
-  
+
   /** Resume audio stream */
   export function ResumeAudioStream(stream: AudioStream): void
-  
+
   /** Check if audio stream is playing */
   export function IsAudioStreamPlaying(stream: AudioStream): boolean
-  
+
   /** Stop audio stream */
   export function StopAudioStream(stream: AudioStream): void
-  
+
   /** Set volume for audio stream (1.0 is max level) */
   export function SetAudioStreamVolume(stream: AudioStream, volume: number): void
-  
+
   /** Set pitch for audio stream (1.0 is base level) */
   export function SetAudioStreamPitch(stream: AudioStream, pitch: number): void
-  
+
   /** Set pan for audio stream (0.5 is centered) */
   export function SetAudioStreamPan(stream: AudioStream, pan: number): void
-  
+
   /** Default size for new audio streams */
   export function SetAudioStreamBufferSizeDefault(size: number): void
-  
+
   /** Ease: Linear */
   export function EaseLinearNone(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Linear In */
   export function EaseLinearIn(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Linear Out */
   export function EaseLinearOut(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Linear In Out */
   export function EaseLinearInOut(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Sine In */
   export function EaseSineIn(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Sine Out */
   export function EaseSineOut(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Sine Out */
   export function EaseSineInOut(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Circular In */
   export function EaseCircIn(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Circular Out */
   export function EaseCircOut(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Circular In Out */
   export function EaseCircInOut(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Cubic In */
   export function EaseCubicIn(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Cubic Out */
   export function EaseCubicOut(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Cubic In Out */
   export function EaseCubicInOut(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Quadratic In */
   export function EaseQuadIn(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Quadratic Out */
   export function EaseQuadOut(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Quadratic In Out */
   export function EaseQuadInOut(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Exponential In */
   export function EaseExpoIn(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Exponential Out */
   export function EaseExpoOut(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Exponential In Out */
   export function EaseExpoInOut(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Back In */
   export function EaseBackIn(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Back Out */
   export function EaseBackOut(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Back In Out */
   export function EaseBackInOut(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Bounce Out */
   export function EaseBounceOut(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Bounce In */
   export function EaseBounceIn(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Bounce In Out */
   export function EaseBounceInOut(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Elastic In */
   export function EaseElasticIn(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Elastic Out */
   export function EaseElasticOut(t: number, b: number, c: number, d: number): number
-  
+
   /** Ease: Elastic In Out */
   export function EaseElasticInOut(t: number, b: number, c: number, d: number): number
-  
+
   /**  */
   export function Clamp(value: number, min: number, max: number): number
-  
+
   /**  */
   export function Lerp(start: number, end: number, amount: number): number
-  
+
   /**  */
   export function Normalize(value: number, start: number, end: number): number
-  
+
   /**  */
   export function Remap(value: number, inputStart: number, inputEnd: number, outputStart: number, outputEnd: number): number
-  
+
   /**  */
   export function Wrap(value: number, min: number, max: number): number
-  
+
   /**  */
   export function FloatEquals(x: number, y: number): number
-  
+
   /**  */
   export function Vector2Zero(): Vector2
-  
+
   /**  */
   export function Vector2One(): Vector2
-  
+
   /**  */
   export function Vector2Add(v1: Vector2, v2: Vector2): Vector2
-  
+
   /**  */
   export function Vector2AddValue(v: Vector2, add: number): Vector2
-  
+
   /**  */
   export function Vector2Subtract(v1: Vector2, v2: Vector2): Vector2
-  
+
   /**  */
   export function Vector2SubtractValue(v: Vector2, sub: number): Vector2
-  
+
   /**  */
   export function Vector2Length(v: Vector2): number
-  
+
   /**  */
   export function Vector2LengthSqr(v: Vector2): number
-  
+
   /**  */
   export function Vector2DotProduct(v1: Vector2, v2: Vector2): number
-  
+
   /**  */
   export function Vector2Distance(v1: Vector2, v2: Vector2): number
-  
+
   /**  */
   export function Vector2DistanceSqr(v1: Vector2, v2: Vector2): number
-  
+
   /**  */
   export function Vector2Angle(v1: Vector2, v2: Vector2): number
-  
+
   /**  */
   export function Vector2LineAngle(start: Vector2, end: Vector2): number
-  
+
   /**  */
   export function Vector2Scale(v: Vector2, scale: number): Vector2
-  
+
   /**  */
   export function Vector2Multiply(v1: Vector2, v2: Vector2): Vector2
-  
+
   /**  */
   export function Vector2Negate(v: Vector2): Vector2
-  
+
   /**  */
   export function Vector2Divide(v1: Vector2, v2: Vector2): Vector2
-  
+
   /**  */
   export function Vector2Normalize(v: Vector2): Vector2
-  
+
   /**  */
   export function Vector2Transform(v: Vector2, mat: Matrix): Vector2
-  
+
   /**  */
   export function Vector2Lerp(v1: Vector2, v2: Vector2, amount: number): Vector2
-  
+
   /**  */
   export function Vector2Reflect(v: Vector2, normal: Vector2): Vector2
-  
+
   /**  */
   export function Vector2Min(v1: Vector2, v2: Vector2): Vector2
-  
+
   /**  */
   export function Vector2Max(v1: Vector2, v2: Vector2): Vector2
-  
+
   /**  */
   export function Vector2Rotate(v: Vector2, angle: number): Vector2
-  
+
   /**  */
   export function Vector2MoveTowards(v: Vector2, target: Vector2, maxDistance: number): Vector2
-  
+
   /**  */
   export function Vector2Invert(v: Vector2): Vector2
-  
+
   /**  */
   export function Vector2Clamp(v: Vector2, min: Vector2, max: Vector2): Vector2
-  
+
   /**  */
   export function Vector2ClampValue(v: Vector2, min: number, max: number): Vector2
-  
+
   /**  */
   export function Vector2Equals(p: Vector2, q: Vector2): number
-  
+
   /**  */
   export function Vector2Refract(v: Vector2, n: Vector2, r: number): Vector2
-  
+
   /**  */
   export function Vector3Zero(): Vector3
-  
+
   /**  */
   export function Vector3One(): Vector3
-  
+
   /**  */
   export function Vector3Add(v1: Vector3, v2: Vector3): Vector3
-  
+
   /**  */
   export function Vector3AddValue(v: Vector3, add: number): Vector3
-  
+
   /**  */
   export function Vector3Subtract(v1: Vector3, v2: Vector3): Vector3
-  
+
   /**  */
   export function Vector3SubtractValue(v: Vector3, sub: number): Vector3
-  
+
   /**  */
   export function Vector3Scale(v: Vector3, scalar: number): Vector3
-  
+
   /**  */
   export function Vector3Multiply(v1: Vector3, v2: Vector3): Vector3
-  
+
   /**  */
   export function Vector3CrossProduct(v1: Vector3, v2: Vector3): Vector3
-  
+
   /**  */
   export function Vector3Perpendicular(v: Vector3): Vector3
-  
+
   /**  */
   export function Vector3Length(v: Vector3): number
-  
+
   /**  */
   export function Vector3LengthSqr(v: Vector3): number
-  
+
   /**  */
   export function Vector3DotProduct(v1: Vector3, v2: Vector3): number
-  
+
   /**  */
   export function Vector3Distance(v1: Vector3, v2: Vector3): number
-  
+
   /**  */
   export function Vector3DistanceSqr(v1: Vector3, v2: Vector3): number
-  
+
   /**  */
   export function Vector3Angle(v1: Vector3, v2: Vector3): number
-  
+
   /**  */
   export function Vector3Negate(v: Vector3): Vector3
-  
+
   /**  */
   export function Vector3Divide(v1: Vector3, v2: Vector3): Vector3
-  
+
   /**  */
   export function Vector3Normalize(v: Vector3): Vector3
-  
+
   /**  */
   export function Vector3Project(v1: Vector3, v2: Vector3): Vector3
-  
+
   /**  */
   export function Vector3Reject(v1: Vector3, v2: Vector3): Vector3
-  
+
   /**  */
   export function Vector3OrthoNormalize(v1: number, v2: number): void
-  
+
   /**  */
   export function Vector3Transform(v: Vector3, mat: Matrix): Vector3
-  
+
   /**  */
   export function Vector3RotateByQuaternion(v: Vector3, q: Quaternion): Vector3
-  
+
   /**  */
   export function Vector3RotateByAxisAngle(v: Vector3, axis: Vector3, angle: number): Vector3
-  
+
   /**  */
   export function Vector3MoveTowards(v: Vector3, target: Vector3, maxDistance: number): Vector3
-  
+
   /**  */
   export function Vector3Lerp(v1: Vector3, v2: Vector3, amount: number): Vector3
-  
+
   /**  */
   export function Vector3CubicHermite(v1: Vector3, tangent1: Vector3, v2: Vector3, tangent2: Vector3, amount: number): Vector3
-  
+
   /**  */
   export function Vector3Reflect(v: Vector3, normal: Vector3): Vector3
-  
+
   /**  */
   export function Vector3Min(v1: Vector3, v2: Vector3): Vector3
-  
+
   /**  */
   export function Vector3Max(v1: Vector3, v2: Vector3): Vector3
-  
+
   /**  */
   export function Vector3Barycenter(p: Vector3, a: Vector3, b: Vector3, c: Vector3): Vector3
-  
+
   /**  */
   export function Vector3Unproject(source: Vector3, projection: Matrix, view: Matrix): Vector3
-  
+
   /**  */
   export function Vector3Invert(v: Vector3): Vector3
-  
+
   /**  */
   export function Vector3Clamp(v: Vector3, min: Vector3, max: Vector3): Vector3
-  
+
   /**  */
   export function Vector3ClampValue(v: Vector3, min: number, max: number): Vector3
-  
+
   /**  */
   export function Vector3Equals(p: Vector3, q: Vector3): number
-  
+
   /**  */
   export function Vector3Refract(v: Vector3, n: Vector3, r: number): Vector3
-  
+
   /**  */
   export function Vector4Zero(): Vector4
-  
+
   /**  */
   export function Vector4One(): Vector4
-  
+
   /**  */
   export function Vector4Add(v1: Vector4, v2: Vector4): Vector4
-  
+
   /**  */
   export function Vector4AddValue(v: Vector4, add: number): Vector4
-  
+
   /**  */
   export function Vector4Subtract(v1: Vector4, v2: Vector4): Vector4
-  
+
   /**  */
   export function Vector4SubtractValue(v: Vector4, add: number): Vector4
-  
+
   /**  */
   export function Vector4Length(v: Vector4): number
-  
+
   /**  */
   export function Vector4LengthSqr(v: Vector4): number
-  
+
   /**  */
   export function Vector4DotProduct(v1: Vector4, v2: Vector4): number
-  
+
   /**  */
   export function Vector4Distance(v1: Vector4, v2: Vector4): number
-  
+
   /**  */
   export function Vector4DistanceSqr(v1: Vector4, v2: Vector4): number
-  
+
   /**  */
   export function Vector4Scale(v: Vector4, scale: number): Vector4
-  
+
   /**  */
   export function Vector4Multiply(v1: Vector4, v2: Vector4): Vector4
-  
+
   /**  */
   export function Vector4Negate(v: Vector4): Vector4
-  
+
   /**  */
   export function Vector4Divide(v1: Vector4, v2: Vector4): Vector4
-  
+
   /**  */
   export function Vector4Normalize(v: Vector4): Vector4
-  
+
   /**  */
   export function Vector4Min(v1: Vector4, v2: Vector4): Vector4
-  
+
   /**  */
   export function Vector4Max(v1: Vector4, v2: Vector4): Vector4
-  
+
   /**  */
   export function Vector4Lerp(v1: Vector4, v2: Vector4, amount: number): Vector4
-  
+
   /**  */
   export function Vector4MoveTowards(v: Vector4, target: Vector4, maxDistance: number): Vector4
-  
+
   /**  */
   export function Vector4Invert(v: Vector4): Vector4
-  
+
   /**  */
   export function Vector4Equals(p: Vector4, q: Vector4): number
-  
+
   /**  */
   export function MatrixDeterminant(mat: Matrix): number
-  
+
   /**  */
   export function MatrixTrace(mat: Matrix): number
-  
+
   /**  */
   export function MatrixTranspose(mat: Matrix): Matrix
-  
+
   /**  */
   export function MatrixInvert(mat: Matrix): Matrix
-  
+
   /**  */
   export function MatrixIdentity(): Matrix
-  
+
   /**  */
   export function MatrixAdd(left: Matrix, right: Matrix): Matrix
-  
+
   /**  */
   export function MatrixSubtract(left: Matrix, right: Matrix): Matrix
-  
+
   /**  */
   export function MatrixMultiply(left: Matrix, right: Matrix): Matrix
-  
+
   /**  */
   export function MatrixTranslate(x: number, y: number, z: number): Matrix
-  
+
   /**  */
   export function MatrixRotate(axis: Vector3, angle: number): Matrix
-  
+
   /**  */
   export function MatrixRotateX(angle: number): Matrix
-  
+
   /**  */
   export function MatrixRotateY(angle: number): Matrix
-  
+
   /**  */
   export function MatrixRotateZ(angle: number): Matrix
-  
+
   /**  */
   export function MatrixRotateXYZ(angle: Vector3): Matrix
-  
+
   /**  */
   export function MatrixRotateZYX(angle: Vector3): Matrix
-  
+
   /**  */
   export function MatrixScale(x: number, y: number, z: number): Matrix
-  
+
   /**  */
   export function MatrixFrustum(left: number, right: number, bottom: number, top: number, nearPlane: number, farPlane: number): Matrix
-  
+
   /**  */
   export function MatrixPerspective(fovY: number, aspect: number, nearPlane: number, farPlane: number): Matrix
-  
+
   /**  */
   export function MatrixOrtho(left: number, right: number, bottom: number, top: number, nearPlane: number, farPlane: number): Matrix
-  
+
   /**  */
   export function MatrixLookAt(eye: Vector3, target: Vector3, up: Vector3): Matrix
-  
+
   /**  */
   export function QuaternionAdd(q1: Quaternion, q2: Quaternion): Quaternion
-  
+
   /**  */
   export function QuaternionAddValue(q: Quaternion, add: number): Quaternion
-  
+
   /**  */
   export function QuaternionSubtract(q1: Quaternion, q2: Quaternion): Quaternion
-  
+
   /**  */
   export function QuaternionSubtractValue(q: Quaternion, sub: number): Quaternion
-  
+
   /**  */
   export function QuaternionIdentity(): Quaternion
-  
+
   /**  */
   export function QuaternionLength(q: Quaternion): number
-  
+
   /**  */
   export function QuaternionNormalize(q: Quaternion): Quaternion
-  
+
   /**  */
   export function QuaternionInvert(q: Quaternion): Quaternion
-  
+
   /**  */
   export function QuaternionMultiply(q1: Quaternion, q2: Quaternion): Quaternion
-  
+
   /**  */
   export function QuaternionScale(q: Quaternion, mul: number): Quaternion
-  
+
   /**  */
   export function QuaternionDivide(q1: Quaternion, q2: Quaternion): Quaternion
-  
+
   /**  */
   export function QuaternionLerp(q1: Quaternion, q2: Quaternion, amount: number): Quaternion
-  
+
   /**  */
   export function QuaternionNlerp(q1: Quaternion, q2: Quaternion, amount: number): Quaternion
-  
+
   /**  */
   export function QuaternionSlerp(q1: Quaternion, q2: Quaternion, amount: number): Quaternion
-  
+
   /**  */
   export function QuaternionCubicHermiteSpline(q1: Quaternion, outTangent1: Quaternion, q2: Quaternion, inTangent2: Quaternion, t: number): Quaternion
-  
+
   /**  */
   export function QuaternionFromVector3ToVector3(from: Vector3, to: Vector3): Quaternion
-  
+
   /**  */
   export function QuaternionFromMatrix(mat: Matrix): Quaternion
-  
+
   /**  */
   export function QuaternionToMatrix(q: Quaternion): Matrix
-  
+
   /**  */
   export function QuaternionFromAxisAngle(axis: Vector3, angle: number): Quaternion
-  
+
   /**  */
   export function QuaternionToAxisAngle(q: Quaternion, outAxis: number, outAngle: number): void
-  
+
   /**  */
   export function QuaternionFromEuler(pitch: number, yaw: number, roll: number): Quaternion
-  
+
   /**  */
   export function QuaternionToEuler(q: Quaternion): Vector3
-  
+
   /**  */
   export function QuaternionTransform(q: Quaternion, mat: Matrix): Quaternion
-  
+
   /**  */
   export function QuaternionEquals(p: Quaternion, q: Quaternion): number
-  
+
   /**  */
   export function MatrixDecompose(mat: Matrix, translation: number, rotation: number, scale: number): void
-  
+
   /** Enable gui controls (global state) */
   export function GuiEnable(): void
-  
+
   /** Disable gui controls (global state) */
   export function GuiDisable(): void
-  
+
   /** Lock gui controls (global state) */
   export function GuiLock(): void
-  
+
   /** Unlock gui controls (global state) */
   export function GuiUnlock(): void
-  
+
   /** Check if gui is locked (global state) */
   export function GuiIsLocked(): boolean
-  
+
   /** Set gui controls alpha (global state), alpha goes from 0.0f to 1.0f */
   export function GuiSetAlpha(alpha: number): void
-  
+
   /** Set gui state (global state) */
   export function GuiSetState(state: number): void
-  
+
   /** Get gui state (global state) */
   export function GuiGetState(): number
-  
+
   /** Set gui custom font (global state) */
   export function GuiSetFont(font: Font): void
-  
+
   /** Get gui custom font (global state) */
   export function GuiGetFont(): Font
-  
+
   /** Set one style property */
   export function GuiSetStyle(control: number, property: number, value: number): void
-  
+
   /** Get one style property */
   export function GuiGetStyle(control: number, property: number): number
-  
+
   /** Load style file over global style variable (.rgs) */
   export function GuiLoadStyle(fileName: string): void
-  
+
   /** Load style default over global style */
   export function GuiLoadStyleDefault(): void
-  
+
   /** Enable gui tooltips (global state) */
   export function GuiEnableTooltip(): void
-  
+
   /** Disable gui tooltips (global state) */
   export function GuiDisableTooltip(): void
-  
+
   /** Set tooltip string */
   export function GuiSetTooltip(tooltip: string): void
-  
+
   /** Get text with icon id prepended (if supported) */
   export function GuiIconText(iconId: number, text: string): string
-  
+
   /** Set default icon drawing size */
   export function GuiSetIconScale(scale: number): void
-  
+
   /** Get raygui icons data pointer */
   export function GuiGetIcons(): number
-  
+
   /** Load raygui icons file (.rgi) into internal icons data */
   export function GuiLoadIcons(fileName: string, loadIconsName: boolean): number
-  
+
   /** Draw icon using pixel size at specified position */
   export function GuiDrawIcon(iconId: number, posX: number, posY: number, pixelSize: number, color: Color): void
-  
+
   /** Window Box control, shows a window that can be closed */
   export function GuiWindowBox(bounds: Rectangle, title: string): number
-  
+
   /** Group Box control with text name */
   export function GuiGroupBox(bounds: Rectangle, text: string): number
-  
+
   /** Line separator control, could contain text */
   export function GuiLine(bounds: Rectangle, text: string): number
-  
+
   /** Panel control, useful to group controls */
   export function GuiPanel(bounds: Rectangle, text: string): number
-  
+
   /** Tab Bar control, returns TAB to be closed or -1 */
   export function GuiTabBar(bounds: Rectangle, text: number, count: number, active: number): number
-  
+
   /** Scroll Panel control */
   export function GuiScrollPanel(bounds: Rectangle, text: string, content: Rectangle, scroll: number, view: number): number
-  
+
   /** Label control */
   export function GuiLabel(bounds: Rectangle, text: string): number
-  
+
   /** Button control, returns true when clicked */
   export function GuiButton(bounds: Rectangle, text: string): number
-  
+
   /** Label button control, returns true when clicked */
   export function GuiLabelButton(bounds: Rectangle, text: string): number
-  
+
   /** Toggle Button control */
   export function GuiToggle(bounds: Rectangle, text: string, active: number): number
-  
+
   /** Toggle Group control */
   export function GuiToggleGroup(bounds: Rectangle, text: string, active: number): number
-  
+
   /** Toggle Slider control */
   export function GuiToggleSlider(bounds: Rectangle, text: string, active: number): number
-  
+
   /** Check Box control, returns true when active */
   export function GuiCheckBox(bounds: Rectangle, text: string, checked: number): number
-  
+
   /** Combo Box control */
   export function GuiComboBox(bounds: Rectangle, text: string, active: number): number
-  
+
   /** Dropdown Box control */
   export function GuiDropdownBox(bounds: Rectangle, text: string, active: number, editMode: boolean): number
-  
+
   /** Spinner control */
   export function GuiSpinner(bounds: Rectangle, text: string, value: number, minValue: number, maxValue: number, editMode: boolean): number
-  
+
   /** Value Box control, updates input text with numbers */
   export function GuiValueBox(bounds: Rectangle, text: string, value: number, minValue: number, maxValue: number, editMode: boolean): number
-  
+
   /** Value box control for float values */
   export function GuiValueBoxFloat(bounds: Rectangle, text: string, textValue: string, value: number, editMode: boolean): number
-  
+
   /** Text Box control, updates input text */
   export function GuiTextBox(bounds: Rectangle, text: string, textSize: number, editMode: boolean): number
-  
+
   /** Slider control */
   export function GuiSlider(bounds: Rectangle, textLeft: string, textRight: string, value: number, minValue: number, maxValue: number): number
-  
+
   /** Slider Bar control */
   export function GuiSliderBar(bounds: Rectangle, textLeft: string, textRight: string, value: number, minValue: number, maxValue: number): number
-  
+
   /** Progress Bar control */
   export function GuiProgressBar(bounds: Rectangle, textLeft: string, textRight: string, value: number, minValue: number, maxValue: number): number
-  
+
   /** Status Bar control, shows info text */
   export function GuiStatusBar(bounds: Rectangle, text: string): number
-  
+
   /** Dummy control for placeholders */
   export function GuiDummyRec(bounds: Rectangle, text: string): number
-  
+
   /** Grid control */
   export function GuiGrid(bounds: Rectangle, text: string, spacing: number, subdivs: number, mouseCell: number): number
-  
+
   /** List View control */
   export function GuiListView(bounds: Rectangle, text: string, scrollIndex: number, active: number): number
-  
+
   /** List View with extended parameters */
   export function GuiListViewEx(bounds: Rectangle, text: number, count: number, scrollIndex: number, active: number, focus: number): number
-  
+
   /** Message Box control, displays a message */
   export function GuiMessageBox(bounds: Rectangle, title: string, message: string, buttons: string): number
-  
+
   /** Text Input Box control, ask for text, supports secret */
   export function GuiTextInputBox(bounds: Rectangle, title: string, message: string, buttons: string, text: string, textMaxSize: number, secretViewActive: number): number
-  
+
   /** Color Picker control (multiple color controls) */
   export function GuiColorPicker(bounds: Rectangle, text: string, color: number): number
-  
+
   /** Color Panel control */
   export function GuiColorPanel(bounds: Rectangle, text: string, color: number): number
-  
+
   /** Color Bar Alpha control */
   export function GuiColorBarAlpha(bounds: Rectangle, text: string, alpha: number): number
-  
+
   /** Color Bar Hue control */
   export function GuiColorBarHue(bounds: Rectangle, text: string, value: number): number
-  
+
   /** Color Picker control that avoids conversion to RGB on each call (multiple color controls) */
   export function GuiColorPickerHSV(bounds: Rectangle, text: string, colorHsv: number): number
-  
+
   /** Color Panel control that updates Hue-Saturation-Value color value, used by GuiColorPickerHSV() */
   export function GuiColorPanelHSV(bounds: Rectangle, text: string, colorHsv: number): number
-  
+
   /** Choose the current matrix to be transformed */
   export function rlMatrixMode(mode: number): void
-  
+
   /** Push the current matrix to stack */
   export function rlPushMatrix(): void
-  
+
   /** Pop latest inserted matrix from stack */
   export function rlPopMatrix(): void
-  
+
   /** Reset current matrix to identity matrix */
   export function rlLoadIdentity(): void
-  
+
   /** Multiply the current matrix by a translation matrix */
   export function rlTranslatef(x: number, y: number, z: number): void
-  
+
   /** Multiply the current matrix by a rotation matrix */
   export function rlRotatef(angle: number, x: number, y: number, z: number): void
-  
+
   /** Multiply the current matrix by a scaling matrix */
   export function rlScalef(x: number, y: number, z: number): void
-  
+
   /** Multiply the current matrix by another matrix */
   export function rlMultMatrixf(matf: number): void
-  
+
   /**  */
   export function rlFrustum(left: number, right: number, bottom: number, top: number, znear: number, zfar: number): void
-  
+
   /**  */
   export function rlOrtho(left: number, right: number, bottom: number, top: number, znear: number, zfar: number): void
-  
+
   /** Set the viewport area */
   export function rlViewport(x: number, y: number, width: number, height: number): void
-  
+
   /** Set clip planes distances */
   export function rlSetClipPlanes(nearPlane: number, farPlane: number): void
-  
+
   /** Get cull plane distance near */
   export function rlGetCullDistanceNear(): number
-  
+
   /** Get cull plane distance far */
   export function rlGetCullDistanceFar(): number
-  
+
   /** Initialize drawing mode (how to organize vertex) */
   export function rlBegin(mode: number): void
-  
+
   /** Finish vertex providing */
   export function rlEnd(): void
-  
+
   /** Define one vertex (position) - 2 int */
   export function rlVertex2i(x: number, y: number): void
-  
+
   /** Define one vertex (position) - 2 float */
   export function rlVertex2f(x: number, y: number): void
-  
+
   /** Define one vertex (position) - 3 float */
   export function rlVertex3f(x: number, y: number, z: number): void
-  
+
   /** Define one vertex (texture coordinate) - 2 float */
   export function rlTexCoord2f(x: number, y: number): void
-  
+
   /** Define one vertex (normal) - 3 float */
   export function rlNormal3f(x: number, y: number, z: number): void
-  
+
   /** Define one vertex (color) - 4 byte */
   export function rlColor4ub(r: number, g: number, b: number, a: number): void
-  
+
   /** Define one vertex (color) - 3 float */
   export function rlColor3f(x: number, y: number, z: number): void
-  
+
   /** Define one vertex (color) - 4 float */
   export function rlColor4f(x: number, y: number, z: number, w: number): void
-  
+
   /** Enable vertex array (VAO, if supported) */
   export function rlEnableVertexArray(vaoId: number): boolean
-  
+
   /** Disable vertex array (VAO, if supported) */
   export function rlDisableVertexArray(): void
-  
+
   /** Enable vertex buffer (VBO) */
   export function rlEnableVertexBuffer(id: number): void
-  
+
   /** Disable vertex buffer (VBO) */
   export function rlDisableVertexBuffer(): void
-  
+
   /** Enable vertex buffer element (VBO element) */
   export function rlEnableVertexBufferElement(id: number): void
-  
+
   /** Disable vertex buffer element (VBO element) */
   export function rlDisableVertexBufferElement(): void
-  
+
   /** Enable vertex attribute index */
   export function rlEnableVertexAttribute(index: number): void
-  
+
   /** Disable vertex attribute index */
   export function rlDisableVertexAttribute(index: number): void
-  
+
   /** Select and active a texture slot */
   export function rlActiveTextureSlot(slot: number): void
-  
+
   /** Enable texture */
   export function rlEnableTexture(id: number): void
-  
+
   /** Disable texture */
   export function rlDisableTexture(): void
-  
+
   /** Enable texture cubemap */
   export function rlEnableTextureCubemap(id: number): void
-  
+
   /** Disable texture cubemap */
   export function rlDisableTextureCubemap(): void
-  
+
   /** Set texture parameters (filter, wrap) */
   export function rlTextureParameters(id: number, param: number, value: number): void
-  
+
   /** Set cubemap parameters (filter, wrap) */
   export function rlCubemapParameters(id: number, param: number, value: number): void
-  
+
   /** Enable shader program */
   export function rlEnableShader(id: number): void
-  
+
   /** Disable shader program */
   export function rlDisableShader(): void
-  
+
   /** Enable render texture (fbo) */
   export function rlEnableFramebuffer(id: number): void
-  
+
   /** Disable render texture (fbo), return to default framebuffer */
   export function rlDisableFramebuffer(): void
-  
+
   /** Get the currently active render texture (fbo), 0 for default framebuffer */
   export function rlGetActiveFramebuffer(): number
-  
+
   /** Activate multiple draw color buffers */
   export function rlActiveDrawBuffers(count: number): void
-  
+
   /** Blit active framebuffer to main framebuffer */
   export function rlBlitFramebuffer(srcX: number, srcY: number, srcWidth: number, srcHeight: number, dstX: number, dstY: number, dstWidth: number, dstHeight: number, bufferMask: number): void
-  
+
   /** Bind framebuffer (FBO) */
   export function rlBindFramebuffer(target: number, framebuffer: number): void
-  
+
   /** Enable color blending */
   export function rlEnableColorBlend(): void
-  
+
   /** Disable color blending */
   export function rlDisableColorBlend(): void
-  
+
   /** Enable depth test */
   export function rlEnableDepthTest(): void
-  
+
   /** Disable depth test */
   export function rlDisableDepthTest(): void
-  
+
   /** Enable depth write */
   export function rlEnableDepthMask(): void
-  
+
   /** Disable depth write */
   export function rlDisableDepthMask(): void
-  
+
   /** Enable backface culling */
   export function rlEnableBackfaceCulling(): void
-  
+
   /** Disable backface culling */
   export function rlDisableBackfaceCulling(): void
-  
+
   /** Color mask control */
   export function rlColorMask(r: boolean, g: boolean, b: boolean, a: boolean): void
-  
+
   /** Set face culling mode */
   export function rlSetCullFace(mode: number): void
-  
+
   /** Enable scissor test */
   export function rlEnableScissorTest(): void
-  
+
   /** Disable scissor test */
   export function rlDisableScissorTest(): void
-  
+
   /** Scissor test */
   export function rlScissor(x: number, y: number, width: number, height: number): void
-  
+
   /** Enable wire mode */
   export function rlEnableWireMode(): void
-  
+
   /** Enable point mode */
   export function rlEnablePointMode(): void
-  
+
   /** Disable wire (and point) mode */
   export function rlDisableWireMode(): void
-  
+
   /** Set the line drawing width */
   export function rlSetLineWidth(width: number): void
-  
+
   /** Get the line drawing width */
   export function rlGetLineWidth(): number
-  
+
   /** Enable line aliasing */
   export function rlEnableSmoothLines(): void
-  
+
   /** Disable line aliasing */
   export function rlDisableSmoothLines(): void
-  
+
   /** Enable stereo rendering */
   export function rlEnableStereoRender(): void
-  
+
   /** Disable stereo rendering */
   export function rlDisableStereoRender(): void
-  
+
   /** Check if stereo render is enabled */
   export function rlIsStereoRenderEnabled(): boolean
-  
+
   /** Clear color buffer with color */
   export function rlClearColor(r: number, g: number, b: number, a: number): void
-  
+
   /** Clear used screen buffers (color and depth) */
   export function rlClearScreenBuffers(): void
-  
+
   /** Check and log OpenGL error codes */
   export function rlCheckErrors(): void
-  
+
   /** Set blending mode */
   export function rlSetBlendMode(mode: number): void
-  
+
   /** Set blending mode factor and equation (using OpenGL factors) */
   export function rlSetBlendFactors(glSrcFactor: number, glDstFactor: number, glEquation: number): void
-  
+
   /** Set blending mode factors and equations separately (using OpenGL factors) */
   export function rlSetBlendFactorsSeparate(glSrcRGB: number, glDstRGB: number, glSrcAlpha: number, glDstAlpha: number, glEqRGB: number, glEqAlpha: number): void
-  
+
   /** Initialize rlgl (buffers, shaders, textures, states) */
   export function rlglInit(width: number, height: number): void
-  
+
   /** De-initialize rlgl (buffers, shaders, textures) */
   export function rlglClose(): void
-  
+
   /** Load OpenGL extensions (loader function required) */
   export function rlLoadExtensions(loader: number): void
-  
+
   /** Get current OpenGL version */
   export function rlGetVersion(): number
-  
+
   /** Set current framebuffer width */
   export function rlSetFramebufferWidth(width: number): void
-  
+
   /** Get default framebuffer width */
   export function rlGetFramebufferWidth(): number
-  
+
   /** Set current framebuffer height */
   export function rlSetFramebufferHeight(height: number): void
-  
+
   /** Get default framebuffer height */
   export function rlGetFramebufferHeight(): number
-  
+
   /** Get default texture id */
   export function rlGetTextureIdDefault(): number
-  
+
   /** Get default shader id */
   export function rlGetShaderIdDefault(): number
-  
+
   /** Get default shader locations */
   export function rlGetShaderLocsDefault(): number
-  
+
   /** Load a render batch system */
   export function rlLoadRenderBatch(numBuffers: number, bufferElements: number): rlRenderBatch
-  
+
   /** Unload render batch system */
   export function rlUnloadRenderBatch(batch: rlRenderBatch): void
-  
+
   /** Draw render batch data (Update->Draw->Reset) */
   export function rlDrawRenderBatch(batch: number): void
-  
+
   /** Set the active render batch for rlgl (NULL for default internal) */
   export function rlSetRenderBatchActive(batch: number): void
-  
+
   /** Update and draw internal render batch */
   export function rlDrawRenderBatchActive(): void
-  
+
   /** Check internal buffer overflow for a given number of vertex */
   export function rlCheckRenderBatchLimit(vCount: number): boolean
-  
+
   /** Set current texture for render batch and check buffers limits */
   export function rlSetTexture(id: number): void
-  
+
   /** Load vertex array (vao) if supported */
   export function rlLoadVertexArray(): number
-  
+
   /** Load a vertex buffer object */
   export function rlLoadVertexBuffer(buffer: number, size: number, dynamic: boolean): number
-  
+
   /** Load vertex buffer elements object */
   export function rlLoadVertexBufferElement(buffer: number, size: number, dynamic: boolean): number
-  
+
   /** Update vertex buffer object data on GPU buffer */
   export function rlUpdateVertexBuffer(bufferId: number, data: number, dataSize: number, offset: number): void
-  
+
   /** Update vertex buffer elements data on GPU buffer */
   export function rlUpdateVertexBufferElements(id: number, data: number, dataSize: number, offset: number): void
-  
+
   /** Unload vertex array (vao) */
   export function rlUnloadVertexArray(vaoId: number): void
-  
+
   /** Unload vertex buffer object */
   export function rlUnloadVertexBuffer(vboId: number): void
-  
+
   /** Set vertex attribute data configuration */
   export function rlSetVertexAttribute(index: number, compSize: number, type: number, normalized: boolean, stride: number, offset: number): void
-  
+
   /** Set vertex attribute data divisor */
   export function rlSetVertexAttributeDivisor(index: number, divisor: number): void
-  
+
   /** Set vertex attribute default value, when attribute to provided */
   export function rlSetVertexAttributeDefault(locIndex: number, value: number, attribType: number, count: number): void
-  
+
   /** Draw vertex array (currently active vao) */
   export function rlDrawVertexArray(offset: number, count: number): void
-  
+
   /** Draw vertex array elements */
   export function rlDrawVertexArrayElements(offset: number, count: number, buffer: number): void
-  
+
   /** Draw vertex array (currently active vao) with instancing */
   export function rlDrawVertexArrayInstanced(offset: number, count: number, instances: number): void
-  
+
   /** Draw vertex array elements with instancing */
   export function rlDrawVertexArrayElementsInstanced(offset: number, count: number, buffer: number, instances: number): void
-  
+
   /** Load texture data */
   export function rlLoadTexture(data: number, width: number, height: number, format: number, mipmapCount: number): number
-  
+
   /** Load depth texture/renderbuffer (to be attached to fbo) */
   export function rlLoadTextureDepth(width: number, height: number, useRenderBuffer: boolean): number
-  
+
   /** Load texture cubemap data */
   export function rlLoadTextureCubemap(data: number, size: number, format: number, mipmapCount: number): number
-  
+
   /** Update texture with new data on GPU */
   export function rlUpdateTexture(id: number, offsetX: number, offsetY: number, width: number, height: number, format: number, data: number): void
-  
+
   /** Get OpenGL internal formats */
   export function rlGetGlTextureFormats(format: number, glInternalFormat: number, glFormat: number, glType: number): void
-  
+
   /** Get name string for pixel format */
   export function rlGetPixelFormatName(format: number): string
-  
+
   /** Unload texture from GPU memory */
   export function rlUnloadTexture(id: number): void
-  
+
   /** Generate mipmap data for selected texture */
   export function rlGenTextureMipmaps(id: number, width: number, height: number, format: number, mipmaps: number): void
-  
+
   /** Read texture pixel data */
   export function rlReadTexturePixels(id: number, width: number, height: number, format: number): number
-  
+
   /** Read screen pixel data (color buffer) */
   export function rlReadScreenPixels(width: number, height: number): Buffer
-  
+
   /** Load an empty framebuffer */
   export function rlLoadFramebuffer(): number
-  
+
   /** Attach texture/renderbuffer to a framebuffer */
   export function rlFramebufferAttach(fboId: number, texId: number, attachType: number, texType: number, mipLevel: number): void
-  
+
   /** Verify framebuffer is complete */
   export function rlFramebufferComplete(id: number): boolean
-  
+
   /** Delete framebuffer from GPU */
   export function rlUnloadFramebuffer(id: number): void
-  
+
   /** Load shader from code strings */
   export function rlLoadShaderCode(vsCode: string, fsCode: string): number
-  
+
   /** Compile custom shader and return shader id (type: RL_VERTEX_SHADER, RL_FRAGMENT_SHADER, RL_COMPUTE_SHADER) */
   export function rlCompileShader(shaderCode: string, type: number): number
-  
+
   /** Load custom shader program */
   export function rlLoadShaderProgram(vShaderId: number, fShaderId: number): number
-  
+
   /** Unload shader program */
   export function rlUnloadShaderProgram(id: number): void
-  
+
   /** Get shader location uniform */
   export function rlGetLocationUniform(shaderId: number, uniformName: string): number
-  
+
   /** Get shader location attribute */
   export function rlGetLocationAttrib(shaderId: number, attribName: string): number
-  
+
   /** Set shader value uniform */
   export function rlSetUniform(locIndex: number, value: number, uniformType: number, count: number): void
-  
+
   /** Set shader value matrix */
   export function rlSetUniformMatrix(locIndex: number, mat: Matrix): void
-  
+
   /** Set shader value matrices */
   export function rlSetUniformMatrices(locIndex: number, mat: number, count: number): void
-  
+
   /** Set shader value sampler */
   export function rlSetUniformSampler(locIndex: number, textureId: number): void
-  
+
   /** Set shader currently active (id and locations) */
   export function rlSetShader(id: number, locs: number): void
-  
+
   /** Load compute shader program */
   export function rlLoadComputeShaderProgram(shaderId: number): number
-  
+
   /** Dispatch compute shader (equivalent to *draw* for graphics pipeline) */
   export function rlComputeShaderDispatch(groupX: number, groupY: number, groupZ: number): void
-  
+
   /** Load shader storage buffer object (SSBO) */
   export function rlLoadShaderBuffer(size: number, data: number, usageHint: number): number
-  
+
   /** Unload shader storage buffer object (SSBO) */
   export function rlUnloadShaderBuffer(ssboId: number): void
-  
+
   /** Update SSBO buffer data */
   export function rlUpdateShaderBuffer(id: number, data: number, dataSize: number, offset: number): void
-  
+
   /** Bind SSBO buffer */
   export function rlBindShaderBuffer(id: number, index: number): void
-  
+
   /** Read SSBO buffer data (GPU->CPU) */
   export function rlReadShaderBuffer(id: number, dest: number, count: number, offset: number): void
-  
+
   /** Copy SSBO data between buffers */
   export function rlCopyShaderBuffer(destId: number, srcId: number, destOffset: number, srcOffset: number, count: number): void
-  
+
   /** Get SSBO buffer size */
   export function rlGetShaderBufferSize(id: number): number
-  
+
   /** Bind image texture */
   export function rlBindImageTexture(id: number, index: number, format: number, readonly: boolean): void
-  
+
   /** Get internal modelview matrix */
   export function rlGetMatrixModelview(): Matrix
-  
+
   /** Get internal projection matrix */
   export function rlGetMatrixProjection(): Matrix
-  
+
   /** Get internal accumulated transform matrix */
   export function rlGetMatrixTransform(): Matrix
-  
+
   /** Get internal projection matrix for stereo render (selected eye) */
   export function rlGetMatrixProjectionStereo(eye: number): Matrix
-  
+
   /** Get internal view offset matrix for stereo render (selected eye) */
   export function rlGetMatrixViewOffsetStereo(eye: number): Matrix
-  
+
   /** Set a custom projection matrix (replaces internal projection matrix) */
   export function rlSetMatrixProjection(proj: Matrix): void
-  
+
   /** Set a custom modelview matrix (replaces internal modelview matrix) */
   export function rlSetMatrixModelview(view: Matrix): void
-  
+
   /** Set eyes projection matrices for stereo rendering */
   export function rlSetMatrixProjectionStereo(right: Matrix, left: Matrix): void
-  
+
   /** Set eyes view offsets matrices for stereo rendering */
   export function rlSetMatrixViewOffsetStereo(right: Matrix, left: Matrix): void
-  
+
   /** Load and draw a cube */
   export function rlLoadDrawCube(): void
-  
+
   /** Load and draw a quad */
   export function rlLoadDrawQuad(): void
-  
+
 
   /** Set shader uniform float */
   export function SetShaderFloat(shader: Shader, locIndex: number, value: number): void

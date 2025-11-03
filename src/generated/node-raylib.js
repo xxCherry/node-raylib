@@ -4764,6 +4764,24 @@ function GenImageText(width, height, text) {
 }
 raylib.GenImageText = GenImageText
 
+function ImageLock(image) {
+  return r.BindImageLock(
+    image.data,
+    image.width,
+    image.height,
+    image.mipmaps,
+    image.format
+  )
+}
+raylib.ImageLock = ImageLock
+
+function ImageUnlock(image) {
+  return r.BindImageUnlock(
+    image
+  )
+}
+raylib.ImageUnlock = ImageUnlock
+
 /**
  * Create an image duplicate (useful for transformations)
  *
@@ -16952,11 +16970,11 @@ raylib.Camera = raylib.Camera3D
 
 /**
  * Set shader uniform value float
- * 
+ *
  * @param {Shader} shader
  * @param {number} locIndex
  * @param {number} value
- * 
+ *
  * @returns {undefined}
  */
 function SetShaderFloat(shader, locIndex, value) {
@@ -16971,11 +16989,11 @@ raylib.SetShaderFloat = SetShaderFloat
 
 /**
  * Set shader uniform value float
- * 
+ *
  * @param {Shader} shader
  * @param {number} locIndex
  * @param {number} value
- * 
+ *
  * @returns {undefined}
  */
 function SetShaderInt(shader, locIndex, value) {
@@ -16990,11 +17008,11 @@ raylib.SetShaderInt = SetShaderInt
 
 /**
  * Set shader uniform value vector2
- * 
+ *
  * @param {Shader} shader
  * @param {number} locIndex
  * @param {Vector2} value
- * 
+ *
  * @returns {undefined}
  */
 function SetShaderVec2(shader, locIndex, value) {
@@ -17010,11 +17028,11 @@ raylib.SetShaderVec2 = SetShaderVec2
 
 /**
  * Set shader uniform value vector3
- * 
+ *
  * @param {Shader} shader
  * @param {number} locIndex
  * @param {Vector3} value
- * 
+ *
  * @returns {undefined}
  */
 function SetShaderVec3(shader, locIndex, value) {
@@ -17031,11 +17049,11 @@ raylib.SetShaderVec3 = SetShaderVec3
 
 /**
  * Set shader uniform value vector4
- * 
+ *
  * @param {Shader} shader
  * @param {number} locIndex
  * @param {Vector4} value
- * 
+ *
  * @returns {undefined}
  */
 function SetShaderVec4(shader, locIndex, value) {
@@ -19452,7 +19470,7 @@ raylib.NPATCH_THREE_PATCH_VERTICAL = 1
 raylib.NPATCH_THREE_PATCH_HORIZONTAL = 2
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19460,7 +19478,7 @@ raylib.NPATCH_THREE_PATCH_HORIZONTAL = 2
 raylib.STATE_NORMAL = 0
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19468,7 +19486,7 @@ raylib.STATE_NORMAL = 0
 raylib.STATE_FOCUSED = 1
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19476,7 +19494,7 @@ raylib.STATE_FOCUSED = 1
 raylib.STATE_PRESSED = 2
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19484,7 +19502,7 @@ raylib.STATE_PRESSED = 2
 raylib.STATE_DISABLED = 3
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19492,7 +19510,7 @@ raylib.STATE_DISABLED = 3
 raylib.TEXT_ALIGN_LEFT = 0
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19500,7 +19518,7 @@ raylib.TEXT_ALIGN_LEFT = 0
 raylib.TEXT_ALIGN_CENTER = 1
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19508,7 +19526,7 @@ raylib.TEXT_ALIGN_CENTER = 1
 raylib.TEXT_ALIGN_RIGHT = 2
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19516,7 +19534,7 @@ raylib.TEXT_ALIGN_RIGHT = 2
 raylib.TEXT_ALIGN_TOP = 0
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19524,7 +19542,7 @@ raylib.TEXT_ALIGN_TOP = 0
 raylib.TEXT_ALIGN_MIDDLE = 1
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19532,7 +19550,7 @@ raylib.TEXT_ALIGN_MIDDLE = 1
 raylib.TEXT_ALIGN_BOTTOM = 2
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19540,7 +19558,7 @@ raylib.TEXT_ALIGN_BOTTOM = 2
 raylib.TEXT_WRAP_NONE = 0
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19548,7 +19566,7 @@ raylib.TEXT_WRAP_NONE = 0
 raylib.TEXT_WRAP_CHAR = 1
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19556,7 +19574,7 @@ raylib.TEXT_WRAP_CHAR = 1
 raylib.TEXT_WRAP_WORD = 2
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19572,7 +19590,7 @@ raylib.DEFAULT = 0
 raylib.LABEL = 1
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19596,7 +19614,7 @@ raylib.TOGGLE = 3
 raylib.SLIDER = 4
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19604,7 +19622,7 @@ raylib.SLIDER = 4
 raylib.PROGRESSBAR = 5
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19612,7 +19630,7 @@ raylib.PROGRESSBAR = 5
 raylib.CHECKBOX = 6
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19620,7 +19638,7 @@ raylib.CHECKBOX = 6
 raylib.COMBOBOX = 7
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19636,7 +19654,7 @@ raylib.DROPDOWNBOX = 8
 raylib.TEXTBOX = 9
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19652,7 +19670,7 @@ raylib.VALUEBOX = 10
 raylib.SPINNER = 11
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19660,7 +19678,7 @@ raylib.SPINNER = 11
 raylib.LISTVIEW = 12
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19668,7 +19686,7 @@ raylib.LISTVIEW = 12
 raylib.COLORPICKER = 13
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -19676,7 +19694,7 @@ raylib.COLORPICKER = 13
 raylib.SCROLLBAR = 14
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20060,7 +20078,7 @@ raylib.SCROLLBAR_SIDE = 19
 raylib.LIST_ITEMS_BORDER_WIDTH = 20
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20100,7 +20118,7 @@ raylib.HUEBAR_SELECTOR_HEIGHT = 19
 raylib.HUEBAR_SELECTOR_OVERFLOW = 20
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20108,7 +20126,7 @@ raylib.HUEBAR_SELECTOR_OVERFLOW = 20
 raylib.ICON_NONE = 0
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20116,7 +20134,7 @@ raylib.ICON_NONE = 0
 raylib.ICON_FOLDER_FILE_OPEN = 1
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20124,7 +20142,7 @@ raylib.ICON_FOLDER_FILE_OPEN = 1
 raylib.ICON_FILE_SAVE_CLASSIC = 2
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20132,7 +20150,7 @@ raylib.ICON_FILE_SAVE_CLASSIC = 2
 raylib.ICON_FOLDER_OPEN = 3
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20140,7 +20158,7 @@ raylib.ICON_FOLDER_OPEN = 3
 raylib.ICON_FOLDER_SAVE = 4
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20148,7 +20166,7 @@ raylib.ICON_FOLDER_SAVE = 4
 raylib.ICON_FILE_OPEN = 5
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20156,7 +20174,7 @@ raylib.ICON_FILE_OPEN = 5
 raylib.ICON_FILE_SAVE = 6
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20164,7 +20182,7 @@ raylib.ICON_FILE_SAVE = 6
 raylib.ICON_FILE_EXPORT = 7
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20172,7 +20190,7 @@ raylib.ICON_FILE_EXPORT = 7
 raylib.ICON_FILE_ADD = 8
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20180,7 +20198,7 @@ raylib.ICON_FILE_ADD = 8
 raylib.ICON_FILE_DELETE = 9
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20188,7 +20206,7 @@ raylib.ICON_FILE_DELETE = 9
 raylib.ICON_FILETYPE_TEXT = 10
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20196,7 +20214,7 @@ raylib.ICON_FILETYPE_TEXT = 10
 raylib.ICON_FILETYPE_AUDIO = 11
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20204,7 +20222,7 @@ raylib.ICON_FILETYPE_AUDIO = 11
 raylib.ICON_FILETYPE_IMAGE = 12
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20212,7 +20230,7 @@ raylib.ICON_FILETYPE_IMAGE = 12
 raylib.ICON_FILETYPE_PLAY = 13
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20220,7 +20238,7 @@ raylib.ICON_FILETYPE_PLAY = 13
 raylib.ICON_FILETYPE_VIDEO = 14
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20228,7 +20246,7 @@ raylib.ICON_FILETYPE_VIDEO = 14
 raylib.ICON_FILETYPE_INFO = 15
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20236,7 +20254,7 @@ raylib.ICON_FILETYPE_INFO = 15
 raylib.ICON_FILE_COPY = 16
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20244,7 +20262,7 @@ raylib.ICON_FILE_COPY = 16
 raylib.ICON_FILE_CUT = 17
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20252,7 +20270,7 @@ raylib.ICON_FILE_CUT = 17
 raylib.ICON_FILE_PASTE = 18
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20260,7 +20278,7 @@ raylib.ICON_FILE_PASTE = 18
 raylib.ICON_CURSOR_HAND = 19
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20268,7 +20286,7 @@ raylib.ICON_CURSOR_HAND = 19
 raylib.ICON_CURSOR_POINTER = 20
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20276,7 +20294,7 @@ raylib.ICON_CURSOR_POINTER = 20
 raylib.ICON_CURSOR_CLASSIC = 21
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20284,7 +20302,7 @@ raylib.ICON_CURSOR_CLASSIC = 21
 raylib.ICON_PENCIL = 22
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20292,7 +20310,7 @@ raylib.ICON_PENCIL = 22
 raylib.ICON_PENCIL_BIG = 23
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20300,7 +20318,7 @@ raylib.ICON_PENCIL_BIG = 23
 raylib.ICON_BRUSH_CLASSIC = 24
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20308,7 +20326,7 @@ raylib.ICON_BRUSH_CLASSIC = 24
 raylib.ICON_BRUSH_PAINTER = 25
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20316,7 +20334,7 @@ raylib.ICON_BRUSH_PAINTER = 25
 raylib.ICON_WATER_DROP = 26
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20324,7 +20342,7 @@ raylib.ICON_WATER_DROP = 26
 raylib.ICON_COLOR_PICKER = 27
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20332,7 +20350,7 @@ raylib.ICON_COLOR_PICKER = 27
 raylib.ICON_RUBBER = 28
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20340,7 +20358,7 @@ raylib.ICON_RUBBER = 28
 raylib.ICON_COLOR_BUCKET = 29
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20348,7 +20366,7 @@ raylib.ICON_COLOR_BUCKET = 29
 raylib.ICON_TEXT_T = 30
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20356,7 +20374,7 @@ raylib.ICON_TEXT_T = 30
 raylib.ICON_TEXT_A = 31
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20364,7 +20382,7 @@ raylib.ICON_TEXT_A = 31
 raylib.ICON_SCALE = 32
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20372,7 +20390,7 @@ raylib.ICON_SCALE = 32
 raylib.ICON_RESIZE = 33
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20380,7 +20398,7 @@ raylib.ICON_RESIZE = 33
 raylib.ICON_FILTER_POINT = 34
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20388,7 +20406,7 @@ raylib.ICON_FILTER_POINT = 34
 raylib.ICON_FILTER_BILINEAR = 35
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20396,7 +20414,7 @@ raylib.ICON_FILTER_BILINEAR = 35
 raylib.ICON_CROP = 36
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20404,7 +20422,7 @@ raylib.ICON_CROP = 36
 raylib.ICON_CROP_ALPHA = 37
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20412,7 +20430,7 @@ raylib.ICON_CROP_ALPHA = 37
 raylib.ICON_SQUARE_TOGGLE = 38
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20420,7 +20438,7 @@ raylib.ICON_SQUARE_TOGGLE = 38
 raylib.ICON_SYMMETRY = 39
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20428,7 +20446,7 @@ raylib.ICON_SYMMETRY = 39
 raylib.ICON_SYMMETRY_HORIZONTAL = 40
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20436,7 +20454,7 @@ raylib.ICON_SYMMETRY_HORIZONTAL = 40
 raylib.ICON_SYMMETRY_VERTICAL = 41
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20444,7 +20462,7 @@ raylib.ICON_SYMMETRY_VERTICAL = 41
 raylib.ICON_LENS = 42
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20452,7 +20470,7 @@ raylib.ICON_LENS = 42
 raylib.ICON_LENS_BIG = 43
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20460,7 +20478,7 @@ raylib.ICON_LENS_BIG = 43
 raylib.ICON_EYE_ON = 44
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20468,7 +20486,7 @@ raylib.ICON_EYE_ON = 44
 raylib.ICON_EYE_OFF = 45
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20476,7 +20494,7 @@ raylib.ICON_EYE_OFF = 45
 raylib.ICON_FILTER_TOP = 46
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20484,7 +20502,7 @@ raylib.ICON_FILTER_TOP = 46
 raylib.ICON_FILTER = 47
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20492,7 +20510,7 @@ raylib.ICON_FILTER = 47
 raylib.ICON_TARGET_POINT = 48
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20500,7 +20518,7 @@ raylib.ICON_TARGET_POINT = 48
 raylib.ICON_TARGET_SMALL = 49
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20508,7 +20526,7 @@ raylib.ICON_TARGET_SMALL = 49
 raylib.ICON_TARGET_BIG = 50
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20516,7 +20534,7 @@ raylib.ICON_TARGET_BIG = 50
 raylib.ICON_TARGET_MOVE = 51
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20524,7 +20542,7 @@ raylib.ICON_TARGET_MOVE = 51
 raylib.ICON_CURSOR_MOVE = 52
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20532,7 +20550,7 @@ raylib.ICON_CURSOR_MOVE = 52
 raylib.ICON_CURSOR_SCALE = 53
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20540,7 +20558,7 @@ raylib.ICON_CURSOR_SCALE = 53
 raylib.ICON_CURSOR_SCALE_RIGHT = 54
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20548,7 +20566,7 @@ raylib.ICON_CURSOR_SCALE_RIGHT = 54
 raylib.ICON_CURSOR_SCALE_LEFT = 55
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20556,7 +20574,7 @@ raylib.ICON_CURSOR_SCALE_LEFT = 55
 raylib.ICON_UNDO = 56
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20564,7 +20582,7 @@ raylib.ICON_UNDO = 56
 raylib.ICON_REDO = 57
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20572,7 +20590,7 @@ raylib.ICON_REDO = 57
 raylib.ICON_REREDO = 58
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20580,7 +20598,7 @@ raylib.ICON_REREDO = 58
 raylib.ICON_MUTATE = 59
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20588,7 +20606,7 @@ raylib.ICON_MUTATE = 59
 raylib.ICON_ROTATE = 60
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20596,7 +20614,7 @@ raylib.ICON_ROTATE = 60
 raylib.ICON_REPEAT = 61
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20604,7 +20622,7 @@ raylib.ICON_REPEAT = 61
 raylib.ICON_SHUFFLE = 62
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20612,7 +20630,7 @@ raylib.ICON_SHUFFLE = 62
 raylib.ICON_EMPTYBOX = 63
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20620,7 +20638,7 @@ raylib.ICON_EMPTYBOX = 63
 raylib.ICON_TARGET = 64
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20628,7 +20646,7 @@ raylib.ICON_TARGET = 64
 raylib.ICON_TARGET_SMALL_FILL = 65
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20636,7 +20654,7 @@ raylib.ICON_TARGET_SMALL_FILL = 65
 raylib.ICON_TARGET_BIG_FILL = 66
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20644,7 +20662,7 @@ raylib.ICON_TARGET_BIG_FILL = 66
 raylib.ICON_TARGET_MOVE_FILL = 67
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20652,7 +20670,7 @@ raylib.ICON_TARGET_MOVE_FILL = 67
 raylib.ICON_CURSOR_MOVE_FILL = 68
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20660,7 +20678,7 @@ raylib.ICON_CURSOR_MOVE_FILL = 68
 raylib.ICON_CURSOR_SCALE_FILL = 69
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20668,7 +20686,7 @@ raylib.ICON_CURSOR_SCALE_FILL = 69
 raylib.ICON_CURSOR_SCALE_RIGHT_FILL = 70
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20676,7 +20694,7 @@ raylib.ICON_CURSOR_SCALE_RIGHT_FILL = 70
 raylib.ICON_CURSOR_SCALE_LEFT_FILL = 71
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20684,7 +20702,7 @@ raylib.ICON_CURSOR_SCALE_LEFT_FILL = 71
 raylib.ICON_UNDO_FILL = 72
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20692,7 +20710,7 @@ raylib.ICON_UNDO_FILL = 72
 raylib.ICON_REDO_FILL = 73
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20700,7 +20718,7 @@ raylib.ICON_REDO_FILL = 73
 raylib.ICON_REREDO_FILL = 74
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20708,7 +20726,7 @@ raylib.ICON_REREDO_FILL = 74
 raylib.ICON_MUTATE_FILL = 75
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20716,7 +20734,7 @@ raylib.ICON_MUTATE_FILL = 75
 raylib.ICON_ROTATE_FILL = 76
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20724,7 +20742,7 @@ raylib.ICON_ROTATE_FILL = 76
 raylib.ICON_REPEAT_FILL = 77
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20732,7 +20750,7 @@ raylib.ICON_REPEAT_FILL = 77
 raylib.ICON_SHUFFLE_FILL = 78
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20740,7 +20758,7 @@ raylib.ICON_SHUFFLE_FILL = 78
 raylib.ICON_EMPTYBOX_SMALL = 79
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20748,7 +20766,7 @@ raylib.ICON_EMPTYBOX_SMALL = 79
 raylib.ICON_BOX = 80
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20756,7 +20774,7 @@ raylib.ICON_BOX = 80
 raylib.ICON_BOX_TOP = 81
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20764,7 +20782,7 @@ raylib.ICON_BOX_TOP = 81
 raylib.ICON_BOX_TOP_RIGHT = 82
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20772,7 +20790,7 @@ raylib.ICON_BOX_TOP_RIGHT = 82
 raylib.ICON_BOX_RIGHT = 83
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20780,7 +20798,7 @@ raylib.ICON_BOX_RIGHT = 83
 raylib.ICON_BOX_BOTTOM_RIGHT = 84
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20788,7 +20806,7 @@ raylib.ICON_BOX_BOTTOM_RIGHT = 84
 raylib.ICON_BOX_BOTTOM = 85
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20796,7 +20814,7 @@ raylib.ICON_BOX_BOTTOM = 85
 raylib.ICON_BOX_BOTTOM_LEFT = 86
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20804,7 +20822,7 @@ raylib.ICON_BOX_BOTTOM_LEFT = 86
 raylib.ICON_BOX_LEFT = 87
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20812,7 +20830,7 @@ raylib.ICON_BOX_LEFT = 87
 raylib.ICON_BOX_TOP_LEFT = 88
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20820,7 +20838,7 @@ raylib.ICON_BOX_TOP_LEFT = 88
 raylib.ICON_BOX_CENTER = 89
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20828,7 +20846,7 @@ raylib.ICON_BOX_CENTER = 89
 raylib.ICON_BOX_CIRCLE_MASK = 90
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20836,7 +20854,7 @@ raylib.ICON_BOX_CIRCLE_MASK = 90
 raylib.ICON_POT = 91
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20844,7 +20862,7 @@ raylib.ICON_POT = 91
 raylib.ICON_ALPHA_MULTIPLY = 92
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20852,7 +20870,7 @@ raylib.ICON_ALPHA_MULTIPLY = 92
 raylib.ICON_ALPHA_CLEAR = 93
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20860,7 +20878,7 @@ raylib.ICON_ALPHA_CLEAR = 93
 raylib.ICON_DITHERING = 94
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20868,7 +20886,7 @@ raylib.ICON_DITHERING = 94
 raylib.ICON_MIPMAPS = 95
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20876,7 +20894,7 @@ raylib.ICON_MIPMAPS = 95
 raylib.ICON_BOX_GRID = 96
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20884,7 +20902,7 @@ raylib.ICON_BOX_GRID = 96
 raylib.ICON_GRID = 97
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20892,7 +20910,7 @@ raylib.ICON_GRID = 97
 raylib.ICON_BOX_CORNERS_SMALL = 98
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20900,7 +20918,7 @@ raylib.ICON_BOX_CORNERS_SMALL = 98
 raylib.ICON_BOX_CORNERS_BIG = 99
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20908,7 +20926,7 @@ raylib.ICON_BOX_CORNERS_BIG = 99
 raylib.ICON_FOUR_BOXES = 100
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20916,7 +20934,7 @@ raylib.ICON_FOUR_BOXES = 100
 raylib.ICON_GRID_FILL = 101
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20924,7 +20942,7 @@ raylib.ICON_GRID_FILL = 101
 raylib.ICON_BOX_MULTISIZE = 102
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20932,7 +20950,7 @@ raylib.ICON_BOX_MULTISIZE = 102
 raylib.ICON_ZOOM_SMALL = 103
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20940,7 +20958,7 @@ raylib.ICON_ZOOM_SMALL = 103
 raylib.ICON_ZOOM_MEDIUM = 104
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20948,7 +20966,7 @@ raylib.ICON_ZOOM_MEDIUM = 104
 raylib.ICON_ZOOM_BIG = 105
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20956,7 +20974,7 @@ raylib.ICON_ZOOM_BIG = 105
 raylib.ICON_ZOOM_ALL = 106
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20964,7 +20982,7 @@ raylib.ICON_ZOOM_ALL = 106
 raylib.ICON_ZOOM_CENTER = 107
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20972,7 +20990,7 @@ raylib.ICON_ZOOM_CENTER = 107
 raylib.ICON_BOX_DOTS_SMALL = 108
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20980,7 +20998,7 @@ raylib.ICON_BOX_DOTS_SMALL = 108
 raylib.ICON_BOX_DOTS_BIG = 109
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20988,7 +21006,7 @@ raylib.ICON_BOX_DOTS_BIG = 109
 raylib.ICON_BOX_CONCENTRIC = 110
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -20996,7 +21014,7 @@ raylib.ICON_BOX_CONCENTRIC = 110
 raylib.ICON_BOX_GRID_BIG = 111
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21004,7 +21022,7 @@ raylib.ICON_BOX_GRID_BIG = 111
 raylib.ICON_OK_TICK = 112
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21012,7 +21030,7 @@ raylib.ICON_OK_TICK = 112
 raylib.ICON_CROSS = 113
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21020,7 +21038,7 @@ raylib.ICON_CROSS = 113
 raylib.ICON_ARROW_LEFT = 114
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21028,7 +21046,7 @@ raylib.ICON_ARROW_LEFT = 114
 raylib.ICON_ARROW_RIGHT = 115
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21036,7 +21054,7 @@ raylib.ICON_ARROW_RIGHT = 115
 raylib.ICON_ARROW_DOWN = 116
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21044,7 +21062,7 @@ raylib.ICON_ARROW_DOWN = 116
 raylib.ICON_ARROW_UP = 117
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21052,7 +21070,7 @@ raylib.ICON_ARROW_UP = 117
 raylib.ICON_ARROW_LEFT_FILL = 118
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21060,7 +21078,7 @@ raylib.ICON_ARROW_LEFT_FILL = 118
 raylib.ICON_ARROW_RIGHT_FILL = 119
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21068,7 +21086,7 @@ raylib.ICON_ARROW_RIGHT_FILL = 119
 raylib.ICON_ARROW_DOWN_FILL = 120
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21076,7 +21094,7 @@ raylib.ICON_ARROW_DOWN_FILL = 120
 raylib.ICON_ARROW_UP_FILL = 121
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21084,7 +21102,7 @@ raylib.ICON_ARROW_UP_FILL = 121
 raylib.ICON_AUDIO = 122
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21092,7 +21110,7 @@ raylib.ICON_AUDIO = 122
 raylib.ICON_FX = 123
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21100,7 +21118,7 @@ raylib.ICON_FX = 123
 raylib.ICON_WAVE = 124
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21108,7 +21126,7 @@ raylib.ICON_WAVE = 124
 raylib.ICON_WAVE_SINUS = 125
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21116,7 +21134,7 @@ raylib.ICON_WAVE_SINUS = 125
 raylib.ICON_WAVE_SQUARE = 126
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21124,7 +21142,7 @@ raylib.ICON_WAVE_SQUARE = 126
 raylib.ICON_WAVE_TRIANGULAR = 127
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21132,7 +21150,7 @@ raylib.ICON_WAVE_TRIANGULAR = 127
 raylib.ICON_CROSS_SMALL = 128
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21140,7 +21158,7 @@ raylib.ICON_CROSS_SMALL = 128
 raylib.ICON_PLAYER_PREVIOUS = 129
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21148,7 +21166,7 @@ raylib.ICON_PLAYER_PREVIOUS = 129
 raylib.ICON_PLAYER_PLAY_BACK = 130
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21156,7 +21174,7 @@ raylib.ICON_PLAYER_PLAY_BACK = 130
 raylib.ICON_PLAYER_PLAY = 131
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21164,7 +21182,7 @@ raylib.ICON_PLAYER_PLAY = 131
 raylib.ICON_PLAYER_PAUSE = 132
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21172,7 +21190,7 @@ raylib.ICON_PLAYER_PAUSE = 132
 raylib.ICON_PLAYER_STOP = 133
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21180,7 +21198,7 @@ raylib.ICON_PLAYER_STOP = 133
 raylib.ICON_PLAYER_NEXT = 134
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21188,7 +21206,7 @@ raylib.ICON_PLAYER_NEXT = 134
 raylib.ICON_PLAYER_RECORD = 135
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21196,7 +21214,7 @@ raylib.ICON_PLAYER_RECORD = 135
 raylib.ICON_MAGNET = 136
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21204,7 +21222,7 @@ raylib.ICON_MAGNET = 136
 raylib.ICON_LOCK_CLOSE = 137
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21212,7 +21230,7 @@ raylib.ICON_LOCK_CLOSE = 137
 raylib.ICON_LOCK_OPEN = 138
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21220,7 +21238,7 @@ raylib.ICON_LOCK_OPEN = 138
 raylib.ICON_CLOCK = 139
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21228,7 +21246,7 @@ raylib.ICON_CLOCK = 139
 raylib.ICON_TOOLS = 140
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21236,7 +21254,7 @@ raylib.ICON_TOOLS = 140
 raylib.ICON_GEAR = 141
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21244,7 +21262,7 @@ raylib.ICON_GEAR = 141
 raylib.ICON_GEAR_BIG = 142
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21252,7 +21270,7 @@ raylib.ICON_GEAR_BIG = 142
 raylib.ICON_BIN = 143
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21260,7 +21278,7 @@ raylib.ICON_BIN = 143
 raylib.ICON_HAND_POINTER = 144
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21268,7 +21286,7 @@ raylib.ICON_HAND_POINTER = 144
 raylib.ICON_LASER = 145
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21276,7 +21294,7 @@ raylib.ICON_LASER = 145
 raylib.ICON_COIN = 146
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21284,7 +21302,7 @@ raylib.ICON_COIN = 146
 raylib.ICON_EXPLOSION = 147
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21292,7 +21310,7 @@ raylib.ICON_EXPLOSION = 147
 raylib.ICON_1UP = 148
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21300,7 +21318,7 @@ raylib.ICON_1UP = 148
 raylib.ICON_PLAYER = 149
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21308,7 +21326,7 @@ raylib.ICON_PLAYER = 149
 raylib.ICON_PLAYER_JUMP = 150
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21316,7 +21334,7 @@ raylib.ICON_PLAYER_JUMP = 150
 raylib.ICON_KEY = 151
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21324,7 +21342,7 @@ raylib.ICON_KEY = 151
 raylib.ICON_DEMON = 152
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21332,7 +21350,7 @@ raylib.ICON_DEMON = 152
 raylib.ICON_TEXT_POPUP = 153
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21340,7 +21358,7 @@ raylib.ICON_TEXT_POPUP = 153
 raylib.ICON_GEAR_EX = 154
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21348,7 +21366,7 @@ raylib.ICON_GEAR_EX = 154
 raylib.ICON_CRACK = 155
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21356,7 +21374,7 @@ raylib.ICON_CRACK = 155
 raylib.ICON_CRACK_POINTS = 156
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21364,7 +21382,7 @@ raylib.ICON_CRACK_POINTS = 156
 raylib.ICON_STAR = 157
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21372,7 +21390,7 @@ raylib.ICON_STAR = 157
 raylib.ICON_DOOR = 158
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21380,7 +21398,7 @@ raylib.ICON_DOOR = 158
 raylib.ICON_EXIT = 159
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21388,7 +21406,7 @@ raylib.ICON_EXIT = 159
 raylib.ICON_MODE_2D = 160
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21396,7 +21414,7 @@ raylib.ICON_MODE_2D = 160
 raylib.ICON_MODE_3D = 161
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21404,7 +21422,7 @@ raylib.ICON_MODE_3D = 161
 raylib.ICON_CUBE = 162
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21412,7 +21430,7 @@ raylib.ICON_CUBE = 162
 raylib.ICON_CUBE_FACE_TOP = 163
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21420,7 +21438,7 @@ raylib.ICON_CUBE_FACE_TOP = 163
 raylib.ICON_CUBE_FACE_LEFT = 164
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21428,7 +21446,7 @@ raylib.ICON_CUBE_FACE_LEFT = 164
 raylib.ICON_CUBE_FACE_FRONT = 165
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21436,7 +21454,7 @@ raylib.ICON_CUBE_FACE_FRONT = 165
 raylib.ICON_CUBE_FACE_BOTTOM = 166
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21444,7 +21462,7 @@ raylib.ICON_CUBE_FACE_BOTTOM = 166
 raylib.ICON_CUBE_FACE_RIGHT = 167
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21452,7 +21470,7 @@ raylib.ICON_CUBE_FACE_RIGHT = 167
 raylib.ICON_CUBE_FACE_BACK = 168
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21460,7 +21478,7 @@ raylib.ICON_CUBE_FACE_BACK = 168
 raylib.ICON_CAMERA = 169
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21468,7 +21486,7 @@ raylib.ICON_CAMERA = 169
 raylib.ICON_SPECIAL = 170
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21476,7 +21494,7 @@ raylib.ICON_SPECIAL = 170
 raylib.ICON_LINK_NET = 171
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21484,7 +21502,7 @@ raylib.ICON_LINK_NET = 171
 raylib.ICON_LINK_BOXES = 172
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21492,7 +21510,7 @@ raylib.ICON_LINK_BOXES = 172
 raylib.ICON_LINK_MULTI = 173
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21500,7 +21518,7 @@ raylib.ICON_LINK_MULTI = 173
 raylib.ICON_LINK = 174
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21508,7 +21526,7 @@ raylib.ICON_LINK = 174
 raylib.ICON_LINK_BROKE = 175
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21516,7 +21534,7 @@ raylib.ICON_LINK_BROKE = 175
 raylib.ICON_TEXT_NOTES = 176
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21524,7 +21542,7 @@ raylib.ICON_TEXT_NOTES = 176
 raylib.ICON_NOTEBOOK = 177
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21532,7 +21550,7 @@ raylib.ICON_NOTEBOOK = 177
 raylib.ICON_SUITCASE = 178
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21540,7 +21558,7 @@ raylib.ICON_SUITCASE = 178
 raylib.ICON_SUITCASE_ZIP = 179
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21548,7 +21566,7 @@ raylib.ICON_SUITCASE_ZIP = 179
 raylib.ICON_MAILBOX = 180
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21556,7 +21574,7 @@ raylib.ICON_MAILBOX = 180
 raylib.ICON_MONITOR = 181
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21564,7 +21582,7 @@ raylib.ICON_MONITOR = 181
 raylib.ICON_PRINTER = 182
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21572,7 +21590,7 @@ raylib.ICON_PRINTER = 182
 raylib.ICON_PHOTO_CAMERA = 183
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21580,7 +21598,7 @@ raylib.ICON_PHOTO_CAMERA = 183
 raylib.ICON_PHOTO_CAMERA_FLASH = 184
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21588,7 +21606,7 @@ raylib.ICON_PHOTO_CAMERA_FLASH = 184
 raylib.ICON_HOUSE = 185
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21596,7 +21614,7 @@ raylib.ICON_HOUSE = 185
 raylib.ICON_HEART = 186
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21604,7 +21622,7 @@ raylib.ICON_HEART = 186
 raylib.ICON_CORNER = 187
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21612,7 +21630,7 @@ raylib.ICON_CORNER = 187
 raylib.ICON_VERTICAL_BARS = 188
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21620,7 +21638,7 @@ raylib.ICON_VERTICAL_BARS = 188
 raylib.ICON_VERTICAL_BARS_FILL = 189
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21628,7 +21646,7 @@ raylib.ICON_VERTICAL_BARS_FILL = 189
 raylib.ICON_LIFE_BARS = 190
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21636,7 +21654,7 @@ raylib.ICON_LIFE_BARS = 190
 raylib.ICON_INFO = 191
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21644,7 +21662,7 @@ raylib.ICON_INFO = 191
 raylib.ICON_CROSSLINE = 192
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21652,7 +21670,7 @@ raylib.ICON_CROSSLINE = 192
 raylib.ICON_HELP = 193
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21660,7 +21678,7 @@ raylib.ICON_HELP = 193
 raylib.ICON_FILETYPE_ALPHA = 194
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21668,7 +21686,7 @@ raylib.ICON_FILETYPE_ALPHA = 194
 raylib.ICON_FILETYPE_HOME = 195
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21676,7 +21694,7 @@ raylib.ICON_FILETYPE_HOME = 195
 raylib.ICON_LAYERS_VISIBLE = 196
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21684,7 +21702,7 @@ raylib.ICON_LAYERS_VISIBLE = 196
 raylib.ICON_LAYERS = 197
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21692,7 +21710,7 @@ raylib.ICON_LAYERS = 197
 raylib.ICON_WINDOW = 198
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21700,7 +21718,7 @@ raylib.ICON_WINDOW = 198
 raylib.ICON_HIDPI = 199
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21708,7 +21726,7 @@ raylib.ICON_HIDPI = 199
 raylib.ICON_FILETYPE_BINARY = 200
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21716,7 +21734,7 @@ raylib.ICON_FILETYPE_BINARY = 200
 raylib.ICON_HEX = 201
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21724,7 +21742,7 @@ raylib.ICON_HEX = 201
 raylib.ICON_SHIELD = 202
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21732,7 +21750,7 @@ raylib.ICON_SHIELD = 202
 raylib.ICON_FILE_NEW = 203
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21740,7 +21758,7 @@ raylib.ICON_FILE_NEW = 203
 raylib.ICON_FOLDER_ADD = 204
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21748,7 +21766,7 @@ raylib.ICON_FOLDER_ADD = 204
 raylib.ICON_ALARM = 205
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21756,7 +21774,7 @@ raylib.ICON_ALARM = 205
 raylib.ICON_CPU = 206
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21764,7 +21782,7 @@ raylib.ICON_CPU = 206
 raylib.ICON_ROM = 207
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21772,7 +21790,7 @@ raylib.ICON_ROM = 207
 raylib.ICON_STEP_OVER = 208
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21780,7 +21798,7 @@ raylib.ICON_STEP_OVER = 208
 raylib.ICON_STEP_INTO = 209
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21788,7 +21806,7 @@ raylib.ICON_STEP_INTO = 209
 raylib.ICON_STEP_OUT = 210
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21796,7 +21814,7 @@ raylib.ICON_STEP_OUT = 210
 raylib.ICON_RESTART = 211
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21804,7 +21822,7 @@ raylib.ICON_RESTART = 211
 raylib.ICON_BREAKPOINT_ON = 212
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21812,7 +21830,7 @@ raylib.ICON_BREAKPOINT_ON = 212
 raylib.ICON_BREAKPOINT_OFF = 213
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21820,7 +21838,7 @@ raylib.ICON_BREAKPOINT_OFF = 213
 raylib.ICON_BURGER_MENU = 214
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21828,7 +21846,7 @@ raylib.ICON_BURGER_MENU = 214
 raylib.ICON_CASE_SENSITIVE = 215
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21836,7 +21854,7 @@ raylib.ICON_CASE_SENSITIVE = 215
 raylib.ICON_REG_EXP = 216
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21844,7 +21862,7 @@ raylib.ICON_REG_EXP = 216
 raylib.ICON_FOLDER = 217
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21852,7 +21870,7 @@ raylib.ICON_FOLDER = 217
 raylib.ICON_FILE = 218
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21860,7 +21878,7 @@ raylib.ICON_FILE = 218
 raylib.ICON_SAND_TIMER = 219
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21868,7 +21886,7 @@ raylib.ICON_SAND_TIMER = 219
 raylib.ICON_WARNING = 220
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21876,7 +21894,7 @@ raylib.ICON_WARNING = 220
 raylib.ICON_HELP_BOX = 221
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21884,7 +21902,7 @@ raylib.ICON_HELP_BOX = 221
 raylib.ICON_INFO_BOX = 222
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21892,7 +21910,7 @@ raylib.ICON_INFO_BOX = 222
 raylib.ICON_PRIORITY = 223
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21900,7 +21918,7 @@ raylib.ICON_PRIORITY = 223
 raylib.ICON_LAYERS_ISO = 224
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21908,7 +21926,7 @@ raylib.ICON_LAYERS_ISO = 224
 raylib.ICON_LAYERS2 = 225
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21916,7 +21934,7 @@ raylib.ICON_LAYERS2 = 225
 raylib.ICON_MLAYERS = 226
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21924,7 +21942,7 @@ raylib.ICON_MLAYERS = 226
 raylib.ICON_MAPS = 227
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21932,7 +21950,7 @@ raylib.ICON_MAPS = 227
 raylib.ICON_HOT = 228
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21940,7 +21958,7 @@ raylib.ICON_HOT = 228
 raylib.ICON_229 = 229
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21948,7 +21966,7 @@ raylib.ICON_229 = 229
 raylib.ICON_230 = 230
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21956,7 +21974,7 @@ raylib.ICON_230 = 230
 raylib.ICON_231 = 231
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21964,7 +21982,7 @@ raylib.ICON_231 = 231
 raylib.ICON_232 = 232
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21972,7 +21990,7 @@ raylib.ICON_232 = 232
 raylib.ICON_233 = 233
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21980,7 +21998,7 @@ raylib.ICON_233 = 233
 raylib.ICON_234 = 234
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21988,7 +22006,7 @@ raylib.ICON_234 = 234
 raylib.ICON_235 = 235
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -21996,7 +22014,7 @@ raylib.ICON_235 = 235
 raylib.ICON_236 = 236
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22004,7 +22022,7 @@ raylib.ICON_236 = 236
 raylib.ICON_237 = 237
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22012,7 +22030,7 @@ raylib.ICON_237 = 237
 raylib.ICON_238 = 238
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22020,7 +22038,7 @@ raylib.ICON_238 = 238
 raylib.ICON_239 = 239
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22028,7 +22046,7 @@ raylib.ICON_239 = 239
 raylib.ICON_240 = 240
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22036,7 +22054,7 @@ raylib.ICON_240 = 240
 raylib.ICON_241 = 241
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22044,7 +22062,7 @@ raylib.ICON_241 = 241
 raylib.ICON_242 = 242
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22052,7 +22070,7 @@ raylib.ICON_242 = 242
 raylib.ICON_243 = 243
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22060,7 +22078,7 @@ raylib.ICON_243 = 243
 raylib.ICON_244 = 244
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22068,7 +22086,7 @@ raylib.ICON_244 = 244
 raylib.ICON_245 = 245
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22076,7 +22094,7 @@ raylib.ICON_245 = 245
 raylib.ICON_246 = 246
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22084,7 +22102,7 @@ raylib.ICON_246 = 246
 raylib.ICON_247 = 247
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22092,7 +22110,7 @@ raylib.ICON_247 = 247
 raylib.ICON_248 = 248
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22100,7 +22118,7 @@ raylib.ICON_248 = 248
 raylib.ICON_249 = 249
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22108,7 +22126,7 @@ raylib.ICON_249 = 249
 raylib.ICON_250 = 250
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22116,7 +22134,7 @@ raylib.ICON_250 = 250
 raylib.ICON_251 = 251
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22124,7 +22142,7 @@ raylib.ICON_251 = 251
 raylib.ICON_252 = 252
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22132,7 +22150,7 @@ raylib.ICON_252 = 252
 raylib.ICON_253 = 253
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -22140,7 +22158,7 @@ raylib.ICON_253 = 253
 raylib.ICON_254 = 254
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -23052,7 +23070,7 @@ raylib.RL_ATTACHMENT_TEXTURE2D = 100
 raylib.RL_ATTACHMENT_RENDERBUFFER = 200
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -23060,7 +23078,7 @@ raylib.RL_ATTACHMENT_RENDERBUFFER = 200
 raylib.RL_CULL_FACE_FRONT = 0
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -23068,7 +23086,7 @@ raylib.RL_CULL_FACE_FRONT = 0
 raylib.RL_CULL_FACE_BACK = 1
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -23644,7 +23662,7 @@ raylib.RL_READ_FRAMEBUFFER = 36008
 raylib.RL_DRAW_FRAMEBUFFER = 36009
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -23652,7 +23670,7 @@ raylib.RL_DRAW_FRAMEBUFFER = 36009
 raylib.RL_DEFAULT_SHADER_ATTRIB_LOCATION_POSITION = 0
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -23660,7 +23678,7 @@ raylib.RL_DEFAULT_SHADER_ATTRIB_LOCATION_POSITION = 0
 raylib.RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD = 1
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -23668,7 +23686,7 @@ raylib.RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD = 1
 raylib.RL_DEFAULT_SHADER_ATTRIB_LOCATION_NORMAL = 2
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -23676,7 +23694,7 @@ raylib.RL_DEFAULT_SHADER_ATTRIB_LOCATION_NORMAL = 2
 raylib.RL_DEFAULT_SHADER_ATTRIB_LOCATION_COLOR = 3
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -23684,7 +23702,7 @@ raylib.RL_DEFAULT_SHADER_ATTRIB_LOCATION_COLOR = 3
 raylib.RL_DEFAULT_SHADER_ATTRIB_LOCATION_TANGENT = 4
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -23692,7 +23710,7 @@ raylib.RL_DEFAULT_SHADER_ATTRIB_LOCATION_TANGENT = 4
 raylib.RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD2 = 5
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -23700,7 +23718,7 @@ raylib.RL_DEFAULT_SHADER_ATTRIB_LOCATION_TEXCOORD2 = 5
 raylib.RL_DEFAULT_SHADER_ATTRIB_LOCATION_INDICES = 6
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
@@ -23708,7 +23726,7 @@ raylib.RL_DEFAULT_SHADER_ATTRIB_LOCATION_INDICES = 6
 raylib.RL_DEFAULT_SHADER_ATTRIB_LOCATION_BONEIDS = 7
 
 /**
- * 
+ *
  *
  * @type {number}
  * @constant
