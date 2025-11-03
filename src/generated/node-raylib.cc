@@ -1732,7 +1732,7 @@ Napi::Value BindLoadImageFromMemory(const Napi::CallbackInfo &info) {
   return ToValue(info.Env(),
     LoadImageFromMemory(
       (const char *)stringFromValue(info, 0),
-      (const unsigned char *)pointerFromValue(info, 1),
+      (const unsigned char *)info[1].As<Napi::Uint8Array>().Data(),
       intFromValue(info, 2)));
 }
 
