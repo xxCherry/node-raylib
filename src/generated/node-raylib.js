@@ -4766,7 +4766,11 @@ raylib.GenImageText = GenImageText
 
 function ImageLock(image) {
   return r.BindImageLock(
-    image
+    image.data,
+    image.width,
+    image.height,
+    image.mipmaps,
+    image.format
   )
 }
 raylib.ImageLock = ImageLock
